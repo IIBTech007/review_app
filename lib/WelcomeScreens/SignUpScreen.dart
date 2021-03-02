@@ -23,6 +23,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     this.cellno=TextEditingController();
     this.country=TextEditingController();
     this.city=TextEditingController();
+
   }
 
   @override
