@@ -1,5 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:review_app/Controllers/AccountController.dart';
+import 'package:review_app/Utils/Utils.dart';
 
 
 
@@ -10,16 +13,16 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  var responseJson;
-  TextEditingController email,password,admin;
-  bool isVisible= true;
-  @override
-  void initState(){
-    this.email=TextEditingController();
-    this.password=TextEditingController();
-    this.admin=TextEditingController();
-  }
-
+  // var responseJson;
+  // TextEditingController email,password,admin;
+  // bool isVisible= true;
+  // @override
+  // void initState(){
+  //   this.email=TextEditingController();
+  //   this.password=TextEditingController();
+  //   this.admin=TextEditingController();
+  // }
+  final  accountController = Get.put(AccountController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
-                            controller: email,
+                            controller: accountController.emailTextEditingController,
                             style: TextStyle(color: Colors.teal,fontWeight: FontWeight.bold),
                             obscureText: false,
                             decoration: InputDecoration(
@@ -130,9 +133,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
-                            controller: password,
+                            controller: accountController.passwordTextEditingController,
                             style: TextStyle(color: Colors.teal,fontWeight: FontWeight.bold),
-                            obscureText: isVisible,
+                            obscureText: accountController.isVisible,
                             keyboardType: TextInputType.visiblePassword,
                             decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(
@@ -144,12 +147,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
                               labelText: "Password",
                               labelStyle: TextStyle(color: Colors.teal, fontWeight: FontWeight.bold),
-                              suffixIcon: IconButton(icon: Icon(isVisible?Icons.visibility:Icons.visibility_off,color: Colors.teal,size: 27),onPressed: () {
+                              suffixIcon: IconButton(icon: Icon(accountController.isVisible?Icons.visibility:Icons.visibility_off,color: Colors.teal,size: 27),onPressed: () {
                                 setState(() {
-                                  if(isVisible){
-                                    isVisible= false;
+                                  if(accountController.isVisible){
+                                    accountController.isVisible= false;
                                   }else{
-                                    isVisible= true;
+                                    accountController.isVisible= true;
                                   }
                                 });
                               },),//Icon(Icons.https,color: yellowColor,size: 27,)
@@ -159,6 +162,20 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         SizedBox(height: 5),
                         InkWell(
+                          onTap: (){
+                            if(accountController.emailTextEditingController.text==null||accountController.emailTextEditingController.text.isEmpty){
+                              Utils.showError(context, "Email is Required");
+                            }else if(!Utils.validateEmail(accountController.emailTextEditingController.text)){
+                              Utils.showError(context, "Email Format is Invalid");
+                            }
+                            else if(accountController.passwordTextEditingController.text==null||accountController.passwordTextEditingController.text.isEmpty){
+                              Utils.showError(context, "Password is Required");
+                            }else if(!Utils.validateStructure(accountController.passwordTextEditingController.text)){
+                              Utils.showError(context, "Password must contain atleast one lower case,Upper case and special characters");
+                            }else{
+                               accountController.AuthenticateUser(context);
+                            }
+                          },
                           // onTap: (){
                           //   if(email.text==null||email.text.isEmpty){
                           //     Utils.showError(context, "Email is Required");
