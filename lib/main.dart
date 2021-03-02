@@ -1,3 +1,4 @@
+import 'package:ars_progress_dialog/ars_progress_dialog.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -108,7 +109,16 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed:(){
+          ArsProgressDialog progressDialog = ArsProgressDialog(
+              context,
+              blur: 2,
+              backgroundColor: Color(0xFFBBDEFB),
+              animationDuration: Duration(milliseconds: 500));
+
+          progressDialog.show(); // show dialog
+
+        },
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
