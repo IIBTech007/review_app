@@ -25,9 +25,8 @@ class _SplashScreenState extends State<SplashScreen> {
         builder: (context, constraints) {
           if (constraints.maxWidth > 600) {
             return _buildWideContainers();
-          } else {
+          } else
             return _buildNormalContainer();
-          }
         },
       ),
     );

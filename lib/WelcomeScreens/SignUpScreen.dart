@@ -1,6 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:review_app/Controllers/AccountController.dart';
+import 'package:review_app/Utils/Utils.dart';
 
 
 class SignUpScreen extends StatefulWidget {
@@ -10,22 +13,22 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   //Address primaryAddress;
-  TextEditingController firstname, lastname, email,password, address, postcode, cellno, country, city;
+  //TextEditingController firstname, lastname, email,password, address, postcode, cellno, country, city;
 
-  @override
-  void initState(){
-    this.firstname=TextEditingController();
-    this.lastname=TextEditingController();
-    this.email=TextEditingController();
-    this.password=TextEditingController();
-    this.address=TextEditingController();
-    this.postcode=TextEditingController();
-    this.cellno=TextEditingController();
-    this.country=TextEditingController();
-    this.city=TextEditingController();
-
-  }
-
+  // @override
+  // void initState(){
+  //   // this.firstname=TextEditingController();
+  //   // this.lastname=TextEditingController();
+  //   // this.email=TextEditingController();
+  //   // this.password=TextEditingController();
+  //   // this.address=TextEditingController();
+  //   // this.postcode=TextEditingController();
+  //   // this.cellno=TextEditingController();
+  //   // this.country=TextEditingController();
+  //   // this.city=TextEditingController();
+  //
+  // }
+  final  accountController = Get.put(AccountController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,7 +106,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
-                              controller: firstname,
+                              controller: accountController.nameTextEditingController,
                               style: TextStyle(color: Colors.teal,fontWeight: FontWeight.bold),
                               obscureText: false,
                               decoration: InputDecoration(
@@ -123,29 +126,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
-                              controller: lastname,
-                              style: TextStyle(color: Colors.teal,fontWeight: FontWeight.bold),
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.teal, width: 1.0)
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.teal, width: 1.0)
-                                ),
-                                labelText: "Last Name",
-                                labelStyle: TextStyle(color: Colors.teal, fontWeight: FontWeight.bold),
-                                //suffixIcon: FaIcon(FontAwesomeIcons.user, color: yellowColor, size: 30,),
-                              ),
-                              textInputAction: TextInputAction.next,
-
-                            ),
-                          ),
-
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child:  TextFormField(
-                              controller: email,
+                              controller: accountController.emailTextEditingController,
                               style: TextStyle(color: Colors.teal,fontWeight: FontWeight.bold),
                               obscureText: false,
                               decoration: InputDecoration(
@@ -157,6 +138,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                                 labelText: "Email",
                                 labelStyle: TextStyle(color: Colors.teal, fontWeight: FontWeight.bold),
+                                //suffixIcon: FaIcon(FontAwesomeIcons.user, color: yellowColor, size: 30,),
+                              ),
+                              textInputAction: TextInputAction.next,
+
+                            ),
+                          ),
+
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child:  TextFormField(
+                              controller: accountController.phoneTextEditingController,
+                              style: TextStyle(color: Colors.teal,fontWeight: FontWeight.bold),
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.teal, width: 1.0)
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.teal, width: 1.0)
+                                ),
+                                labelText: "Phone",
+                                labelStyle: TextStyle(color: Colors.teal, fontWeight: FontWeight.bold),
                               ),
                               textInputAction: TextInputAction.next,
 
@@ -165,7 +168,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child:  TextFormField(
-                              controller: password,
+                              controller: accountController.passwordTextEditingController,
                               style: TextStyle(color: Colors.teal,fontWeight: FontWeight.bold),
                               obscureText: false,
                               decoration: InputDecoration(
@@ -186,7 +189,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             padding: const EdgeInsets.all(0.0),
                             child:  ListTile(
                               title: TextFormField(
-                                controller: address,
+                                controller: accountController.countryTextEditingController,
                                 style: TextStyle(color: Colors.teal,fontWeight: FontWeight.bold),
                                 obscureText: false,
                                 decoration: InputDecoration(
@@ -196,7 +199,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(color: Colors.teal, width: 1.0)
                                   ),
-                                  labelText:  "Address",
+                                  labelText:  "Country",
                                   labelStyle: TextStyle(color: Colors.teal, fontWeight: FontWeight.bold),
                                 ),
                                 textInputAction: TextInputAction.next,
@@ -213,7 +216,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child:  TextFormField(
-                              controller: cellno,
+                              controller: accountController.cityTextEditingController,
                               style: TextStyle(color: Colors.teal,fontWeight: FontWeight.bold),
                               obscureText: false,
                               decoration: InputDecoration(
@@ -223,13 +226,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.teal, width: 1.0)
                                 ),
-                                labelText: "Contact #",
+                                labelText: "City",
                                 labelStyle: TextStyle(color: Colors.teal, fontWeight: FontWeight.bold),
                               ),
                               textInputAction: TextInputAction.next,
                             ),
                           ),
                           InkWell(
+                            onTap: (){
+                              if(accountController.nameTextEditingController.text == null || accountController.nameTextEditingController.text.isEmpty){
+                                Utils.showError(context, "Name Required");
+                              }else if(accountController.emailTextEditingController.text == null || accountController.emailTextEditingController.text.isEmpty){
+                                Utils.showError(context, "Email Required");
+                              }else if(!Utils.validateEmail(accountController.emailTextEditingController.text)){
+                                Utils.showError(context, "Email Not Valid");
+                              }  else if(accountController.passwordTextEditingController.text == null || accountController.passwordTextEditingController.text.isEmpty){
+                                Utils.showError(context, "Password Required");
+                              } else if(!Utils.validateStructure(accountController.passwordTextEditingController.text)) {
+                                Utils.showError(context, "password contain 1 upper case 1 num and 1 special chracter");
+                              }else if(accountController.phoneTextEditingController.text == null || accountController.phoneTextEditingController.text.isEmpty){
+                                Utils.showError(context, "Phone is Required");
+                              }else if(accountController.cityTextEditingController.text == null || accountController.cityTextEditingController.text.isEmpty){
+                                Utils.showError(context, "City is Required");
+                              }else if(accountController.countryTextEditingController.text == null || accountController.countryTextEditingController.text.isEmpty){
+                                Utils.showError(context, "Country is Required");
+                              }else{
+                                  accountController.RegisterUser(context);
+                              }
+                            },
                             // onTap: (){
                             //   if(firstname.text == null || firstname.text.isEmpty || lastname.text.isEmpty){
                             //     Utils.showError(context, "Name Required");
