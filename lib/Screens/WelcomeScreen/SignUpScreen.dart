@@ -44,7 +44,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       SizedBox(height: 40,),
                       Text(
-                        'THE REVIEWER',
+                        'TASTE CLICKS',
                         style: new TextStyle(
                           fontSize: 40.0,
                           color: color4,
@@ -56,169 +56,175 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Center(
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
-                          child: Container(
-                            width: 400,
-                            height: 580,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                //color: color3,
-                                border: Border.all(
-                                    color: color3,
-                                    width: 2
-                                )
-                            ),
-                            child: Column(
-                              children: [
-                                Center(
-                                  child: Padding(
+                          child: Card(
+                            elevation: 10,
+                            color: color1,
+                            child: Container(
+
+                              width: 400,
+                              height: 580,
+                              decoration: BoxDecoration(
+
+                                  borderRadius: BorderRadius.circular(10),
+                                  //color: color3,
+                                  // border: Border.all(
+                                  //     color: color3,
+                                  //     width: 0
+                                  // )
+                              ),
+                              child: Column(
+                                children: [
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        'SIGN-UP',
+                                        style: new TextStyle(
+                                          fontSize: 30.0,
+                                          color: color3,
+                                          fontWeight: FontWeight.bold,
+                                          //foreground: Paint()..shader = linearGradient2
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        'Create an Account to Enter...',
+                                        style: new TextStyle(
+                                          fontSize: 20.0,
+                                          color: color4,
+                                          fontWeight: FontWeight.bold,
+                                          //foreground: Paint()..shader = linearGradient2
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 10,),
+                                  Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      'SIGN-UP',
-                                      style: new TextStyle(
-                                        fontSize: 30.0,
-                                        color: color3,
-                                        fontWeight: FontWeight.bold,
-                                        //foreground: Paint()..shader = linearGradient2
+                                    child: TextFormField(
+                                      controller: accountController.nameTextEditingController,
+                                      style: TextStyle(color: color4,fontWeight: FontWeight.bold),
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(color: color3, width: 1.0)
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(color: color3, width: 1.0)
+                                        ),
+                                        labelText: "Name",
+                                        labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                        suffixIcon: Icon(Icons.assignment_ind,color: color3,size: 27,),
                                       ),
+                                      textInputAction: TextInputAction.next,
                                     ),
                                   ),
-                                ),
-                                Center(
-                                  child: Padding(
+                                  Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      'Create an Account to Enter...',
-                                      style: new TextStyle(
-                                        fontSize: 20.0,
-                                        color: color4,
-                                        fontWeight: FontWeight.bold,
-                                        //foreground: Paint()..shader = linearGradient2
+                                    child: TextFormField(
+                                      controller: accountController.emailTextEditingController,
+                                      style: TextStyle(color: color4,fontWeight: FontWeight.bold),
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(color: color3, width: 1.0)
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(color: color3, width: 1.0)
+                                        ),
+                                        labelText: "Email",
+                                        labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                        suffixIcon: Icon(Icons.email,color: color3,size: 27,),
+                                      ),
+                                      textInputAction: TextInputAction.next,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TextFormField(
+                                      controller: accountController.passwordTextEditingController,
+                                      style: TextStyle(color: color4,fontWeight: FontWeight.bold),
+                                      obscureText: false,
+                                      keyboardType: TextInputType.visiblePassword,
+                                      decoration: InputDecoration(
+                                        focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(color: color3, width: 1.0)
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(color: color3, width: 1.0)
+                                        ),
+                                        labelText: "Password",
+                                        labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                        suffixIcon: IconButton(icon: Icon(Icons.visibility,color: color3,size: 27)),//Icon(Icons.https,color: yellowColor,size: 27,)
                                       ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(height: 10,),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    controller: accountController.nameTextEditingController,
-                                    style: TextStyle(color: color4,fontWeight: FontWeight.bold),
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: color3, width: 1.0)
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TextFormField(
+                                      controller: accountController.phoneTextEditingController,
+                                      style: TextStyle(color: color4,fontWeight: FontWeight.bold),
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(color: color3, width: 1.0)
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(color: color3, width: 1.0)
+                                        ),
+                                        labelText: "Phone",
+                                        labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                        suffixIcon: Icon(Icons.add_call,color: color3,size: 27,),
                                       ),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: color3, width: 1.0)
-                                      ),
-                                      labelText: "Name",
-                                      labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
-                                      suffixIcon: Icon(Icons.assignment_ind,color: color3,size: 27,),
-                                    ),
-                                    textInputAction: TextInputAction.next,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    controller: accountController.emailTextEditingController,
-                                    style: TextStyle(color: color4,fontWeight: FontWeight.bold),
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: color3, width: 1.0)
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: color3, width: 1.0)
-                                      ),
-                                      labelText: "Email",
-                                      labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
-                                      suffixIcon: Icon(Icons.email,color: color3,size: 27,),
-                                    ),
-                                    textInputAction: TextInputAction.next,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    controller: accountController.passwordTextEditingController,
-                                    style: TextStyle(color: color4,fontWeight: FontWeight.bold),
-                                    obscureText: false,
-                                    keyboardType: TextInputType.visiblePassword,
-                                    decoration: InputDecoration(
-                                      focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: color3, width: 1.0)
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: color3, width: 1.0)
-                                      ),
-                                      labelText: "Password",
-                                      labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
-                                      suffixIcon: IconButton(icon: Icon(Icons.visibility,color: color3,size: 27)),//Icon(Icons.https,color: yellowColor,size: 27,)
+                                      textInputAction: TextInputAction.next,
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    controller: accountController.phoneTextEditingController,
-                                    style: TextStyle(color: color4,fontWeight: FontWeight.bold),
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: color3, width: 1.0)
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TextFormField(
+                                      controller: accountController.cityTextEditingController,
+                                      style: TextStyle(color: color4,fontWeight: FontWeight.bold),
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(color: color3, width: 1.0)
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(color: color3, width: 1.0)
+                                        ),
+                                        labelText: "City",
+                                        labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                        suffixIcon: Icon(Icons.add_location_alt_outlined,color: color3,size: 27,),
                                       ),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: color3, width: 1.0)
-                                      ),
-                                      labelText: "Phone",
-                                      labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
-                                      suffixIcon: Icon(Icons.add_call,color: color3,size: 27,),
+                                      textInputAction: TextInputAction.next,
                                     ),
-                                    textInputAction: TextInputAction.next,
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    controller: accountController.cityTextEditingController,
-                                    style: TextStyle(color: color4,fontWeight: FontWeight.bold),
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: color3, width: 1.0)
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TextFormField(
+                                      controller: accountController.countryTextEditingController,
+                                      style: TextStyle(color: color4,fontWeight: FontWeight.bold),
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(color: color3, width: 1.0)
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(color: color3, width: 1.0)
+                                        ),
+                                        labelText: "Country",
+                                        labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                        suffixIcon: Icon(Icons.account_balance,color: color3,size: 27,),
                                       ),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: color3, width: 1.0)
-                                      ),
-                                      labelText: "City",
-                                      labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
-                                      suffixIcon: Icon(Icons.add_location_alt_outlined,color: color3,size: 27,),
+                                      textInputAction: TextInputAction.next,
                                     ),
-                                    textInputAction: TextInputAction.next,
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    controller: accountController.countryTextEditingController,
-                                    style: TextStyle(color: color4,fontWeight: FontWeight.bold),
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: color3, width: 1.0)
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: color3, width: 1.0)
-                                      ),
-                                      labelText: "Country",
-                                      labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
-                                      suffixIcon: Icon(Icons.account_balance,color: color3,size: 27,),
-                                    ),
-                                    textInputAction: TextInputAction.next,
-                                  ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -263,7 +269,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ],
                   ),
                   Positioned(
-                    top: 765,
+                    top: 770,
                     left: 30,
                     right: 30,
                     child: Padding(
@@ -296,18 +302,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             width: 220,
 
                             decoration: BoxDecoration(
-                              color: Color(0xffb55400),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26.withOpacity(0.25),
+                                  spreadRadius: 3,
+                                  blurRadius: 5,
+                                  offset: Offset(0, 2), // changes position of shadow
+                                ),
+                              ],
+                              color: color3,
                               // gradient: new LinearGradient(
                               //     colors: [
                               //       Color(0xff222831), Color(0xff393e46)
                               //     ]
                               // ),
-                              borderRadius: BorderRadius.circular(40),
+                              borderRadius: BorderRadius.circular(10),
                               //border: Border.all(color: Color(0xfbb55400), width: 3)
                             ),
                             child: Center(
                               child: Text("Sign Up", style: TextStyle(
-                                color: Color(0xff222831),
+                                color: color1,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 22,
                                 //foreground: Paint()..shader = linearGradient

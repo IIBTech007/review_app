@@ -41,7 +41,7 @@ class _ForgotPasswordScreenState extends State< ForgotPasswordScreen> {
                       ),
                       SizedBox(height: 70,),
                       Text(
-                        'THE REVIEWER',
+                        'TASTE CLICKS',
                         style: new TextStyle(
                           fontSize: 50.0,
                           color: color4,
@@ -53,69 +53,73 @@ class _ForgotPasswordScreenState extends State< ForgotPasswordScreen> {
                       Center(
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
-                          child: Container(
-                            width: 400,
-                            height: 210,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                //color: color3,
-                                border: Border.all(
-                                    color: color3,
-                                    width: 2
-                                )
-                            ),
-                            child: Column(
-                              children: [
-                                Center(
-                                  child: Padding(
+                          child: Card(
+                            elevation: 10,
+                              color: color1,
+                            child: Container(
+                              width: 400,
+                              height: 210,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  //color: color3,
+                                  // border: Border.all(
+                                  //     color: color3,
+                                  //     width: 2
+                                  // )
+                              ),
+                              child: Column(
+                                children: [
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        'FORGOT PASSWORD',
+                                        style: new TextStyle(
+                                          fontSize: 30.0,
+                                          color: color3,
+                                          fontWeight: FontWeight.bold,
+                                          //foreground: Paint()..shader = linearGradient2
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        'Enter your Email to Continue...',
+                                        style: new TextStyle(
+                                          fontSize: 20.0,
+                                          color: color4,
+                                          fontWeight: FontWeight.bold,
+                                          //foreground: Paint()..shader = linearGradient2
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 10,),
+                                  Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      'FORGOT PASSWORD',
-                                      style: new TextStyle(
-                                        fontSize: 30.0,
-                                        color: color3,
-                                        fontWeight: FontWeight.bold,
-                                        //foreground: Paint()..shader = linearGradient2
+                                    child: TextFormField(
+                                      //controller: email,
+                                      style: TextStyle(color: color4,fontWeight: FontWeight.bold),
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(color: color3, width: 1.0)
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(color: color3, width: 1.0)
+                                        ),
+                                        labelText: "Email",
+                                        labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                        suffixIcon: Icon(Icons.email,color: color3,size: 27,),
                                       ),
+                                      textInputAction: TextInputAction.next,
                                     ),
                                   ),
-                                ),
-                                Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      'Enter your Email to Continue...',
-                                      style: new TextStyle(
-                                        fontSize: 20.0,
-                                        color: color4,
-                                        fontWeight: FontWeight.bold,
-                                        //foreground: Paint()..shader = linearGradient2
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 10,),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    //controller: email,
-                                    style: TextStyle(color: color4,fontWeight: FontWeight.bold),
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: color3, width: 1.0)
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: color3, width: 1.0)
-                                      ),
-                                      labelText: "Email",
-                                      labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
-                                      suffixIcon: Icon(Icons.email,color: color3,size: 27,),
-                                    ),
-                                    textInputAction: TextInputAction.next,
-                                  ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -134,27 +138,31 @@ class _ForgotPasswordScreenState extends State< ForgotPasswordScreen> {
                           Navigator.push(context, MaterialPageRoute(builder: (context)=> NewPasswordScreen()));
                         },
                         child: Center(
-                          child: Container(
-                            height: 55,
-                            width: 220,
+                          child: Card(
+                            color: color3,
+                            elevation: 10,
+                            child: Container(
+                              height: 55,
+                              width: 220,
 
-                            decoration: BoxDecoration(
-                              color: Color(0xffb55400),
-                              // gradient: new LinearGradient(
-                              //     colors: [
-                              //       Color(0xff222831), Color(0xff393e46)
-                              //     ]
-                              // ),
-                              borderRadius: BorderRadius.circular(40),
-                              //border: Border.all(color: Color(0xfbb55400), width: 3)
-                            ),
-                            child: Center(
-                              child: Text("Submit", style: TextStyle(
-                                color: Color(0xff222831),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 22,
-                                //foreground: Paint()..shader = linearGradient
-                              ),),
+                              decoration: BoxDecoration(
+                                //color: color3,
+                                // gradient: new LinearGradient(
+                                //     colors: [
+                                //       Color(0xff222831), Color(0xff393e46)
+                                //     ]
+                                // ),
+                                borderRadius: BorderRadius.circular(10),
+                                //border: Border.all(color: Color(0xfbb55400), width: 3)
+                              ),
+                              child: Center(
+                                child: Text("Submit", style: TextStyle(
+                                  color: color1,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22,
+                                  //foreground: Paint()..shader = linearGradient
+                                ),),
+                              ),
                             ),
                           ),
                         ),
