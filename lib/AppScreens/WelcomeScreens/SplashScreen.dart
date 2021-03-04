@@ -1,8 +1,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:review_app/Screens/WelcomeScreen/NewLoginScreen.dart';
-import 'package:review_app/Screens/WelcomeScreen/SignUpScreen.dart';
+import 'file:///C:/Users/IIB/AndroidStudioProjects/review_app/lib/AppScreens/WelcomeScreens/NewLoginScreen.dart';
+import 'file:///C:/Users/IIB/AndroidStudioProjects/review_app/lib/AppScreens/WelcomeScreens/SignUpScreen.dart';
 import 'package:review_app/components/colorConstants.dart';
 
 

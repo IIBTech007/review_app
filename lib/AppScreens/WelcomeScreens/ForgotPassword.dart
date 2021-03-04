@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:review_app/Screens/WelcomeScreen/NewPasswordScreen.dart';
+import 'file:///C:/Users/IIB/AndroidStudioProjects/review_app/lib/AppScreens/WelcomeScreens/NewPasswordScreen.dart';
 import 'package:review_app/components/colorConstants.dart';
 
 
