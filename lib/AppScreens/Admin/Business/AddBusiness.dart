@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:review_app/Controllers/BusinessController.dart';
 import 'package:review_app/Models/Address.dart';
 import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';
@@ -18,12 +19,11 @@ class _AddBusinessState extends State<AddBusiness> {
   @override
   Address address;
   File _image;
-  var picked_image;
   DateTime start_time ;//= DateTime.now();
   DateTime end_time ;
   var _formKey = new GlobalKey<FormState>();
   var _autoValidate = false;
-
+  final businessController=Get.find<BusinessController>();
     Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -53,7 +53,7 @@ class _AddBusinessState extends State<AddBusiness> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
-                        //controller: storeName,
+                        controller: businessController.nameTextEditingController,
                         style: TextStyle(color: color1,fontWeight: FontWeight.bold),
                         obscureText: false,
                         validator: (String value) =>
@@ -75,7 +75,7 @@ class _AddBusinessState extends State<AddBusiness> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
-                        //controller: contactNo,
+                        controller: businessController.phoneTextEditingController,
                         style: TextStyle(color: color1,fontWeight: FontWeight.bold),
                         obscureText: false,
                         validator: (String value) =>
@@ -93,12 +93,11 @@ class _AddBusinessState extends State<AddBusiness> {
                         textInputAction: TextInputAction.next,
                       ),
                     ),
-
                     Padding(
                       padding: const EdgeInsets.all(2.0),
                       child: ListTile(
                         title: TextFormField(
-                          //controller: storeAddress,
+                          controller: businessController.addressTextEditingController,
                           style: TextStyle(color: color1,fontWeight: FontWeight.bold),
                           obscureText: false,maxLines: 2,
                           validator: (String value) =>
@@ -119,7 +118,7 @@ class _AddBusinessState extends State<AddBusiness> {
                         ),
                         trailing: InkWell(
                             onTap: () async{
-                              // address = await Navigator.push(context, MaterialPageRoute(builder: (context) => getPosition(),),);
+                            //  address = await Navigator.push(context, MaterialPageRoute(builder: (context) => getPosition(),),);
                               // storeAddress.text = address.address;
                             },
                             child: Icon(Icons.add_location_alt,color: color3, size: 30,)),
@@ -128,7 +127,7 @@ class _AddBusinessState extends State<AddBusiness> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
-                        //controller: restaurantEmail,
+                        controller: businessController.emailTextEditingController,
                         keyboardType: TextInputType.emailAddress,
                         style: TextStyle(color: color1,fontWeight: FontWeight.bold),
                         obscureText: false,
@@ -145,11 +144,10 @@ class _AddBusinessState extends State<AddBusiness> {
                         textInputAction: TextInputAction.next,
                       ),
                     ),
-
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
-                        //controller: restaurantWeb,
+                        controller: businessController.descriptionTextEditingController,
                         style: TextStyle(color: color1,fontWeight: FontWeight.bold),
                         obscureText: false,
                         decoration: InputDecoration(
@@ -159,7 +157,7 @@ class _AddBusinessState extends State<AddBusiness> {
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: color1, width: 1.0)
                           ),
-                          labelText: "Website",
+                          labelText: "Description",
                           labelStyle: TextStyle(color: color1, fontWeight: FontWeight.bold),
                         ),
                         textInputAction: TextInputAction.next,
@@ -175,20 +173,26 @@ class _AddBusinessState extends State<AddBusiness> {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: FormBuilderDateTimePicker(
-                            attribute: "Opening Time",
+                          child: DateTimeField(
                             style: Theme.of(context).textTheme.body1,
-                            inputType: InputType.time,
+                            //inputType: InputType.time,
                             //alwaysUse24HourFormat: true,
-                            validators: [FormBuilderValidators.required()],
                             format: DateFormat("HH:mm:ss"),
+                            onShowPicker: (context, currentValue) async {
+                              final time = await showTimePicker(
+                                context: context,
+                                initialTime: TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
+                              );
+
+                              return DateTimeField.convert(time);
+                            },
                             decoration: InputDecoration(labelText: "Select start time",labelStyle: TextStyle(color: color1, fontWeight: FontWeight.bold),
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(9.0),
                                   borderSide: BorderSide(color: color1, width: 2.0)
                               ),),
                             onChanged: (value){
-                              setState(() {
+                              setState(() {businessController.openingTime.value=value;
                                 this.start_time=value;
                               });
                             },
@@ -206,13 +210,18 @@ class _AddBusinessState extends State<AddBusiness> {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: FormBuilderDateTimePicker(
-                            attribute: "Closing Time",
+                          child: DateTimeField(
                             style: Theme.of(context).textTheme.body1,
-                            inputType: InputType.time,
                             // alwaysUse24HourFormat: true,
-                            validators: [FormBuilderValidators.required()],
                             format: DateFormat("HH:mm:ss"),
+                            onShowPicker: (context, currentValue) async {
+                              final time = await showTimePicker(
+                                context: context,
+                                initialTime: TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
+                              );
+
+                              return DateTimeField.convert(time);
+                            },
                             decoration: InputDecoration(labelText: "Select end time",labelStyle: TextStyle(color:color1, fontWeight: FontWeight.bold),
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(9.0),
@@ -221,6 +230,7 @@ class _AddBusinessState extends State<AddBusiness> {
                             onChanged: (value){
                               setState(() {
                                 this.end_time=value;
+                                businessController.closingTime.value=value;
                               });
                             },
                           ),
@@ -248,10 +258,9 @@ class _AddBusinessState extends State<AddBusiness> {
                           if(image_file!=null){
                             image_file.readAsBytes().then((image){
                               if(image!=null){
+                                businessController.image.value=base64Encode(image);
                                 setState(() {
-                                  //this.picked_image=image;
                                   _image = image_file;
-                                  this.picked_image = base64Encode(image);
                                 });
                               }
                             });
@@ -267,7 +276,7 @@ class _AddBusinessState extends State<AddBusiness> {
               ),
               InkWell(
                 onTap: (){
-                  //Navigator.push(context, MaterialPageRoute(builder: (context)=> NewPasswordScreen()));
+                  businessController.addBusiness(context);
                 },
                 child: Center(
                   child: Container(

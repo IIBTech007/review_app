@@ -2,6 +2,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:review_app/Controllers/AccountController.dart';
+import 'package:review_app/Interfaces/IBusinessRepository.dart';
+import 'package:review_app/Interfaces/ICategoryRepository.dart';
+import 'package:review_app/Utils/Locator.dart';
 import 'file:///C:/Users/IIB/AndroidStudioProjects/review_app/lib/AppScreens/WelcomeScreens/ForgotPassword.dart';
 import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';
@@ -200,6 +203,7 @@ class _NewLoginScreenState extends State<NewLoginScreen> {
                     Utils.showError(context, "Password must contain atleast one lower case,Upper case and special characters");
                     }else{
                     accountController.AuthenticateUser(context);
+                      //locator<IBusinessRepository>().getBusinessByOwner(context);
                     }
                     },
                    child: Center(
