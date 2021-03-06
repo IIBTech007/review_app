@@ -1,17 +1,16 @@
-import 'dart:convert';
-
 import 'package:ars_progress_dialog/ars_progress_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
-import 'package:review_app/Interfaces/ICategoryRepository.dart';
+import 'package:review_app/Interfaces/ISubCategoryRepository.dart';
 import 'package:review_app/Models/CategoriesViewModel.dart';
 import 'package:http/http.dart'as http;
 import 'package:review_app/Utils/Locator.dart';
 import 'package:review_app/Utils/Utils.dart';
-class CategoryRepository extends ICategoryRepository{
+class SubCategoryRepository extends ISubCategoryRepository{
   @override
-  Future<void> addCategories(CategoriesViewModel categoriesViewModel,BuildContext context) async{
+  Future<void> addSubCategories(CategoriesViewModel categoriesViewModel,BuildContext context)async{
+    locator<Logger>().i(categoriesViewModel.toJson());
     ArsProgressDialog progressDialog = ArsProgressDialog(
         context,
         blur: 2,
@@ -19,7 +18,7 @@ class CategoryRepository extends ICategoryRepository{
         animationDuration: Duration(milliseconds: 500));
     try{
       progressDialog.show();
-      var res=await http.post(Utils.baseUrl()+"Categories",body:CategoriesViewModel.CategoriesViewModelToJson(categoriesViewModel),headers: {"Content-Type":"application/json","Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
+      var res=await http.post(Utils.baseUrl()+"Subcategories",body:CategoriesViewModel.CategoriesViewModelToJson(categoriesViewModel),headers: {"Content-Type":"application/json","Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
       progressDialog.dismiss();
       if(res.statusCode==200||res.statusCode==201)
       {
@@ -30,7 +29,7 @@ class CategoryRepository extends ICategoryRepository{
         Utils.showError(context,res.body.trim());
       }else
         progressDialog.dismiss();
-        Utils.showError(context,res.statusCode.toString());
+      Utils.showError(context,res.statusCode.toString());
     }catch(e){
       progressDialog.dismiss();
       Utils.showError(context, e.toString());
@@ -40,7 +39,12 @@ class CategoryRepository extends ICategoryRepository{
   }
 
   @override
-  Future<List<CategoriesViewModel>> getCategories(int businessId,BuildContext context) async{
+  Future<void> changeVisibility(int id) {
+
+  }
+
+  @override
+  Future<List<CategoriesViewModel>> getSubCategories(int categoryId,BuildContext context) async {
     ArsProgressDialog progressDialog = ArsProgressDialog(
         context,
         blur: 2,
@@ -48,17 +52,17 @@ class CategoryRepository extends ICategoryRepository{
         animationDuration: Duration(milliseconds: 500));
     try{
       progressDialog.show();
-      var response= await http.get(Utils.baseUrl()+"Categories/GetCategoriesByBusiness/$businessId",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
+      var response= await http.get(Utils.baseUrl()+"Subcategories?categoryId=$categoryId",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
       if(response.statusCode==200){
         progressDialog.dismiss();
-       // locator<Logger>().i(CategoriesViewModel.CategoriesListFromJson(response.body));
+        locator<Logger>().i(CategoriesViewModel.CategoriesListFromJson(response.body));
         return CategoriesViewModel.CategoriesListFromJson(response.body);
       }else if(response.body!=null&&response.body.isNotEmpty){
         progressDialog.dismiss();
         Utils.showError(context,response.body.toString());
       }else
         progressDialog.dismiss();
-        Utils.showError(context,response.statusCode.toString());
+      Utils.showError(context,response.statusCode.toString());
     }catch(e){
       progressDialog.dismiss();
       Utils.showError(context,e.toString());
@@ -66,11 +70,6 @@ class CategoryRepository extends ICategoryRepository{
       progressDialog.dismiss();
     }
     return null;
-  }
-
-  @override
-  Future<void> changeVisibility(int id) {
-
   }
 
 }

@@ -26,17 +26,19 @@ class AccountRepository extends IAccountRepository{
     try{
       progressDialog.show();
       var res=await http.post(Utils.baseUrl()+"Account/Login",body:LoginViewModel.loginModelToJson(loginViewModel),headers: {"Content-Type":"application/json"});
-      progressDialog.dismiss();
       if(res.statusCode==200)
       {
+        progressDialog.dismiss();
         Utils.showSuccess(context,"Login Sucess");
         locator<Logger>().i(jsonDecode(res.body)["token"]);
         locator<GetStorage>().write("token", jsonDecode(res.body)["token"]);
-        Get.offAll(BusinessList());
+        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>BusinessList()));
         return res.body;
       }else if(res.body!=null){
+        progressDialog.dismiss();
         Utils.showError(context,res.body.trim());
       }else
+        progressDialog.dismiss();
         Utils.showError(context,res.statusCode.toString());
       return "InValid Username or Password";
     }catch(e){
@@ -62,12 +64,15 @@ class AccountRepository extends IAccountRepository{
       progressDialog.dismiss();
       if(res.statusCode==200)
       {
+        progressDialog.dismiss();
         Utils.showSuccess(context,res.body.trim());
         locator<Logger>().w(res.body.trim());
         return res.body.trim();
-      }else if(res.body!=null){
+      }else if(res.body!=null&&res.body.isNotEmpty){
+        progressDialog.dismiss();
         Utils.showError(context,res.body.trim());
       }else
+        progressDialog.dismiss();
         Utils.showError(context,res.statusCode.toString());
     }catch(e){
       progressDialog.dismiss();

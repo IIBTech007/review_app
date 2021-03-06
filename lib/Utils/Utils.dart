@@ -12,9 +12,8 @@ import 'package:share/share.dart';
 
 class Utils{
    static String baseUrl(){
-     return "http://192.168.10.15:45455/api/";
-     //return "http://192.236.147.77:8083/api/";
-     //return "http://192.236.147.77:9000/api/";
+     //return "https://foodbooks.conveyor.cloud/api/";
+     return "http://192.168.10.14:45455/api/";
    }
    static bool validateStructure(String value){
      RegExp regExp = new RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{6,}$');

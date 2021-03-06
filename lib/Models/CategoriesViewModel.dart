@@ -17,10 +17,8 @@ class CategoriesViewModel{
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
     "businessId": businessId,
     "categoryId":categoryId,
     "name":name,
-    "isVisible":isVisible
   };
 }

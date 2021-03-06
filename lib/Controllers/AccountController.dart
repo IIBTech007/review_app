@@ -79,7 +79,7 @@ class AccountController extends GetxController{
       phone: phoneTextEditingController.text,
       country: countryTextEditingController.text,
       city: cityTextEditingController.text,
-      roleId: "5380d13a-983f-487f-981d-7f18c651ce0f"
+      roleId: "d24a371d-764c-4e62-99bd-2497bef73099"
     ));
   }
 
@@ -91,5 +91,11 @@ class AccountController extends GetxController{
     phoneTextEditingController?.dispose();
     cityTextEditingController?.dispose();
     countryTextEditingController?.dispose();
+  }
+
+  @override
+  void dispose() {
+   this.dispose();
+    super.dispose();
   }
 }
