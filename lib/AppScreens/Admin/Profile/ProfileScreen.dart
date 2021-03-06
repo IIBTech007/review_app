@@ -23,7 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Stack(
               children: [
                 Container(
-                  height: 350,
+                  height: 310,
                   width: MediaQuery.of(context).size.width,
                   decoration:
                   BoxDecoration(
@@ -119,7 +119,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                       Text("Branch Admin",
                                         style: TextStyle(
-                                            fontSize: 20,
+                                            fontSize: 17,
                                             fontWeight: FontWeight.bold,
                                             color: color4
                                         ),
@@ -136,9 +136,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 Positioned(
-                  top: 250,
+                  top: 260,
                   child: Container(
-                    height: 100,
+                    height: 50,
                     width: MediaQuery.of(context).size.width,
                     decoration: ShapeDecoration(
                       shape: CustomShapeBorder(),
@@ -155,7 +155,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               RotationTransition(
                 turns: new AlwaysStoppedAnimation(180 / 360),
                 child: Container(
-                    height: 100,
+                    height: 50,
                     width: MediaQuery.of(context).size.width,
                     decoration: ShapeDecoration(
                         shape: CustomShapeBorder(),
@@ -167,13 +167,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   // ),
                 ),
               ),
-             Text("PROFILE",
-             style: TextStyle(
-               color: color1,
-               fontWeight: FontWeight.bold,
-               fontSize: 30
-             ),
-             ),
+             // Text("PROFILE",
+             // style: TextStyle(
+             //   color: color1,
+             //   fontWeight: FontWeight.bold,
+             //   fontSize: 30
+             // ),
+             // ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(

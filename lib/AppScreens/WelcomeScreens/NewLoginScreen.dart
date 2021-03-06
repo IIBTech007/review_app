@@ -185,7 +185,7 @@ class _NewLoginScreenState extends State<NewLoginScreen> {
                ],
              ),
              Positioned(
-               top: 605,
+               top: 605             ,
                left: 30,
                right: 30,
                child: Padding(
