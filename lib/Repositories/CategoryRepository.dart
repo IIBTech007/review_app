@@ -47,13 +47,17 @@ class CategoryRepository extends ICategoryRepository{
       progressDialog.show();
       var response= await http.get(Utils.baseUrl()+"Categories/GetCategoriesByBusiness/$businessId",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
       if(response.statusCode==200){
+        progressDialog.dismiss();
         locator<Logger>().i(CategoriesViewModel.CategoriesListFromJson(response.body));
         return CategoriesViewModel.CategoriesListFromJson(response.body);
       }else if(response.body!=null){
+        progressDialog.dismiss();
         Utils.showError(context,response.body.toString());
       }else
+        progressDialog.dismiss();
         Utils.showError(context,response.statusCode.toString());
     }catch(e){
+      progressDialog.dismiss();
       Utils.showError(context,e.toString());
     }finally{
       progressDialog.dismiss();

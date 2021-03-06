@@ -12,7 +12,7 @@ import 'package:share/share.dart';
 
 class Utils{
    static String baseUrl(){
-     return "http://192.168.10.11:45455/api/";
+     return "http://192.168.10.15:45455/api/";
      //return "http://192.236.147.77:8083/api/";
      //return "http://192.236.147.77:9000/api/";
    }
