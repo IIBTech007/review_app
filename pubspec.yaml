@@ -57,6 +57,10 @@ dependencies:
   flutter_polyline_points: ^0.2.3
   charts_flutter: ^0.9.0
   pie_chart: ^4.0.1
+  flutter_custom_clippers: ^1.1.2
+  slimy_card: ^1.0.4
+  carousel_slider:
+
 
 dev_dependencies:
   flutter_test:

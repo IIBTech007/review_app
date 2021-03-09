@@ -3,6 +3,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:review_app/AppScreens/Admin/Business/AddBusiness.dart';
 import 'package:review_app/AppScreens/Admin/Business/BusinessList.dart';
+import 'package:review_app/AppScreens/Admin/BusinessCategory/BusinessCategoryList.dart';
 import 'package:review_app/AppScreens/Admin/Profile/ProfileScreen.dart';
 import 'file:///C:/Users/IIB/AndroidStudioProjects/review_app/lib/AppScreens/WelcomeScreens/SplashScreen.dart';
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: BusinessCategoryList(),
     );
   }
 }
