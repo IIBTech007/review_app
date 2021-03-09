@@ -1,24 +1,15 @@
-
 import 'package:flutter/cupertino.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:review_app/Utils/Utils.dart';
-import 'package:review_app/AppScreens/WelcomeScreens/NewWelcomeScreens/NewForgotPasswordScreen.dart';
+import 'package:review_app/AppScreens/WelcomeScreens/NewWelcomeScreens/LoginScreen.dart';
 import 'package:review_app/Controllers/AccountController.dart';
 import 'package:review_app/components/colorConstants.dart';
 
-class NewLoginScreen extends StatefulWidget {
-  @override
-  _NewLoginScreenState createState() => _NewLoginScreenState();
-}
-
-class _NewLoginScreenState extends State<NewLoginScreen> {
-  bool isVisible= true;
-  final  accountController = Get.put(AccountController());
-
+class RegisterScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
+    final  accountController = Get.put(AccountController());
     return Scaffold(
       body: Container(
         color: color4,
@@ -72,21 +63,20 @@ class _NewLoginScreenState extends State<NewLoginScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 40,),
+              SizedBox(height: 10,),
               Center(
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Container(
                     width: 400,
-                    height: 280,
+                    height: 560,
                     decoration: BoxDecoration(
-                      color: color4,
-                        borderRadius: BorderRadius.circular(10),
-                        //color: color3,
-                        // border: Border.all(
-                        //     color: color3,
-                        //     width: 2
-                        // )
+                      borderRadius: BorderRadius.circular(10),
+                      //color: color3,
+                      // border: Border.all(
+                      //     color: color3,
+                      //     width: 2
+                      // )
                     ),
                     child: Column(
                       children: [
@@ -94,9 +84,9 @@ class _NewLoginScreenState extends State<NewLoginScreen> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              'WELCOME',
+                              'SIGN UP',
                               style: new TextStyle(
-                                fontSize: 30.0,
+                                fontSize: 25.0,
                                 color: color3,
                                 fontWeight: FontWeight.bold,
                                 //foreground: Paint()..shader = linearGradient2
@@ -104,16 +94,42 @@ class _NewLoginScreenState extends State<NewLoginScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(height: 5,),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Card(
                             elevation: 8,
-                            color: color4,
+                            color: color6,
+                            child: Container(
+                              child: TextFormField(
+                                controller: accountController.nameTextEditingController,
+                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: color3, width: 1.0)
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: color6, width: 1.0)
+                                  ),
+                                  labelText: "Name",
+                                  labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                  suffixIcon: Icon(Icons.assignment_ind,color: color3,size: 27,),
+                                ),
+                                textInputAction: TextInputAction.next,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            elevation: 8,
+                            color: color6,
                             child: Container(
                               child: TextFormField(
                                 controller: accountController.emailTextEditingController,
-                                style: TextStyle(color: color4,fontWeight: FontWeight.bold),
+                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
@@ -131,17 +147,16 @@ class _NewLoginScreenState extends State<NewLoginScreen> {
                             ),
                           ),
                         ),
-
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Card(
                             elevation: 8,
-                            color: color4,
+                            color: color6,
                             child: Container(
                               child: TextFormField(
                                 controller: accountController.passwordTextEditingController,
-                                style: TextStyle(color: color4,fontWeight: FontWeight.bold),
-                                obscureText: isVisible,
+                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                obscureText: accountController.signUpPasswordIsVisible,
                                 keyboardType: TextInputType.visiblePassword,
                                 decoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
@@ -150,20 +165,94 @@ class _NewLoginScreenState extends State<NewLoginScreen> {
                                   enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(color: color6, width: 1.0)
                                   ),
-
                                   labelText: "Password",
                                   labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
-                                  suffixIcon: IconButton(icon: Icon(accountController.isVisible?Icons.visibility:Icons.visibility_off,color: color3,size: 27),onPressed: () {
-                                    setState(() {
-                                      if(accountController.isVisible){
-                                        accountController.isVisible= false;
-                                      }else{
-                                        accountController.isVisible= true;
-                                      }
-                                    });
-                                  },),//(Icons.https,color: yellowColor,size: 27,)
+                                  suffixIcon: IconButton(icon: Icon(accountController.signUpPasswordIsVisible?Icons.visibility:Icons.visibility_off,color: color3,size: 27),
+                                    onPressed: () {
+                                     if(accountController.signUpPasswordIsVisible){
+                                       accountController.signUpPasswordIsVisible=false;
+                                     }else
+                                       accountController.signUpPasswordIsVisible=true;
+                                  },),//Icon(Icons.https,color: yellowColor,size: 27,)
                                 ),
-
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            elevation: 8,
+                            color: color6,
+                            child: Container(
+                              child: TextFormField(
+                                controller: accountController.phoneTextEditingController,
+                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: color3, width: 1.0)
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: color6, width: 1.0)
+                                  ),
+                                  labelText: "Phone",
+                                  labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                  suffixIcon: Icon(Icons.add_call,color: color3,size: 27,),
+                                ),
+                                textInputAction: TextInputAction.next,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            elevation: 8,
+                            color: color6,
+                            child: Container(
+                              child: TextFormField(
+                                controller: accountController.cityTextEditingController,
+                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: color3, width: 1.0)
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: color6, width: 1.0)
+                                  ),
+                                  labelText: "City",
+                                  labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                  suffixIcon: Icon(Icons.add_location_alt_outlined,color: color3,size: 27,),
+                                ),
+                                textInputAction: TextInputAction.next,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            elevation: 8,
+                            color: color6,
+                            child: Container(
+                              child: TextFormField(
+                                controller: accountController.countryTextEditingController,
+                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: color3, width: 1.0)
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: color6, width: 1.0)
+                                  ),
+                                  labelText: "Country",
+                                  labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                  suffixIcon: Icon(Icons.account_balance,color: color3,size: 27,),
+                                ),
+                                textInputAction: TextInputAction.next,
                               ),
                             ),
                           ),
@@ -177,19 +266,7 @@ class _NewLoginScreenState extends State<NewLoginScreen> {
                 padding: const EdgeInsets.all(5.0),
                 child: InkWell(
                   onTap: (){
-                    if(accountController.emailTextEditingController.text==null||accountController.emailTextEditingController.text.isEmpty){
-                      Utils.showError(context, "Email is Required");
-                    }else if(!Utils.validateEmail(accountController.emailTextEditingController.text)){
-                      Utils.showError(context, "Email Format is Invalid");
-                    }
-                    else if(accountController.passwordTextEditingController.text==null||accountController.passwordTextEditingController.text.isEmpty){
-                      Utils.showError(context, "Password is Required");
-                    }else if(!Utils.validateStructure(accountController.passwordTextEditingController.text)){
-                      Utils.showError(context, "Password must contain atleast one lower case,Upper case and special characters");
-                    }else{
-                      accountController.AuthenticateUser(context);
-                      //locator<IBusinessRepository>().getBusinessByOwner(context);
-                    }
+                      accountController.RegisterUser(context);
                   },
                   child: Center(
                     child: Card(
@@ -199,17 +276,10 @@ class _NewLoginScreenState extends State<NewLoginScreen> {
                         height: 55,
                         width: 250,
                         decoration: BoxDecoration(
-                          //color: color1,
-                          // gradient: new LinearGradient(
-                          //     colors: [
-                          //       Color(0xff222831), Color(0xff393e46)
-                          //     ]
-                          // ),
                           borderRadius: BorderRadius.circular(15),
-                          //border: Border.all(color: Color(0xfbb55400), width: 3)
                         ),
                         child: Center(
-                          child: Text("Sign In", style: TextStyle(
+                          child: Text("Sign Up", style: TextStyle(
                             color: color4,
                             fontWeight: FontWeight.bold,
                             fontSize: 22,
@@ -223,47 +293,39 @@ class _NewLoginScreenState extends State<NewLoginScreen> {
               ),
               SizedBox(height: 15,),
               Center(
-                  child: InkWell(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> NewForgotPasswordScreen()));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: Text(
-                        'Forgot Password?',
-                        style: new TextStyle(
-                          decoration: TextDecoration.underline,
-                          fontSize: 15.0,
-                          color: color3,
-                          fontWeight: FontWeight.bold,
-                          //foreground: Paint()..shader = linearGradient2
-                        ),
-                      ),
-                    ),
-                  )
-              ),
-              SizedBox(height: 20,),
-              RotationTransition(
-                turns: new AlwaysStoppedAnimation(180 / 360),
-                child: Container(
-                  child: ClipPath(
-                    clipper: WaveClipperTwo(flip: true),
-                    child: Container(
-                      height: 115,
-                      color: color5,
-                      child: Stack(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          ClipPath(
-                            clipper: WaveClipperTwo(flip: true),
-                            child: Container(
-                              height: 100,
-                              color: color3,
-                              //child: Center(child: Text("WaveClipperTwo(flip: true)")),
+                          Text(
+                            'Already Have Account?',
+                            style: new TextStyle(
+                              fontSize: 17.0,
+                              color: color1,
+                              fontWeight: FontWeight.bold,
+                              //foreground: Paint()..shader = linearGradient2
                             ),
                           ),
+                          SizedBox(width: 4,),
+                          InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginScreen()));
+                            },
+                            child: Text(
+                              'Login',
+                              style: new TextStyle(
+                                decoration: TextDecoration.underline,
+                                fontSize: 20.0,
+                                color: color3,
+                                fontWeight: FontWeight.bold,
+                                //foreground: Paint()..shader = linearGradient2
+                              ),
+                            ),
+                          )
                         ],
-                      ),
-                    ),
+                      )
                   ),
                 ),
               ),

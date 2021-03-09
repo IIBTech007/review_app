@@ -1,18 +1,17 @@
+
 import 'package:flutter/cupertino.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:review_app/Utils/Utils.dart';
+import 'package:review_app/AppScreens/WelcomeScreens/NewWelcomeScreens/ForgotPassword.dart';
+import 'package:review_app/Controllers/AccountController.dart';
 import 'package:review_app/components/colorConstants.dart';
 
-class NewForgotPasswordScreen extends StatefulWidget {
-  @override
-  _NewForgotPasswordScreenState createState() => _NewForgotPasswordScreenState();
-}
-
-class _NewForgotPasswordScreenState extends State<NewForgotPasswordScreen> {
-  bool isVisible= true;
-  bool isVisible2= true;
-
+class LoginScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
+    final  accountController = Get.put(AccountController());
     return Scaffold(
       body: Container(
         color: color4,
@@ -72,7 +71,7 @@ class _NewForgotPasswordScreenState extends State<NewForgotPasswordScreen> {
                   padding: const EdgeInsets.all(12.0),
                   child: Container(
                     width: 400,
-                    height: 320,
+                    height: 280,
                     decoration: BoxDecoration(
                       color: color4,
                       borderRadius: BorderRadius.circular(10),
@@ -88,9 +87,9 @@ class _NewForgotPasswordScreenState extends State<NewForgotPasswordScreen> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              'FORGOT PASSWORD',
+                              'WELCOME',
                               style: new TextStyle(
-                                fontSize: 20.0,
+                                fontSize: 30.0,
                                 color: color3,
                                 fontWeight: FontWeight.bold,
                                 //foreground: Paint()..shader = linearGradient2
@@ -98,17 +97,16 @@ class _NewForgotPasswordScreenState extends State<NewForgotPasswordScreen> {
                             ),
                           ),
                         ),
-
                         SizedBox(height: 10,),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Card(
                             elevation: 8,
-                            color: color6,
+                            color: color4,
                             child: Container(
                               child: TextFormField(
-                                //controller: email,
-                                style: TextStyle(color: color4,fontWeight: FontWeight.bold),
+                                controller: accountController.emailTextEditingController,
+                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
@@ -126,16 +124,17 @@ class _NewForgotPasswordScreenState extends State<NewForgotPasswordScreen> {
                             ),
                           ),
                         ),
+
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Card(
                             elevation: 8,
-                            color: color6,
+                            color: color4,
                             child: Container(
                               child: TextFormField(
-                                //controller: password,
-                                style: TextStyle(color: color4,fontWeight: FontWeight.bold),
-                                obscureText: isVisible,
+                                controller: accountController.passwordTextEditingController,
+                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                obscureText: true,
                                 keyboardType: TextInputType.visiblePassword,
                                 decoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
@@ -145,51 +144,11 @@ class _NewForgotPasswordScreenState extends State<NewForgotPasswordScreen> {
                                       borderSide: BorderSide(color: color6, width: 1.0)
                                   ),
 
-                                  labelText: "New Password",
+                                  labelText: "Password",
                                   labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
-                                  suffixIcon: IconButton(icon: Icon(isVisible?Icons.visibility:Icons.visibility_off,color: color3,size: 27),onPressed: () {
-                                    setState(() {
-                                      if(isVisible){
-                                        isVisible= false;
-                                      }else{
-                                        isVisible= true;
-                                      }
-                                    });
-                                  },),//Icon(Icons.https,color: yellowColor,size: 27,)
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Card(
-                            elevation: 8,
-                            color: color6,
-                            child: Container(
-                              child: TextFormField(
-                                //controller: password,
-                                style: TextStyle(color: color4,fontWeight: FontWeight.bold),
-                                obscureText: isVisible,
-                                keyboardType: TextInputType.visiblePassword,
-                                decoration: InputDecoration(
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: color3, width: 1.0)
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: color6, width: 1.0)
-                                  ),
-                                  labelText: "Confirm Password",
-                                  labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
-                                  suffixIcon: IconButton(icon: Icon(isVisible2?Icons.visibility:Icons.visibility_off,color: color3,size: 27),onPressed: () {
-                                    setState(() {
-                                      if(isVisible2){
-                                        isVisible2= false;
-                                      }else{
-                                        isVisible2= true;
-                                      }
-                                    });
-                                  },),//Icon(Icons.https,color: yellowColor,size: 27,)
+                                  suffixIcon: IconButton(icon: Icon(accountController.isVisible?Icons.visibility:Icons.visibility_off,color: color3,size: 27),onPressed: () {
+
+                                  },),//(Icons.https,color: yellowColor,size: 27,)
                                 ),
 
                               ),
@@ -205,7 +164,19 @@ class _NewForgotPasswordScreenState extends State<NewForgotPasswordScreen> {
                 padding: const EdgeInsets.all(5.0),
                 child: InkWell(
                   onTap: (){
-                    //Navigator.push(context, MaterialPageRoute(builder: (context)=> NewLoginScreen()));
+                    if(accountController.emailTextEditingController.text==null||accountController.emailTextEditingController.text.isEmpty){
+                      Utils.showError(context, "Email is Required");
+                    }else if(!Utils.validateEmail(accountController.emailTextEditingController.text)){
+                      Utils.showError(context, "Email Format is Invalid");
+                    }
+                    else if(accountController.passwordTextEditingController.text==null||accountController.passwordTextEditingController.text.isEmpty){
+                      Utils.showError(context, "Password is Required");
+                    }else if(!Utils.validateStructure(accountController.passwordTextEditingController.text)){
+                      Utils.showError(context, "Password must contain atleast one lower case,Upper case and special characters");
+                    }else{
+                      accountController.AuthenticateUser(context);
+                      //locator<IBusinessRepository>().getBusinessByOwner(context);
+                    }
                   },
                   child: Center(
                     child: Card(
@@ -225,7 +196,7 @@ class _NewForgotPasswordScreenState extends State<NewForgotPasswordScreen> {
                           //border: Border.all(color: Color(0xfbb55400), width: 3)
                         ),
                         child: Center(
-                          child: Text("Submit", style: TextStyle(
+                          child: Text("Sign In", style: TextStyle(
                             color: color4,
                             fontWeight: FontWeight.bold,
                             fontSize: 22,
@@ -236,6 +207,27 @@ class _NewForgotPasswordScreenState extends State<NewForgotPasswordScreen> {
                     ),
                   ),
                 ),
+              ),
+              SizedBox(height: 15,),
+              Center(
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> ForgotPassword()));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: Text(
+                        'Forgot Password?',
+                        style: new TextStyle(
+                          decoration: TextDecoration.underline,
+                          fontSize: 15.0,
+                          color: color3,
+                          fontWeight: FontWeight.bold,
+                          //foreground: Paint()..shader = linearGradient2
+                        ),
+                      ),
+                    ),
+                  )
               ),
               SizedBox(height: 20,),
               RotationTransition(

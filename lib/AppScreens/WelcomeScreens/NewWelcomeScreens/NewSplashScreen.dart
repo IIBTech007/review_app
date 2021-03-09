@@ -1,8 +1,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:review_app/AppScreens/WelcomeScreens/NewWelcomeScreens/NewLoginScreen.dart';
-import 'package:review_app/AppScreens/WelcomeScreens/NewWelcomeScreens/NewSignUpScreen.dart';
+import 'package:review_app/AppScreens/WelcomeScreens/NewWelcomeScreens/LoginScreen.dart';
+import 'package:review_app/AppScreens/WelcomeScreens/NewWelcomeScreens/RegisterScreen.dart';
 import 'package:review_app/components/colorConstants.dart';
 
 class NewSplashScreen extends StatefulWidget {
@@ -56,7 +56,7 @@ class _NewSplashScreenState extends State<NewSplashScreen> {
               Center(
                 child: InkWell(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> NewSignupScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisterScreen()));
                   },
                   child: Container(
                     height: 60,
@@ -81,7 +81,7 @@ class _NewSplashScreenState extends State<NewSplashScreen> {
               Center(
                 child: InkWell(
                   onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> NewLoginScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginScreen()));
                   },
                   child: Container(
                     height: 60,

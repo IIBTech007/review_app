@@ -1,16 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:review_app/AppScreens/Admin/Questionnaire/AddAnswers.dart';
+import 'package:review_app/Controllers/QuestionsController.dart';
 import 'package:review_app/components/colorConstants.dart';
 
 
 class AddAQuestion extends StatefulWidget {
+  int businessId,categoryId,subCategoryId;
+
+  AddAQuestion(this.businessId, this.categoryId, this.subCategoryId);
+
   @override
   _AddAQuestionState createState() => _AddAQuestionState();
 }
 
 class _AddAQuestionState extends State<AddAQuestion> {
-  List reviewTypeList=["Star Rating", "MultiSelect", "Combo Box", "Number Rating", "Yes/No"];
 
+  final _questionController=Get.find<QuestionController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,11 +44,11 @@ class _AddAQuestionState extends State<AddAQuestion> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
-                  //controller: contactNo,
+                  controller: _questionController.questionText,
                   style: TextStyle(color: color1,fontWeight: FontWeight.bold),
                   obscureText: false,
-                  // validator: (String value) =>
-                  // value.isEmpty ? "This field is Required" : null,
+                  validator: (String value) =>
+                  value.isEmpty ? "This field is Required" : null,
                   decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: color1, width: 1.0)
@@ -56,33 +63,9 @@ class _AddAQuestionState extends State<AddAQuestion> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  //controller: storeAddress,
-                  style: TextStyle(color: color1,fontWeight: FontWeight.bold),
-                  obscureText: false,maxLines: 4,
-                  // validator: (String value) =>
-                  // value.isEmpty ? "This field is Required" : null,
-                  decoration: InputDecoration(
-                    // suffixIcon: Icon(Icons.add_location,color: Colors.amberAccent,),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: color1, width: 1.0)
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: color1, width: 1.0)
-                    ),
-                    labelText: 'Description',
-                    labelStyle: TextStyle(color: color1, fontWeight: FontWeight.bold),
-                    //suffixIcon: Icon(Icons.email,color: Colors.amberAccent,size: 27,),
-                  ),
-                  textInputAction: TextInputAction.next,
-                ),
-              ),
-              Padding(
                 padding: const EdgeInsets.all(8),
                 child: DropdownButtonFormField(
-                  // hint: Text("Select Size"),
-                  items: reviewTypeList!=null?reviewTypeList.map((trainer)=>DropdownMenuItem(
+                  items: _questionController.reviewTypeList!=null?_questionController.reviewTypeList.map((trainer)=>DropdownMenuItem(
                     child: Text(trainer,style: TextStyle(color: color1),),
                     value: trainer,
                   )).toList():[""].map((name) => DropdownMenuItem(
@@ -95,17 +78,18 @@ class _AddAQuestionState extends State<AddAQuestion> {
                     ),
                   ),
                   onChanged: (value){
-                    setState(() {
-                      //selected_size.insert(cards.length-1, sizesList.indexOf(value));
-
-                    });
+                   _questionController.questionTypeId.value=_questionController.reviewTypeList.indexOf(value)+1;
                   },
                 ),
               ),
               SizedBox(height: 10,),
               InkWell(
                 onTap: (){
-                  //Navigator.push(context, MaterialPageRoute(builder: (context)=> NewPasswordScreen()));
+                   if(_questionController.questionTypeId.value==3){
+                       Navigator.push(context,MaterialPageRoute(builder:(context)=>AddOptions(businessId: widget.businessId,subCategoryId: widget.subCategoryId,categoryId: widget.categoryId,questionTypeId: _questionController.questionTypeId.value,questionText: _questionController.questionText.text,)));
+                   }else{
+                     _questionController.AddQuestions(widget.businessId, widget.categoryId, widget.subCategoryId, context);
+                   }
                 },
                 child: Center(
                   child: Container(

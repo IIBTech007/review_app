@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:ars_progress_dialog/ars_progress_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:logger/logger.dart';
 import 'package:review_app/Interfaces/ICategoryRepository.dart';
 import 'package:review_app/Models/CategoriesViewModel.dart';
 import 'package:http/http.dart'as http;
