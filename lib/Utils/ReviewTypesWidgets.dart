@@ -14,7 +14,7 @@ class _ReviewWidgetsState extends State<ReviewWidgets> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Review Widgets", style: TextStyle(
+        title: Text("Review Widget", style: TextStyle(
             color: color4, fontSize: 22, fontWeight: FontWeight.bold
         ),
         ),
