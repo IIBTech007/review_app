@@ -24,7 +24,7 @@ class AccountRepository extends IAccountRepository{
         animationDuration: Duration(milliseconds: 500));
 
     try{
-      progressDialog.show();
+     // progressDialog.show();
       var res=await http.post(Utils.baseUrl()+"Account/Login",body:LoginViewModel.loginModelToJson(loginViewModel),headers: {"Content-Type":"application/json"});
       if(res.statusCode==200)
       {
@@ -34,7 +34,7 @@ class AccountRepository extends IAccountRepository{
         locator<GetStorage>().write("token", jsonDecode(res.body)["token"]);
         Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>BusinessList()));
         return res.body;
-      }else if(res.body!=null){
+      }else if(res.body!=null&&res.body.isNotEmpty){
         progressDialog.dismiss();
         Utils.showError(context,res.body.trim());
       }else

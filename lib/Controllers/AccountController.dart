@@ -12,6 +12,7 @@ import '../Utils/Utils.dart';
 class AccountController extends GetxController{
  var accountRepository =locator<IAccountRepository>();
  bool isVisible=true;
+ bool signUpPasswordIsVisible=true;
  TextEditingController confirmPasswordTextEditingController, nameTextEditingController,emailTextEditingController,passwordTextEditingController,cityTextEditingController,countryTextEditingController,phoneTextEditingController;
 
  @override
@@ -62,25 +63,57 @@ class AccountController extends GetxController{
     });
 
   }
-  Future<void> ResetPassword(BuildContext context){
-
-    return accountRepository.resetPassword(context,LoginViewModel(
-      email: emailTextEditingController.text,
-      password: passwordTextEditingController.text,
-      confirmPassword: confirmPasswordTextEditingController.text
-    ));
+   ResetPassword(BuildContext context){
+    if(emailTextEditingController.text==null||emailTextEditingController.text.isEmpty){
+      Utils.showError(context, "Email is Required");
+    }else if(!Utils.validateEmail(emailTextEditingController.text)){
+      Utils.showError(context, "Email Format is Invalid");
+    } else if(passwordTextEditingController.text==null||passwordTextEditingController.text.isEmpty){
+      Utils.showError(context, "Password is Required");
+    }else if(!Utils.validateStructure(passwordTextEditingController.text)) {
+      Utils.showError(context, "Password must contain atleast one lower case,Upper case and special characters");
+    }else if(confirmPasswordTextEditingController.text==null||confirmPasswordTextEditingController.text.isEmpty){
+      Utils.showError(context, "Confirm Password is Required");
+    }else if(!Utils.validateStructure(confirmPasswordTextEditingController.text)){
+      Utils.showError(context, "Confirm Password must contain atleast one lower case,Upper case and special characters");
+    }else if(passwordTextEditingController.text!=confirmPasswordTextEditingController.text){
+      Utils.showError(context, "Both Passwords should match");
+    }else{
+      accountRepository.resetPassword(context, LoginViewModel(
+          email: emailTextEditingController.text,
+          password: passwordTextEditingController.text,
+          confirmPassword: confirmPasswordTextEditingController.text
+      ));
+    }
   }
-  Future<void> RegisterUser(BuildContext context){
-
-    return accountRepository.register(context, RegisterViewModel(
-      name:nameTextEditingController.text,
-      email:emailTextEditingController.text,
-      password: passwordTextEditingController.text,
-      phone: phoneTextEditingController.text,
-      country: countryTextEditingController.text,
-      city: cityTextEditingController.text,
-      roleId: "d24a371d-764c-4e62-99bd-2497bef73099"
-    ));
+  Future<void> RegisterUser(BuildContext context) {
+    if (nameTextEditingController.text == null || nameTextEditingController.text.isEmpty) {
+      Utils.showError(context, "Name Required");
+    } else if (emailTextEditingController.text == null || emailTextEditingController.text.isEmpty) {
+      Utils.showError(context, "Email Required");
+    } else if (!Utils.validateEmail(emailTextEditingController.text)) {
+      Utils.showError(context, "Email Not Valid");
+    } else if (passwordTextEditingController.text == null || passwordTextEditingController.text.isEmpty) {
+      Utils.showError(context, "Password Required");
+    } else if (!Utils.validateStructure(passwordTextEditingController.text)) {
+      Utils.showError(context, "password contain 1 upper case 1 num and 1 special chracter");
+    } else if (phoneTextEditingController.text == null || phoneTextEditingController.text.isEmpty) {
+      Utils.showError(context, "Phone is Required");
+    } else if (cityTextEditingController.text == null || cityTextEditingController.text.isEmpty) {
+      Utils.showError(context, "City is Required");
+    } else if (countryTextEditingController.text == null || countryTextEditingController.text.isEmpty) {
+      Utils.showError(context, "Country is Required");
+    } else {
+      return accountRepository.register(context, RegisterViewModel(
+          name: nameTextEditingController.text,
+          email: emailTextEditingController.text,
+          password: passwordTextEditingController.text,
+          phone: phoneTextEditingController.text,
+          country: countryTextEditingController.text,
+          city: cityTextEditingController.text,
+          roleId: "d24a371d-764c-4e62-99bd-2497bef73099"
+      ));
+    }
   }
 
   @override

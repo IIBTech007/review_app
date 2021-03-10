@@ -13,7 +13,7 @@ import 'package:share/share.dart';
 class Utils{
    static String baseUrl(){
      //return "https://foodbooks.conveyor.cloud/api/";
-     return "http://192.168.10.14:45455/api/";
+     return "http://192.168.10.34:45455/api/";
    }
    static bool validateStructure(String value){
      RegExp regExp = new RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{6,}$');
@@ -45,7 +45,6 @@ class Utils{
        duration: Duration(seconds: 3),
        message: message,
      ).show(context);
-
    }
    static Map<String, dynamic> parseJwt(String token) {
      final parts = token.split('.');
@@ -79,7 +78,17 @@ class Utils{
 
      return utf8.decode(base64Url.decode(output));
    }
-
+   static String getQuestionType(int id){
+     if(id==1){
+       return "Star Rating";
+     }else if(id==2){
+       return "Yes/No";
+     }else if(id==3){
+       return "Dropdown";
+     }else if(id==4){
+       return "Numbering";
+     }
+   }
    // static Future<String> translate(String input)async{
    //   final translator=GoogleTranslator();
    //   var trans=await translator.translate(input,to:"en");
