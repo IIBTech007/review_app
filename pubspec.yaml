@@ -59,8 +59,9 @@ dependencies:
   pie_chart: ^4.0.1
   flutter_custom_clippers: ^1.1.2
   slimy_card: ^1.0.4
-  carousel_slider:
-
+  carousel_slider: 2.3.4
+  fancy_bottom_navigation: ^0.3.2
+  flutter_rating_bar: ^3.2.0
 
 dev_dependencies:
   flutter_test:
