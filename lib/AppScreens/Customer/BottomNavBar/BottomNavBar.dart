@@ -3,12 +3,13 @@ import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:review_app/AppScreens/Admin/Home/HomeScreen.dart';
+import 'package:review_app/AppScreens/Customer/Home/HomeScreen.dart';
 
-class BottomNavBar extends StatefulWidget {
+class ClientBottomNavBar extends StatefulWidget {
   @override
   _BottomNavBarState createState() => _BottomNavBarState();
 }
-class _BottomNavBarState extends State<BottomNavBar> {
+class _BottomNavBarState extends State<ClientBottomNavBar> {
   int currentPage = 0;
   GlobalKey bottomNavigationKey = GlobalKey();
 
@@ -24,19 +25,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
       bottomNavigationBar: FancyBottomNavigation(
         tabs: [
           TabData(
-            iconData:Icons.dashboard,
-            title: "Dashboard",
-          ),
-          TabData(
-            iconData: Icons.view_list,
-            title: "Review",
+            iconData: Icons.question_answer,
+            title: "Reviews",
           ),
           TabData(iconData: Icons.home, title: "Home",),
-          TabData(iconData: Icons.question_answer, title: "Feedbacks"),
+
           TabData(iconData: Icons.settings, title: "Settings"),
 
         ],
-        initialSelection: 2,
+        initialSelection: 1,
         key: bottomNavigationKey,
         onTabChangedListener: (position) {
           setState(() {
@@ -50,15 +47,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
   _getPage(int page) {
     switch (page) {
       case 0:
-        return AdminHomeScreen();
+        return ClientHomeScreen();
       case 1:
-        return AdminHomeScreen();
-      case 2:
-        return AdminHomeScreen();
-      case 3:
-        return AdminHomeScreen();//AboutScreen();
+        return ClientHomeScreen();
       default:
-        return AdminHomeScreen();
+        return ClientHomeScreen();
     }
   }
 }

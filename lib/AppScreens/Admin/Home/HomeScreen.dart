@@ -1,15 +1,16 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:review_app/components/colorConstants.dart';
 import 'package:slimy_card/slimy_card.dart';
 
-class HomeScreen extends StatefulWidget {
+class AdminHomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<AdminHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,34 +43,49 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(height: 10,),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text("Business Category",
-                  style: TextStyle(
-                      color: color1,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("Business Category",
+                      style: TextStyle(
+                          color: color1,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25
+                      ),
+                    ),
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("See All",
+                      style: TextStyle(
+                          color: color3,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15
+                      ),
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 15,),
               Container(
                 child: CarouselSlider.builder(
                   itemCount: 4,
                   options: CarouselOptions(
-                  height: 600,
-                          aspectRatio: 16/9,
-                          viewportFraction: 0.8,
-                          initialPage: 0,
-                          enableInfiniteScroll: true,
-                          reverse: false,
-                          autoPlay: true,
-                          autoPlayInterval: Duration(seconds: 3),
-                          autoPlayAnimationDuration: Duration(milliseconds: 800),
-                          autoPlayCurve: Curves.fastOutSlowIn,
-                          enlargeCenterPage: true,
-                          scrollDirection: Axis.horizontal,
-                ),
+                    height: 600,
+                    aspectRatio: 16/9,
+                    viewportFraction: 0.8,
+                    initialPage: 0,
+                    enableInfiniteScroll: true,
+                    reverse: false,
+                    autoPlay: true,
+                    autoPlayInterval: Duration(seconds: 3),
+                    autoPlayAnimationDuration: Duration(milliseconds: 800),
+                    autoPlayCurve: Curves.fastOutSlowIn,
+                    enlargeCenterPage: true,
+                    scrollDirection: Axis.horizontal,
+                  ),
                   itemBuilder: ((BuildContext context, int index){
                     return  Container(
                       child: SlimyCard(
@@ -110,20 +126,61 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
+          child: Stack(
+            children: [
+              Positioned(
+                top: 10,
+                right:10,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.black45,
+                      borderRadius: BorderRadius.circular(30)
+                  ),
+                  width: 60,
+                  height: 30,
+
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Row(
+                      children: [
+                        FaIcon(
+                          FontAwesomeIcons.solidStar,
+                          color: Colors.amber,
+                          size: 20,
+                        ),
+                        SizedBox(width: 2,),
+                        Text("4.5",
+                          style: TextStyle(
+                              color: color4,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                top:205,
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 50,
+                  color: Colors.black45,
+                  child: Text("YalaHabibi Dhaba",
+                    style: TextStyle(
+                        color: color4,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
         SizedBox(height: 15),
-        // Text(
-        //   'The Rock',
-        //   style: TextStyle(color: color3, fontSize: 20),
-        // ),
-        // SizedBox(height: 15),
-        // Text(
-        //   'He asks, what your name is. But!',
-        //   style: TextStyle(
-        //       color: color4,
-        //       fontSize: 12,
-        //       fontWeight: FontWeight.w500),
-        // ),
+
         SizedBox(height: 10),
       ],
     );
@@ -133,23 +190,21 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget bottomCardWidget() {
     return Column(
       children: [
-        Center(
-          child: Text("YalaHabibi Dhaba",
-            style: TextStyle(
-                color: color3,
-                fontSize: 20,
-                fontWeight: FontWeight.bold
-            ),
-          ),
+        Row(
+          children: [
+            Center(
+              child: Text("Ramtalai Road, Gujrat, Pakistan",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: color4,
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold
+                ),
+              ),
+            )
+          ],
         ),
         SizedBox(height: 5,),
-        Text("Ramtalai Road, IIB Khokha Corp., Gujrat, Basitshaitan",
-          style: TextStyle(
-              color: color4,
-              fontSize: 15,
-              fontWeight: FontWeight.bold
-          ),
-        )
       ],
     );
     //   Text(
