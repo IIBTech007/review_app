@@ -39,14 +39,14 @@ class _CommentWithPictureState extends State<CommentWithPicture> {
                 child: ClipPath(
                   clipper: WaveClipperTwo(flip: true),
                   child: Container(
-                    height: 115,
+                    height: 105,
                     color: color5,
                     child: Stack(
                       children: [
                         ClipPath(
                           clipper: WaveClipperTwo(flip: true),
                           child: Container(
-                            height: 100,
+                            height: 90,
                             color: color3,
                           ),
                         ),
