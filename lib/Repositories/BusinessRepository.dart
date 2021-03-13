@@ -55,12 +55,14 @@ class BusinessRepository extends IBusinessRepository{
         return BusinessViewModel.BusinessListFromJson(response.body);
       }else if(response.body!=null&&response.body.isNotEmpty){
         progressDialog.dismiss();
-        Utils.showError(context,response.body);
+        locator<Logger>().i(response.body);
+       // Utils.showError(context,response.body);
       }else
         progressDialog.dismiss();
         Utils.showError(context,response.statusCode.toString());
     }catch(e){
-      Utils.showError(context,e.toString());
+      locator<Logger>().i(e);
+     // Utils.showError(context,e.toString());
       progressDialog.dismiss();
     }finally{
       progressDialog.dismiss();

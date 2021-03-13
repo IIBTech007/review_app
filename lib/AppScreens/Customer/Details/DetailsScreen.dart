@@ -16,7 +16,7 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      //resizeToAvoidBottomPadding: false,
       body: ExpandableCardPage(
         page: BusinessProfileScreen(),
         expandableCard: ExpandableCard(

@@ -78,7 +78,6 @@ class QuestionRepository extends IQuestionRepository{
     try{
       progressDialog.show();
       var response= await http.get(Utils.baseUrl()+"Questions?BusinessId=$businessId",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
-      print(Utils.baseUrl()+"Questions?SubCategoryId=$businessId");
       locator<Logger>().i(response.body);
       if(response.statusCode==200){
         progressDialog.dismiss();

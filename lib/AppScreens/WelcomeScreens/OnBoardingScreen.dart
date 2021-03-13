@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:review_app/AppScreens/WelcomeScreens/NewWelcomeScreens/NewSplashScreen.dart';
+import 'file:///C:/Users/IIB/AndroidStudioProjects/review_app/lib/AppScreens/WelcomeScreens/NewSplashScreen.dart';
 import 'package:review_app/components/colorConstants.dart';
 
 class OnBoardingScreen extends StatefulWidget {

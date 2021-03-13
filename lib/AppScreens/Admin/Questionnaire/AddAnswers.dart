@@ -18,8 +18,10 @@ class _AddOptionsState extends State<AddOptions> {
   var optionTextTECS = <TextEditingController>[];
   var ratingTECS = <TextEditingController>[];
   var cards = <Card>[];
+  int id=null;
   final _questionController=Get.find<QuestionController>();
   Card createCard() {
+    id??null;
     var optionText = TextEditingController();
     var rating = TextEditingController();
     optionTextTECS.add(optionText);

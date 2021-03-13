@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share/share.dart';
@@ -12,8 +13,8 @@ import 'package:share/share.dart';
 
 class Utils{
    static String baseUrl(){
-     //return "https://foodbooks.conveyor.cloud/api/";
-     return "http://192.168.10.34:45455/api/";
+    // return "https://foodbooks.conveyor.cloud/api/";
+     return "http://192.168.10.12:45457/api/";
    }
    static bool validateStructure(String value){
      RegExp regExp = new RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{6,}$');
@@ -84,35 +85,15 @@ class Utils{
      }else if(id==2){
        return "Yes/No";
      }else if(id==3){
-       return "Dropdown";
+       return "Radio Button";
      }else if(id==4){
        return "Numbering";
      }
    }
-   // static Future<String> translate(String input)async{
-   //   final translator=GoogleTranslator();
-   //   var trans=await translator.translate(input,to:"en");
-   //  return trans.text;
-   // }
    static Future<File> getImage() async {
      var image = await ImagePicker.pickImage(source: ImageSource.gallery);
      return image;
    }
-
-   // static TwilioFlutter initializeTwilio(){
-   //  var twilioFlutter = TwilioFlutter(
-   //       accountSid : 'AC6414a8b9b8c39d810990bc24cd2ef679', // replace *** with Account SID
-   //       authToken : '961149c8d93400faf901e04ef16366af',  // replace xxx with Auth Token
-   //       twilioNumber : '+19065694110'  // replace .... with Twilio Number
-   //   );
-   //  return twilioFlutter;
-   // }
-   // static sendMessage(String number,String message){
-   //
-   //   initializeTwilio().sendSMS(
-   //       toNumber : number,
-   //       messageBody : message);
-   // }
    static void shareImage(BuildContext context,Uint8List pngBytes) async{
      try{
        var rng = new Random();
@@ -128,5 +109,71 @@ class Utils{
      }catch(e){
        showError(context,e.toString());
      }
+   }
+   static Widget getRatingType(int type){
+     if(type==1){
+       return Center(
+         child: RatingBar.builder(
+           initialRating: 0,
+           itemCount: 5,
+           itemBuilder: (context, index) {
+             switch (index) {
+               case 0:
+                 return Icon(
+                   Icons.sentiment_very_dissatisfied,
+                   color: Colors.red,
+                 );
+               case 1:
+                 return Icon(
+                   Icons.sentiment_dissatisfied,
+                   color: Colors.redAccent,
+                 );
+               case 2:
+                 return Icon(
+                   Icons.sentiment_neutral,
+                   color: Colors.amber,
+                 );
+               case 3:
+                 return Icon(
+                   Icons.sentiment_satisfied,
+                   color: Colors.lightGreen,
+                 );
+               case 4:
+                 return Icon(
+                   Icons.sentiment_very_satisfied,
+                   color: Colors.green,
+                 );
+             }
+           },
+           onRatingUpdate: (rating) {
+             print(rating);
+           },
+         ),
+       );
+     }else if(type==2){
+       return Column(
+         mainAxisSize: MainAxisSize.min,
+         children: <Widget>[
+           _myRadioButton(
+             title: "Yes",
+             value: 5,
+           //  onChanged: (newValue) => setState(() => _groupValue = newValue),
+           ),
+           _myRadioButton(
+             title: "No",
+             value: 1,
+            // onChanged: (newValue) => setState(() => _groupValue = newValue),
+           ),
+         ],
+       );
+     }
+   }
+ static  Widget _myRadioButton({String title, int value, Function onChanged}) {
+     return RadioListTile(
+       value: value,
+       groupValue: "groupValue",
+       onChanged: onChanged,
+       title: Text(title),
+     );
    }
 }

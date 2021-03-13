@@ -4,8 +4,9 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:need_resume/need_resume.dart';
-import 'package:review_app/AppScreens/Admin/BusinessCategory/BusinessSubcategory/AddBusinessSubCategory.dart';
 import 'package:review_app/AppScreens/Admin/Questionnaire/QuestionnaireList.dart';
+import 'AddBusinessSubCategory.dart';
+import 'file:///C:/Users/IIB/AndroidStudioProjects/review_app/lib/AppScreens/Admin/Feedbacks/CustomerInfoforFeedback.dart';
 import 'package:review_app/Controllers/SubCategoryController.dart';
 import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';
@@ -118,6 +119,9 @@ class _BusinessSubCategoryListState extends ResumableState<BusinessSubCategoryLi
                           border: Border.all(color: color3, width: 2)
                       ),
                       child: ListTile(
+                        onLongPress: (){
+                          Navigator.push(context, MaterialPageRoute(builder:(context)=>CustomerInfoForFeedback(subcategoryId: subCategoryController.subcategoryList[index].id,categoryId: subCategoryController.subcategoryList[index].categoryId,businessId: widget.businessId)));
+                        },
                         onTap: (){
                           Navigator.push(context, MaterialPageRoute(builder:(context)=>QuestionnaireList(subCategoryId: subCategoryController.subcategoryList[index].id,categoryId: subCategoryController.subcategoryList[index].categoryId,businessId: widget.businessId)));
                         },

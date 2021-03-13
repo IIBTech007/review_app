@@ -18,6 +18,7 @@ class QuestionController extends GetxController{
    if(questionText==null){
      questionText=TextEditingController();
    }
+
   }
    AddQuestions(int businessId,int categoryId,int subcategoryId,BuildContext context){
       _questionRepository.addQuestions(Questions(

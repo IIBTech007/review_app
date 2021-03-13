@@ -1,17 +1,17 @@
-
-import 'package:flutter/cupertino.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:review_app/Utils/Utils.dart';
-import 'package:review_app/AppScreens/WelcomeScreens/NewWelcomeScreens/ForgotPassword.dart';
-import 'package:review_app/Controllers/AccountController.dart';
+import 'file:///C:/Users/IIB/AndroidStudioProjects/review_app/lib/AppScreens/Admin/Feedbacks/AddRating.dart';
+import 'package:review_app/Controllers/FeedbackController.dart';
 import 'package:review_app/components/colorConstants.dart';
 
-class LoginScreen extends StatelessWidget{
+class CustomerInfoForFeedback extends StatelessWidget{
+  int businessId,categoryId,subcategoryId;
+
+  CustomerInfoForFeedback({this.businessId, this.categoryId, this.subcategoryId});
+
   @override
   Widget build(BuildContext context) {
-    final  accountController = Get.put(AccountController());
+    final _feedbackController =Get.put(FeedbackController());
     return Scaffold(
       body: Container(
         color: color4,
@@ -65,21 +65,15 @@ class LoginScreen extends StatelessWidget{
                   ),
                 ),
               ),
-              SizedBox(height: 40,),
+              SizedBox(height: 10,),
               Center(
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Container(
                     width: 400,
-                    height: 280,
+                    height: 470,
                     decoration: BoxDecoration(
-                      color: color4,
                       borderRadius: BorderRadius.circular(10),
-                      //color: color3,
-                      // border: Border.all(
-                      //     color: color3,
-                      //     width: 2
-                      // )
                     ),
                     child: Column(
                       children: [
@@ -87,9 +81,9 @@ class LoginScreen extends StatelessWidget{
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              'WELCOME',
+                              'Give Feedback',
                               style: new TextStyle(
-                                fontSize: 30.0,
+                                fontSize: 25.0,
                                 color: color3,
                                 fontWeight: FontWeight.bold,
                                 //foreground: Paint()..shader = linearGradient2
@@ -97,15 +91,41 @@ class LoginScreen extends StatelessWidget{
                             ),
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(height: 5,),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Card(
                             elevation: 8,
-                            color: color4,
+                            color: color6,
                             child: Container(
                               child: TextFormField(
-                                controller: accountController.emailTextEditingController,
+                                controller: _feedbackController.name,
+                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: color3, width: 1.0)
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: color6, width: 1.0)
+                                  ),
+                                  labelText: "Name",
+                                  labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                  suffixIcon: Icon(Icons.assignment_ind,color: color3,size: 27,),
+                                ),
+                                textInputAction: TextInputAction.next,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            elevation: 8,
+                            color: color6,
+                            child: Container(
+                              child: TextFormField(
+                                controller: _feedbackController.email,
                                 style: TextStyle(color: color1,fontWeight: FontWeight.bold),
                                 obscureText: false,
                                 decoration: InputDecoration(
@@ -124,18 +144,16 @@ class LoginScreen extends StatelessWidget{
                             ),
                           ),
                         ),
-
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Card(
                             elevation: 8,
-                            color: color4,
+                            color: color6,
                             child: Container(
                               child: TextFormField(
-                                controller: accountController.passwordTextEditingController,
+                                controller: _feedbackController.phone,
                                 style: TextStyle(color: color1,fontWeight: FontWeight.bold),
-                                obscureText: true,
-                                keyboardType: TextInputType.visiblePassword,
+                                obscureText: false,
                                 decoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(color: color3, width: 1.0)
@@ -143,14 +161,63 @@ class LoginScreen extends StatelessWidget{
                                   enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(color: color6, width: 1.0)
                                   ),
-
-                                  labelText: "Password",
+                                  labelText: "Phone",
                                   labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
-                                  suffixIcon: IconButton(icon: Icon(accountController.isVisible?Icons.visibility:Icons.visibility_off,color: color3,size: 27),onPressed: () {
-
-                                  },),//(Icons.https,color: yellowColor,size: 27,)
+                                  suffixIcon: Icon(Icons.add_call,color: color3,size: 27,),
                                 ),
-
+                                textInputAction: TextInputAction.next,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            elevation: 8,
+                            color: color6,
+                            child: Container(
+                              child: TextFormField(
+                                controller: _feedbackController.city,
+                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: color3, width: 1.0)
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: color6, width: 1.0)
+                                  ),
+                                  labelText: "City",
+                                  labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                  suffixIcon: Icon(Icons.add_location_alt_outlined,color: color3,size: 27,),
+                                ),
+                                textInputAction: TextInputAction.next,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            elevation: 8,
+                            color: color6,
+                            child: Container(
+                              child: TextFormField(
+                                controller: _feedbackController.country,
+                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: color3, width: 1.0)
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: color6, width: 1.0)
+                                  ),
+                                  labelText: "Country",
+                                  labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                  suffixIcon: Icon(Icons.account_balance,color: color3,size: 27,),
+                                ),
+                                textInputAction: TextInputAction.next,
                               ),
                             ),
                           ),
@@ -164,19 +231,7 @@ class LoginScreen extends StatelessWidget{
                 padding: const EdgeInsets.all(5.0),
                 child: InkWell(
                   onTap: (){
-                    if(accountController.emailTextEditingController.text==null||accountController.emailTextEditingController.text.isEmpty){
-                      Utils.showError(context, "Email is Required");
-                    }else if(!Utils.validateEmail(accountController.emailTextEditingController.text)){
-                      Utils.showError(context, "Email Format is Invalid");
-                    }
-                    else if(accountController.passwordTextEditingController.text==null||accountController.passwordTextEditingController.text.isEmpty){
-                      Utils.showError(context, "Password is Required");
-                    }else if(!Utils.validateStructure(accountController.passwordTextEditingController.text)){
-                      Utils.showError(context, "Password must contain atleast one lower case,Upper case and special characters");
-                    }else{
-                      accountController.AuthenticateUser(context);
-                      //locator<IBusinessRepository>().getBusinessByOwner(context);
-                    }
+                    Navigator.push(context,MaterialPageRoute(builder: (context)=>AddRatings(businessId: businessId,categoryId: categoryId,subcategoryId: subcategoryId,)));
                   },
                   child: Center(
                     child: Card(
@@ -186,17 +241,10 @@ class LoginScreen extends StatelessWidget{
                         height: 55,
                         width: 250,
                         decoration: BoxDecoration(
-                          //color: color1,
-                          // gradient: new LinearGradient(
-                          //     colors: [
-                          //       Color(0xff222831), Color(0xff393e46)
-                          //     ]
-                          // ),
                           borderRadius: BorderRadius.circular(15),
-                          //border: Border.all(color: Color(0xfbb55400), width: 3)
                         ),
                         child: Center(
-                          child: Text("Sign In", style: TextStyle(
+                          child: Text("Proceed", style: TextStyle(
                             color: color4,
                             fontWeight: FontWeight.bold,
                             fontSize: 22,
@@ -208,64 +256,14 @@ class LoginScreen extends StatelessWidget{
                   ),
                 ),
               ),
-              SizedBox(height: 15,),
-              Center(
-                  child: InkWell(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> ForgotPassword()));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: Text(
-                        'Forgot Password?',
-                        style: new TextStyle(
-                          decoration: TextDecoration.underline,
-                          fontSize: 15.0,
-                          color: color3,
-                          fontWeight: FontWeight.bold,
-                          //foreground: Paint()..shader = linearGradient2
-                        ),
-                      ),
-                    ),
-                  )
-              ),
-              SizedBox(height: 20,),
-              RotationTransition(
-                turns: new AlwaysStoppedAnimation(180 / 360),
-                child: Container(
-                  child: ClipPath(
-                    clipper: WaveClipperTwo(flip: true),
-                    child: Container(
-                      height: 115,
-                      color: color5,
-                      child: Stack(
-                        children: [
-                          ClipPath(
-                            clipper: WaveClipperTwo(flip: true),
-                            child: Container(
-                              height: 100,
-                              color: color3,
-                              //child: Center(child: Text("WaveClipperTwo(flip: true)")),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
             ],
           ),
         ),
       ),
     );
   }
+
 }
-
-
-
-
-
 class WaveClipperTwo extends CustomClipper<Path> {
   /// reverse the wave direction in vertical axis
   bool reverse;

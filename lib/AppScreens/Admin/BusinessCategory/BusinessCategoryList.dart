@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:need_resume/need_resume.dart';
 import 'package:review_app/AppScreens/Admin/BusinessCategory/AddBusinessCategory.dart';
-import 'package:review_app/AppScreens/Admin/BusinessCategory/BusinessSubcategory/BusinessSubCategoryList.dart';
+import 'package:review_app/AppScreens/Admin/BusinessSubcategory/BusinessSubCategoryList.dart';
 import 'package:review_app/Controllers/CategoryController.dart';
 import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';

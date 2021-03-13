@@ -1,11 +1,19 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:review_app/Controllers/FeedbackController.dart';
+import 'package:review_app/Models/feedback.dart';
 import 'package:review_app/components/colorConstants.dart';
 import 'package:review_app/Utils/Utils.dart';
 
 class CommentWithPicture extends StatefulWidget {
+  int businessId,categoryId,subcategoryId;
+
+  CommentWithPicture({this.businessId, this.categoryId, this.subcategoryId});
+
   @override
   _CommentWithPictureState createState() => _CommentWithPictureState();
 }
@@ -16,6 +24,7 @@ class _CommentWithPictureState extends State<CommentWithPicture> {
 
   @override
   Widget build(BuildContext context) {
+    final _feedbackController=Get.find<FeedbackController>();
     return Scaffold(
       appBar: AppBar(
         title: Text("Comment & Picture", style: TextStyle(
@@ -64,11 +73,6 @@ class _CommentWithPictureState extends State<CommentWithPicture> {
                     height: 360,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      //color: color3,
-                      // border: Border.all(
-                      //     color: color3,
-                      //     width: 2
-                      // )
                     ),
                     child: Column(
                       children: [
@@ -79,7 +83,7 @@ class _CommentWithPictureState extends State<CommentWithPicture> {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: TextFormField(
-                                //controller: storeAddress,
+                                controller: _feedbackController.comment,
                                 style: TextStyle(color: color1,fontWeight: FontWeight.bold),
                                 obscureText: false,maxLines: 5,
                                 // validator: (String value) =>
@@ -119,7 +123,7 @@ class _CommentWithPictureState extends State<CommentWithPicture> {
                                     if(image_file!=null){
                                       image_file.readAsBytes().then((image){
                                         if(image!=null){
-                                          //businessController.image.value=base64Encode(image);
+                                          _feedbackController.image=base64Encode(image);
                                           setState(() {
                                             _image = image_file;
                                           });
@@ -144,7 +148,7 @@ class _CommentWithPictureState extends State<CommentWithPicture> {
                 padding: const EdgeInsets.all(5.0),
                 child: InkWell(
                   onTap: (){
-                    //Navigator.push(context, MaterialPageRoute(builder: (context)=> NewLoginScreen()));
+                    _feedbackController.addFeedback(context, widget.businessId, widget.categoryId, widget.subcategoryId);
                   },
                   child: Center(
                     child: Card(

@@ -1,8 +1,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:review_app/AppScreens/WelcomeScreens/NewWelcomeScreens/LoginScreen.dart';
-import 'package:review_app/AppScreens/WelcomeScreens/NewWelcomeScreens/RegisterScreen.dart';
+import 'file:///C:/Users/IIB/AndroidStudioProjects/review_app/lib/AppScreens/WelcomeScreens/LoginScreen.dart';
+import 'file:///C:/Users/IIB/AndroidStudioProjects/review_app/lib/AppScreens/WelcomeScreens/RegisterScreen.dart';
 import 'package:review_app/components/colorConstants.dart';
 
 class NewSplashScreen extends StatefulWidget {

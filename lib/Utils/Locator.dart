@@ -5,12 +5,14 @@ import 'package:review_app/Interfaces/IAccountRepository.dart';
 import 'package:review_app/Interfaces/IBusinessRepository.dart';
 import 'package:review_app/Interfaces/IBusinessTypeRepository.dart';
 import 'package:review_app/Interfaces/ICategoryRepository.dart';
+import 'package:review_app/Interfaces/IFeedbackRepository.dart';
 import 'package:review_app/Interfaces/IQuestionRepository.dart';
 import 'package:review_app/Interfaces/ISubCategoryRepository.dart';
 import 'package:review_app/Repositories/AccountRepository.dart';
 import 'package:review_app/Repositories/BusinessRepository.dart';
 import 'package:review_app/Repositories/BusinessTypeRepository.dart';
 import 'package:review_app/Repositories/CategoryRepository.dart';
+import 'package:review_app/Repositories/FeedBackRepository.dart';
 import 'package:review_app/Repositories/QuestionRepository.dart';
 import 'package:review_app/Repositories/SubCategoryRepository.dart';
 
@@ -25,4 +27,5 @@ void SetupLocator(){
   locator.registerLazySingleton<IBusinessRepository>(() =>BusinessRepository());
   locator.registerLazySingleton<ISubCategoryRepository>(() =>SubCategoryRepository());
   locator.registerLazySingleton<IQuestionRepository>(() =>QuestionRepository());
+  locator.registerLazySingleton<IFeedBackRepository>(() =>FeedBackRepository());
 }
