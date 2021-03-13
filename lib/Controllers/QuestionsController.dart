@@ -9,8 +9,7 @@ class QuestionController extends GetxController{
   TextEditingController questionText;
  var _questionRepository= locator<IQuestionRepository>();
  var optionsList =<QuestionOptions>[].obs;
-  var _questionList =<Questions>[].obs;
-  var questionList=<Questions>[];
+  var questionList =<Questions>[].obs;
   List reviewTypeList=["Star Rating", "Yes/No", "Radio Button", "Number Rating"];
   var questionTypeId=1.obs;
   @override
@@ -18,7 +17,6 @@ class QuestionController extends GetxController{
    if(questionText==null){
      questionText=TextEditingController();
    }
-
   }
    AddQuestions(int businessId,int categoryId,int subcategoryId,BuildContext context){
       _questionRepository.addQuestions(Questions(
@@ -32,23 +30,20 @@ class QuestionController extends GetxController{
    }
    getQuestionsBySubCategory(int subCategoryId,BuildContext context){
     _questionRepository.getQuestionsBySubCategory(subCategoryId, context).then((questionlist){
-      _questionList.assignAll(questionlist);
       questionList.clear();
-      questionList.addAll(_questionList);
+      questionList.assignAll(questionlist);
     });
    }
   getQuestionsByCategory(int CategoryId,BuildContext context){
     _questionRepository.getQuestionsCategory(CategoryId, context).then((questionlist){
-      _questionList.assignAll(questionlist);
       questionList.clear();
-      questionList.addAll(_questionList);
+      questionList.assignAll(questionlist);
     });
   }
   getQuestionsByBusiness(int businessId,BuildContext context){
     _questionRepository.getQuestionsByBusiness(businessId, context).then((questionlist){
-      _questionList.assignAll(questionlist);
       questionList.clear();
-      questionList.addAll(_questionList);
+      questionList.assignAll(questionlist);
     });
   }
   @override

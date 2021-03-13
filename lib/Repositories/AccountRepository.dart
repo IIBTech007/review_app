@@ -24,7 +24,7 @@ class AccountRepository extends IAccountRepository{
         animationDuration: Duration(milliseconds: 500));
 
     try{
-     // progressDialog.show();
+      progressDialog.show();
       var res=await http.post(Utils.baseUrl()+"Account/Login",body:LoginViewModel.loginModelToJson(loginViewModel),headers: {"Content-Type":"application/json"});
       if(res.statusCode==200)
       {

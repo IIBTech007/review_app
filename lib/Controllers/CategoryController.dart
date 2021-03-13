@@ -8,8 +8,7 @@ import 'package:review_app/Utils/Utils.dart';
 class CategoryController extends GetxController{
  TextEditingController categoryName;
  var _categoryRepository=locator<ICategoryRepository>();
- var _categoryList=<CategoriesViewModel>[].obs;
- var categoryList=<CategoriesViewModel>[];
+ var categoryList=<CategoriesViewModel>[].obs;
   @override
   void onInit() {
     if(categoryName==null) {
@@ -18,9 +17,8 @@ class CategoryController extends GetxController{
   }
   getCategories(BuildContext context,int businessId){
     _categoryRepository.getCategories(businessId, context).then((categoriesList){
-      _categoryList.assignAll(categoriesList);
       categoryList.clear();
-      categoryList.addAll(_categoryList);
+      categoryList.assignAll(categoriesList);
     });
   }
   addCategories(BuildContext context,int businessId){

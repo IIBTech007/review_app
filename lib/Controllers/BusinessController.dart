@@ -9,8 +9,7 @@ import 'package:review_app/Utils/Locator.dart';
 import 'package:review_app/Utils/Utils.dart';
 
 class BusinessController extends GetxController{
-  var businesses =<BusinessViewModel>[];
-  var _businesses =<BusinessViewModel>[].obs;
+  var businesses =<BusinessViewModel>[].obs;
   var _businessRepository= locator<IBusinessRepository>();
   var openingTime=DateTime.now().obs;
   var closingTime=DateTime.now().obs;
@@ -39,9 +38,8 @@ class BusinessController extends GetxController{
 
   getBusinessByOwner(BuildContext context){
      _businessRepository.getBusinessByOwner(context).then((businessList){
-       _businesses.assignAll(businessList);
        businesses.clear();
-       businesses.addAll(_businesses);
+       businesses.assignAll(businessList);
      });
   }
 

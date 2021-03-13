@@ -7,8 +7,7 @@ import 'package:review_app/Utils/Utils.dart';
 
 class SubCategoryController extends GetxController{
   TextEditingController subCategoryName;
-  var _subcategories=<CategoriesViewModel>[].obs;
-  var subcategoryList=<CategoriesViewModel>[];
+  var subcategoryList=<CategoriesViewModel>[].obs;
   var _subCategoryRepository=locator<ISubCategoryRepository>();
   @override
   void onInit() {
@@ -32,9 +31,8 @@ class SubCategoryController extends GetxController{
    }
    getSubCategory(int categoryId,BuildContext context){
     _subCategoryRepository.getSubCategories(categoryId, context).then((value){
-      _subcategories.assignAll(value);
       subcategoryList.clear();
-      subcategoryList.addAll(_subcategories);
+      subcategoryList.assignAll(value);
     });
    }
   @override

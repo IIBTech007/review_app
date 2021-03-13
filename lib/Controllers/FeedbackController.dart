@@ -46,8 +46,6 @@ List<CustomerFeedBack> customerFeedback=<CustomerFeedBack>[];
       customerFeedBacks: customerFeedback
     ), context).then((value){
       customerFeedback.clear();
-    }).then((value){
-      Navigator.pop(context);
       city.text="";
       country.text="";
       name.text="";
@@ -55,6 +53,7 @@ List<CustomerFeedBack> customerFeedback=<CustomerFeedBack>[];
       email.text="";
       image="";
       comment.text="";
+      Navigator.pop(context);
     });
   }
   getFeedBack(int businessId,BuildContext context){
