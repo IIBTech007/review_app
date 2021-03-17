@@ -61,7 +61,7 @@ class _QuestionnaireListState extends ResumableState<QuestionnaireList> {
         onRefresh: ()async{
           Utils.check_connectivity().then((isConnected){
             if(isConnected){
-              _questionController.getQuestionsBySubCategory(widget.subCategoryId, context);
+              _questionController.getQuestions(widget.subCategoryId, context);
             }else{
               Utils.showError(context,"Network not Available");
             }

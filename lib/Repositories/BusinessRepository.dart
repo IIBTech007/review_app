@@ -117,4 +117,34 @@ class BusinessRepository extends IBusinessRepository{
     }
     return null;
   }
+
+  @override
+  Future<BusinessViewModel> getBusinessById(int businessId, BuildContext context) async {
+    ArsProgressDialog progressDialog = ArsProgressDialog(
+        context,
+        blur: 2,
+        backgroundColor: Color(0x33000000),
+        animationDuration: Duration(milliseconds: 500));
+    try{
+      progressDialog.show();
+      var response= await http.get(Utils.baseUrl()+"Business/$businessId",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
+      if(response.statusCode==200){
+        locator<Logger>().i(BusinessViewModel.BusinessListFromJson(response.body));
+        return BusinessViewModel.BusinessFromJson(response.body);
+      }else if(response.body!=null&&response.body.isNotEmpty){
+        progressDialog.dismiss();
+        locator<Logger>().i(response.body);
+        // Utils.showError(context,response.body);
+      }else
+        progressDialog.dismiss();
+      Utils.showError(context,response.statusCode.toString());
+    }catch(e){
+      locator<Logger>().i(e);
+      // Utils.showError(context,e.toString());
+      progressDialog.dismiss();
+    }finally{
+      progressDialog.dismiss();
+    }
+    return null;
+  }
 }

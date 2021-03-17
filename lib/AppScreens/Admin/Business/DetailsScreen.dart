@@ -79,7 +79,7 @@ class _DetailPageState extends State<DetailPage> {
               onRefresh: ()async{
                 return Utils.check_connectivity().then((isConnected){
                   if(isConnected){
-                    feedbackController.getFeedBack(widget.business.id, context);
+                    feedbackController.getFeedBackforCustomer(widget.business.id, context);
                   }else{
                     Utils.showError(context,"Network not Available");
                   }

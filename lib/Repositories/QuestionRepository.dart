@@ -38,98 +38,6 @@ class QuestionRepository extends IQuestionRepository{
   }
 
   @override
-  Future<List<Questions>> getQuestionsBySubCategory(int subcategoryId,BuildContext context) async{
-    ArsProgressDialog progressDialog = ArsProgressDialog(
-        context,
-        blur: 2,
-        backgroundColor: Color(0x33000000),
-        animationDuration: Duration(milliseconds: 500));
-    try{
-      progressDialog.show();
-      var response= await http.get(Utils.baseUrl()+"Questions?SubCategoryId$subcategoryId",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
-      print(Utils.baseUrl()+"Questions?SubCategoryId=$subcategoryId");
-      locator<Logger>().i(response.body);
-      if(response.statusCode==200){
-        progressDialog.dismiss();
-         locator<Logger>().i(response.body);
-        return Questions.QuestionsListFromJson(response.body);
-      }else if(response.body!=null&&response.body.isNotEmpty){
-        progressDialog.dismiss();
-        Utils.showError(context,response.body.toString());
-      }else
-        progressDialog.dismiss();
-      Utils.showError(context,response.statusCode.toString());
-    }catch(e){
-      progressDialog.dismiss();
-      Utils.showError(context,e.toString());
-    }finally{
-      progressDialog.dismiss();
-    }
-    return null;
-  }
-
-  @override
-  Future<List<Questions>> getQuestionsByBusiness(int businessId, BuildContext context)async {
-    ArsProgressDialog progressDialog = ArsProgressDialog(
-        context,
-        blur: 2,
-        backgroundColor: Color(0x33000000),
-        animationDuration: Duration(milliseconds: 500));
-    try{
-      progressDialog.show();
-      var response= await http.get(Utils.baseUrl()+"Questions?BusinessId=$businessId",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
-      locator<Logger>().i(response.body);
-      if(response.statusCode==200){
-        progressDialog.dismiss();
-        locator<Logger>().i(response.body);
-        return Questions.QuestionsListFromJson(response.body);
-      }else if(response.body!=null&&response.body.isNotEmpty){
-        progressDialog.dismiss();
-        Utils.showError(context,response.body.toString());
-      }else
-        progressDialog.dismiss();
-      Utils.showError(context,response.statusCode.toString());
-    }catch(e){
-      progressDialog.dismiss();
-      Utils.showError(context,e.toString());
-    }finally{
-      progressDialog.dismiss();
-    }
-    return null;
-  }
-
-  @override
-  Future<List<Questions>> getQuestionsCategory(int categoryId, BuildContext context) async {
-    ArsProgressDialog progressDialog = ArsProgressDialog(
-        context,
-        blur: 2,
-        backgroundColor: Color(0x33000000),
-        animationDuration: Duration(milliseconds: 500));
-    try{
-      progressDialog.show();
-      var response= await http.get(Utils.baseUrl()+"Questions?CategoryId=$categoryId",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
-      print(Utils.baseUrl()+"Questions?SubCategoryId=$categoryId");
-      locator<Logger>().i(response.body);
-      if(response.statusCode==200){
-        progressDialog.dismiss();
-        locator<Logger>().i(response.body);
-        return Questions.QuestionsListFromJson(response.body);
-      }else if(response.body!=null&&response.body.isNotEmpty){
-        progressDialog.dismiss();
-        Utils.showError(context,response.body.toString());
-      }else
-        progressDialog.dismiss();
-      Utils.showError(context,response.statusCode.toString());
-    }catch(e){
-      progressDialog.dismiss();
-      Utils.showError(context,e.toString());
-    }finally{
-      progressDialog.dismiss();
-    }
-    return null;
-  }
-
-  @override
   Future<void> changeVisibility(int id, BuildContext context)async {
     var response=await http.get(Utils.baseUrl()+"Questions/ChangeVisibility/$id",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
     if(response.statusCode==200){
@@ -146,9 +54,8 @@ class QuestionRepository extends IQuestionRepository{
     // TODO: implement updateQuestions
     throw UnimplementedError();
   }
-
   @override
-  Future<List<Questions>> getQuestionsBySubCategoryforCustomer(int subcategoryId, BuildContext context) async {
+  Future<List<Questions>> getQuestions(int businessId, int categoryId, int subcategoryId, BuildContext context) async{
     ArsProgressDialog progressDialog = ArsProgressDialog(
         context,
         blur: 2,
@@ -156,7 +63,38 @@ class QuestionRepository extends IQuestionRepository{
         animationDuration: Duration(milliseconds: 500));
     try{
       progressDialog.show();
-      var response= await http.get(Utils.baseUrl()+"Questions/getQuestionsforCustomer?SubCategoryId=$subcategoryId&BusinessId=0&CategoryId=0",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
+      var response= await http.get(Utils.baseUrl()+"Questions?SubCategoryId=$subcategoryId&BusinessId=$businessId&CategoryId=$categoryId",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
+      print(Utils.baseUrl()+"getQuestionsforCustomer?SubCategoryId=$subcategoryId");
+      locator<Logger>().i(response.body);
+      if(response.statusCode==200){
+        progressDialog.dismiss();
+        locator<Logger>().i(response.body);
+        return Questions.QuestionsListFromJson(response.body);
+      }else if(response.body!=null&&response.body.isNotEmpty){
+        progressDialog.dismiss();
+        Utils.showError(context,response.body.toString());
+      }else
+        progressDialog.dismiss();
+      Utils.showError(context,response.statusCode.toString());
+    }catch(e){
+      progressDialog.dismiss();
+      Utils.showError(context,e.toString());
+    }finally{
+      progressDialog.dismiss();
+    }
+    return null;
+  }
+
+  @override
+  Future<List<Questions>> getQuestionsforCustomer(int businessId, int categoryId, int subcategoryId, BuildContext context)async {
+    ArsProgressDialog progressDialog = ArsProgressDialog(
+        context,
+        blur: 2,
+        backgroundColor: Color(0x33000000),
+        animationDuration: Duration(milliseconds: 500));
+    try{
+      progressDialog.show();
+      var response= await http.get(Utils.baseUrl()+"Questions/getQuestionsforCustomer?SubCategoryId=$subcategoryId&BusinessId=$businessId&CategoryId=$categoryId",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
       print(Utils.baseUrl()+"getQuestionsforCustomer?SubCategoryId=$subcategoryId");
       locator<Logger>().i(response.body);
       if(response.statusCode==200){

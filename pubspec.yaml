@@ -29,7 +29,6 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
   datetime_picker_formfield: ^1.0.0
-  #flutter_form_builder: ^3.7.1
   shared_preferences: ^0.5.6+1
   http:
   data_connection_checker: ^0.3.4
@@ -47,8 +46,6 @@ dependencies:
   intl:
   need_resume: 1.0.5+1
   ars_progress_dialog: ^0.1.2
-  #flutter_localizations:
-    #sdk: flutter
   google_maps_flutter: ^0.5.28+1
   geolocator: ^5.3.1
   get_storage: ^1.4.0
@@ -62,6 +59,9 @@ dependencies:
   expandable_card: ^0.0.3+1
   google_fonts: ^1.1.2
   sqflite: ^2.0.0+2
+  flutter_barcode_scanner: ^1.0.2
+  qr_flutter: 4.0.0
+  printing: ^5.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

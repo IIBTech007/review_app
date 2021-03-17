@@ -63,7 +63,7 @@ class _AddRatingsState extends State<AddRatings> {
         onRefresh: ()async{
           return Utils.check_connectivity().then((isConnected){
             if(isConnected){
-              _questionController.getQuestionsBySubCategoryforCustomer(widget.subcategoryId, context);
+              _questionController.getQuestionsforCustomer(widget.subcategoryId, context);
             }
           });
         },

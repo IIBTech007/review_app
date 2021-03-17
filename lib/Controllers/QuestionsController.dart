@@ -28,31 +28,19 @@ class QuestionController extends GetxController{
         questionOptions: optionsList
       ), context).then((value) =>questionText.text="");
    }
-  void getQuestionsBySubCategory(int subCategoryId,BuildContext context){
-    _questionRepository.getQuestionsBySubCategory(subCategoryId, context).then((questionlist){
+  void getQuestions(int subCategoryId,BuildContext context){
+    _questionRepository.getQuestions(0,0,subCategoryId,context).then((questionlist){
       questionList.clear();
       questionList.assignAll(questionlist);
     });
    }
-  void getQuestionsByCategory(int CategoryId,BuildContext context){
-    _questionRepository.getQuestionsCategory(CategoryId, context).then((questionlist){
-      questionList.clear();
-      questionList.assignAll(questionlist);
-    });
-  }
- void getQuestionsByBusiness(int businessId,BuildContext context){
-    _questionRepository.getQuestionsByBusiness(businessId, context).then((questionlist){
-      questionList.clear();
-      questionList.assignAll(questionlist);
-    });
-  }
   void changeVisibility(int id,int subCategoryId,BuildContext context){
     _questionRepository.changeVisibility(id, context).then((value){
-      getQuestionsBySubCategory(subCategoryId, context);
+      getQuestions(subCategoryId, context);
     });
   }
-  void getQuestionsBySubCategoryforCustomer(int subCategoryId,BuildContext context){
-    _questionRepository.getQuestionsBySubCategoryforCustomer(subCategoryId, context).then((questionlist){
+  void getQuestionsforCustomer(int subCategoryId,BuildContext context){
+    _questionRepository.getQuestionsforCustomer(0,0,subCategoryId,context).then((questionlist){
       questionList.clear();
       questionList.assignAll(questionlist);
     });

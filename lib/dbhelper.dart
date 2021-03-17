@@ -22,6 +22,8 @@ class dbhelper {
         "customerName TEXT,"
         "phone  TEXT,"
         "email TEXT,"
+        "city TEXT,"
+        "country TEXT,"
         "comment TEXT,"
         "image TEXT,"
         "categoryId INTEGER,"

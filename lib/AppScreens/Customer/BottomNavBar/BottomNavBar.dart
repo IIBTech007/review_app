@@ -1,6 +1,7 @@
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:review_app/AppScreens/Admin/Feedbacks/IndividualFeedbacks.dart';
+import 'package:review_app/AppScreens/Admin/Profile/ProfileScreen.dart';
 import 'package:review_app/AppScreens/Customer/Home/SeeAllBusinesses.dart';
 
 class ClientBottomNavBar extends StatefulWidget {
@@ -48,7 +49,7 @@ class _BottomNavBarState extends State<ClientBottomNavBar> {
       case 1:
         return ClientSeeAllBusinesses();
       default:
-        //return ClientHomeScreen();
+        return ProfileScreen();
     }
   }
 }

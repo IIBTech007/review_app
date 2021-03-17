@@ -5,6 +5,7 @@ import 'package:review_app/Interfaces/IFeedbackRepository.dart';
 import 'package:review_app/Models/CustomerFeedBack.dart';
 import 'package:review_app/Models/feedback.dart';
 import 'package:review_app/Utils/Locator.dart';
+import 'package:review_app/dbhelper.dart';
 
 class FeedbackController extends GetxController{
 TextEditingController comment,phone,email,name,city,country;
@@ -34,6 +35,7 @@ final _accountController=Get.find<AccountController>();
       country=TextEditingController();
     }
     //Assigning values for Already Logged in User
+      if(_accountController.getLoggedInUserData()!=null){
       if(_accountController.getLoggedInUserData().userInfo.name!=null&&_accountController.getLoggedInUserData().userInfo.name.isNotEmpty){
         name.text=_accountController.getLoggedInUserData().userInfo.name;
       }
@@ -49,9 +51,10 @@ final _accountController=Get.find<AccountController>();
       if(_accountController.getLoggedInUserData().userInfo.country!=null&&_accountController.getLoggedInUserData().userInfo.country.isNotEmpty){
         country.text=_accountController.getLoggedInUserData().userInfo.country;
       }
+      }
     customerFeedback.clear();
   }
-  addFeedback(BuildContext context,int businessId,int categoryId,int subCategoryId){
+ void addFeedback(BuildContext context,int businessId,int categoryId,int subCategoryId){
     final ids = customerFeedback.map((e) => e.questionId).toSet();
     customerFeedback.retainWhere((x) => ids.remove(x.questionId));
     _feedbackRepository.AddFeedBack(feedback(
@@ -65,6 +68,20 @@ final _accountController=Get.find<AccountController>();
       image: image,
       customerFeedBacks: customerFeedback
     ), context).then((value){
+      if(_accountController.getLoggedInUserData()==null){
+        new dbhelper().addFeedBacks(feedback(
+            subCategoryId: subCategoryId,
+            categoryId: categoryId,
+            phone:phone.text,
+            businessId: businessId,
+            email: email.text,
+            customerName: name.text,
+            comment: comment.text,
+            city: city.text,
+            country: country.text,
+            image: image,
+            customerFeedBacks: customerFeedback));
+      }
       customerFeedback.clear();
       city.text="";
       country.text="";
@@ -76,20 +93,25 @@ final _accountController=Get.find<AccountController>();
       Navigator.pop(context);
     });
   }
-  getFeedBack(int businessId,BuildContext context){
+ void getFeedBack(int businessId,BuildContext context){
     _feedbackRepository.getFeedBack(0, 0, businessId,null,context).then((value){
       feedbacks.clear();
       feedbacks.assignAll(value);
     });
   }
-getFeedBackByEmail(BuildContext context){
+void getFeedBackByEmail(BuildContext context){
    if(_accountController.getLoggedInUserData().userInfo.email!=null){
      _feedbackRepository.getFeedBack(0, 0,0,_accountController.getLoggedInUserData().userInfo.email, context).then((value){
        feedbacks.clear();
        feedbacks.assignAll(value);
      });
    }
-
+}
+void getFeedBackforCustomer(int businessId,BuildContext context){
+  _feedbackRepository.getFeedbackforCustomer(0, 0, businessId,null,context).then((value){
+    feedbacks.clear();
+    feedbacks.assignAll(value);
+  });
 }
   @override
   void onClose() {

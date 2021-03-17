@@ -19,11 +19,11 @@ class BusinessController extends GetxController{
   var longitude=0.0.obs;
   var latitude=0.0.obs;
   var image="".obs;
-  final accountController=Get.find<AccountController>();
+  final accountController=Get.put(AccountController());
   TextEditingController nameTextEditingController,phoneTextEditingController,emailTextEditingController,descriptionTextEditingController,addressTextEditingController;
   @override
   void onInit() {
-    if(accountController.getLoggedInUserData().role=="Admin") {
+    if(accountController.getLoggedInUserData()!=null&&accountController.getLoggedInUserData().role=="Admin") {
       if (nameTextEditingController == null) {
         nameTextEditingController = TextEditingController();
       }

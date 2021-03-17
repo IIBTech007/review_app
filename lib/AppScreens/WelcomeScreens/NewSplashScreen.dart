@@ -1,6 +1,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:review_app/AppScreens/Customer/Home/SeeAllBusinesses.dart';
+import 'package:review_app/Utils/Locator.dart';
 import 'file:///C:/Users/IIB/AndroidStudioProjects/review_app/lib/AppScreens/WelcomeScreens/LoginScreen.dart';
 import 'file:///C:/Users/IIB/AndroidStudioProjects/review_app/lib/AppScreens/WelcomeScreens/RegisterScreen.dart';
 import 'package:review_app/components/colorConstants.dart';
@@ -101,6 +104,15 @@ class _NewSplashScreenState extends State<NewSplashScreen> {
                       ),
                     ),
                   ),
+                ),
+              ),
+              Center(
+                child: TextButton(
+                  child: Text("Use as Guest",style: TextStyle(fontSize: 20,color: color3),),
+                  onPressed: (){
+                    locator<GetStorage>().remove("token");
+                    Navigator.push(context,MaterialPageRoute(builder: (context)=>ClientSeeAllBusinesses()));
+                  },
                 ),
               ),
               SizedBox(height: 50,),

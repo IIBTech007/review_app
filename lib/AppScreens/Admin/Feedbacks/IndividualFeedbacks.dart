@@ -73,7 +73,7 @@ class _IndividualFeedbacksState extends State<IndividualFeedbacks> {
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width,
-                    height: 130,
+                    height: 145,
                     decoration: BoxDecoration(
                       //color: color1,
                         borderRadius: BorderRadius.circular(10),
@@ -91,111 +91,109 @@ class _IndividualFeedbacksState extends State<IndividualFeedbacks> {
                         children: [
                           Row(
                             children: [
-                              Row(
-                                children: [
-                                  Text("Overall Rating: ",
-                                    style: TextStyle(
-                                        color: color3,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15
-                                    ),
-                                  ),
-                                  Text(_feedbackcontroller.feedbacks[index].overallRating.toStringAsFixed(1),
-                                    style: TextStyle(
-                                        color: color1,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15
-                                    ),
-                                  ),
-                                ],
+                              Text("Restaurant: ",
+                                style: TextStyle(
+                                    color: color3,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15
+                                ),
+                              ),
+                              Text(_feedbackcontroller.feedbacks[index].customerName,
+                                style: TextStyle(
+                                    color: color1,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15
+                                ),
                               ),
                             ],
                           ),
                           Row(
                             children: [
-                              Row(
-                                children: [
-                                  Text("City: ",
-                                    style: TextStyle(
-                                        color: color3,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15
-                                    ),
-                                  ),
-                                  Text("-",
-                                    style: TextStyle(
-                                        color: color1,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15
-                                    ),
-                                  ),
-                                ],
+                              Text("Overall Rating: ",
+                                style: TextStyle(
+                                    color: color3,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15
+                                ),
+                              ),
+                              Text(_feedbackcontroller.feedbacks[index].overallRating.toStringAsFixed(1),
+                                style: TextStyle(
+                                    color: color1,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15
+                                ),
                               ),
                             ],
                           ),
                           Row(
                             children: [
-                              Row(
-                                children: [
-                                  Text("Country: ",
-                                    style: TextStyle(
-                                        color: color3,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15
-                                    ),
-                                  ),
-                                  Text("-",
-                                    style: TextStyle(
-                                        color: color1,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15
-                                    ),
-                                  ),
-                                ],
+                              Text("City: ",
+                                style: TextStyle(
+                                    color: color3,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15
+                                ),
+                              ),
+                              Text("-",
+                                style: TextStyle(
+                                    color: color1,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15
+                                ),
                               ),
                             ],
                           ),
                           Row(
                             children: [
-                              Row(
-                                children: [
-                                  Text("Email: ",
-                                    style: TextStyle(
-                                        color: color3,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15
-                                    ),
-                                  ),
-                                  Text(_feedbackcontroller.feedbacks[index].email,
-                                    style: TextStyle(
-                                        color: color1,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15
-                                    ),
-                                  ),
-                                ],
+                              Text("Country: ",
+                                style: TextStyle(
+                                    color: color3,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15
+                                ),
+                              ),
+                              Text("-",
+                                style: TextStyle(
+                                    color: color1,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15
+                                ),
                               ),
                             ],
                           ),
                           Row(
                             children: [
-                              Row(
-                                children: [
-                                  Text("Phone: ",
-                                    style: TextStyle(
-                                        color: color3,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15
-                                    ),
-                                  ),
-                                  Text(_feedbackcontroller.feedbacks[index].phone,
-                                    style: TextStyle(
-                                        color: color1,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15
-                                    ),
-                                  ),
-                                ],
+                              Text("Email: ",
+                                style: TextStyle(
+                                    color: color3,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15
+                                ),
+                              ),
+                              Text(_feedbackcontroller.feedbacks[index].email,
+                                style: TextStyle(
+                                    color: color1,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text("Phone: ",
+                                style: TextStyle(
+                                    color: color3,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15
+                                ),
+                              ),
+                              Text(_feedbackcontroller.feedbacks[index].phone,
+                                style: TextStyle(
+                                    color: color1,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15
+                                ),
                               ),
                             ],
                           ),

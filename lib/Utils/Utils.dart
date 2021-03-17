@@ -5,9 +5,12 @@ import 'dart:typed_data';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:review_app/AppScreens/Admin/Business/DetailsScreen.dart';
+import 'package:review_app/Interfaces/IBusinessRepository.dart';
+import 'package:review_app/Utils/Locator.dart';
 import 'package:share/share.dart';
 
 
@@ -110,70 +113,31 @@ class Utils{
        showError(context,e.toString());
      }
    }
-   static Widget getRatingType(int type){
-     if(type==1){
-       return Center(
-         child: RatingBar.builder(
-           initialRating: 0,
-           itemCount: 5,
-           itemBuilder: (context, index) {
-             switch (index) {
-               case 0:
-                 return Icon(
-                   Icons.sentiment_very_dissatisfied,
-                   color: Colors.red,
-                 );
-               case 1:
-                 return Icon(
-                   Icons.sentiment_dissatisfied,
-                   color: Colors.redAccent,
-                 );
-               case 2:
-                 return Icon(
-                   Icons.sentiment_neutral,
-                   color: Colors.amber,
-                 );
-               case 3:
-                 return Icon(
-                   Icons.sentiment_satisfied,
-                   color: Colors.lightGreen,
-                 );
-               case 4:
-                 return Icon(
-                   Icons.sentiment_very_satisfied,
-                   color: Colors.green,
-                 );
-             }
-           },
-           onRatingUpdate: (rating) {
-             print(rating);
-           },
-         ),
-       );
-     }else if(type==2){
-       return Column(
-         mainAxisSize: MainAxisSize.min,
-         children: <Widget>[
-           _myRadioButton(
-             title: "Yes",
-             value: 5,
-           //  onChanged: (newValue) => setState(() => _groupValue = newValue),
-           ),
-           _myRadioButton(
-             title: "No",
-             value: 1,
-            // onChanged: (newValue) => setState(() => _groupValue = newValue),
-           ),
-         ],
-       );
+   static Future scan(BuildContext context) async {
+     String  barcode;
+     try {
+       String result = await FlutterBarcodeScanner.scanBarcode(
+           "#ff6666",
+           "Cancel",
+           true,
+           ScanMode.DEFAULT);
+       barcode = result;
+       if (barcode != "" && barcode.length > 0) {
+          locator<IBusinessRepository>().getBusinessById(int.parse(barcode), context).then((business){
+            if(business!=null){
+              Navigator.push(context,MaterialPageRoute(builder: (context)=>DetailPage(business: business,)));
+            }else{
+              showError(context,"No Business Data Found");
+            }
+          });
+       }
+     } catch (e) {
+       Flushbar(
+         message: e,
+         backgroundColor: Colors.red,
+         duration: Duration(seconds: 5),
+       ).show(context);
      }
-   }
- static  Widget _myRadioButton({String title, int value, Function onChanged}) {
-     return RadioListTile(
-       value: value,
-       groupValue: "groupValue",
-       onChanged: onChanged,
-       title: Text(title),
-     );
+     return barcode;
    }
 }

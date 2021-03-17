@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:need_resume/need_resume.dart';
 import 'package:review_app/AppScreens/Admin/Business/AddBusiness.dart';
 import 'package:review_app/AppScreens/Admin/Business/DetailsScreen.dart';
+import 'package:review_app/AppScreens/Admin/Business/BusinessQrCode.dart';
 import 'package:review_app/AppScreens/Admin/BusinessCategory/BusinessCategoryList.dart';
 import 'package:review_app/AppScreens/Admin/Feedbacks/IndividualFeedbacks.dart';
 import 'package:review_app/Controllers/AccountController.dart';
@@ -83,7 +84,7 @@ class _BusinessListState extends ResumableState<BusinessList> {
                 padding: const EdgeInsets.all(8.0),
                 child: InkWell(
                   onLongPress: (){
-                    push(context,MaterialPageRoute(builder:(context)=>IndividualFeedbacks(businessId: businessController.businesses[index].id,isAdmin: true)));
+                    push(context,MaterialPageRoute(builder:(context)=>BusinessQRCode(businessController.businesses[index].id)));
                   },
                   onTap: (){
                     push(context,MaterialPageRoute(builder:(context)=>BusinessCategoryList(businessController.businesses[index].id)));

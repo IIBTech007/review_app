@@ -3,10 +3,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:review_app/AppScreens/Admin/Business/DetailsScreen.dart';
 import 'package:review_app/Controllers/BusinessController.dart';
+import 'package:review_app/Utils/Locator.dart';
 import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';
+import 'package:review_app/dbhelper.dart';
 
 class ClientSeeAllBusinesses extends StatefulWidget {
   @override
@@ -18,6 +21,9 @@ class _ClientSeeAllBusinessesState extends State<ClientSeeAllBusinesses> {
   final businessController=Get.put(BusinessController());
   @override
   void initState() {
+     new dbhelper().getFeedBacks().then((value){
+       print(value.toString());
+     });
     WidgetsBinding.instance
         .addPostFrameCallback((_) => _refreshIndicatorKey.currentState.show());
     super.initState();
@@ -35,6 +41,28 @@ class _ClientSeeAllBusinessesState extends State<ClientSeeAllBusinesses> {
         ),
         centerTitle: true,
         backgroundColor: color3,
+        actions: [
+          locator<GetStorage>().read("token")==null?Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+              padding: EdgeInsets.all(16),
+              icon:Icon(Icons.feedback),
+              onPressed: (){
+
+              },
+              ),
+              IconButton(
+                padding: EdgeInsets.all(16),
+                icon:Icon(FontAwesomeIcons.qrcode),
+                onPressed: (){
+
+                },
+              )
+            ],
+          )
+         :Container()
+        ],
       ),
       body: RefreshIndicator(
         key: _refreshIndicatorKey,

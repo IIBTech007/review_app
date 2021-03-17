@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
 import 'package:review_app/AppScreens/Admin/Business/BusinessList.dart';
+import 'package:review_app/AppScreens/Customer/Home/SeeAllBusinesses.dart';
 import 'package:review_app/Interfaces/IFeedbackRepository.dart';
 import 'package:review_app/Models/feedback.dart';
 import 'package:review_app/Utils/Locator.dart';
@@ -27,7 +28,7 @@ class FeedBackRepository extends IFeedBackRepository{
       {
         progressDialog.dismiss();
         Utils.showSuccess(context,"Feedback Added");
-        Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder:(context)=>BusinessList()),(Route<dynamic> route) => false);
+        Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder:(context)=>ClientSeeAllBusinesses()),(Route<dynamic> route) => false);
       }else if(res.body!=null&&res.body.isNotEmpty){
         progressDialog.dismiss();
         locator<Logger>().i(res.body.trim());
@@ -89,5 +90,34 @@ class FeedBackRepository extends IFeedBackRepository{
   Future<void> updateFeedBack(feedback feedback, BuildContext context) {
     // TODO: implement updateFeedBack
     throw UnimplementedError();
+  }
+
+  @override
+  Future<List<feedback>> getFeedbackforCustomer(int categoryId, int subcategoryId, int businessId, String email, BuildContext context)async {
+    ArsProgressDialog progressDialog = ArsProgressDialog(
+        context,
+        blur: 2,
+        backgroundColor: Color(0x33000000),
+        animationDuration: Duration(milliseconds: 500));
+    try{
+      progressDialog.show();
+      var response= await http.get(Utils.baseUrl()+"Feedback/getfeedbacksforCustomers?BusinessId=$businessId&CategoryId=$categoryId&SubCategoryId=$subcategoryId&email=$email",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
+      locator<Logger>().i(response.body);
+      if(response.statusCode==200){
+        progressDialog.dismiss();
+        return feedback.FeedbackListFromJson(response.body);
+      }else if(response.body!=null&&response.body.isNotEmpty){
+        progressDialog.dismiss();
+        Utils.showError(context,response.body.toString());
+      }else
+        progressDialog.dismiss();
+      Utils.showError(context,response.statusCode.toString());
+    }catch(e){
+      progressDialog.dismiss();
+      Utils.showError(context,e.toString());
+    }finally{
+      progressDialog.dismiss();
+    }
+    return null;
   }
 }

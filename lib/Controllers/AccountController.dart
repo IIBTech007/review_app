@@ -117,7 +117,11 @@ class AccountController extends GetxController{
     }
   }
   TokenPayLoad getLoggedInUserData(){
-     return TokenPayLoad.fromJson(Utils.parseJwt(locator<GetStorage>().read("token")));
+   if(locator<GetStorage>().read("token")!=null) {
+     return TokenPayLoad.fromJson(
+         Utils.parseJwt(locator<GetStorage>().read("token")));
+   }else
+     return null;
   }
 
   @override
