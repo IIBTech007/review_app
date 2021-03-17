@@ -1,25 +1,22 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:need_resume/need_resume.dart';
-import 'package:review_app/AppScreens/Admin/BusinessCategory/AddBusinessCategory.dart';
-import 'package:review_app/AppScreens/Admin/BusinessSubcategory/BusinessSubCategoryList.dart';
-import 'package:review_app/AppScreens/Customer/ReviewCategory/SelectReviewSubCategory.dart';
-import 'package:review_app/Controllers/CategoryController.dart';
+import 'package:review_app/AppScreens/Admin/Feedbacks/AddRating.dart';
+import 'package:review_app/AppScreens/Admin/Feedbacks/CustomerInfoforFeedback.dart';
+import 'package:review_app/Controllers/SubCategoryController.dart';
 import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';
 
-class SelectReviewCategoryList extends StatefulWidget {
-  int businessId;
-  SelectReviewCategoryList(this.businessId);
+class SelectReviewSubCategoryList extends StatefulWidget {
+  int categoryId,businessId;
+  SelectReviewSubCategoryList(this.businessId,this.categoryId);
   @override
-  _SelectReviewCategoryListState createState() => _SelectReviewCategoryListState();
+  _SelectReviewSubCategoryListState createState() => _SelectReviewSubCategoryListState();
 }
 
-class _SelectReviewCategoryListState extends ResumableState<SelectReviewCategoryList> {
-  final categoriesController=Get.put(CategoryController());
+class _SelectReviewSubCategoryListState extends ResumableState<SelectReviewSubCategoryList> {
+  final subCategoriesController=Get.put(SubCategoryController());
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
   @override
   void initState() {
@@ -38,7 +35,7 @@ class _SelectReviewCategoryListState extends ResumableState<SelectReviewCategory
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Select Review Category", style: TextStyle(
+        title: Text("Select Review Sub Category", style: TextStyle(
             color: color3, fontSize: 22, fontWeight: FontWeight.bold
         ),
         ),
@@ -53,7 +50,7 @@ class _SelectReviewCategoryListState extends ResumableState<SelectReviewCategory
         onRefresh: ()async{
           return Utils.check_connectivity().then((isConnected){
             if(isConnected){
-              categoriesController.getCategoriesforCustomer(context, widget.businessId);
+              subCategoriesController.getSubCategoryforCustomer(widget.categoryId,context);
             }else{
               Utils.showError(context,"Network not Available");
             }
@@ -64,7 +61,7 @@ class _SelectReviewCategoryListState extends ResumableState<SelectReviewCategory
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child:Obx((){
-            return ListView.builder(itemCount:categoriesController.categoryList!=null?categoriesController.categoryList.length:0, itemBuilder: (context, index){
+            return ListView.builder(itemCount:subCategoriesController.subcategoryList!=null?subCategoriesController.subcategoryList.length:0, itemBuilder: (context, index){
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
@@ -77,9 +74,9 @@ class _SelectReviewCategoryListState extends ResumableState<SelectReviewCategory
                   ),
                   child: ListTile(
                     onTap: (){
-                      Navigator.push(context,MaterialPageRoute(builder:(context)=>SelectReviewSubCategoryList(widget.businessId,categoriesController.categoryList[index].id)));
+                      Navigator.push(context,MaterialPageRoute(builder:(context)=>CustomerInfoForFeedback(businessId:widget.businessId,subcategoryId:subCategoriesController.subcategoryList[index].id,categoryId: widget.categoryId,)));
                     },
-                    title: Text(categoriesController.categoryList!=null&&categoriesController.categoryList[index].name!=null?categoriesController.categoryList[index].name:"-",
+                    title: Text(subCategoriesController.subcategoryList!=null&&subCategoriesController.subcategoryList[index].name!=null?subCategoriesController.subcategoryList[index].name:"-",
                       style: TextStyle(
                           color: color3,
                           fontWeight: FontWeight.bold,

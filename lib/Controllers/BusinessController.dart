@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
 import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
+import 'package:review_app/Controllers/AccountController.dart';
 import 'package:review_app/Interfaces/IBusinessRepository.dart';
+import 'package:review_app/Models/BusinessByCustomerViewModel.dart';
 import 'package:review_app/Models/BusinessViewModel.dart';
 import 'package:review_app/Utils/Locator.dart';
 import 'package:review_app/Utils/Utils.dart';
@@ -16,31 +19,48 @@ class BusinessController extends GetxController{
   var longitude=0.0.obs;
   var latitude=0.0.obs;
   var image="".obs;
+  final accountController=Get.find<AccountController>();
   TextEditingController nameTextEditingController,phoneTextEditingController,emailTextEditingController,descriptionTextEditingController,addressTextEditingController;
   @override
   void onInit() {
-    if(nameTextEditingController==null){
-      nameTextEditingController=TextEditingController();
-    }
-    if(phoneTextEditingController==null){
-      phoneTextEditingController=TextEditingController();
-    }
-    if(emailTextEditingController==null){
-      emailTextEditingController=TextEditingController();
-    }
-    if(descriptionTextEditingController==null){
-      descriptionTextEditingController=TextEditingController();
-    }
-    if(addressTextEditingController==null){
-      addressTextEditingController=TextEditingController();
+    if(accountController.getLoggedInUserData().role=="Admin") {
+      if (nameTextEditingController == null) {
+        nameTextEditingController = TextEditingController();
+      }
+      if (phoneTextEditingController == null) {
+        phoneTextEditingController = TextEditingController();
+      }
+      if (emailTextEditingController == null) {
+        emailTextEditingController = TextEditingController();
+      }
+      if (descriptionTextEditingController == null) {
+        descriptionTextEditingController = TextEditingController();
+      }
+      if (addressTextEditingController == null) {
+        addressTextEditingController = TextEditingController();
+      }
+
     }
   }
 
-  getBusinessByOwner(BuildContext context){
+ void  getBusinessByOwner(BuildContext context){
      _businessRepository.getBusinessByOwner(context).then((businessList){
        businesses.clear();
        businesses.assignAll(businessList);
      });
+  }
+
+ void getBusinessForCustomer(BuildContext context){
+    Geolocator().getCurrentPosition().then((position) {
+      _businessRepository.getBusinessForCustomer(BusinessByCustomerViewModel(
+        userLongitude: position.longitude,
+        userLatitude: position.latitude
+      ), context).then((value){
+        businesses.clear();
+        businesses.assignAll(value);
+      });
+      locator<Logger>().i("Latitude  ${position.latitude}  Longitude  ${position.longitude}");
+    });
   }
 
   addBusiness(BuildContext context){

@@ -18,7 +18,7 @@ class QuestionController extends GetxController{
      questionText=TextEditingController();
    }
   }
-   AddQuestions(int businessId,int categoryId,int subcategoryId,BuildContext context){
+  void AddQuestions(int businessId,int categoryId,int subcategoryId,BuildContext context){
       _questionRepository.addQuestions(Questions(
         businessId: businessId,
         categoryId: categoryId,
@@ -28,24 +28,36 @@ class QuestionController extends GetxController{
         questionOptions: optionsList
       ), context).then((value) =>questionText.text="");
    }
-   getQuestionsBySubCategory(int subCategoryId,BuildContext context){
+  void getQuestionsBySubCategory(int subCategoryId,BuildContext context){
     _questionRepository.getQuestionsBySubCategory(subCategoryId, context).then((questionlist){
       questionList.clear();
       questionList.assignAll(questionlist);
     });
    }
-  getQuestionsByCategory(int CategoryId,BuildContext context){
+  void getQuestionsByCategory(int CategoryId,BuildContext context){
     _questionRepository.getQuestionsCategory(CategoryId, context).then((questionlist){
       questionList.clear();
       questionList.assignAll(questionlist);
     });
   }
-  getQuestionsByBusiness(int businessId,BuildContext context){
+ void getQuestionsByBusiness(int businessId,BuildContext context){
     _questionRepository.getQuestionsByBusiness(businessId, context).then((questionlist){
       questionList.clear();
       questionList.assignAll(questionlist);
     });
   }
+  void changeVisibility(int id,int subCategoryId,BuildContext context){
+    _questionRepository.changeVisibility(id, context).then((value){
+      getQuestionsBySubCategory(subCategoryId, context);
+    });
+  }
+  void getQuestionsBySubCategoryforCustomer(int subCategoryId,BuildContext context){
+    _questionRepository.getQuestionsBySubCategoryforCustomer(subCategoryId, context).then((questionlist){
+      questionList.clear();
+      questionList.assignAll(questionlist);
+    });
+  }
+
   @override
   void onClose() {
      questionText?.dispose();

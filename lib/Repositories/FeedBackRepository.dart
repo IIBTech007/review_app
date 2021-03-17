@@ -2,6 +2,7 @@ import 'package:ars_progress_dialog/ars_progress_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
+import 'package:review_app/AppScreens/Admin/Business/BusinessList.dart';
 import 'package:review_app/Interfaces/IFeedbackRepository.dart';
 import 'package:review_app/Models/feedback.dart';
 import 'package:review_app/Utils/Locator.dart';
@@ -25,7 +26,8 @@ class FeedBackRepository extends IFeedBackRepository{
       if(res.statusCode==200||res.statusCode==201)
       {
         progressDialog.dismiss();
-       // Navigator.pop(context,"Refresh");
+        Utils.showSuccess(context,"Feedback Added");
+        Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder:(context)=>BusinessList()),(Route<dynamic> route) => false);
       }else if(res.body!=null&&res.body.isNotEmpty){
         progressDialog.dismiss();
         locator<Logger>().i(res.body.trim());
@@ -43,7 +45,7 @@ class FeedBackRepository extends IFeedBackRepository{
   }
 
   @override
-  Future<List<feedback>> getFeedBack(int categoryId, int subcategoryId, int businessId, BuildContext context) async{
+  Future<List<feedback>> getFeedBack(int categoryId, int subcategoryId, int businessId,String email, BuildContext context) async{
     ArsProgressDialog progressDialog = ArsProgressDialog(
         context,
         blur: 2,
@@ -51,7 +53,7 @@ class FeedBackRepository extends IFeedBackRepository{
         animationDuration: Duration(milliseconds: 500));
     try{
       progressDialog.show();
-      var response= await http.get(Utils.baseUrl()+"Feedback?BusinessId=$businessId",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
+      var response= await http.get(Utils.baseUrl()+"Feedback?BusinessId=$businessId&CategoryId=$categoryId&SubCategoryId=$subcategoryId&email=$email",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
       locator<Logger>().i(response.body);
       if(response.statusCode==200){
         progressDialog.dismiss();
@@ -69,5 +71,23 @@ class FeedBackRepository extends IFeedBackRepository{
       progressDialog.dismiss();
     }
     return null;
+  }
+
+  @override
+  Future<void> changeVisibility(int id, BuildContext context)async {
+    var response=await http.get(Utils.baseUrl()+"Feedback/ChangeVisibility/$id",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
+    if(response.statusCode==200){
+      Utils.showSuccess(context,"Visibility Changed");
+    }else if(response.body!=null&&response.body.isNotEmpty){
+      Utils.showError(context,response.body);
+    }else
+      Utils.showError(context,response.statusCode.toString());
+    return null;
+  }
+
+  @override
+  Future<void> updateFeedBack(feedback feedback, BuildContext context) {
+    // TODO: implement updateFeedBack
+    throw UnimplementedError();
   }
 }

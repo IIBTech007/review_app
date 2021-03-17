@@ -16,7 +16,7 @@ class SubCategoryController extends GetxController{
     }
     super.onInit();
   }
-   addSubCategory(BuildContext context,int categoryId,int businessId){
+  void addSubCategory(BuildContext context,int categoryId,int businessId){
     if(subCategoryName.text.isEmpty){
       Utils.showError(context,"Sub Category Name is Required");
     }else{
@@ -29,12 +29,25 @@ class SubCategoryController extends GetxController{
       });
     }
    }
-   getSubCategory(int categoryId,BuildContext context){
+ void getSubCategory(int categoryId,BuildContext context){
     _subCategoryRepository.getSubCategories(categoryId, context).then((value){
       subcategoryList.clear();
       subcategoryList.assignAll(value);
     });
-   }
+  }
+
+  void changeVisibility(int id,int categoryId,BuildContext context){
+    _subCategoryRepository.changeVisibility(id, context).then((value){
+      getSubCategory(categoryId,context);
+    });
+  }
+
+  void getSubCategoryforCustomer(int categoryId,BuildContext context){
+    _subCategoryRepository.getSubCategoriesforCustomer(categoryId, context).then((value){
+      subcategoryList.clear();
+      subcategoryList.assignAll(value);
+    });
+  }
   @override
   void onClose() {
     subCategoryName?.dispose();

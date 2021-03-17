@@ -1,6 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
 import 'package:review_app/Interfaces/IBusinessTypeRepository.dart';
 import 'package:review_app/Models/Dropdown.dart';
@@ -23,10 +22,15 @@ class BusinessTypeRepository extends IBusinessTypeRepository{
     }
 
   }
-
   @override
-  Future<void> changeVisibility(int id) {
-
+  Future<void> changeVisibility(int id, BuildContext context)async {
+    var response=await http.get(Utils.baseUrl()+"BusinessTypes/ChangeVisibility/$id",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
+    if(response.statusCode==200){
+      Utils.showSuccess(context,"Visibility Changed");
+    }else if(response.body!=null&&response.body.isNotEmpty){
+      Utils.showError(context,response.body);
+    }else
+      Utils.showError(context,response.statusCode.toString());
+    return null;
   }
-
 }

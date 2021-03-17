@@ -1,0 +1,164 @@
+import 'package:expandable_card/expandable_card.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:review_app/AppScreens/Admin/BusinessCategory/BusinessCategoryList.dart';
+import 'package:review_app/AppScreens/Admin/BusinessSubcategory/BusinessSubCategoryList.dart';
+import 'package:review_app/AppScreens/Admin/Feedbacks/FeedbackDetails.dart';
+import 'package:review_app/AppScreens/Customer/ReviewCategory/SelectReviewCategory.dart';
+import 'package:review_app/Controllers/FeedbackController.dart';
+import 'package:review_app/Models/BusinessViewModel.dart';
+import 'package:review_app/Utils/Utils.dart';
+import 'file:///C:/Users/IIB/AndroidStudioProjects/review_app/lib/AppScreens/Admin/Business/NewDetailScreen.dart';
+import 'package:review_app/components/colorConstants.dart';
+
+class DetailPage extends StatefulWidget {
+  BusinessViewModel business;
+
+  DetailPage({this.business});
+
+  @override
+  _DetailPageState createState() => _DetailPageState();
+}
+
+class _DetailPageState extends State<DetailPage> {
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
+  @override
+  void initState() {
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => _refreshIndicatorKey.currentState.show());
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+    final feedbackController =Get.put(FeedbackController());
+    return Scaffold(
+      //resizeToAvoidBottomPadding: false,
+      body: ExpandableCardPage(
+        page: BusinessProfileScreen(business: widget.business,),
+        expandableCard: ExpandableCard(
+          backgroundColor: color1,
+          padding: EdgeInsets.only(top: 5, left: 20, right: 20),
+          maxHeight: MediaQuery.of(context).size.height - 100,
+          minHeight: 105,
+          hasRoundedCorners: true,
+          hasShadow: true,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    Row(
+                      children: [
+                        FaIcon(FontAwesomeIcons.comments, color: color3, size: 35, ),
+                        SizedBox(width: 7,),
+                        Text("Reviews",
+                          style: TextStyle(
+                              color: color4,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+                        SizedBox(width: 155,),
+                        IconButton(icon: FaIcon(FontAwesomeIcons.commentMedical, color: color3, size: 35,),
+                            onPressed: (){
+                               Navigator.push(context,MaterialPageRoute(builder: (context)=>SelectReviewCategoryList(widget.business.id)));
+                            })
+                      ],
+                    ),
+
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            RefreshIndicator(
+              key: _refreshIndicatorKey,
+              onRefresh: ()async{
+                return Utils.check_connectivity().then((isConnected){
+                  if(isConnected){
+                    feedbackController.getFeedBack(widget.business.id, context);
+                  }else{
+                    Utils.showError(context,"Network not Available");
+                  }
+                });
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  //border: Border.all(color: color1, width: 2)
+                ),
+                width: MediaQuery.of(context).size.width,
+                height: 500,
+                child:Obx((){
+                   return ListView.builder(itemCount:feedbackController.feedbacks.length, itemBuilder: (context, index){
+                     return Padding(
+                       padding: const EdgeInsets.all(8.0),
+                       child: Container(
+                         width: MediaQuery.of(context).size.width,
+                         height: 70,
+                         decoration: BoxDecoration(
+                           //color: color1,
+                             borderRadius: BorderRadius.circular(10),
+                             border: Border.all(color: color3, width: 2)
+                         ),
+                         child: ListTile(
+                           onTap: (){
+                             Navigator.push(context,MaterialPageRoute(builder:(context)=>FeedbackDetails(feedbackController.feedbacks[index].customerFeedBacks)));
+                           },
+                           title: Text(feedbackController.feedbacks[index].customerName,
+                             style: TextStyle(
+                                 color: color4,
+                                 fontWeight: FontWeight.bold,
+                                 fontSize: 17
+                             ),
+                           ),
+                           subtitle: Row(
+                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                             children: [
+                               Text(feedbackController.feedbacks[index].comment,
+                                 style: TextStyle(
+                                     color: color3,
+                                     fontWeight: FontWeight.bold,
+                                     fontSize: 15
+                                 ),
+                               ),
+                               Row(
+                                 children: [
+                                   FaIcon(
+                                     FontAwesomeIcons.solidStar,
+                                     color: Colors.amber,
+                                     size: 20,
+                                   ),
+                                   SizedBox(width: 2,),
+                                   Text(feedbackController.feedbacks[index].overallRating.toStringAsFixed(1),
+                                     style: TextStyle(
+                                         color: color4,
+                                         fontWeight: FontWeight.bold,
+                                         fontSize: 15
+                                     ),
+                                   ),
+                                 ],
+                               )
+                             ],
+                           ),
+
+                           leading: FaIcon(
+                             FontAwesomeIcons.comments,
+                             color: color3,
+                             size: 35,
+                           ),
+                         ),
+                       ),
+                     );
+                   });
+                })
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

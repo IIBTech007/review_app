@@ -45,6 +45,12 @@ class _AddRatingsState extends State<AddRatings> {
           IconButton(
             icon:Icon(Icons.add),
             onPressed: (){
+              // final ids = _feedbackController.customerFeedback.map((e) => e.questionId).toSet();
+              // _feedbackController.customerFeedback.retainWhere((x) => ids.remove(x.questionId));
+              // for(int i=0;i<_feedbackController.customerFeedback.length;i++){
+              //   print(_feedbackController.customerFeedback[i].toJson());
+              // }
+              // print(_feedbackController.customerFeedback.length);
              Navigator.push(context,MaterialPageRoute(builder: (context)=>CommentWithPicture(businessId: widget.businessId,subcategoryId: widget.subcategoryId,categoryId: widget.categoryId,)));
             },
           )
@@ -57,7 +63,7 @@ class _AddRatingsState extends State<AddRatings> {
         onRefresh: ()async{
           return Utils.check_connectivity().then((isConnected){
             if(isConnected){
-              _questionController.getQuestionsBySubCategory(widget.subcategoryId, context);
+              _questionController.getQuestionsBySubCategoryforCustomer(widget.subcategoryId, context);
             }
           });
         },
@@ -203,7 +209,6 @@ class _AddRatingsState extends State<AddRatings> {
                         child: ListView.builder(
                           itemCount: _questionController.questionList[index].questionOptions.length,
                           itemBuilder: (BuildContext context,int i){
-
                             return Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [

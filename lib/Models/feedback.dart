@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:review_app/Models/CustomerFeedBack.dart';
 
 class feedback{
-  String customerName,phone,email,comment,image;
+  String customerName,phone,email,comment,image,city,country;
   int businessId,categoryId,subCategoryId;
   List<CustomerFeedBack> customerFeedBacks;
   double overallRating;
@@ -11,6 +11,8 @@ class feedback{
     this.customerName,
     this.phone,
     this.email,
+    this.city,
+    this.country,
     this.comment,
     this.image,
     this.businessId,
@@ -26,6 +28,8 @@ class feedback{
     customerName: json["customerName"],
     phone: json["phone"],
     email :json["email"],
+    city: json["city"],
+    country: json["country"],
     comment:json["comment"],
     image: json["image"],
       businessId:json["businessId"],

@@ -9,8 +9,9 @@ import 'package:review_app/components/colorConstants.dart';
 
 class IndividualFeedbacks extends StatefulWidget {
   int businessId;
+  bool isAdmin;
 
-  IndividualFeedbacks({this.businessId});
+  IndividualFeedbacks({this.businessId,this.isAdmin});
 
   @override
   _IndividualFeedbacksState createState() => _IndividualFeedbacksState();
@@ -44,7 +45,11 @@ class _IndividualFeedbacksState extends State<IndividualFeedbacks> {
         onRefresh: ()async{
           return Utils.check_connectivity().then((isConnected){
             if(isConnected){
-              _feedbackcontroller.getFeedBack(widget.businessId, context);
+              if(widget.isAdmin) {
+                _feedbackcontroller.getFeedBack(widget.businessId, context);
+              }else{
+                _feedbackcontroller.getFeedBackByEmail(context);
+              }
             }else{
               Utils.showError(context,"Network not Available");
             }

@@ -2,6 +2,7 @@
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:review_app/AppScreens/Admin/Business/BusinessList.dart';
 import 'package:review_app/AppScreens/Admin/Home/HomeScreen.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -50,15 +51,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
   _getPage(int page) {
     switch (page) {
       case 0:
-        return AdminHomeScreen();
+      //  return AdminHomeScreen();
       case 1:
-        return AdminHomeScreen();
+       // return AdminHomeScreen();
       case 2:
-        return AdminHomeScreen();
+        return BusinessList();
       case 3:
-        return AdminHomeScreen();//AboutScreen();
+       // return AdminHomeScreen();//AboutScreen();
       default:
-        return AdminHomeScreen();
+       // return AdminHomeScreen();
     }
   }
 }

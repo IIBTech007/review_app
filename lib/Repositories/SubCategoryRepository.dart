@@ -27,9 +27,10 @@ class SubCategoryRepository extends ISubCategoryRepository{
       }else if(res.body!=null&&res.body.isNotEmpty){
         progressDialog.dismiss();
         Utils.showError(context,res.body.trim());
-      }else
+      }else {
         progressDialog.dismiss();
-      Utils.showError(context,res.statusCode.toString());
+        Utils.showError(context, res.statusCode.toString());
+      }
     }catch(e){
       progressDialog.dismiss();
       Utils.showError(context, e.toString());
@@ -37,12 +38,6 @@ class SubCategoryRepository extends ISubCategoryRepository{
       progressDialog.dismiss();
     }
   }
-
-  @override
-  Future<void> changeVisibility(int id) {
-
-  }
-
   @override
   Future<List<CategoriesViewModel>> getSubCategories(int categoryId,BuildContext context) async {
     ArsProgressDialog progressDialog = ArsProgressDialog(
@@ -53,6 +48,51 @@ class SubCategoryRepository extends ISubCategoryRepository{
     try{
       progressDialog.show();
       var response= await http.get(Utils.baseUrl()+"Subcategories?categoryId=$categoryId",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
+      if(response.statusCode==200){
+        progressDialog.dismiss();
+        locator<Logger>().i(CategoriesViewModel.CategoriesListFromJson(response.body));
+        return CategoriesViewModel.CategoriesListFromJson(response.body);
+      }else if(response.body!=null&&response.body.isNotEmpty){
+        progressDialog.dismiss();
+        Utils.showError(context,response.body.toString());
+      }else
+        progressDialog.dismiss();
+      Utils.showError(context,response.statusCode.toString());
+    }catch(e){
+      progressDialog.dismiss();
+      Utils.showError(context,e.toString());
+    }finally{
+      progressDialog.dismiss();
+    }
+    return null;
+  }
+  @override
+  Future<void> changeVisibility(int id, BuildContext context)async {
+    var response=await http.get(Utils.baseUrl()+"Subcategories/ChangeVisibility/$id",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
+    if(response.statusCode==200){
+      Utils.showSuccess(context,"Visibility Changed");
+    }else if(response.body!=null&&response.body.isNotEmpty){
+      Utils.showError(context,response.body);
+    }else
+      Utils.showError(context,response.statusCode.toString());
+    return null;
+  }
+  @override
+  Future<void> updateSubCategories(CategoriesViewModel categoriesViewModel, BuildContext context) {
+    // TODO: implement updateSubCategories
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<CategoriesViewModel>> getSubCategoriesforCustomer(int categoryId, BuildContext context) async {
+    ArsProgressDialog progressDialog = ArsProgressDialog(
+        context,
+        blur: 2,
+        backgroundColor: Color(0x33000000),
+        animationDuration: Duration(milliseconds: 500));
+    try{
+      progressDialog.show();
+      var response= await http.get(Utils.baseUrl()+"Subcategories/getSubcategoriesforCustomer?categoryId=$categoryId",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
       if(response.statusCode==200){
         progressDialog.dismiss();
         locator<Logger>().i(CategoriesViewModel.CategoriesListFromJson(response.body));

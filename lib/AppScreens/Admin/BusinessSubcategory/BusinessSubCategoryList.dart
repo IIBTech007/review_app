@@ -23,11 +23,11 @@ class BusinessSubCategoryList extends StatefulWidget {
 class _BusinessSubCategoryListState extends ResumableState<BusinessSubCategoryList> {
   @override
   void onResume() {
+    super.onResume();
     if(resume.data=="Refresh"){
       WidgetsBinding.instance
           .addPostFrameCallback((_) => _refreshIndicatorKey.currentState.show());
     }
-    super.onResume();
   }
 
   final subCategoryController=Get.put(SubCategoryController());
@@ -46,7 +46,7 @@ class _BusinessSubCategoryListState extends ResumableState<BusinessSubCategoryLi
           IconButton(
             icon: Icon(Icons.add, color: color3,size:25,),
             onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> AddBusinessSubCategory(widget.businessId,widget.categoryId)));
+              push(context, MaterialPageRoute(builder: (context)=> AddBusinessSubCategory(widget.businessId,widget.categoryId)));
             },
           ),
         ],
@@ -83,31 +83,21 @@ class _BusinessSubCategoryListState extends ResumableState<BusinessSubCategoryLi
                     actionPane: SlidableDrawerActionPane(),
                     actionExtentRatio: 0.20,
                     secondaryActions: <Widget>[
-                      // IconSlideAction(
-                      //   //icon: storeList[index].isVisible?Icons.visibility_off:Icons.visibility,
-                      //   color: Colors.red,
-                      //   //caption: storeList[index].isVisible?"InVisible":"Visible",
-                      //   // onTap: () async {
-                      //   //   networksOperation.storeVisibility(context, token, storeList[index].id).then((value){
-                      //   //     if(value){
-                      //   //       Utils.showSuccess(context, "Visibility Changed");
-                      //   //       WidgetsBinding.instance
-                      //   //           .addPostFrameCallback((_) => _refreshIndicatorKey.currentState.show());
-                      //   //     }
-                      //   //
-                      //   //     else
-                      //   //       Utils.showError(context, "Please Tr Again");
-                      //   //   });
-                      //   // },
-                      // ),
                       IconSlideAction(
                         icon: Icons.edit,
                         color: color2,
                         caption: 'Update',
-                        // onTap: () async {
-                        //   //print(discountList[index]);
-                        //   Navigator.push(context,MaterialPageRoute(builder: (context)=>UpdateStore(storeList[index])));
-                        // },
+                        onTap: () async {
+
+                        },
+                      ),
+                      IconSlideAction(
+                        icon: subCategoryController.subcategoryList[index].isVisible?Icons.visibility_off:Icons.visibility,
+                        color: Colors.red,
+                        caption: 'Visibility',
+                        onTap: () {
+                          subCategoryController.changeVisibility(subCategoryController.subcategoryList[index].id, widget.categoryId, context);
+                        },
                       ),
                     ],
                     child: Container(
@@ -119,9 +109,6 @@ class _BusinessSubCategoryListState extends ResumableState<BusinessSubCategoryLi
                           border: Border.all(color: color3, width: 2)
                       ),
                       child: ListTile(
-                        onLongPress: (){
-                          Navigator.push(context, MaterialPageRoute(builder:(context)=>CustomerInfoForFeedback(subcategoryId: subCategoryController.subcategoryList[index].id,categoryId: subCategoryController.subcategoryList[index].categoryId,businessId: widget.businessId)));
-                        },
                         onTap: (){
                           Navigator.push(context, MaterialPageRoute(builder:(context)=>QuestionnaireList(subCategoryId: subCategoryController.subcategoryList[index].id,categoryId: subCategoryController.subcategoryList[index].categoryId,businessId: widget.businessId)));
                         },

@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
+import 'package:review_app/AppScreens/Admin/BottomNavBar/BottomNavBar.dart';
 import 'package:review_app/AppScreens/Admin/Business/BusinessList.dart';
+import 'package:review_app/AppScreens/Customer/BottomNavBar/BottomNavBar.dart';
 import 'package:review_app/Interfaces/IAccountRepository.dart';
 import 'package:review_app/Interfaces/IBusinessRepository.dart';
 import 'package:review_app/Models/Dropdown.dart';
@@ -32,7 +34,7 @@ class AccountRepository extends IAccountRepository{
         Utils.showSuccess(context,"Login Sucess");
         locator<Logger>().i(jsonDecode(res.body)["token"]);
         locator<GetStorage>().write("token", jsonDecode(res.body)["token"]);
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>BusinessList()));
+        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>ClientBottomNavBar()));
         return res.body;
       }else if(res.body!=null&&res.body.isNotEmpty){
         progressDialog.dismiss();

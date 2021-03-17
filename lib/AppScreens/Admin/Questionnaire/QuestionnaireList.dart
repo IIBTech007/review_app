@@ -79,36 +79,26 @@ class _QuestionnaireListState extends ResumableState<QuestionnaireList> {
                     actionPane: SlidableDrawerActionPane(),
                     actionExtentRatio: 0.20,
                     secondaryActions: <Widget>[
-                      // IconSlideAction(
-                      //   //icon: storeList[index].isVisible?Icons.visibility_off:Icons.visibility,
-                      //   color: Colors.red,
-                      //   //caption: storeList[index].isVisible?"InVisible":"Visible",
-                      //   // onTap: () async {
-                      //   //   networksOperation.storeVisibility(context, token, storeList[index].id).then((value){
-                      //   //     if(value){
-                      //   //       Utils.showSuccess(context, "Visibility Changed");
-                      //   //       WidgetsBinding.instance
-                      //   //           .addPostFrameCallback((_) => _refreshIndicatorKey.currentState.show());
-                      //   //     }
-                      //   //
-                      //   //     else
-                      //   //       Utils.showError(context, "Please Tr Again");
-                      //   //   });
-                      //   // },
-                      // ),
                       IconSlideAction(
                         icon: Icons.edit,
                         color: color2,
                         caption: 'Update',
-                        // onTap: () async {
-                        //   //print(discountList[index]);
-                        //   Navigator.push(context,MaterialPageRoute(builder: (context)=>UpdateStore(storeList[index])));
-                        // },
+                        onTap: () {
+
+                        },
+                      ),
+                      IconSlideAction(
+                        icon: _questionController.questionList[index].isVisible?Icons.visibility_off:Icons.visibility,
+                        color: Colors.red,
+                        caption: 'Visibility',
+                        onTap: () {
+                           _questionController.changeVisibility(_questionController.questionList[index].id, widget.subCategoryId, context);
+                        },
                       ),
                     ],
                     child: Container(
                       width: MediaQuery.of(context).size.width,
-                      height: 70,
+                      //height: 70,
                       decoration: BoxDecoration(
                         //color: color1,
                           borderRadius: BorderRadius.circular(10),

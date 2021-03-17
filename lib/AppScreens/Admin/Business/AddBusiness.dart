@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:review_app/AppScreens/Admin/LocationSetting/Location.dart';
 import 'package:review_app/Controllers/BusinessController.dart';
 import 'package:review_app/Models/Address.dart';
 import 'package:review_app/Utils/Utils.dart';
@@ -118,8 +119,8 @@ class _AddBusinessState extends State<AddBusiness> {
                         ),
                         trailing: InkWell(
                             onTap: () async{
-                            //  address = await Navigator.push(context, MaterialPageRoute(builder: (context) => getPosition(),),);
-                              // storeAddress.text = address.address;
+                             address = await Navigator.push(context, MaterialPageRoute(builder: (context) => Location(),),);
+                              businessController.addressTextEditingController.text = address.address;
                             },
                             child: Icon(Icons.add_location_alt,color: color3, size: 30,)),
                       ),

@@ -5,8 +5,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:need_resume/need_resume.dart';
 import 'package:review_app/AppScreens/Admin/Business/AddBusiness.dart';
+import 'package:review_app/AppScreens/Admin/Business/DetailsScreen.dart';
 import 'package:review_app/AppScreens/Admin/BusinessCategory/BusinessCategoryList.dart';
 import 'package:review_app/AppScreens/Admin/Feedbacks/IndividualFeedbacks.dart';
+import 'package:review_app/Controllers/AccountController.dart';
 import 'package:review_app/Controllers/BusinessController.dart';
 import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';
@@ -38,15 +40,17 @@ class _BusinessListState extends ResumableState<BusinessList> {
 
   @override
   Widget build(BuildContext context) {
+    final _accountController =Get.find<AccountController>();
     return Scaffold(
       appBar: AppBar(
         actions: [
+          _accountController.getLoggedInUserData().role=="Admin"?
           IconButton(
             icon: Icon(Icons.add, color: color3,size:25,),
             onPressed: (){
               push(context, MaterialPageRoute(builder: (context)=> AddBusiness()));
             },
-          ),
+          ):Container()
         ],
         title: Text("Business", style: TextStyle(
             color: color3, fontSize: 22, fontWeight: FontWeight.bold
@@ -79,7 +83,7 @@ class _BusinessListState extends ResumableState<BusinessList> {
                 padding: const EdgeInsets.all(8.0),
                 child: InkWell(
                   onLongPress: (){
-                    push(context,MaterialPageRoute(builder:(context)=>IndividualFeedbacks(businessId: businessController.businesses[index].id,)));
+                    push(context,MaterialPageRoute(builder:(context)=>IndividualFeedbacks(businessId: businessController.businesses[index].id,isAdmin: true)));
                   },
                   onTap: (){
                     push(context,MaterialPageRoute(builder:(context)=>BusinessCategoryList(businessController.businesses[index].id)));

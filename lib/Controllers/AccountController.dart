@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:review_app/Interfaces/IAccountRepository.dart';
 import 'package:review_app/Models/LoginViewModel.dart';
 import 'package:review_app/Models/RegisterViewModel.dart';
-import 'package:review_app/Repositories/AccountRepository.dart';
+import 'package:review_app/Models/TokenPayLoad.dart';
 import 'package:review_app/Utils/Locator.dart';
-
 import '../Models/LoginViewModel.dart';
 import '../Utils/Utils.dart';
 
@@ -38,6 +38,7 @@ class AccountController extends GetxController{
    if(countryTextEditingController==null) {
      countryTextEditingController = TextEditingController();
    }
+
   }
 
   Future<String> AuthenticateUser(BuildContext context)async{
@@ -114,6 +115,9 @@ class AccountController extends GetxController{
           roleId: "d24a371d-764c-4e62-99bd-2497bef73099"
       ));
     }
+  }
+  TokenPayLoad getLoggedInUserData(){
+     return TokenPayLoad.fromJson(Utils.parseJwt(locator<GetStorage>().read("token")));
   }
 
   @override

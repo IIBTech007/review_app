@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:need_resume/need_resume.dart';
 import 'package:review_app/AppScreens/Admin/BusinessCategory/AddBusinessCategory.dart';
 import 'package:review_app/AppScreens/Admin/BusinessSubcategory/BusinessSubCategoryList.dart';
+import 'package:review_app/Controllers/AccountController.dart';
 import 'package:review_app/Controllers/CategoryController.dart';
 import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';
@@ -35,15 +36,17 @@ class _BusinessCategoryListState extends ResumableState<BusinessCategoryList> {
   }
   @override
   Widget build(BuildContext context) {
+    final _accountController =Get.find<AccountController>();
     return Scaffold(
       appBar: AppBar(
         actions: [
+          _accountController.getLoggedInUserData().role=="Admin"?
           IconButton(
             icon: Icon(Icons.add, color: color3,size:25,),
             onPressed: (){
               push(context,MaterialPageRoute(builder:(context)=>AddBusinessCategory(widget.businessId)));
             },
-          ),
+          ):Container()
         ],
         title: Text("Business Category", style: TextStyle(
             color: color3, fontSize: 22, fontWeight: FontWeight.bold
@@ -84,6 +87,14 @@ class _BusinessCategoryListState extends ResumableState<BusinessCategoryList> {
                         caption: 'Update',
                         onTap: () async {
                           //Navigator.push(context,MaterialPageRoute(builder: (context)=>UpdateStore(storeList[index])));
+                        },
+                      ),
+                      IconSlideAction(
+                        icon: categoriesController.categoryList[index].isVisible?Icons.visibility_off:Icons.visibility,
+                        color: Colors.red,
+                        caption: 'Visibility',
+                        onTap: () async {
+                          categoriesController.changeVisibility(categoriesController.categoryList[index].id, widget.businessId, context);
                         },
                       ),
                     ],
