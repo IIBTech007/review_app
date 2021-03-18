@@ -1,4 +1,5 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pie_chart/pie_chart.dart';
@@ -60,7 +61,7 @@ class _BusinessReportState extends State<BusinessReport> {
                           return Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text("Monthly Report",style: TextStyle(fontSize: 20),),
+                              Text("Monthly Report",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                           Visibility(
                           visible: _reportController.dataMap!=null,
                             child: PieChart(
