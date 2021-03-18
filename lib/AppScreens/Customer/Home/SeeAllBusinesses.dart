@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:logger/logger.dart';
 import 'package:review_app/AppScreens/Admin/Business/DetailsScreen.dart';
 import 'package:review_app/Controllers/BusinessController.dart';
 import 'package:review_app/Utils/Locator.dart';
@@ -23,7 +24,7 @@ class _ClientSeeAllBusinessesState extends State<ClientSeeAllBusinesses> {
   @override
   void initState() {
      new dbhelper().getFeedBacks().then((value){
-       print(value.toString());
+       locator<Logger>().i(value);
      });
     WidgetsBinding.instance
         .addPostFrameCallback((_) => _refreshIndicatorKey.currentState.show());

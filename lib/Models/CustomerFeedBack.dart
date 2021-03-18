@@ -18,6 +18,10 @@ class CustomerFeedBack{
     this.selectedOptions,
     this.questions
   });
+  @override
+  String toString() {
+    return toJson().toString();
+  }
   static CustomerFeedBack CustomerFeedBackFromJson(String str) => CustomerFeedBack.fromJson(json.decode(str));
   static List<CustomerFeedBack> CustomerFeedBackListFromJson(String str) => List<CustomerFeedBack>.from(json.decode(str).map((x) => CustomerFeedBack.fromJson(x)));
   static String CustomerFeedBackToJson(CustomerFeedBack data) => json.encode(data.toJson());

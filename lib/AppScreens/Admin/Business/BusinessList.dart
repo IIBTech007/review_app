@@ -6,15 +6,13 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:need_resume/need_resume.dart';
 import 'package:review_app/AppScreens/Admin/Business/AddBusiness.dart';
-import 'package:review_app/AppScreens/Admin/Business/DetailsScreen.dart';
+import 'package:review_app/AppScreens/Admin/Business/BusinessReport.dart';
 import 'package:review_app/AppScreens/Admin/Business/BusinessQrCode.dart';
 import 'package:review_app/AppScreens/Admin/BusinessCategory/BusinessCategoryList.dart';
-import 'package:review_app/AppScreens/Admin/Feedbacks/IndividualFeedbacks.dart';
 import 'package:review_app/Controllers/AccountController.dart';
 import 'package:review_app/Controllers/BusinessController.dart';
 import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';
-import 'package:review_app/components/constants.dart';
 
 class BusinessList extends StatefulWidget {
   @override
@@ -91,6 +89,9 @@ class _BusinessListState extends ResumableState<BusinessList> {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: InkWell(
+                    onDoubleTap: (){
+                      Navigator.push(context,MaterialPageRoute(builder:(context)=>BusinessReport(businessController.businesses[index].id)));
+                    },
                           onLongPress: (){
                             push(context,MaterialPageRoute(builder:(context)=>BusinessQRCode(businessController.businesses[index].id)));
                           },
@@ -147,7 +148,7 @@ class _BusinessListState extends ResumableState<BusinessList> {
                                                   size: 20,
                                                 ),
                                                 SizedBox(width: 2,),
-                                                Text("4.5",
+                                                Text(businessController.businesses[index].overallRating.toStringAsFixed(1),
                                                   style: GoogleFonts.prompt(
                                                     textStyle: TextStyle(
                                                         color: color4,
@@ -345,164 +346,6 @@ class _BusinessListState extends ResumableState<BusinessList> {
                   ),
                 );
               });
-
-            //   ListView.builder(itemCount: businessController.businesses!=null?businessController.businesses.length:0 ,itemBuilder: (context, index){
-            //   return Padding(
-            //     padding: const EdgeInsets.all(8.0),
-            //     child: InkWell(
-            //       onLongPress: (){
-            //         push(context,MaterialPageRoute(builder:(context)=>BusinessQRCode(businessController.businesses[index].id)));
-            //       },
-            //       onTap: (){
-            //         push(context,MaterialPageRoute(builder:(context)=>BusinessCategoryList(businessController.businesses[index].id)));
-            //       },
-            //       child: Container(
-            //         decoration: BoxDecoration(
-            //           border: Border.all(color: color3, width: 2),
-            //           color: BackgroundColor,
-            //         ),
-            //         height: 130,
-            //         width: MediaQuery.of(context).size.width,
-            //         child: Stack(
-            //           children: [
-            //             Container(
-            //               decoration: BoxDecoration(
-            //                 image: DecorationImage(
-            //                   alignment: Alignment.centerRight,
-            //                   fit: BoxFit.fitHeight,
-            //                   image:  MemoryImage(
-            //                       base64Decode(businessController.businesses!=null&&businessController.businesses[index].image!=null?businessController.businesses[index].image:'')
-            //                   ),
-            //                   // image:  NetworkImage(
-            //                   //     storeList[index].image!=null?storeList[index].image:"http://www.4motiondarlington.org/wp-content/uploads/2013/06/No-image-found.jpg"
-            //                   // ),
-            //                 ),
-            //               ),
-            //             ),
-            //             ClipPath(
-            //               clipper: TrapeziumClipper(),
-            //               child: Container(
-            //                 decoration: BoxDecoration(
-            //                   color: BackgroundColor,
-            //                   //border: Border.all(color: yellowColor)
-            //                 ),
-            //                 padding: EdgeInsets.all(8.0),
-            //                 width: 340,
-            //                 child: Column(
-            //                   crossAxisAlignment: CrossAxisAlignment.start,
-            //                   children: <Widget>[
-            //                     ConstrainedBox(
-            //                       constraints: BoxConstraints(
-            //                           maxWidth: 280
-            //                       ),
-            //
-            //                     ),
-            //                   ],
-            //                 ),
-            //               ),
-            //             ),
-            //             Container(
-            //               decoration: BoxDecoration(
-            //                 //border: Border.all(color: Colors.amberAccent, width: 2),
-            //                 //color: Colors.white38,
-            //               ),
-            //               height: 170,
-            //               width: MediaQuery.of(context).size.width,
-            //               child: Padding(
-            //                 padding: const EdgeInsets.all(5.0),
-            //                 child: Column(
-            //                   children: [
-            //                     Row(
-            //                       children: [
-            //                         Padding(
-            //                           padding: const EdgeInsets.only(right: 9),
-            //                           child: FaIcon(FontAwesomeIcons.utensils, color: color1, size: 17,),
-            //                         ),
-            //                         Text("Business: ", style: TextStyle(color: color3, fontSize: 17, fontWeight: FontWeight.bold),),
-            //                         Container(
-            //                           width: 140,
-            //                           child:
-            //                           Text(businessController.businesses!=null?businessController.businesses[index].name:'-',
-            //                               //storeList[index].name!=null?storeList[index].name:"",
-            //                               maxLines: 1 ,
-            //                               style: TextStyle(color: color1, fontSize: 17, fontWeight: FontWeight.bold),
-            //                               overflow: TextOverflow.ellipsis),
-            //                         )
-            //                       ],
-            //                     ),
-            //                     SizedBox(height: 5,),
-            //                     Row(
-            //                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //                       children: [
-            //                         Row(
-            //                           children: [
-            //                             Padding(
-            //                               padding: const EdgeInsets.only(right: 3),
-            //                               child: FaIcon(FontAwesomeIcons.city, color: color1, size: 17,),
-            //                             ),
-            //                             Text("Address: ", style: TextStyle(color: color3, fontSize: 15, fontWeight: FontWeight.bold),),
-            //                             Container(
-            //                               width: 150,
-            //                               child: Text(businessController.businesses!=null&&businessController.businesses[index].address!=null?businessController.businesses[index].address:'-',
-            //                                 overflow: TextOverflow.ellipsis,
-            //                                 style: TextStyle(color: color1,
-            //                                     fontSize: 15, fontWeight: FontWeight.bold),),
-            //                             )
-            //                           ],
-            //                         ),
-            //                       ],
-            //                     ),
-            //                     SizedBox(height: 5,),
-            //                     Row(
-            //                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //                       children: [
-            //                         Row(
-            //                           children: [
-            //                             Padding(
-            //                               padding: const EdgeInsets.only(right: 3),
-            //                               child: FaIcon(FontAwesomeIcons.city, color: color1, size: 17,),
-            //                             ),
-            //                             Text("Business Type: ", style: TextStyle(color: color3, fontSize: 15, fontWeight: FontWeight.bold),),
-            //                             Text(businessController.businesses!=null&&businessController.businesses[index].businessType!=null?businessController.businesses[index].businessType.name:'-',
-            //                               style: TextStyle(color: color1,
-            //                                   fontSize: 15, fontWeight: FontWeight.bold),)
-            //                           ],
-            //                         ),
-            //                       ],
-            //                     ),
-            //                     SizedBox(height: 5,),
-            //                     Row(
-            //                       children: [
-            //                         Padding(
-            //                           padding: const EdgeInsets.only(right: 3),
-            //                           child: FaIcon(FontAwesomeIcons.clock, color: color1, size: 17,),
-            //                         ),
-            //                         Text("Opening: ",style: TextStyle(color: color3,fontWeight: FontWeight.bold),),
-            //                         Text(businessController.businesses!=null&&businessController.businesses[index].openingTime!=null?businessController.businesses[index].openingTime:'-',
-            //                           style: TextStyle(color: color1,fontWeight: FontWeight.bold),),
-            //                       ],
-            //                     ),
-            //                     Row(
-            //                       children: [
-            //                         Padding(
-            //                           padding: const EdgeInsets.only(right: 3),
-            //                           child: FaIcon(FontAwesomeIcons.clock, color: color1, size: 17,),
-            //                         ),
-            //                         Text("Closing: ",style: TextStyle(color: color3,fontWeight: FontWeight.bold),),
-            //                         Text(businessController.businesses!=null&&businessController.businesses[index].closingTime!=null?businessController.businesses[index].closingTime:'-',
-            //                           style: TextStyle(color: color1,fontWeight: FontWeight.bold),),
-            //                       ],
-            //                     )
-            //                   ],
-            //                 ),
-            //               ),
-            //             )
-            //           ],
-            //         ),
-            //       ),
-            //     ),
-            //   );
-            // });
           })
         ),
       ),

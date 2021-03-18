@@ -61,6 +61,7 @@ class _AddRatingsState extends State<AddRatings> {
               //   print(_feedbackController.customerFeedback[i].toJson());
               // }
               // print(_feedbackController.customerFeedback.length);
+              //print(_feedbackController.customerFeedback.toString());
              Navigator.push(context,MaterialPageRoute(builder: (context)=>CommentWithPicture(businessId: widget.businessId,subcategoryId: widget.subcategoryId,categoryId: widget.categoryId,)));
             },
           )

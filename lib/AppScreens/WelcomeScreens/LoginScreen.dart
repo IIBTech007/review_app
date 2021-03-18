@@ -1,12 +1,9 @@
-
-import 'package:flutter/cupertino.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:review_app/AppScreens/WelcomeScreens/ForgotPassword.dart';
 import 'package:review_app/Utils/Utils.dart';
-import 'file:///C:/Users/IIB/AndroidStudioProjects/review_app/lib/AppScreens/WelcomeScreens/ForgotPassword.dart';
 import 'package:review_app/Controllers/AccountController.dart';
 import 'package:review_app/components/colorConstants.dart';
 
@@ -232,7 +229,7 @@ class LoginScreen extends StatelessWidget{
               Center(
                   child: InkWell(
                     onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> ForgotPassword()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgotPassword()));
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 20),

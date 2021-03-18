@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:review_app/Controllers/AccountController.dart';
 import 'package:review_app/Interfaces/IFeedbackRepository.dart';
 import 'package:review_app/Models/CustomerFeedBack.dart';
@@ -57,6 +58,20 @@ final _accountController=Get.find<AccountController>();
  void addFeedback(BuildContext context,int businessId,int categoryId,int subCategoryId){
     final ids = customerFeedback.map((e) => e.questionId).toSet();
     customerFeedback.retainWhere((x) => ids.remove(x.questionId));
+     if(locator<GetStorage>().read("token")==null){
+       new dbhelper().addFeedBacks(feedback(
+           subCategoryId: subCategoryId,
+           categoryId: categoryId,
+           phone:phone.text,
+           businessId: businessId,
+           email: email.text,
+           customerName: name.text,
+           comment: comment.text,
+           city: city.text,
+           country: country.text,
+           image: image,
+           customerFeedBacks: customerFeedback));
+     }
     _feedbackRepository.AddFeedBack(feedback(
       subCategoryId: subCategoryId,
       categoryId: categoryId,
@@ -68,21 +83,6 @@ final _accountController=Get.find<AccountController>();
       image: image,
       customerFeedBacks: customerFeedback
     ), context).then((value){
-      if(_accountController.getLoggedInUserData()==null){
-        new dbhelper().addFeedBacks(feedback(
-            subCategoryId: subCategoryId,
-            categoryId: categoryId,
-            phone:phone.text,
-            businessId: businessId,
-            email: email.text,
-            customerName: name.text,
-            comment: comment.text,
-            city: city.text,
-            country: country.text,
-            image: image,
-            customerFeedBacks: customerFeedback));
-      }
-      customerFeedback.clear();
       city.text="";
       country.text="";
       name.text="";
@@ -90,7 +90,8 @@ final _accountController=Get.find<AccountController>();
       email.text="";
       image="";
       comment.text="";
-      Navigator.pop(context);
+      customerFeedback.clear();
+     // Navigator.pop(context);
     });
   }
  void getFeedBack(int businessId,BuildContext context){

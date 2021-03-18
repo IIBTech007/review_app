@@ -24,6 +24,7 @@ class FeedBackRepository extends IFeedBackRepository{
       progressDialog.show();
       var res=await http.post(Utils.baseUrl()+"Feedback",body:feedback.FeedbackToJson(f),headers: {"Content-Type":"application/json","Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
       progressDialog.dismiss();
+      locator<Logger>().i(res.statusCode);
       if(res.statusCode==200||res.statusCode==201)
       {
         progressDialog.dismiss();
@@ -33,9 +34,10 @@ class FeedBackRepository extends IFeedBackRepository{
         progressDialog.dismiss();
         locator<Logger>().i(res.body.trim());
        // Utils.showError(context,res.body.trim());
-      }else
+      }else {
         progressDialog.dismiss();
-      Utils.showError(context,res.statusCode.toString());
+        Utils.showError(context, res.statusCode.toString());
+      }
     }catch(e){
       progressDialog.dismiss();
       locator<Logger>().e(e);
