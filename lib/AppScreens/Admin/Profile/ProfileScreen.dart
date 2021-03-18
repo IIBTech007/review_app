@@ -2,8 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:review_app/AppScreens/WelcomeScreens/NewSplashScreen.dart';
 import 'package:review_app/Controllers/AccountController.dart';
+import 'package:review_app/Utils/Locator.dart';
 import 'package:review_app/components/colorConstants.dart';
 
 
@@ -49,10 +51,8 @@ class ProfileScreen extends StatelessWidget {
                                   IconButton(
                                     icon:  FaIcon(FontAwesomeIcons.signOutAlt, color: color3, size: 25,),
                                     onPressed: (){
-                                      // SharedPreferences.getInstance().then((value) {
-                                      //   value.remove("token");
-                                      //   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => NewSplashScreen()), (route) => false);
-                                      // } );
+                                      locator<GetStorage>().remove("token");
+                                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => NewSplashScreen()), (route) => false);
                                     },
                                   ),
                                 ],

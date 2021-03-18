@@ -15,6 +15,8 @@ import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';
 import 'package:review_app/components/constants.dart';
 
+import 'BusinessReport.dart';
+
 class BusinessList extends StatefulWidget {
   @override
   _BusinessListState createState() => _BusinessListState();
@@ -83,11 +85,14 @@ class _BusinessListState extends ResumableState<BusinessList> {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: InkWell(
+                  onDoubleTap: (){
+                    Navigator.push(context,MaterialPageRoute(builder: (context)=>BusinessReport(businessController.businesses[index].id)));
+                  },
                   onLongPress: (){
-                    push(context,MaterialPageRoute(builder:(context)=>BusinessQRCode(businessController.businesses[index].id)));
+                    Navigator.push(context,MaterialPageRoute(builder:(context)=>BusinessQRCode(businessController.businesses[index].id)));
                   },
                   onTap: (){
-                    push(context,MaterialPageRoute(builder:(context)=>BusinessCategoryList(businessController.businesses[index].id)));
+                    Navigator.push(context,MaterialPageRoute(builder:(context)=>BusinessCategoryList(businessController.businesses[index].id)));
                   },
                   child: Container(
                     decoration: BoxDecoration(

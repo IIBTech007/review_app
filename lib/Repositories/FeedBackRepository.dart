@@ -2,9 +2,9 @@ import 'package:ars_progress_dialog/ars_progress_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
-import 'package:review_app/AppScreens/Admin/Business/BusinessList.dart';
 import 'package:review_app/AppScreens/Customer/Home/SeeAllBusinesses.dart';
 import 'package:review_app/Interfaces/IFeedbackRepository.dart';
+import 'package:review_app/Models/OverallReport.dart';
 import 'package:review_app/Models/feedback.dart';
 import 'package:review_app/Utils/Locator.dart';
 import 'package:http/http.dart'as http;
@@ -119,5 +119,32 @@ class FeedBackRepository extends IFeedBackRepository{
       progressDialog.dismiss();
     }
     return null;
+  }
+
+  @override
+  Future<OverallReport> getOverAllReport(int businessId, double days,BuildContext context) async{
+    ArsProgressDialog progressDialog = ArsProgressDialog(
+        context,
+        blur: 2,
+        backgroundColor: Color(0x33000000),
+        animationDuration: Duration(milliseconds: 500));
+      try {
+        progressDialog.show();
+        var response = await http.get(Utils.baseUrl() + "Feedback/GetOverallReportOfRating?businessId=$businessId&days=$days",headers:{"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
+        locator<Logger>().i(response.body);
+        if(response.statusCode==200){
+          progressDialog.dismiss();
+          return OverallReport.OverallReportFromJson(response.body);
+        }else{
+          Utils.showError(context,"Unable to Fetch Reports");
+          progressDialog.dismiss();
+        }
+      }catch(e){
+        progressDialog.dismiss();
+        locator<Logger>().i(e);
+      }finally {
+        progressDialog.dismiss();
+      }
+     return null;
   }
 }

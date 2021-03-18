@@ -19,7 +19,7 @@ class _AddBusinessState extends State<AddBusiness> {
   @override
   Address address;
   File _image;
-  DateTime start_time ;//= DateTime.now();
+  DateTime start_time ;
   DateTime end_time ;
   var _formKey = new GlobalKey<FormState>();
   var _autoValidate = false;
