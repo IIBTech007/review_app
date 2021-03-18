@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:review_app/AppScreens/WelcomeScreens/NewSplashScreen.dart';
 import 'package:review_app/Controllers/AccountController.dart';
 import 'package:review_app/components/colorConstants.dart';
@@ -16,7 +17,7 @@ class ProfileScreen extends StatelessWidget {
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        color: Colors.white,
+        color: color4,
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -38,7 +39,7 @@ class ProfileScreen extends StatelessWidget {
                               padding: const EdgeInsets.only(top: 50),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                //crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   IconButton(
                                     icon: Icon(Icons.arrow_back, color: color3,size:30),
@@ -109,28 +110,33 @@ class ProfileScreen extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Text(_accountController.getLoggedInUserData()!=null&&_accountController.getLoggedInUserData().userInfo!=null?_accountController.getLoggedInUserData().userInfo.name:'',
-                                        style: TextStyle(
-                                            fontSize: 35,
-                                            fontWeight: FontWeight.bold,
-                                            color: color3
+                                        style: GoogleFonts.prompt(
+                                          textStyle: TextStyle(
+                                              color: color3,
+                                              fontSize: 35,
+                                              fontWeight: FontWeight.bold
+                                          ),
                                         ),
                                       ),
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-
                                           Text("as ",
-                                            style: TextStyle(
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.bold,
-                                                color: color3
+                                            style: GoogleFonts.prompt(
+                                              textStyle: TextStyle(
+                                                  color: color4,
+                                                  fontSize: 17,
+                                                  fontWeight: FontWeight.bold
+                                              ),
                                             ),
                                           ),
                                           Text(_accountController.getLoggedInUserData()!=null&&_accountController.getLoggedInUserData().userInfo!=null?_accountController.getLoggedInUserData().role:'',
-                                            style: TextStyle(
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.bold,
-                                                color: color4
+                                            style: GoogleFonts.prompt(
+                                              textStyle: TextStyle(
+                                                  color: color3,
+                                                  fontSize: 17,
+                                                  fontWeight: FontWeight.bold
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -183,11 +189,14 @@ class ProfileScreen extends StatelessWidget {
                           top: 22,
                           left: 50,
                           child: Text("Name: ",
-                            style: TextStyle(
-                                color: color4,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold
-                            ),),
+                            style: GoogleFonts.prompt(
+                              textStyle: TextStyle(
+                                  color: color4,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -201,11 +210,14 @@ class ProfileScreen extends StatelessWidget {
                               ),
                               child: Center(
                                 child: Text(_accountController.getLoggedInUserData()!=null&&_accountController.getLoggedInUserData().userInfo!=null?_accountController.getLoggedInUserData().userInfo.name:'',
-                                  style: TextStyle(
-                                      color: color1,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold
-                                  ),),
+                                  style: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color1,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                  ),
+                                ),
                               ),
                             )
                           ],
@@ -229,11 +241,14 @@ class ProfileScreen extends StatelessWidget {
                           top: 22,
                           left: 50,
                           child: Text("Email: ",
-                            style: TextStyle(
-                                color: color4,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold
-                            ),),
+                            style: GoogleFonts.prompt(
+                              textStyle: TextStyle(
+                                  color: color4,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -247,11 +262,14 @@ class ProfileScreen extends StatelessWidget {
                               ),
                               child: Center(
                                 child: Text(_accountController.getLoggedInUserData()!=null&&_accountController.getLoggedInUserData().userInfo!=null?_accountController.getLoggedInUserData().userInfo.email:'',
-                                  style: TextStyle(
-                                      color: color1,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold
-                                  ),),
+                                  style: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color1,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                  ),
+                                ),
                               ),
                             )
                           ],
@@ -274,12 +292,15 @@ class ProfileScreen extends StatelessWidget {
                         Positioned(
                           top: 22,
                           left: 50,
-                          child: Text("Contact#: ",
-                            style: TextStyle(
-                                color: color4,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold
-                            ),),
+                          child: Text("Contact: ",
+                            style: GoogleFonts.prompt(
+                              textStyle: TextStyle(
+                                  color: color4,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -293,11 +314,14 @@ class ProfileScreen extends StatelessWidget {
                               ),
                               child: Center(
                                 child: Text(_accountController.getLoggedInUserData()!=null&&_accountController.getLoggedInUserData().userInfo!=null?_accountController.getLoggedInUserData().userInfo.phone:'',
-                                  style: TextStyle(
-                                      color: color1,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold
-                                  ),),
+                                  style: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color1,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                  ),
+                                ),
                               ),
                             )
                           ],
@@ -321,11 +345,14 @@ class ProfileScreen extends StatelessWidget {
                           top: 22,
                           left: 50,
                           child: Text("City: ",
-                            style: TextStyle(
-                                color: color4,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold
-                            ),),
+                            style: GoogleFonts.prompt(
+                              textStyle: TextStyle(
+                                  color: color4,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -339,11 +366,14 @@ class ProfileScreen extends StatelessWidget {
                               ),
                               child: Center(
                                 child: Text(_accountController.getLoggedInUserData()!=null&&_accountController.getLoggedInUserData().userInfo!=null?_accountController.getLoggedInUserData().userInfo.city:'',
-                                  style: TextStyle(
-                                      color: color1,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold
-                                  ),),
+                                  style: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color1,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                  ),
+                                ),
                               ),
                             )
                           ],
@@ -367,11 +397,14 @@ class ProfileScreen extends StatelessWidget {
                           top: 22,
                           left: 50,
                           child: Text("Country: ",
-                            style: TextStyle(
-                                color: color4,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold
-                            ),),
+                            style: GoogleFonts.prompt(
+                              textStyle: TextStyle(
+                                  color: color4,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -385,11 +418,14 @@ class ProfileScreen extends StatelessWidget {
                               ),
                               child: Center(
                                 child: Text(_accountController.getLoggedInUserData()!=null&&_accountController.getLoggedInUserData().userInfo!=null?_accountController.getLoggedInUserData().userInfo.country:'',
-                                  style: TextStyle(
-                                      color: color1,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold
-                                  ),),
+                                  style: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color1,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                  ),
+                                ),
                               ),
                             )
                           ],
@@ -398,7 +434,7 @@ class ProfileScreen extends StatelessWidget {
                     )
                 ),
               ),
-              SizedBox(height: 20,)
+              SizedBox(height: 30,)
             ],
           ),
         ),

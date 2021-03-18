@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:review_app/AppScreens/Admin/LocationSetting/Location.dart';
@@ -27,15 +28,20 @@ class _AddBusinessState extends State<AddBusiness> {
     Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Add Business", style: TextStyle(
-              color: color3, fontSize: 22, fontWeight: FontWeight.bold
-          ),
+          title: Text("Add Business",
+            style: GoogleFonts.prompt(
+              textStyle: TextStyle(
+                  color: color4,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold
+              ),
+            ),
           ),
           iconTheme: IconThemeData(
-              color: color3
+              color: color4
           ),
           centerTitle: true,
-          backgroundColor: color1,
+          backgroundColor: color3,
         ),
       body: Container(
         color: color4,
@@ -52,187 +58,288 @@ class _AddBusinessState extends State<AddBusiness> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: businessController.nameTextEditingController,
-                        style: TextStyle(color: color1,fontWeight: FontWeight.bold),
-                        obscureText: false,
-                        validator: (String value) =>
-                        value.isEmpty ? "This field is Required" : null,
-                        decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: color1, width: 1.0)
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: color1, width: 1.0)
-                          ),
-                          labelText: "Name",
-                          labelStyle: TextStyle(color: color1, fontWeight: FontWeight.bold),
-
-                        ),
-                        textInputAction: TextInputAction.next,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: businessController.phoneTextEditingController,
-                        style: TextStyle(color: color1,fontWeight: FontWeight.bold),
-                        obscureText: false,
-                        validator: (String value) =>
-                        value.isEmpty ? "This field is Required" : null,
-                        decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: color1, width: 1.0)
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: color1, width: 1.0)
-                          ),
-                          labelText: "Contact Number",
-                          labelStyle: TextStyle(color: color1, fontWeight: FontWeight.bold),
-                        ),
-                        textInputAction: TextInputAction.next,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(2.0),
-                      child: ListTile(
-                        title: TextFormField(
-                          controller: businessController.addressTextEditingController,
-                          style: TextStyle(color: color1,fontWeight: FontWeight.bold),
-                          obscureText: false,maxLines: 2,
-                          validator: (String value) =>
-                          value.isEmpty ? "This field is Required" : null,
-                          decoration: InputDecoration(
-                            // suffixIcon: Icon(Icons.add_location,color: Colors.amberAccent,),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: color1, width: 1.0)
+                      child: Card(
+                        elevation: 8,
+                        color: color6,
+                        child: Container(
+                          child: TextFormField(
+                            controller: businessController.nameTextEditingController,
+                            style:  GoogleFonts.prompt(
+                              textStyle: TextStyle(
+                                  color: color1,
+                                  fontWeight: FontWeight.w500
+                              ),
                             ),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: color1, width: 1.0)
+                            obscureText: false,
+                            validator: (String value) =>
+                            value.isEmpty ? "This field is Required" : null,
+                            decoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: color3, width: 1.0)
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: color6, width: 1.0)
+                              ),
+                              labelText: "Name",
+                              labelStyle: GoogleFonts.prompt(
+                                textStyle: TextStyle(
+                                    color: color3,
+                                    fontWeight: FontWeight.w500
+                                ),
+                              ),
                             ),
-                            labelText: 'Address',
-                            labelStyle: TextStyle(color: color1, fontWeight: FontWeight.bold),
-                            //suffixIcon: Icon(Icons.email,color: Colors.amberAccent,size: 27,),
+                            textInputAction: TextInputAction.next,
                           ),
-                          textInputAction: TextInputAction.next,
                         ),
-                        trailing: InkWell(
-                            onTap: () async{
-                             address = await Navigator.push(context, MaterialPageRoute(builder: (context) => Location(),),);
-                              businessController.addressTextEditingController.text = address.address;
-                            },
-                            child: Icon(Icons.add_location_alt,color: color3, size: 30,)),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: businessController.emailTextEditingController,
-                        keyboardType: TextInputType.emailAddress,
-                        style: TextStyle(color: color1,fontWeight: FontWeight.bold),
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: color1, width: 1.0)
+                      child: Card(
+                        elevation: 8,
+                        color: color6,
+                        child: Container(
+                          child: TextFormField(
+                            controller: businessController.phoneTextEditingController,
+                            style:  GoogleFonts.prompt(
+                              textStyle: TextStyle(
+                                  color: color1,
+                                  fontWeight: FontWeight.w500
+                              ),
+                            ),
+                            obscureText: false,
+                            validator: (String value) =>
+                            value.isEmpty ? "This field is Required" : null,
+                            decoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: color3, width: 1.0)
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: color6, width: 1.0)
+                              ),
+                              labelText: "Contact Number",
+                              labelStyle: GoogleFonts.prompt(
+                                textStyle: TextStyle(
+                                    color: color3,
+                                    fontWeight: FontWeight.w500
+                                ),
+                              ),
+                            ),
+                            textInputAction: TextInputAction.next,
                           ),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color:color1, width: 1.0)
-                          ),
-                          labelText: "Email",
-                          labelStyle: TextStyle(color: color1, fontWeight: FontWeight.bold),
                         ),
-                        textInputAction: TextInputAction.next,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 2, bottom: 2, left: 8, right: 8),
+                      child: Card(
+                        elevation: 8,
+                        color: color6,
+                        child: Container(
+                          child: ListTile(
+                            title: TextFormField(
+                              controller: businessController.addressTextEditingController,
+                              style:  GoogleFonts.prompt(
+                                textStyle: TextStyle(
+                                    color: color1,
+                                    fontWeight: FontWeight.w500
+                                ),
+                              ),
+                              obscureText: false,maxLines: 2,
+                              validator: (String value) =>
+                              value.isEmpty ? "This field is Required" : null,
+                              decoration: InputDecoration(
+                                // suffixIcon: Icon(Icons.add_location,color: Colors.amberAccent,),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: color3, width: 1.0)
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: color6, width: 1.0)
+                                ),
+                                labelText: 'Address',
+                                labelStyle: GoogleFonts.prompt(
+                                  textStyle: TextStyle(
+                                      color: color3,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                ),
+                                //suffixIcon: Icon(Icons.email,color: Colors.amberAccent,size: 27,),
+                              ),
+                              textInputAction: TextInputAction.next,
+                            ),
+                            trailing: InkWell(
+                                onTap: () async{
+                                 address = await Navigator.push(context, MaterialPageRoute(builder: (context) => Location(),),);
+                                  businessController.addressTextEditingController.text = address.address;
+                                },
+                                child: Icon(Icons.add_location_alt,color: color3, size: 30,)),
+                          ),
+                        ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: businessController.descriptionTextEditingController,
-                        style: TextStyle(color: color1,fontWeight: FontWeight.bold),
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: color1, width: 1.0)
+                      child: Card(
+                        elevation: 8,
+                        color: color6,
+                        child: Container(
+                          child: TextFormField(
+                            controller: businessController.emailTextEditingController,
+                            keyboardType: TextInputType.emailAddress,
+                            style:  GoogleFonts.prompt(
+                              textStyle: TextStyle(
+                                  color: color1,
+                                  fontWeight: FontWeight.w500
+                              ),
+                            ),
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: color3, width: 1.0)
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color:color6, width: 1.0)
+                              ),
+                              labelText: "Email",
+                              labelStyle: GoogleFonts.prompt(
+                                textStyle: TextStyle(
+                                    color: color3,
+                                    fontWeight: FontWeight.w500
+                                ),
+                              ),
+                            ),
+                            textInputAction: TextInputAction.next,
                           ),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: color1, width: 1.0)
-                          ),
-                          labelText: "Description",
-                          labelStyle: TextStyle(color: color1, fontWeight: FontWeight.bold),
                         ),
-                        textInputAction: TextInputAction.next,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          //color: Colors.white12,
-                          borderRadius: BorderRadius.circular(9),
-                          border: Border.all(color: color1, width: 2)
+                      child: Card(
+                        elevation: 8,
+                        color: color6,
+                        child: Container(
+                          child: TextFormField(
+                            controller: businessController.descriptionTextEditingController,
+                            style:  GoogleFonts.prompt(
+                              textStyle: TextStyle(
+                                  color: color1,
+                                  fontWeight: FontWeight.w500
+                              ),
+                            ),
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: color3, width: 1.0)
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: color6, width: 1.0)
+                              ),
+                              labelText: "Description",
+                              labelStyle: GoogleFonts.prompt(
+                                textStyle: TextStyle(
+                                    color: color3,
+                                    fontWeight: FontWeight.w500
+                                ),
+                              ),
+                            ),
+                            textInputAction: TextInputAction.next,
+                          ),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: DateTimeField(
-                            style: Theme.of(context).textTheme.body1,
-                            //inputType: InputType.time,
-                            //alwaysUse24HourFormat: true,
-                            format: DateFormat("HH:mm:ss"),
-                            onShowPicker: (context, currentValue) async {
-                              final time = await showTimePicker(
-                                context: context,
-                                initialTime: TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
-                              );
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Card(
+                        elevation: 8,
+                        color: color6,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            //color: Colors.white12,
+                            borderRadius: BorderRadius.circular(9),
+                            //border: Border.all(color: color1, width: 2)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: DateTimeField(
+                              style: Theme.of(context).textTheme.body1,
+                              //inputType: InputType.time,
+                              //alwaysUse24HourFormat: true,
+                              format: DateFormat("HH:mm:ss"),
+                              onShowPicker: (context, currentValue) async {
+                                final time = await showTimePicker(
+                                  context: context,
+                                  initialTime: TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
+                                );
 
-                              return DateTimeField.convert(time);
-                            },
-                            decoration: InputDecoration(labelText: "Select start time",labelStyle: TextStyle(color: color1, fontWeight: FontWeight.bold),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(9.0),
-                                  borderSide: BorderSide(color: color1, width: 2.0)
-                              ),),
-                            onChanged: (value){
-                              setState(() {businessController.openingTime.value=value;
-                                this.start_time=value;
-                              });
-                            },
+                                return DateTimeField.convert(time);
+                              },
+                              decoration: InputDecoration(labelText: "Select start time",
+                                labelStyle: GoogleFonts.prompt(
+                                textStyle: TextStyle(
+                                    color: color3,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500
+                                ),
+                              ),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(9.0),
+                                    borderSide: BorderSide(color: color1, width: 2.0)
+                                ),),
+                              onChanged: (value){
+                                setState(() {businessController.openingTime.value=value;
+                                  this.start_time=value;
+                                });
+                              },
+                            ),
                           ),
                         ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          //color: Colors.white12,
-                          borderRadius: BorderRadius.circular(9),
-                          border: Border.all(color: color1, width: 2)
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: DateTimeField(
-                            style: Theme.of(context).textTheme.body1,
-                            // alwaysUse24HourFormat: true,
-                            format: DateFormat("HH:mm:ss"),
-                            onShowPicker: (context, currentValue) async {
-                              final time = await showTimePicker(
-                                context: context,
-                                initialTime: TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
-                              );
+                      child: Card(
+                        elevation: 8,
+                        color: color6,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            //color: Colors.white12,
+                            borderRadius: BorderRadius.circular(9),
+                            //border: Border.all(color: color1, width: 2)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: DateTimeField(
+                              style: Theme.of(context).textTheme.body1,
+                              // alwaysUse24HourFormat: true,
+                              format: DateFormat("HH:mm:ss"),
+                              onShowPicker: (context, currentValue) async {
+                                final time = await showTimePicker(
+                                  context: context,
+                                  initialTime: TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
+                                );
 
-                              return DateTimeField.convert(time);
-                            },
-                            decoration: InputDecoration(labelText: "Select end time",labelStyle: TextStyle(color:color1, fontWeight: FontWeight.bold),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(9.0),
-                                  borderSide: BorderSide(color:color1, width: 2.0)
-                              ),),
-                            onChanged: (value){
-                              setState(() {
-                                this.end_time=value;
-                                businessController.closingTime.value=value;
-                              });
-                            },
+                                return DateTimeField.convert(time);
+                              },
+                              decoration: InputDecoration(labelText: "Select end time",
+                                labelStyle: GoogleFonts.prompt(
+                                  textStyle: TextStyle(
+                                      color: color3,
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                ),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(9.0),
+                                    borderSide: BorderSide(color:color1, width: 2.0)
+                                ),),
+                              onChanged: (value){
+                                setState(() {
+                                  this.end_time=value;
+                                  businessController.closingTime.value=value;
+                                });
+                              },
+                            ),
                           ),
                         ),
                       ),
@@ -249,7 +356,16 @@ class _AddBusinessState extends State<AddBusiness> {
                       margin: EdgeInsets.all(16),
                       height: 100,
                       width: 80,
-                      child: _image == null ? Text('No image selected.', style: TextStyle(color: color1, fontWeight: FontWeight.bold),) : Image.file(_image),
+                      child: _image == null ? Text('No image selected.',
+                        style: GoogleFonts.prompt(
+                          textStyle: TextStyle(
+                              color: color1,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500
+                          ),
+                        ),
+
+                      ) : Image.file(_image),
                     ),
                     MaterialButton(
                       color: color3,
@@ -269,7 +385,15 @@ class _AddBusinessState extends State<AddBusiness> {
                           }
                         });
                       },
-                      child: Text("Select Image",style: TextStyle(color: color1, fontWeight: FontWeight.bold),),
+                      child: Text("Select Image",
+                        style: GoogleFonts.prompt(
+                          textStyle: TextStyle(
+                              color: color4,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -279,19 +403,27 @@ class _AddBusinessState extends State<AddBusiness> {
                   businessController.addBusiness(context);
                 },
                 child: Center(
-                  child: Container(
-                    height: 55,
-                    width: 220,
-                    decoration: BoxDecoration(
-                      color: color3,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Text("SAVE", style: TextStyle(
-                        color: color1,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 22,
-                      ),),
+                  child: Card(
+                    elevation: 8,
+                    color: color3,
+                    child: Container(
+                      height: 55,
+                      width: 220,
+                      decoration: BoxDecoration(
+                        //color: color3,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                        child: Text("SAVE",
+                          style: GoogleFonts.prompt(
+                            textStyle: TextStyle(
+                                color: color4,
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),

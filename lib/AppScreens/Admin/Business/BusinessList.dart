@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:need_resume/need_resume.dart';
 import 'package:review_app/AppScreens/Admin/Business/AddBusiness.dart';
 import 'package:review_app/AppScreens/Admin/Business/DetailsScreen.dart';
@@ -44,24 +45,30 @@ class _BusinessListState extends ResumableState<BusinessList> {
     final _accountController =Get.find<AccountController>();
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         actions: [
           _accountController.getLoggedInUserData().role=="Admin"?
           IconButton(
-            icon: Icon(Icons.add, color: color3,size:25,),
+            icon: Icon(Icons.add, color: color4, size:35,),
             onPressed: (){
               push(context, MaterialPageRoute(builder: (context)=> AddBusiness()));
             },
           ):Container()
         ],
-        title: Text("Business", style: TextStyle(
-            color: color3, fontSize: 22, fontWeight: FontWeight.bold
-        ),
+        title: Text("Business",
+          style: GoogleFonts.prompt(
+            textStyle: TextStyle(
+                color: color4,
+                fontSize: 22,
+                fontWeight: FontWeight.bold
+            ),
+          ),
         ),
         iconTheme: IconThemeData(
-            color: color1
+            color: color4
         ),
         centerTitle: true,
-        backgroundColor: color1,
+        backgroundColor: color3,
       ),
       body: RefreshIndicator(
         key: _refreshIndicatorKey,
@@ -79,163 +86,423 @@ class _BusinessListState extends ResumableState<BusinessList> {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child:Obx((){
-            return ListView.builder(itemCount: businessController.businesses!=null?businessController.businesses.length:0 ,itemBuilder: (context, index){
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: InkWell(
-                  onLongPress: (){
-                    push(context,MaterialPageRoute(builder:(context)=>BusinessQRCode(businessController.businesses[index].id)));
-                  },
-                  onTap: (){
-                    push(context,MaterialPageRoute(builder:(context)=>BusinessCategoryList(businessController.businesses[index].id)));
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: color3, width: 2),
-                      color: BackgroundColor,
-                    ),
-                    height: 130,
-                    width: MediaQuery.of(context).size.width,
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              alignment: Alignment.centerRight,
-                              fit: BoxFit.fitHeight,
-                              image:  MemoryImage(
-                                  base64Decode(businessController.businesses!=null&&businessController.businesses[index].image!=null?businessController.businesses[index].image:'')
-                              ),
-                              // image:  NetworkImage(
-                              //     storeList[index].image!=null?storeList[index].image:"http://www.4motiondarlington.org/wp-content/uploads/2013/06/No-image-found.jpg"
-                              // ),
-                            ),
-                          ),
-                        ),
-                        ClipPath(
-                          clipper: TrapeziumClipper(),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: BackgroundColor,
-                              //border: Border.all(color: yellowColor)
-                            ),
-                            padding: EdgeInsets.all(8.0),
-                            width: 340,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                ConstrainedBox(
-                                  constraints: BoxConstraints(
-                                      maxWidth: 280
-                                  ),
-
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            //border: Border.all(color: Colors.amberAccent, width: 2),
-                            //color: Colors.white38,
-                          ),
-                          height: 170,
-                          width: MediaQuery.of(context).size.width,
-                          child: Padding(
+            return
+              ListView.builder(itemCount:businessController.businesses!=null?businessController.businesses.length:0  ,itemBuilder:(context, index){
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                          onLongPress: (){
+                            push(context,MaterialPageRoute(builder:(context)=>BusinessQRCode(businessController.businesses[index].id)));
+                          },
+                          onTap: (){
+                            push(context,MaterialPageRoute(builder:(context)=>BusinessCategoryList(businessController.businesses[index].id)));
+                          },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 210,
+                      decoration: BoxDecoration(
+                        //border: Border.all(color: color1, width: 2)
+                      ),
+                      child: Stack(
+                        children: [
+                          Padding(
                             padding: const EdgeInsets.all(5.0),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 9),
-                                      child: FaIcon(FontAwesomeIcons.utensils, color: color1, size: 17,),
+                            child:
+                            Card(
+                              elevation: 6,
+                              //color: color3,
+                              child: Container(
+                                  height: MediaQuery.of(context).size.height,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                                        image:  MemoryImage(
+                                                            base64Decode(businessController.businesses!=null&&businessController.businesses[index].image!=null?businessController.businesses[index].image:'')
+                                                        ),
                                     ),
-                                    Text("Business: ", style: TextStyle(color: color3, fontSize: 17, fontWeight: FontWeight.bold),),
-                                    Container(
-                                      width: 140,
-                                      child:
-                                      Text(businessController.businesses!=null?businessController.businesses[index].name:'-',
-                                          //storeList[index].name!=null?storeList[index].name:"",
-                                          maxLines: 1 ,
-                                          style: TextStyle(color: color1, fontSize: 17, fontWeight: FontWeight.bold),
-                                          overflow: TextOverflow.ellipsis),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(height: 5,),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(right: 3),
-                                          child: FaIcon(FontAwesomeIcons.city, color: color1, size: 17,),
+                                    //color: color3,
+                                    //borderRadius: BorderRadius.circular(10)
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              color: Colors.black87,
+                                              borderRadius: BorderRadius.circular(30)
+                                          ),
+                                          width: 60,
+                                          height: 30,
+
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(4.0),
+                                            child: Row(
+                                              children: [
+                                                FaIcon(
+                                                  FontAwesomeIcons.solidStar,
+                                                  color: Colors.amber,
+                                                  size: 20,
+                                                ),
+                                                SizedBox(width: 2,),
+                                                Text("4.5",
+                                                  style: GoogleFonts.prompt(
+                                                    textStyle: TextStyle(
+                                                        color: color4,
+                                                        fontSize: 15,
+                                                        fontWeight: FontWeight.w500
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
-                                        Text("Address: ", style: TextStyle(color: color3, fontSize: 15, fontWeight: FontWeight.bold),),
-                                        Container(
-                                          width: 150,
-                                          child: Text(businessController.businesses!=null&&businessController.businesses[index].address!=null?businessController.businesses[index].address:'-',
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(color: color1,
-                                                fontSize: 15, fontWeight: FontWeight.bold),),
-                                        )
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 5,),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(right: 3),
-                                          child: FaIcon(FontAwesomeIcons.city, color: color1, size: 17,),
-                                        ),
-                                        Text("Business Type: ", style: TextStyle(color: color3, fontSize: 15, fontWeight: FontWeight.bold),),
-                                        Text(businessController.businesses!=null&&businessController.businesses[index].businessType!=null?businessController.businesses[index].businessType.name:'-',
-                                          style: TextStyle(color: color1,
-                                              fontSize: 15, fontWeight: FontWeight.bold),)
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 5,),
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 3),
-                                      child: FaIcon(FontAwesomeIcons.clock, color: color1, size: 17,),
-                                    ),
-                                    Text("Opening: ",style: TextStyle(color: color3,fontWeight: FontWeight.bold),),
-                                    Text(businessController.businesses!=null&&businessController.businesses[index].openingTime!=null?businessController.businesses[index].openingTime:'-',
-                                      style: TextStyle(color: color1,fontWeight: FontWeight.bold),),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 3),
-                                      child: FaIcon(FontAwesomeIcons.clock, color: color1, size: 17,),
-                                    ),
-                                    Text("Closing: ",style: TextStyle(color: color3,fontWeight: FontWeight.bold),),
-                                    Text(businessController.businesses!=null&&businessController.businesses[index].closingTime!=null?businessController.businesses[index].closingTime:'-',
-                                      style: TextStyle(color: color1,fontWeight: FontWeight.bold),),
-                                  ],
-                                )
-                              ],
+                                      ),
+                                    ],
+                                  )
+                              ),
                             ),
                           ),
-                        )
-                      ],
+                          Positioned(
+                            top: 23,
+                            left: 110,
+                            child: Card(
+                              elevation: 10,
+                              color: color4,
+                              child: Container(
+                                height: 160,
+                                width: 280,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  //border: Border.all(color: color3, width: 1)
+                                ),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      width: 280,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: Row(
+                                          children: [
+                                            FaIcon(FontAwesomeIcons.utensils, color: color1, size: 20,),
+                                            SizedBox(width: 3,),
+                                            Text("Business: ",
+                                              style: GoogleFonts.prompt(
+                                                textStyle: TextStyle(
+                                                    color: color3,
+                                                    fontSize: 17,
+                                                    fontWeight: FontWeight.bold
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(width: 2,),
+                                                                    Container(
+                                                                      width: 140,
+                                                                      child:
+                                                                      Text(businessController.businesses!=null?businessController.businesses[index].name:'-',
+                                                                          //storeList[index].name!=null?storeList[index].name:"",
+                                                                          maxLines: 1 ,
+                                                                          style: GoogleFonts.prompt(
+                                                                            textStyle: TextStyle(
+                                                                                color: color1,
+                                                                                fontSize: 17,
+                                                                                fontWeight: FontWeight.w500
+                                                                            ),
+                                                                          ),
+                                                                          overflow: TextOverflow.ellipsis),
+                                                                    )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Row(
+                                        children: [
+                                          FaIcon(FontAwesomeIcons.mapMarkedAlt, color: color1, size: 20,),
+                                          SizedBox(width: 3,),
+                                          Text("Address: ",
+                                            style: GoogleFonts.prompt(
+                                              textStyle: TextStyle(
+                                                  color: color3,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(width: 2,),
+                                                                      Container(
+                                                                        width: 150,
+                                                                        child: Text(businessController.businesses!=null&&businessController.businesses[index].address!=null?businessController.businesses[index].address:'-',
+                                                                          overflow: TextOverflow.ellipsis,
+                                                                          style: GoogleFonts.prompt(
+                                                                            textStyle: TextStyle(
+                                                                                color: color1,
+                                                                                fontSize: 15,
+                                                                                fontWeight: FontWeight.w500
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      )
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Row(
+                                        children: [
+                                          FaIcon(FontAwesomeIcons.building, color: color1, size: 20,),
+                                          SizedBox(width: 3,),
+                                          Text("Business Type: ",
+                                            style: GoogleFonts.prompt(
+                                              textStyle: TextStyle(
+                                                  color: color3,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(width: 2,),
+                                      Text(businessController.businesses!=null&&businessController.businesses[index].businessType!=null?businessController.businesses[index].businessType.name:'-',
+                                        style: GoogleFonts.prompt(
+                                          textStyle: TextStyle(
+                                              color: color1,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w500
+                                          ),
+                                        ),
+                                      )
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Row(
+                                        children: [
+                                          FaIcon(FontAwesomeIcons.clock, color: color1, size: 20,),
+                                          SizedBox(width: 3,),
+                                          Text("Opening: ",
+                                            style: GoogleFonts.prompt(
+                                              textStyle: TextStyle(
+                                                  color: color3,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(width: 3,),
+                                          Text(businessController.businesses!=null&&businessController.businesses[index].openingTime!=null?businessController.businesses[index].openingTime:'-',
+                                            style: GoogleFonts.prompt(
+                                              textStyle: TextStyle(
+                                                  color: color1,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Row(
+                                        children: [
+                                          FaIcon(FontAwesomeIcons.clock, color: color1, size: 20,),
+                                          SizedBox(width: 3,),
+                                          Text("Closing: ",
+                                            style: GoogleFonts.prompt(
+                                              textStyle: TextStyle(
+                                                  color: color3,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(width: 3,),
+                                          Text(businessController.businesses!=null&&businessController.businesses[index].closingTime!=null?businessController.businesses[index].closingTime:'-',
+                                            style: GoogleFonts.prompt(
+                                              textStyle: TextStyle(
+                                                  color: color1,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              );
-            });
+                );
+              });
+
+            //   ListView.builder(itemCount: businessController.businesses!=null?businessController.businesses.length:0 ,itemBuilder: (context, index){
+            //   return Padding(
+            //     padding: const EdgeInsets.all(8.0),
+            //     child: InkWell(
+            //       onLongPress: (){
+            //         push(context,MaterialPageRoute(builder:(context)=>BusinessQRCode(businessController.businesses[index].id)));
+            //       },
+            //       onTap: (){
+            //         push(context,MaterialPageRoute(builder:(context)=>BusinessCategoryList(businessController.businesses[index].id)));
+            //       },
+            //       child: Container(
+            //         decoration: BoxDecoration(
+            //           border: Border.all(color: color3, width: 2),
+            //           color: BackgroundColor,
+            //         ),
+            //         height: 130,
+            //         width: MediaQuery.of(context).size.width,
+            //         child: Stack(
+            //           children: [
+            //             Container(
+            //               decoration: BoxDecoration(
+            //                 image: DecorationImage(
+            //                   alignment: Alignment.centerRight,
+            //                   fit: BoxFit.fitHeight,
+            //                   image:  MemoryImage(
+            //                       base64Decode(businessController.businesses!=null&&businessController.businesses[index].image!=null?businessController.businesses[index].image:'')
+            //                   ),
+            //                   // image:  NetworkImage(
+            //                   //     storeList[index].image!=null?storeList[index].image:"http://www.4motiondarlington.org/wp-content/uploads/2013/06/No-image-found.jpg"
+            //                   // ),
+            //                 ),
+            //               ),
+            //             ),
+            //             ClipPath(
+            //               clipper: TrapeziumClipper(),
+            //               child: Container(
+            //                 decoration: BoxDecoration(
+            //                   color: BackgroundColor,
+            //                   //border: Border.all(color: yellowColor)
+            //                 ),
+            //                 padding: EdgeInsets.all(8.0),
+            //                 width: 340,
+            //                 child: Column(
+            //                   crossAxisAlignment: CrossAxisAlignment.start,
+            //                   children: <Widget>[
+            //                     ConstrainedBox(
+            //                       constraints: BoxConstraints(
+            //                           maxWidth: 280
+            //                       ),
+            //
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ),
+            //             ),
+            //             Container(
+            //               decoration: BoxDecoration(
+            //                 //border: Border.all(color: Colors.amberAccent, width: 2),
+            //                 //color: Colors.white38,
+            //               ),
+            //               height: 170,
+            //               width: MediaQuery.of(context).size.width,
+            //               child: Padding(
+            //                 padding: const EdgeInsets.all(5.0),
+            //                 child: Column(
+            //                   children: [
+            //                     Row(
+            //                       children: [
+            //                         Padding(
+            //                           padding: const EdgeInsets.only(right: 9),
+            //                           child: FaIcon(FontAwesomeIcons.utensils, color: color1, size: 17,),
+            //                         ),
+            //                         Text("Business: ", style: TextStyle(color: color3, fontSize: 17, fontWeight: FontWeight.bold),),
+            //                         Container(
+            //                           width: 140,
+            //                           child:
+            //                           Text(businessController.businesses!=null?businessController.businesses[index].name:'-',
+            //                               //storeList[index].name!=null?storeList[index].name:"",
+            //                               maxLines: 1 ,
+            //                               style: TextStyle(color: color1, fontSize: 17, fontWeight: FontWeight.bold),
+            //                               overflow: TextOverflow.ellipsis),
+            //                         )
+            //                       ],
+            //                     ),
+            //                     SizedBox(height: 5,),
+            //                     Row(
+            //                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //                       children: [
+            //                         Row(
+            //                           children: [
+            //                             Padding(
+            //                               padding: const EdgeInsets.only(right: 3),
+            //                               child: FaIcon(FontAwesomeIcons.city, color: color1, size: 17,),
+            //                             ),
+            //                             Text("Address: ", style: TextStyle(color: color3, fontSize: 15, fontWeight: FontWeight.bold),),
+            //                             Container(
+            //                               width: 150,
+            //                               child: Text(businessController.businesses!=null&&businessController.businesses[index].address!=null?businessController.businesses[index].address:'-',
+            //                                 overflow: TextOverflow.ellipsis,
+            //                                 style: TextStyle(color: color1,
+            //                                     fontSize: 15, fontWeight: FontWeight.bold),),
+            //                             )
+            //                           ],
+            //                         ),
+            //                       ],
+            //                     ),
+            //                     SizedBox(height: 5,),
+            //                     Row(
+            //                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //                       children: [
+            //                         Row(
+            //                           children: [
+            //                             Padding(
+            //                               padding: const EdgeInsets.only(right: 3),
+            //                               child: FaIcon(FontAwesomeIcons.city, color: color1, size: 17,),
+            //                             ),
+            //                             Text("Business Type: ", style: TextStyle(color: color3, fontSize: 15, fontWeight: FontWeight.bold),),
+            //                             Text(businessController.businesses!=null&&businessController.businesses[index].businessType!=null?businessController.businesses[index].businessType.name:'-',
+            //                               style: TextStyle(color: color1,
+            //                                   fontSize: 15, fontWeight: FontWeight.bold),)
+            //                           ],
+            //                         ),
+            //                       ],
+            //                     ),
+            //                     SizedBox(height: 5,),
+            //                     Row(
+            //                       children: [
+            //                         Padding(
+            //                           padding: const EdgeInsets.only(right: 3),
+            //                           child: FaIcon(FontAwesomeIcons.clock, color: color1, size: 17,),
+            //                         ),
+            //                         Text("Opening: ",style: TextStyle(color: color3,fontWeight: FontWeight.bold),),
+            //                         Text(businessController.businesses!=null&&businessController.businesses[index].openingTime!=null?businessController.businesses[index].openingTime:'-',
+            //                           style: TextStyle(color: color1,fontWeight: FontWeight.bold),),
+            //                       ],
+            //                     ),
+            //                     Row(
+            //                       children: [
+            //                         Padding(
+            //                           padding: const EdgeInsets.only(right: 3),
+            //                           child: FaIcon(FontAwesomeIcons.clock, color: color1, size: 17,),
+            //                         ),
+            //                         Text("Closing: ",style: TextStyle(color: color3,fontWeight: FontWeight.bold),),
+            //                         Text(businessController.businesses!=null&&businessController.businesses[index].closingTime!=null?businessController.businesses[index].closingTime:'-',
+            //                           style: TextStyle(color: color1,fontWeight: FontWeight.bold),),
+            //                       ],
+            //                     )
+            //                   ],
+            //                 ),
+            //               ),
+            //             )
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   );
+            // });
           })
         ),
       ),

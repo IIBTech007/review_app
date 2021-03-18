@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:review_app/Controllers/FeedbackController.dart';
 import 'package:review_app/Models/CustomerFeedBack.dart';
 import 'package:review_app/components/colorConstants.dart';
@@ -22,9 +23,14 @@ class _FeedbackDetailsState extends State<FeedbackDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Feedback Details", style: TextStyle(
-            color: color4, fontSize: 22, fontWeight: FontWeight.bold
-        ),
+        title: Text("Feedback Details",
+          style: GoogleFonts.prompt(
+            textStyle: TextStyle(
+                color: color4,
+                fontSize: 22,
+                fontWeight: FontWeight.bold
+            ),
+          ),
         ),
         iconTheme: IconThemeData(
             color: color4
@@ -39,49 +45,57 @@ class _FeedbackDetailsState extends State<FeedbackDetails> {
         child: ListView.builder(itemCount:widget.customerFeedbacks.length, itemBuilder: (context, index){
           return Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              //height: 70,
-              decoration: BoxDecoration(
-                //color: color1,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: color3, width: 2)
-              ),
-              child: ListTile(
-                title: Text(widget.customerFeedbacks[index].questions.questionText,
-                  style: TextStyle(
-                      color: color1,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20
-                  ),
+            child: Card(
+              elevation: 6,
+              color: color4,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                //height: 70,
+                decoration: BoxDecoration(
+                  //color: color1,
+                    borderRadius: BorderRadius.circular(10),
+                    //border: Border.all(color: color1, width: 2)
                 ),
-                subtitle: Text((){
-                  if(widget.customerFeedbacks[index].questions.questionType==1){
-                    return widget.customerFeedbacks[index].rating.toString()+" Stars Rating";
-                  }else if(widget.customerFeedbacks[index].questions.questionType==2){
-                    if(widget.customerFeedbacks[index].rating==5.0){
-                      return "Yes";
+                child: ListTile(
+                  title: Text(widget.customerFeedbacks[index].questions.questionText,
+                    style: GoogleFonts.prompt(
+                      textStyle: TextStyle(
+                          color: color3,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                  subtitle: Text((){
+                    if(widget.customerFeedbacks[index].questions.questionType==1){
+                      return widget.customerFeedbacks[index].rating.toString()+" Stars Rating";
+                    }else if(widget.customerFeedbacks[index].questions.questionType==2){
+                      if(widget.customerFeedbacks[index].rating==5.0){
+                        return "Yes";
+                      }else
+                        return "No";
+                    }else if(widget.customerFeedbacks[index].questions.questionType==3&&widget.customerFeedbacks[index].selectedOptions.length>0){
+                      List<String> selectedOptions=[];
+                      for(int i=0;i<widget.customerFeedbacks[index].selectedOptions.length;i++){
+                        selectedOptions.add(widget.customerFeedbacks[index].selectedOptions[i].questionOptions.questionOptionText);
+                      }
+                      return selectedOptions.toString().replaceAll("[","").replaceAll("]", "");
                     }else
-                      return "No";
-                  }else if(widget.customerFeedbacks[index].questions.questionType==3&&widget.customerFeedbacks[index].selectedOptions.length>0){
-                    List<String> selectedOptions=[];
-                    for(int i=0;i<widget.customerFeedbacks[index].selectedOptions.length;i++){
-                      selectedOptions.add(widget.customerFeedbacks[index].selectedOptions[i].questionOptions.questionOptionText);
-                    }
-                    return selectedOptions.toString().replaceAll("[","").replaceAll("]", "");
-                  }else
-                    return widget.customerFeedbacks[index].rating.toString();
-                }(),
-                  style: TextStyle(
-                      color: color3,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 17
+                      return widget.customerFeedbacks[index].rating.toString();
+                  }(),
+                    style: GoogleFonts.prompt(
+                      textStyle: TextStyle(
+                          color: color1,
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
                   ),
-                ),
-                leading: FaIcon(
-                  FontAwesomeIcons.comment,
-                  color: color3,
-                  size: 35,
+                  leading: FaIcon(
+                    FontAwesomeIcons.comment,
+                    color: color3,
+                    size: 35,
+                  ),
                 ),
               ),
             ),

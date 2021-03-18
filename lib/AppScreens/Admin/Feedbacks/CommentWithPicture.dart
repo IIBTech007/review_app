@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:review_app/Controllers/FeedbackController.dart';
 import 'package:review_app/Models/feedback.dart';
 import 'package:review_app/components/colorConstants.dart';
@@ -27,9 +28,14 @@ class _CommentWithPictureState extends State<CommentWithPicture> {
     final _feedbackController=Get.find<FeedbackController>();
     return Scaffold(
       appBar: AppBar(
-        title: Text("Comment & Picture", style: TextStyle(
-            color: color4, fontSize: 22, fontWeight: FontWeight.bold
-        ),
+        title: Text("Comment & Picture",
+          style: GoogleFonts.prompt(
+            textStyle: TextStyle(
+                color: color4,
+                fontSize: 22,
+                fontWeight: FontWeight.bold
+            ),
+          ),
         ),
         iconTheme: IconThemeData(
             color: color4
@@ -84,7 +90,12 @@ class _CommentWithPictureState extends State<CommentWithPicture> {
                               padding: const EdgeInsets.all(8.0),
                               child: TextFormField(
                                 controller: _feedbackController.comment,
-                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                style: GoogleFonts.prompt(
+                                  textStyle: TextStyle(
+                                      color: color1,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                ),
                                 obscureText: false,maxLines: 5,
                                 // validator: (String value) =>
                                 // value.isEmpty ? "This field is Required" : null,
@@ -97,7 +108,12 @@ class _CommentWithPictureState extends State<CommentWithPicture> {
                                       borderSide: BorderSide(color: color6, width: 1.0)
                                   ),
                                   labelText: 'Comment',
-                                  labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                  labelStyle: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color3,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                  ),
                                   //suffixIcon: Icon(Icons.email,color: Colors.amberAccent,size: 27,),
                                 ),
                                 textInputAction: TextInputAction.next,
@@ -114,7 +130,14 @@ class _CommentWithPictureState extends State<CommentWithPicture> {
                                 margin: EdgeInsets.all(16),
                                 height: 100,
                                 width: 80,
-                                child: _image == null ? Text('No image selected.', style: TextStyle(color: color1, fontWeight: FontWeight.bold),) : Image.file(_image),
+                                child: _image == null ? Text('No image selected.',
+                                  style: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color1,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                  ),
+                                ) : Image.file(_image),
                               ),
                               MaterialButton(
                                 color: color3,
@@ -134,7 +157,14 @@ class _CommentWithPictureState extends State<CommentWithPicture> {
                                     }
                                   });
                                 },
-                                child: Text("Select Image",style: TextStyle(color: color1, fontWeight: FontWeight.bold),),
+                                child: Text("Select Image",
+                                  style: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color4,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                  ),
+                                ),
                               ),
                             ],
                           ),
@@ -153,7 +183,7 @@ class _CommentWithPictureState extends State<CommentWithPicture> {
                   child: Center(
                     child: Card(
                       elevation: 8,
-                      color: color1,
+                      color: color3,
                       child: Container(
                         height: 55,
                         width: 250,
@@ -168,12 +198,15 @@ class _CommentWithPictureState extends State<CommentWithPicture> {
                           //border: Border.all(color: Color(0xfbb55400), width: 3)
                         ),
                         child: Center(
-                          child: Text("SAVE", style: TextStyle(
-                            color: color4,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22,
-                            //foreground: Paint()..shader = linearGradient
-                          ),),
+                          child: Text("SAVE",
+                            style: GoogleFonts.prompt(
+                              textStyle: TextStyle(
+                                  color: color4,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),

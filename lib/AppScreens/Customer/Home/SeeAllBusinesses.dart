@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:review_app/AppScreens/Admin/Business/DetailsScreen.dart';
 import 'package:review_app/Controllers/BusinessController.dart';
 import 'package:review_app/Utils/Locator.dart';
@@ -32,9 +33,15 @@ class _ClientSeeAllBusinessesState extends State<ClientSeeAllBusinesses> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Businesses", style: TextStyle(
-            color: color4, fontSize: 22, fontWeight: FontWeight.bold
-        ),
+        automaticallyImplyLeading: false,
+        title: Text("Restaurants",
+          style: GoogleFonts.prompt(
+            textStyle: TextStyle(
+                color: color4,
+                fontSize: 22,
+                fontWeight: FontWeight.bold
+            ),
+          ),
         ),
         iconTheme: IconThemeData(
             color: color4
@@ -92,7 +99,7 @@ class _ClientSeeAllBusinessesState extends State<ClientSeeAllBusinesses> {
                     color: color4,
                     child: Container(
                       width: 300,
-                      height: 210,
+                      height: 230,
                       decoration: BoxDecoration(
                         //color: color4,
                         borderRadius: BorderRadius.circular(10),
@@ -116,7 +123,7 @@ class _ClientSeeAllBusinessesState extends State<ClientSeeAllBusinesses> {
                                   right:10,
                                   child: Container(
                                     decoration: BoxDecoration(
-                                        color: Colors.black45,
+                                        color: Colors.black87,
                                         borderRadius: BorderRadius.circular(30)
                                     ),
                                     width: 60,
@@ -133,10 +140,12 @@ class _ClientSeeAllBusinessesState extends State<ClientSeeAllBusinesses> {
                                           ),
                                           SizedBox(width: 2,),
                                           Text(businessController.businesses[index].overallRating.toStringAsFixed(1),
-                                            style: TextStyle(
-                                                color: color4,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 15
+                                            style: GoogleFonts.prompt(
+                                              textStyle: TextStyle(
+                                                  color: color4,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -151,13 +160,15 @@ class _ClientSeeAllBusinessesState extends State<ClientSeeAllBusinesses> {
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               children: [
-                                FaIcon(FontAwesomeIcons.building, color: color3, size: 25,),
+                                FaIcon(FontAwesomeIcons.building, color: color3, size: 30,),
                                 SizedBox(width: 5,),
                                 Text(businessController.businesses[index].name,
-                                  style: TextStyle(
-                                      color: color3,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20
+                                  style: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color3,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold
+                                    ),
                                   ),
                                 )
                               ],
@@ -166,14 +177,18 @@ class _ClientSeeAllBusinessesState extends State<ClientSeeAllBusinesses> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
+                              // crossAxisAlignment: CrossAxisAlignment.end,
+                              // mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                FaIcon(FontAwesomeIcons.mapMarkedAlt, color: color3, size: 25,),
+                                FaIcon(FontAwesomeIcons.mapMarkerAlt, color: color3, size: 30,),
                                 SizedBox(width: 5,),
                                 Text(businessController.businesses[index].address!=null?businessController.businesses[index].address:"-",
-                                  style: TextStyle(
-                                      color: color1,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15
+                                  style: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color1,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold
+                                    ),
                                   ),
                                 )
                               ],

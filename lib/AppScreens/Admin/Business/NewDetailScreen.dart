@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:review_app/Models/BusinessViewModel.dart';
 import 'package:review_app/components/colorConstants.dart';
 
@@ -43,16 +44,23 @@ class BusinessProfileScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(top: 50),
+                              padding: const EdgeInsets.only(top: 40),
                               child: Row(
                                 //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  IconButton(
-                                    icon: Icon(Icons.arrow_back, color: color3,size:45),
-                                    onPressed: (){
-                                      Navigator.pop(context);
-                                    },
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: color1),
+                                    child:   Center(
+                                      child: IconButton(
+                                        icon: Icon(Icons.arrow_back, color: color3,size:35),
+                                        onPressed: (){
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -88,11 +96,13 @@ class BusinessProfileScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Center(
-                  child: Text(business.name!=null?business.name:"",
-                    style: TextStyle(
+                  child:  Text(business.name!=null?business.name:"",
+                    style: GoogleFonts.prompt(
+                      textStyle: TextStyle(
                         color: color3,
+                        fontSize: 35,
                         fontWeight: FontWeight.bold,
-                        fontSize: 30
+                      ),
                     ),
                   ),
                 ),
@@ -116,10 +126,12 @@ class BusinessProfileScreen extends StatelessWidget {
                           FaIcon(FontAwesomeIcons.mobileAlt, color: color3, ),
                           SizedBox(width: 5,),
                           Text("Contact# ",
-                            style: TextStyle(
-                                color: color4,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold
+                            style: GoogleFonts.prompt(
+                              textStyle: TextStyle(
+                                      color: color4,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold
+                              ),
                             ),
                           ),
                         ],
@@ -141,11 +153,14 @@ class BusinessProfileScreen extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Center(
-                                child: Text(business.phone!=null?business.phone:'',
-                                  style: TextStyle(
-                                      color: color4,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold
+                                child:
+                                Text(business.phone!=null?business.phone:'',
+                                  style: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color4,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold
+                                    ),
                                   ),
                                 ),
                               ),
@@ -169,10 +184,12 @@ class BusinessProfileScreen extends StatelessWidget {
                           FaIcon(FontAwesomeIcons.mapMarkedAlt, color: color3, ),
                           SizedBox(width: 5,),
                           Text("Address ",
-                            style: TextStyle(
-                                color: color4,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold
+                            style: GoogleFonts.prompt(
+                              textStyle: TextStyle(
+                                  color: color4,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold
+                              ),
                             ),
                           ),
                         ],
@@ -198,10 +215,12 @@ class BusinessProfileScreen extends StatelessWidget {
                                   width: 220,
                                   child: Text(business.address!=null?business.address:'',
                                     overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: color4,
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.bold
+                                    style: GoogleFonts.prompt(
+                                      textStyle: TextStyle(
+                                          color: color4,
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -226,10 +245,12 @@ class BusinessProfileScreen extends StatelessWidget {
                           FaIcon(FontAwesomeIcons.clock, color: color3, ),
                           SizedBox(width: 5,),
                           Text("Timings ",
-                            style: TextStyle(
-                                color: color4,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold
+                            style: GoogleFonts.prompt(
+                              textStyle: TextStyle(
+                                  color: color4,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold
+                              ),
                             ),
                           ),
                         ],
@@ -260,18 +281,22 @@ class BusinessProfileScreen extends StatelessWidget {
                                           children: [
                                             Text("Open: ",
                                               overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                  color: color1,
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.bold
+                                              style: GoogleFonts.prompt(
+                                                textStyle: TextStyle(
+                                                    color: color1,
+                                                    fontSize: 17,
+                                                    fontWeight: FontWeight.bold
+                                                ),
                                               ),
                                             ),
                                             Text(business.openingTime!=null?business.openingTime.toString().substring(0,5):'',
                                               overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                  color: color4,
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.bold
+                                              style: GoogleFonts.prompt(
+                                                textStyle: TextStyle(
+                                                    color: color4,
+                                                    fontSize: 17,
+                                                    fontWeight: FontWeight.bold
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -280,18 +305,22 @@ class BusinessProfileScreen extends StatelessWidget {
                                           children: [
                                             Text("Close: ",
                                               overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                  color: color1,
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.bold
+                                              style: GoogleFonts.prompt(
+                                                textStyle: TextStyle(
+                                                    color: color1,
+                                                    fontSize: 17,
+                                                    fontWeight: FontWeight.bold
+                                                ),
                                               ),
                                             ),
                                             Text(business.closingTime!=null?business.closingTime.toString().substring(0,5):'',
                                               overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                  color: color4,
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.bold
+                                              style: GoogleFonts.prompt(
+                                                textStyle: TextStyle(
+                                                    color: color4,
+                                                    fontSize: 17,
+                                                    fontWeight: FontWeight.bold
+                                                ),
                                               ),
                                             ),
                                           ],

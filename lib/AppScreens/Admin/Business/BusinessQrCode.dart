@@ -1,11 +1,13 @@
 import 'dart:typed_data';
 import 'dart:ui';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:review_app/components/colorConstants.dart';
 
 class BusinessQRCode extends StatelessWidget {
   int businessId;
@@ -16,14 +18,26 @@ class BusinessQRCode extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Qrcode"),
+        title: Text("Scan QRCode",
+          style: GoogleFonts.prompt(
+            textStyle: TextStyle(
+                color: color4,
+                fontSize: 22,
+                fontWeight: FontWeight.bold
+            ),
+          ),
+        ),
+        iconTheme: IconThemeData(
+            color: color4
+        ),
         centerTitle: true,
+        backgroundColor: color3,
         actions: [
           Row(
             children: [
               IconButton(
                 padding: EdgeInsets.all(16),
-                icon: Icon(Icons.print),
+                icon: Icon(Icons.print, color: color4,),
                 onPressed: ()async{
                   final doc = pw.Document();
                   RenderRepaintBoundary boundary = globalKey.currentContext.findRenderObject();

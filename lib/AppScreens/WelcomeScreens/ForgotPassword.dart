@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:review_app/Controllers/AccountController.dart';
 import 'package:review_app/components/colorConstants.dart';
 
@@ -54,14 +55,15 @@ import 'package:review_app/components/colorConstants.dart';
                ),
              ),
              Center(
-               child: Text(
-                 "TASTE CLICKS",
-                 style: TextStyle(
-                     fontWeight: FontWeight.bold,
-                     fontSize: 40,
-                     color: color1
+               child: Container(
+                 width: 400,
+                 height: 130,
+                 decoration: BoxDecoration(
+                     image: DecorationImage(
+                         image: AssetImage('assets/tasteclicks.png')
+                     )
                  ),
-               ),
+               )
              ),
              SizedBox(height: 40,),
              Center(
@@ -69,7 +71,7 @@ import 'package:review_app/components/colorConstants.dart';
                  padding: const EdgeInsets.all(12.0),
                  child: Container(
                    width: 400,
-                   height: 320,
+                   height: 310,
                    decoration: BoxDecoration(
                      color: color4,
                      borderRadius: BorderRadius.circular(10),
@@ -80,12 +82,13 @@ import 'package:review_app/components/colorConstants.dart';
                          child: Padding(
                            padding: const EdgeInsets.all(8.0),
                            child: Text(
-                             'FORGOT PASSWORD',
-                             style: new TextStyle(
-                               fontSize: 20.0,
-                               color: color3,
-                               fontWeight: FontWeight.bold,
-                               //foreground: Paint()..shader = linearGradient2
+                             'Forgot Your Password?',
+                             style: GoogleFonts.prompt(
+                               textStyle: TextStyle(
+                                   color: color1,
+                                   fontSize: 20,
+                                   fontWeight: FontWeight.bold
+                               ),
                              ),
                            ),
                          ),
@@ -100,7 +103,12 @@ import 'package:review_app/components/colorConstants.dart';
                            child: Container(
                              child: TextFormField(
                                controller: _accountController.emailTextEditingController,
-                               style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                               style:  GoogleFonts.prompt(
+                                 textStyle: TextStyle(
+                                     color: color1,
+                                     fontWeight: FontWeight.w500
+                                 ),
+                               ),
                                obscureText: false,
                                decoration: InputDecoration(
                                  focusedBorder: OutlineInputBorder(
@@ -110,7 +118,12 @@ import 'package:review_app/components/colorConstants.dart';
                                      borderSide: BorderSide(color: color6, width: 1.0)
                                  ),
                                  labelText: "Email",
-                                 labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                 labelStyle: GoogleFonts.prompt(
+                                   textStyle: TextStyle(
+                                       color: color3,
+                                       fontWeight: FontWeight.w500
+                                   ),
+                                 ),
                                  suffixIcon: Icon(Icons.email,color: color3,size: 27,),
                                ),
                                textInputAction: TextInputAction.next,
@@ -126,7 +139,12 @@ import 'package:review_app/components/colorConstants.dart';
                            child: Container(
                              child: TextFormField(
                                controller: _accountController.passwordTextEditingController,
-                               style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                               style:  GoogleFonts.prompt(
+                                 textStyle: TextStyle(
+                                     color: color1,
+                                     fontWeight: FontWeight.w500
+                                 ),
+                               ),
                                obscureText: isVisible,
                                keyboardType: TextInputType.visiblePassword,
                                decoration: InputDecoration(
@@ -138,7 +156,12 @@ import 'package:review_app/components/colorConstants.dart';
                                  ),
 
                                  labelText: "New Password",
-                                 labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                 labelStyle: GoogleFonts.prompt(
+                                   textStyle: TextStyle(
+                                       color: color3,
+                                       fontWeight: FontWeight.w500
+                                   ),
+                                 ),
                                  suffixIcon: IconButton(icon: Icon(isVisible?Icons.visibility:Icons.visibility_off,color: color3,size: 27),onPressed: () {
 
                                  },),//Icon(Icons.https,color: yellowColor,size: 27,)
@@ -155,7 +178,12 @@ import 'package:review_app/components/colorConstants.dart';
                            child: Container(
                              child: TextFormField(
                                controller: _accountController.confirmPasswordTextEditingController,
-                               style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                               style:  GoogleFonts.prompt(
+                                 textStyle: TextStyle(
+                                     color: color1,
+                                     fontWeight: FontWeight.w500
+                                 ),
+                               ),
                                obscureText: isVisible,
                                keyboardType: TextInputType.visiblePassword,
                                decoration: InputDecoration(
@@ -166,7 +194,12 @@ import 'package:review_app/components/colorConstants.dart';
                                      borderSide: BorderSide(color: color6, width: 1.0)
                                  ),
                                  labelText: "Confirm Password",
-                                 labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                 labelStyle: GoogleFonts.prompt(
+                                   textStyle: TextStyle(
+                                       color: color3,
+                                       fontWeight: FontWeight.w500
+                                   ),
+                                 ),
                                  suffixIcon: IconButton(icon: Icon(isVisible2?Icons.visibility:Icons.visibility_off,color: color3,size: 27),onPressed: () {
 
                                  },),//Icon(Icons.https,color: yellowColor,size: 27,)
@@ -198,11 +231,15 @@ import 'package:review_app/components/colorConstants.dart';
                          borderRadius: BorderRadius.circular(15),
                        ),
                        child: Center(
-                         child: Text("Submit", style: TextStyle(
-                           color: color4,
-                           fontWeight: FontWeight.bold,
-                           fontSize: 22,
-                         ),),
+                         child: Text("Submit",
+                           style: GoogleFonts.prompt(
+                             textStyle: TextStyle(
+                                 color: color4,
+                                 fontSize: 22,
+                                 fontWeight: FontWeight.bold
+                             ),
+                           ),
+                         ),
                        ),
                      ),
                    ),

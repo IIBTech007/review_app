@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:review_app/AppScreens/Admin/Feedbacks/FeedbackDetails.dart';
 import 'package:review_app/Controllers/FeedbackController.dart';
 import 'package:review_app/Utils/Utils.dart';
@@ -30,9 +31,14 @@ class _IndividualFeedbacksState extends State<IndividualFeedbacks> {
     final _feedbackcontroller=Get.put(FeedbackController());
     return Scaffold(
       appBar: AppBar(
-        title: Text("Individual Feedback", style: TextStyle(
-            color: color4, fontSize: 22, fontWeight: FontWeight.bold
-        ),
+        title: Text("Individual Feedback",
+          style: GoogleFonts.prompt(
+            textStyle: TextStyle(
+                color: color4,
+                fontSize: 22,
+                fontWeight: FontWeight.bold
+            ),
+          ),
         ),
         iconTheme: IconThemeData(
             color: color4
@@ -71,138 +77,168 @@ class _IndividualFeedbacksState extends State<IndividualFeedbacks> {
                       Utils.showError(context,"No Details Available");
                     }
                   },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 145,
-                    decoration: BoxDecoration(
-                      //color: color1,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: color3, width: 2)
-                    ),
-                    child: ListTile(
-                      title: Text(_feedbackcontroller.feedbacks[index].customerName,
-                        style: TextStyle(
-                            color: color1,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20
+                  child: Card(
+                    elevation: 6,
+                    color: color4,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 175,
+                      decoration: BoxDecoration(
+                        //color: color1,
+                          borderRadius: BorderRadius.circular(10),
+                          //border: Border.all(color: color3, width: 2)
+                      ),
+                      child: ListTile(
+                        title: Text(_feedbackcontroller.feedbacks[index].customerName,
+                          style: GoogleFonts.prompt(
+                            textStyle: TextStyle(
+                                color: color1,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold
+                            ),
+                          ),
                         ),
-                      ),
-                      subtitle: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Text("Restaurant: ",
-                                style: TextStyle(
-                                    color: color3,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15
+                        subtitle: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Text("Restaurant: ",
+                                  style: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color3,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              Text(_feedbackcontroller.feedbacks[index].customerName,
-                                style: TextStyle(
-                                    color: color1,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15
+                                Text(_feedbackcontroller.feedbacks[index].customerName,
+                                  style: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color1,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text("Overall Rating: ",
-                                style: TextStyle(
-                                    color: color3,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text("Overall Rating: ",
+                                  style: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color3,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              Text(_feedbackcontroller.feedbacks[index].overallRating.toStringAsFixed(1),
-                                style: TextStyle(
-                                    color: color1,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15
+                                Text(_feedbackcontroller.feedbacks[index].overallRating.toStringAsFixed(1),
+                                  style: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color1,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text("City: ",
-                                style: TextStyle(
-                                    color: color3,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text("City: ",
+                                  style: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color3,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              Text("-",
-                                style: TextStyle(
-                                    color: color1,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15
+                                Text("-",
+                                  style: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color1,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text("Country: ",
-                                style: TextStyle(
-                                    color: color3,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text("Country: ",
+                                  style: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color3,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              Text("-",
-                                style: TextStyle(
-                                    color: color1,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15
+                                Text("-",
+                                  style: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color1,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text("Email: ",
-                                style: TextStyle(
-                                    color: color3,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text("Email: ",
+                                  style: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color3,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              Text(_feedbackcontroller.feedbacks[index].email,
-                                style: TextStyle(
-                                    color: color1,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15
+                                Text(_feedbackcontroller.feedbacks[index].email,
+                                  style: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color1,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text("Phone: ",
-                                style: TextStyle(
-                                    color: color3,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text("Phone: ",
+                                  style: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color3,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              Text(_feedbackcontroller.feedbacks[index].phone,
-                                style: TextStyle(
-                                    color: color1,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15
+                                Text(_feedbackcontroller.feedbacks[index].phone,
+                                  style: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color1,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      leading: FaIcon(
-                        FontAwesomeIcons.comments,
-                        color: color3,
-                        size: 35,
+                              ],
+                            ),
+                          ],
+                        ),
+                        leading: FaIcon(
+                          FontAwesomeIcons.comments,
+                          color: color3,
+                          size: 35,
+                        ),
                       ),
                     ),
                   ),
