@@ -2,10 +2,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:review_app/AppScreens/Customer/Home/SeeAllBusinesses.dart';
 import 'package:review_app/Utils/Locator.dart';
-import 'file:///C:/Users/IIB/AndroidStudioProjects/review_app/lib/AppScreens/WelcomeScreens/LoginScreen.dart';
-import 'file:///C:/Users/IIB/AndroidStudioProjects/review_app/lib/AppScreens/WelcomeScreens/RegisterScreen.dart';
+import 'package:review_app/AppScreens/WelcomeScreens/LoginScreen.dart';
+import 'package:review_app/AppScreens/WelcomeScreens/RegisterScreen.dart';
+
 import 'package:review_app/components/colorConstants.dart';
 
 class NewSplashScreen extends StatefulWidget {
@@ -46,16 +48,18 @@ class _NewSplashScreenState extends State<NewSplashScreen> {
                 ),
               ),
               Center(
-                child: Text(
-                  "TASTE CLICKS",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 50,
-                    color: color1
+                child: Container(
+                  width: 400,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+
+                      image: AssetImage('assets/tasteclicks.png')
+                    )
                   ),
-                ),
+                )
               ),
-              SizedBox(height: 280,),
+              SizedBox(height: 90,),
               Center(
                 child: InkWell(
                   onTap: (){
@@ -70,11 +74,13 @@ class _NewSplashScreenState extends State<NewSplashScreen> {
                     ),
                     child: Center(
                       child: Text("Sign Up",
-                      style: TextStyle(
-                        color: color1,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                      ),
+                        style: GoogleFonts.prompt(
+                          textStyle: TextStyle(
+                              color: color3,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -96,19 +102,30 @@ class _NewSplashScreenState extends State<NewSplashScreen> {
                     ),
                     child: Center(
                       child: Text("Sign In",
-                        style: TextStyle(
-                            color: color3,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold
+                        style: GoogleFonts.prompt(
+                          textStyle: TextStyle(
+                              color: color4,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
               ),
+              SizedBox(height: 10,),
               Center(
                 child: TextButton(
-                  child: Text("Use as Guest",style: TextStyle(fontSize: 20,color: color3),),
+                  child: Text("Login as Guest",
+                    style: GoogleFonts.prompt(
+                      textStyle: TextStyle(
+                      color: color3,
+                      fontSize: 20,
+                          decoration: TextDecoration.underline,
+                      fontWeight: FontWeight.bold
+                  ),
+                ),),
                   onPressed: (){
                     locator<GetStorage>().remove("token");
                     Navigator.push(context,MaterialPageRoute(builder: (context)=>ClientSeeAllBusinesses()));

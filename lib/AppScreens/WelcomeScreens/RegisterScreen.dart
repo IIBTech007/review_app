@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'file:///C:/Users/IIB/AndroidStudioProjects/review_app/lib/AppScreens/WelcomeScreens/LoginScreen.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:review_app/AppScreens/WelcomeScreens/LoginScreen.dart';
 import 'package:review_app/Controllers/AccountController.dart';
 import 'package:review_app/components/colorConstants.dart';
 
@@ -54,14 +55,15 @@ class RegisterScreen extends StatelessWidget{
                 ),
               ),
               Center(
-                child: Text(
-                  "TASTE CLICKS",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 40,
-                      color: color1
+                child: Container(
+                  width: 400,
+                  height: 100,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/tasteclicks.png')
+                      )
                   ),
-                ),
+                )
               ),
               SizedBox(height: 10,),
               Center(
@@ -84,12 +86,13 @@ class RegisterScreen extends StatelessWidget{
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              'SIGN UP',
-                              style: new TextStyle(
-                                fontSize: 25.0,
-                                color: color3,
-                                fontWeight: FontWeight.bold,
-                                //foreground: Paint()..shader = linearGradient2
+                              'Create An Account...',
+                              style: GoogleFonts.prompt(
+                                textStyle: TextStyle(
+                                    color: color1,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold
+                                ),
                               ),
                             ),
                           ),
@@ -103,7 +106,12 @@ class RegisterScreen extends StatelessWidget{
                             child: Container(
                               child: TextFormField(
                                 controller: accountController.nameTextEditingController,
-                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                style:  GoogleFonts.prompt(
+                                  textStyle: TextStyle(
+                                      color: color1,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                ),
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
@@ -113,7 +121,12 @@ class RegisterScreen extends StatelessWidget{
                                       borderSide: BorderSide(color: color6, width: 1.0)
                                   ),
                                   labelText: "Name",
-                                  labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                  labelStyle: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color3,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                  ),
                                   suffixIcon: Icon(Icons.assignment_ind,color: color3,size: 27,),
                                 ),
                                 textInputAction: TextInputAction.next,
@@ -129,7 +142,12 @@ class RegisterScreen extends StatelessWidget{
                             child: Container(
                               child: TextFormField(
                                 controller: accountController.emailTextEditingController,
-                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                style:  GoogleFonts.prompt(
+                                  textStyle: TextStyle(
+                                      color: color1,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                ),
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
@@ -139,7 +157,12 @@ class RegisterScreen extends StatelessWidget{
                                       borderSide: BorderSide(color: color6, width: 1.0)
                                   ),
                                   labelText: "Email",
-                                  labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                  labelStyle: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color3,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                  ),
                                   suffixIcon: Icon(Icons.email,color: color3,size: 27,),
                                 ),
                                 textInputAction: TextInputAction.next,
@@ -155,7 +178,12 @@ class RegisterScreen extends StatelessWidget{
                             child: Container(
                               child: TextFormField(
                                 controller: accountController.passwordTextEditingController,
-                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                style:  GoogleFonts.prompt(
+                                  textStyle: TextStyle(
+                                      color: color1,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                ),
                                 obscureText: accountController.signUpPasswordIsVisible,
                                 keyboardType: TextInputType.visiblePassword,
                                 decoration: InputDecoration(
@@ -166,7 +194,12 @@ class RegisterScreen extends StatelessWidget{
                                       borderSide: BorderSide(color: color6, width: 1.0)
                                   ),
                                   labelText: "Password",
-                                  labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                  labelStyle: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color3,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                  ),
                                   suffixIcon: IconButton(icon: Icon(accountController.signUpPasswordIsVisible?Icons.visibility:Icons.visibility_off,color: color3,size: 27),
                                     onPressed: () {
                                      if(accountController.signUpPasswordIsVisible){
@@ -187,7 +220,12 @@ class RegisterScreen extends StatelessWidget{
                             child: Container(
                               child: TextFormField(
                                 controller: accountController.phoneTextEditingController,
-                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                style:  GoogleFonts.prompt(
+                                  textStyle: TextStyle(
+                                      color: color1,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                ),
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
@@ -197,7 +235,12 @@ class RegisterScreen extends StatelessWidget{
                                       borderSide: BorderSide(color: color6, width: 1.0)
                                   ),
                                   labelText: "Phone",
-                                  labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                  labelStyle: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color3,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                  ),
                                   suffixIcon: Icon(Icons.add_call,color: color3,size: 27,),
                                 ),
                                 textInputAction: TextInputAction.next,
@@ -213,7 +256,12 @@ class RegisterScreen extends StatelessWidget{
                             child: Container(
                               child: TextFormField(
                                 controller: accountController.cityTextEditingController,
-                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                style:  GoogleFonts.prompt(
+                                  textStyle: TextStyle(
+                                      color: color1,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                ),
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
@@ -223,7 +271,12 @@ class RegisterScreen extends StatelessWidget{
                                       borderSide: BorderSide(color: color6, width: 1.0)
                                   ),
                                   labelText: "City",
-                                  labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                  labelStyle: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color3,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                  ),
                                   suffixIcon: Icon(Icons.add_location_alt_outlined,color: color3,size: 27,),
                                 ),
                                 textInputAction: TextInputAction.next,
@@ -239,7 +292,12 @@ class RegisterScreen extends StatelessWidget{
                             child: Container(
                               child: TextFormField(
                                 controller: accountController.countryTextEditingController,
-                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                style:  GoogleFonts.prompt(
+                                  textStyle: TextStyle(
+                                      color: color1,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                ),
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
@@ -249,7 +307,12 @@ class RegisterScreen extends StatelessWidget{
                                       borderSide: BorderSide(color: color6, width: 1.0)
                                   ),
                                   labelText: "Country",
-                                  labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                  labelStyle: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color3,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                  ),
                                   suffixIcon: Icon(Icons.account_balance,color: color3,size: 27,),
                                 ),
                                 textInputAction: TextInputAction.next,
@@ -271,7 +334,7 @@ class RegisterScreen extends StatelessWidget{
                   child: Center(
                     child: Card(
                       elevation: 8,
-                      color: color1,
+                      color: color3,
                       child: Container(
                         height: 55,
                         width: 250,
@@ -279,12 +342,15 @@ class RegisterScreen extends StatelessWidget{
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Center(
-                          child: Text("Sign Up", style: TextStyle(
-                            color: color4,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22,
-                            //foreground: Paint()..shader = linearGradient
-                          ),),
+                          child: Text("Sign Up",
+                            style: GoogleFonts.prompt(
+                              textStyle: TextStyle(
+                                  color: color4,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -301,11 +367,12 @@ class RegisterScreen extends StatelessWidget{
                         children: [
                           Text(
                             'Already Have Account?',
-                            style: new TextStyle(
-                              fontSize: 17.0,
-                              color: color1,
-                              fontWeight: FontWeight.bold,
-                              //foreground: Paint()..shader = linearGradient2
+                            style: GoogleFonts.prompt(
+                              textStyle: TextStyle(
+                                  color: color1,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold
+                              ),
                             ),
                           ),
                           SizedBox(width: 4,),
@@ -315,12 +382,13 @@ class RegisterScreen extends StatelessWidget{
                             },
                             child: Text(
                               'Login',
-                              style: new TextStyle(
-                                decoration: TextDecoration.underline,
-                                fontSize: 20.0,
-                                color: color3,
-                                fontWeight: FontWeight.bold,
-                                //foreground: Paint()..shader = linearGradient2
+                              style: GoogleFonts.prompt(
+                                textStyle: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                    color: color3,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold
+                                ),
                               ),
                             ),
                           )

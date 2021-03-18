@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'file:///C:/Users/IIB/AndroidStudioProjects/review_app/lib/AppScreens/Admin/Feedbacks/AddRating.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:review_app/AppScreens/Admin/Feedbacks/AddRating.dart';
 import 'package:review_app/Controllers/FeedbackController.dart';
 import 'package:review_app/components/colorConstants.dart';
 
@@ -56,14 +57,15 @@ class CustomerInfoForFeedback extends StatelessWidget{
                 ),
               ),
               Center(
-                child: Text(
-                  "TASTE CLICKS",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 40,
-                      color: color1
+                child: Container(
+                  width: 400,
+                  height: 100,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/tasteclicks.png')
+                      )
                   ),
-                ),
+                )
               ),
               SizedBox(height: 10,),
               Center(
@@ -71,7 +73,7 @@ class CustomerInfoForFeedback extends StatelessWidget{
                   padding: const EdgeInsets.all(12.0),
                   child: Container(
                     width: 400,
-                    height: 470,
+                    height: 510,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -81,12 +83,13 @@ class CustomerInfoForFeedback extends StatelessWidget{
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              'Give Feedback',
-                              style: new TextStyle(
-                                fontSize: 25.0,
-                                color: color3,
-                                fontWeight: FontWeight.bold,
-                                //foreground: Paint()..shader = linearGradient2
+                              'Want to Give Feedback?',
+                              style: GoogleFonts.prompt(
+                                textStyle: TextStyle(
+                                    color: color1,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold
+                                ),
                               ),
                             ),
                           ),
@@ -100,7 +103,12 @@ class CustomerInfoForFeedback extends StatelessWidget{
                             child: Container(
                               child: TextFormField(
                                 controller: _feedbackController.name,
-                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                style:  GoogleFonts.prompt(
+                                  textStyle: TextStyle(
+                                      color: color1,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                ),
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
@@ -110,7 +118,12 @@ class CustomerInfoForFeedback extends StatelessWidget{
                                       borderSide: BorderSide(color: color6, width: 1.0)
                                   ),
                                   labelText: "Name",
-                                  labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                  labelStyle: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color3,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                  ),
                                   suffixIcon: Icon(Icons.assignment_ind,color: color3,size: 27,),
                                 ),
                                 textInputAction: TextInputAction.next,
@@ -126,7 +139,12 @@ class CustomerInfoForFeedback extends StatelessWidget{
                             child: Container(
                               child: TextFormField(
                                 controller: _feedbackController.email,
-                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                style:  GoogleFonts.prompt(
+                                  textStyle: TextStyle(
+                                      color: color1,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                ),
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
@@ -136,7 +154,12 @@ class CustomerInfoForFeedback extends StatelessWidget{
                                       borderSide: BorderSide(color: color6, width: 1.0)
                                   ),
                                   labelText: "Email",
-                                  labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                  labelStyle: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color3,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                  ),
                                   suffixIcon: Icon(Icons.email,color: color3,size: 27,),
                                 ),
                                 textInputAction: TextInputAction.next,
@@ -152,7 +175,12 @@ class CustomerInfoForFeedback extends StatelessWidget{
                             child: Container(
                               child: TextFormField(
                                 controller: _feedbackController.phone,
-                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                style:  GoogleFonts.prompt(
+                                  textStyle: TextStyle(
+                                      color: color1,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                ),
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
@@ -162,7 +190,12 @@ class CustomerInfoForFeedback extends StatelessWidget{
                                       borderSide: BorderSide(color: color6, width: 1.0)
                                   ),
                                   labelText: "Phone",
-                                  labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                  labelStyle: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color3,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                  ),
                                   suffixIcon: Icon(Icons.add_call,color: color3,size: 27,),
                                 ),
                                 textInputAction: TextInputAction.next,
@@ -178,7 +211,12 @@ class CustomerInfoForFeedback extends StatelessWidget{
                             child: Container(
                               child: TextFormField(
                                 controller: _feedbackController.city,
-                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                style:  GoogleFonts.prompt(
+                                  textStyle: TextStyle(
+                                      color: color1,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                ),
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
@@ -188,7 +226,12 @@ class CustomerInfoForFeedback extends StatelessWidget{
                                       borderSide: BorderSide(color: color6, width: 1.0)
                                   ),
                                   labelText: "City",
-                                  labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                  labelStyle: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color3,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                  ),
                                   suffixIcon: Icon(Icons.add_location_alt_outlined,color: color3,size: 27,),
                                 ),
                                 textInputAction: TextInputAction.next,
@@ -204,7 +247,12 @@ class CustomerInfoForFeedback extends StatelessWidget{
                             child: Container(
                               child: TextFormField(
                                 controller: _feedbackController.country,
-                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                style:  GoogleFonts.prompt(
+                                  textStyle: TextStyle(
+                                      color: color1,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                ),
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
@@ -214,7 +262,12 @@ class CustomerInfoForFeedback extends StatelessWidget{
                                       borderSide: BorderSide(color: color6, width: 1.0)
                                   ),
                                   labelText: "Country",
-                                  labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                  labelStyle: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color3,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                  ),
                                   suffixIcon: Icon(Icons.account_balance,color: color3,size: 27,),
                                 ),
                                 textInputAction: TextInputAction.next,
@@ -236,7 +289,7 @@ class CustomerInfoForFeedback extends StatelessWidget{
                   child: Center(
                     child: Card(
                       elevation: 8,
-                      color: color1,
+                      color: color3,
                       child: Container(
                         height: 55,
                         width: 250,
@@ -244,12 +297,15 @@ class CustomerInfoForFeedback extends StatelessWidget{
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Center(
-                          child: Text("Proceed", style: TextStyle(
-                            color: color4,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22,
-                            //foreground: Paint()..shader = linearGradient
-                          ),),
+                          child: Text("Proceed",
+                            style: GoogleFonts.prompt(
+                              textStyle: TextStyle(
+                                  color: color4,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),

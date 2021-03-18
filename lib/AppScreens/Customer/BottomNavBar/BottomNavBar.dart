@@ -28,7 +28,7 @@ class _BottomNavBarState extends State<ClientBottomNavBar> {
           ),
           TabData(iconData: Icons.home, title: "Home",),
 
-          TabData(iconData: Icons.settings, title: "Settings"),
+          TabData(iconData: Icons.assignment_ind, title: "Profile"),
 
         ],
         initialSelection: 1,

@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:review_app/AppScreens/WelcomeScreens/ForgotPassword.dart';
 import 'package:review_app/Utils/Utils.dart';
 import 'file:///C:/Users/IIB/AndroidStudioProjects/review_app/lib/AppScreens/WelcomeScreens/ForgotPassword.dart';
 import 'package:review_app/Controllers/AccountController.dart';
@@ -56,22 +58,23 @@ class LoginScreen extends StatelessWidget{
                 ),
               ),
               Center(
-                child: Text(
-                  "TASTE CLICKS",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 40,
-                      color: color1
+                child:Container(
+                  width: 400,
+                  height: 120,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/tasteclicks.png')
+                      )
                   ),
-                ),
+                )
               ),
-              SizedBox(height: 40,),
+              SizedBox(height: 10,),
               Center(
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Container(
                     width: 400,
-                    height: 280,
+                    height: 240,
                     decoration: BoxDecoration(
                       color: color4,
                       borderRadius: BorderRadius.circular(10),
@@ -87,26 +90,32 @@ class LoginScreen extends StatelessWidget{
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              'WELCOME',
-                              style: new TextStyle(
-                                fontSize: 30.0,
-                                color: color3,
-                                fontWeight: FontWeight.bold,
-                                //foreground: Paint()..shader = linearGradient2
+                              'WELCOME...',
+                              style: GoogleFonts.prompt(
+                                textStyle: TextStyle(
+                                    color: color1,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold
+                                ),
                               ),
                             ),
                           ),
                         ),
                         SizedBox(height: 10,),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: Card(
                             elevation: 8,
                             color: color4,
                             child: Container(
                               child: TextFormField(
                                 controller: accountController.emailTextEditingController,
-                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                style:  GoogleFonts.prompt(
+                                  textStyle: TextStyle(
+                                      color: color1,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                ),
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
@@ -116,7 +125,12 @@ class LoginScreen extends StatelessWidget{
                                       borderSide: BorderSide(color: color6, width: 1.0)
                                   ),
                                   labelText: "Email",
-                                  labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                  labelStyle: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color3,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                  ),
                                   suffixIcon: Icon(Icons.email,color: color3,size: 27,),
                                 ),
                                 textInputAction: TextInputAction.next,
@@ -126,14 +140,19 @@ class LoginScreen extends StatelessWidget{
                         ),
 
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: Card(
                             elevation: 8,
                             color: color4,
                             child: Container(
                               child: TextFormField(
                                 controller: accountController.passwordTextEditingController,
-                                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                style: GoogleFonts.prompt(
+                                  textStyle: TextStyle(
+                                      color: color1,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                ),
                                 obscureText: true,
                                 keyboardType: TextInputType.visiblePassword,
                                 decoration: InputDecoration(
@@ -143,9 +162,13 @@ class LoginScreen extends StatelessWidget{
                                   enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(color: color6, width: 1.0)
                                   ),
-
                                   labelText: "Password",
-                                  labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                                  labelStyle: GoogleFonts.prompt(
+                                    textStyle: TextStyle(
+                                        color: color3,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                  ),
                                   suffixIcon: IconButton(icon: Icon(accountController.isVisible?Icons.visibility:Icons.visibility_off,color: color3,size: 27),onPressed: () {
 
                                   },),//(Icons.https,color: yellowColor,size: 27,)
@@ -181,34 +204,31 @@ class LoginScreen extends StatelessWidget{
                   child: Center(
                     child: Card(
                       elevation: 8,
-                      color: color1,
+                      color: color3,
                       child: Container(
                         height: 55,
                         width: 250,
                         decoration: BoxDecoration(
-                          //color: color1,
-                          // gradient: new LinearGradient(
-                          //     colors: [
-                          //       Color(0xff222831), Color(0xff393e46)
-                          //     ]
-                          // ),
                           borderRadius: BorderRadius.circular(15),
                           //border: Border.all(color: Color(0xfbb55400), width: 3)
                         ),
                         child: Center(
-                          child: Text("Sign In", style: TextStyle(
-                            color: color4,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22,
-                            //foreground: Paint()..shader = linearGradient
-                          ),),
+                          child: Text("Sign In",
+                            style: GoogleFonts.prompt(
+                              textStyle: TextStyle(
+                                  color: color4,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 15,),
+              SizedBox(height: 10,),
               Center(
                   child: InkWell(
                     onTap: (){
@@ -218,12 +238,13 @@ class LoginScreen extends StatelessWidget{
                       padding: const EdgeInsets.only(bottom: 20),
                       child: Text(
                         'Forgot Password?',
-                        style: new TextStyle(
-                          decoration: TextDecoration.underline,
-                          fontSize: 15.0,
-                          color: color3,
-                          fontWeight: FontWeight.bold,
-                          //foreground: Paint()..shader = linearGradient2
+                        style: GoogleFonts.prompt(
+                          textStyle: TextStyle(
+                            decoration: TextDecoration.underline,
+                              color: color1,
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold
+                          ),
                         ),
                       ),
                     ),

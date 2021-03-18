@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:review_app/AppScreens/Admin/Business/NewDetailScreen.dart';
 import 'package:review_app/AppScreens/Admin/BusinessCategory/BusinessCategoryList.dart';
 import 'package:review_app/AppScreens/Admin/BusinessSubcategory/BusinessSubCategoryList.dart';
 import 'package:review_app/AppScreens/Admin/Feedbacks/FeedbackDetails.dart';
@@ -10,7 +12,6 @@ import 'package:review_app/AppScreens/Customer/ReviewCategory/SelectReviewCatego
 import 'package:review_app/Controllers/FeedbackController.dart';
 import 'package:review_app/Models/BusinessViewModel.dart';
 import 'package:review_app/Utils/Utils.dart';
-import 'file:///C:/Users/IIB/AndroidStudioProjects/review_app/lib/AppScreens/Admin/Business/NewDetailScreen.dart';
 import 'package:review_app/components/colorConstants.dart';
 
 class DetailPage extends StatefulWidget {
@@ -55,10 +56,12 @@ class _DetailPageState extends State<DetailPage> {
                         FaIcon(FontAwesomeIcons.comments, color: color3, size: 35, ),
                         SizedBox(width: 7,),
                         Text("Reviews",
-                          style: TextStyle(
-                              color: color4,
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold
+                          style: GoogleFonts.prompt(
+                            textStyle: TextStyle(
+                                color: color4,
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold
+                            ),
                           ),
                         ),
                         SizedBox(width: 155,),
@@ -108,20 +111,24 @@ class _DetailPageState extends State<DetailPage> {
                              Navigator.push(context,MaterialPageRoute(builder:(context)=>FeedbackDetails(feedbackController.feedbacks[index].customerFeedBacks)));
                            },
                            title: Text(feedbackController.feedbacks[index].customerName,
-                             style: TextStyle(
-                                 color: color4,
-                                 fontWeight: FontWeight.bold,
-                                 fontSize: 17
+                             style: GoogleFonts.prompt(
+                               textStyle: TextStyle(
+                                   color: color4,
+                                   fontSize: 17,
+                                   fontWeight: FontWeight.bold
+                               ),
                              ),
                            ),
                            subtitle: Row(
                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                              children: [
                                Text(feedbackController.feedbacks[index].comment,
-                                 style: TextStyle(
-                                     color: color3,
-                                     fontWeight: FontWeight.bold,
-                                     fontSize: 15
+                                 style: GoogleFonts.prompt(
+                                   textStyle: TextStyle(
+                                       color: color3,
+                                       fontSize: 15,
+                                       fontWeight: FontWeight.bold
+                                   ),
                                  ),
                                ),
                                Row(
@@ -133,10 +140,12 @@ class _DetailPageState extends State<DetailPage> {
                                    ),
                                    SizedBox(width: 2,),
                                    Text(feedbackController.feedbacks[index].overallRating.toStringAsFixed(1),
-                                     style: TextStyle(
-                                         color: color4,
-                                         fontWeight: FontWeight.bold,
-                                         fontSize: 15
+                                     style: GoogleFonts.prompt(
+                                       textStyle: TextStyle(
+                                           color: color4,
+                                           fontSize: 15,
+                                           fontWeight: FontWeight.bold
+                                       ),
                                      ),
                                    ),
                                  ],
