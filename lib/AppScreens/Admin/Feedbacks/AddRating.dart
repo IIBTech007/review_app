@@ -1,5 +1,6 @@
 import 'dart:async';
 
+// import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
@@ -11,7 +12,9 @@ import 'package:review_app/Models/CustomerFeedBack.dart';
 import 'package:review_app/Models/SelectedOptions.dart';
 import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';
+import 'package:review_app/components/radio_grouped.dart';
 
+import '../../customRadioBtn.dart';
 class AddRatings extends StatefulWidget {
   int businessId,categoryId,subcategoryId;
 
@@ -148,12 +151,12 @@ class _AddRatingsState extends State<AddRatings> {
                             },
                             onRatingUpdate: (rating) {
 
-                              if(_feedbackController.customerFeedback.length>0) {
-                                _feedbackController.customerFeedback.removeWhere((
-                                    element) => element.questionId ==
-                                    _feedbackController.customerFeedback[index]
-                                        .questionId);
-                              }
+                              // if(_feedbackController.customerFeedback.length>0) {
+                              //   _feedbackController.customerFeedback.removeWhere((
+                              //       element) => element.questionId ==
+                              //       _feedbackController.customerFeedback[index]
+                              //           .questionId);
+                              // }
                                 _feedbackController.customerFeedback.insert(index,
                                     CustomerFeedBack(
                                         businessId: widget.businessId,
@@ -164,6 +167,8 @@ class _AddRatingsState extends State<AddRatings> {
                                         questionId: _questionController
                                             .questionList[index].id,
                                         rating: rating,
+                                        questions: _questionController
+                                            .questionList[index],
                                       selectedOptions: [],
                                     ));
                             },
@@ -173,11 +178,11 @@ class _AddRatingsState extends State<AddRatings> {
                           children: <Widget>[
                             RadioListTile(
                           value: "Yes",
-                          groupValue: groupValue,
+                          groupValue: groupValue2,
                           onChanged:(value){
                             var alreadyAdded=false;
                             setState(() {
-                              groupValue=value;
+                              groupValue2=value;
                                 _feedbackController.customerFeedback.insert(index,
                                     CustomerFeedBack(
                                         businessId: widget.businessId,
@@ -187,6 +192,8 @@ class _AddRatingsState extends State<AddRatings> {
                                             .questionList[index].subCategoryId,
                                         questionId: _questionController
                                             .questionList[index].id,
+                                         questions: _questionController
+                                             .questionList[index],
                                         rating: 5.0,
                                       selectedOptions: [],
                                     ));
@@ -204,10 +211,10 @@ class _AddRatingsState extends State<AddRatings> {
                         ),
                             RadioListTile(
                               value: "No",
-                              groupValue: groupValue,
+                              groupValue: groupValue2,
                               onChanged:(value){
                                 setState(() {
-                                  groupValue=value;
+                                  groupValue2=value;
                                     _feedbackController.customerFeedback.insert(index,
                                         CustomerFeedBack(
                                             businessId: widget.businessId,
@@ -243,30 +250,62 @@ class _AddRatingsState extends State<AddRatings> {
                               return Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  RadioListTile(
-                                    value: _questionController.questionList[index].questionOptions[i].questionOptionText,
-                                    groupValue: groupValue2,
-                                    title: Text(_questionController.questionList[index].questionOptions[i].questionOptionText),
-                                    onChanged: (value){
-                                      List<SelectedOptions> options=[];
-                                      setState(() {
-                                        groupValue2=value;
-                                        options.add(SelectedOptions(questionOptionsId:  _questionController.questionList[index].questionOptions[i].questionOptionId));
-                                          _feedbackController.customerFeedback.insert(index,
-                                              CustomerFeedBack(
-                                                businessId: widget.businessId,
-                                                categoryId: _questionController
-                                                    .questionList[index].categoryId,
-                                                subCategoryId: _questionController
-                                                    .questionList[index].subCategoryId,
-                                                questionId: _questionController
-                                                    .questionList[index].id,
-                                                rating:  _questionController.questionList[index].questionOptions[i].rating,
-                                                selectedOptions: options,
-                                              ));
-                                      });
-                                    },
+                                  // MyCustomRadioButton(
+                                  //   elevation: 0,
+                                  //   absoluteZeroSpacing: false,
+                                  //   enableShape: true,
+                                  //   padding:5,
+                                  //   enableButtonWrap: true,
+                                  //   width: 100,
+                                  //   horizontal: true,
+                                  //   unSelectedColor: Theme.of(context).canvasColor,
+                                  //   //defaultSelected:_questionController.questionList[index].questionOptions[i].questionOptionText,
+                                  //   buttonLables: [
+                                  //     _questionController.questionList[index].questionOptions[i].questionOptionText
+                                  //   ],
+                                  //   buttonValues: [
+                                  //     _questionController.questionList[index].questionOptions[i].rating
+                                  //    // _questionController.questionList[index].questionOptions[i].questionOptionText
+                                  //   ],
+                                  //
+                                  //   // buttonTextStyle: ButtonTextStyle(
+                                  //   //     selectedColor: Colors.white,
+                                  //   //     unSelectedColor: Colors.yellow,
+                                  //   //     textStyle: TextStyle(fontSize: 16)),
+                                  //   radioButtonValue: (value) {
+                                  //     print(value);
+                                  //   },
+                                  //   autoWidth: false,
+                                  //   selectedColor: Theme.of(context).accentColor,
+                                  // ),
+                                  customRadioBtn(
+                                    buttonValue: [ _questionController.questionList[index].questionOptions[i].rating],
+                                    buttonLabels: [ _questionController.questionList[index].questionOptions[i].questionOptionText],
                                   )
+                                  // RadioListTile(
+                                  //   value: _questionController.questionList[index].questionOptions[i].questionOptionText,
+                                  //   groupValue: groupValue,
+                                  //   title: Text(_questionController.questionList[index].questionOptions[i].questionOptionText),
+                                  //   onChanged: (value){
+                                  //     List<SelectedOptions> options=[];
+                                  //     setState(() {
+                                  //       groupValue=value;
+                                  //       options.add(SelectedOptions(questionOptionsId:  _questionController.questionList[index].questionOptions[i].questionOptionId));
+                                  //         _feedbackController.customerFeedback.insert(index,
+                                  //             CustomerFeedBack(
+                                  //               businessId: widget.businessId,
+                                  //               categoryId: _questionController
+                                  //                   .questionList[index].categoryId,
+                                  //               subCategoryId: _questionController
+                                  //                   .questionList[index].subCategoryId,
+                                  //               questionId: _questionController
+                                  //                   .questionList[index].id,
+                                  //               rating:  _questionController.questionList[index].questionOptions[i].rating,
+                                  //               selectedOptions: options,
+                                  //             ));
+                                  //     });
+                                  //   },
+                                  // )
                                 ],
                               );
                             },

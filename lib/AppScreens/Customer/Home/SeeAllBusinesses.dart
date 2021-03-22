@@ -13,6 +13,8 @@ import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';
 import 'package:review_app/dbhelper.dart';
 
+import 'OfflineFeedback.dart';
+
 class ClientSeeAllBusinesses extends StatefulWidget {
   @override
   _ClientSeeAllBusinessesState createState() => _ClientSeeAllBusinessesState();
@@ -57,7 +59,7 @@ class _ClientSeeAllBusinessesState extends State<ClientSeeAllBusinesses> {
               padding: EdgeInsets.all(16),
               icon:Icon(Icons.feedback),
               onPressed: (){
-
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>OfflineFeedbacks()));
               },
               ),
               IconButton(

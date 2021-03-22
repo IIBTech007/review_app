@@ -56,9 +56,13 @@ final _accountController=Get.find<AccountController>();
     customerFeedback.clear();
   }
  void addFeedback(BuildContext context,int businessId,int categoryId,int subCategoryId){
+    var overallRating=0.0;
     final ids = customerFeedback.map((e) => e.questionId).toSet();
     customerFeedback.retainWhere((x) => ids.remove(x.questionId));
      if(locator<GetStorage>().read("token")==null){
+       for(CustomerFeedBack cus in customerFeedback){
+         overallRating+=cus.rating/customerFeedback.length;
+       }
        new dbhelper().addFeedBacks(feedback(
            subCategoryId: subCategoryId,
            categoryId: categoryId,
@@ -70,6 +74,7 @@ final _accountController=Get.find<AccountController>();
            city: city.text,
            country: country.text,
            image: image,
+           overallRating: overallRating,
            customerFeedBacks: customerFeedback));
      }
     _feedbackRepository.AddFeedBack(feedback(

@@ -21,14 +21,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
       ),
       bottomNavigationBar: FancyBottomNavigation(
         tabs: [
-          TabData(
-            iconData:Icons.dashboard,
-            title: "Dashboard",
-          ),
-          TabData(
-            iconData: Icons.view_list,
-            title: "Review",
-          ),
+          // TabData(
+          //   iconData:Icons.dashboard,
+          //   title: "Dashboard",
+          // ),
+          // TabData(
+          //   iconData: Icons.view_list,
+          //   title: "Review",
+          // ),
           TabData(iconData: Icons.home, title: "Home",),
           TabData(iconData: Icons.question_answer, title: "Feedbacks"),
           TabData(iconData: Icons.settings, title: "Settings"),
@@ -48,15 +48,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
   _getPage(int page) {
     switch (page) {
       case 0:
-      //  return AdminHomeScreen();
-      case 1:
-       // return AdminHomeScreen();
-      case 2:
         return BusinessList();
-      case 3:
-       // return AdminHomeScreen();//AboutScreen();
+      case 1:
+        return BusinessList();
+      // case 2:
+      //   return BusinessList();
+      // case 3:
+      //   return BusinessList();//AboutScreen();
       default:
-       // return AdminHomeScreen();
+        return BusinessList();
     }
   }
 }

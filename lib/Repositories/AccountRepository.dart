@@ -34,7 +34,9 @@ class AccountRepository extends IAccountRepository{
         Utils.showSuccess(context,"Login Sucess");
         locator<Logger>().i(jsonDecode(res.body)["token"]);
         locator<GetStorage>().write("token", jsonDecode(res.body)["token"]);
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>BottomNavBar()));
+         Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>ClientBottomNavBar()));
+       // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>BottomNavBar()));
+
         return res.body;
       }else if(res.body!=null&&res.body.isNotEmpty){
         progressDialog.dismiss();

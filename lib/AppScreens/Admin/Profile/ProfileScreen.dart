@@ -97,7 +97,7 @@ class ProfileScreen extends StatelessWidget {
                                 ),
                                 SizedBox(width: 8,),
                                 Container(
-                                  width: 220,
+                                  width: 200,
                                   height: 100,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
@@ -110,6 +110,8 @@ class ProfileScreen extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Text(_accountController.getLoggedInUserData()!=null&&_accountController.getLoggedInUserData().userInfo!=null?_accountController.getLoggedInUserData().userInfo.name:'',
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
                                         style: GoogleFonts.prompt(
                                           textStyle: TextStyle(
                                               color: color3,
@@ -130,7 +132,7 @@ class ProfileScreen extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          Text(_accountController.getLoggedInUserData()!=null&&_accountController.getLoggedInUserData().userInfo!=null?_accountController.getLoggedInUserData().role:'',
+                                          Text(_accountController.getLoggedInUserData()!=null&&_accountController.getLoggedInUserData().userInfo!=null&&_accountController.getLoggedInUserData().role!=null?_accountController.getLoggedInUserData().role:'',
                                             style: GoogleFonts.prompt(
                                               textStyle: TextStyle(
                                                   color: color3,
