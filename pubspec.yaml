@@ -61,8 +61,8 @@ dependencies:
   flutter_barcode_scanner: ^1.0.2
   qr_flutter: 4.0.0
   printing: ^5.0.0
-  custom_radio_grouped_button: ^1.0.6+1
   pie_chart: ^5.0.0
+  custom_radio_grouped_button: ^1.0.6+1
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,7 +1,10 @@
 import 'dart:convert';
 
+import 'package:review_app/Models/BusinessViewModel.dart';
+
 class RegisterViewModel{
  String name,email,phone,password,roleId,city,country;
+ BusinessViewModel businessViewModel;
 
  RegisterViewModel({
   this.name,
@@ -10,7 +13,8 @@ class RegisterViewModel{
   this.password,
   this.roleId,
   this.city,
-  this.country
+  this.country,
+  this.businessViewModel
  });
  static RegisterViewModel registerViewModelFromJson(String str) => RegisterViewModel.fromJson(json.decode(str));
 
@@ -22,7 +26,7 @@ class RegisterViewModel{
   email: json["email"],
   password: json["password"],
   phone: json["phone"],
-     roleId:json["roleId"]
+  roleId:json["roleId"]
  );
 
  Map<String, dynamic> toJson() => {
@@ -32,6 +36,7 @@ class RegisterViewModel{
   "email": email,
   "password": password,
   "phone": phone,
-  "roleId":roleId
+  "roleId":roleId,
+  "business": businessViewModel == null ? null : businessViewModel,
  };
 }

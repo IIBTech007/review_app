@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:review_app/AppScreens/Customer/Home/SeeAllBusinesses.dart';
+import 'package:review_app/AppScreens/WelcomeScreens/RegisterBusiness.dart';
 import 'package:review_app/Utils/Locator.dart';
 import 'package:review_app/AppScreens/WelcomeScreens/LoginScreen.dart';
 import 'package:review_app/AppScreens/WelcomeScreens/RegisterScreen.dart';
@@ -58,6 +59,33 @@ class _NewSplashScreenState extends State<NewSplashScreen> {
                     )
                   ),
                 )
+              ),
+              SizedBox(height: 90,),
+              Center(
+                child: InkWell(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisterBusiness()));
+                  },
+                  child: Container(
+                    height: 60,
+                    width: 310,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: color3, width: 2)
+                    ),
+                    child: Center(
+                      child: Text("Register Business",
+                        style: GoogleFonts.prompt(
+                          textStyle: TextStyle(
+                              color: color3,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
               SizedBox(height: 90,),
               Center(

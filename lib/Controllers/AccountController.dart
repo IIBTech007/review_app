@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:review_app/Controllers/BusinessController.dart';
 import 'package:review_app/Interfaces/IAccountRepository.dart';
+import 'package:review_app/Models/BusinessViewModel.dart';
 import 'package:review_app/Models/LoginViewModel.dart';
 import 'package:review_app/Models/RegisterViewModel.dart';
 import 'package:review_app/Models/TokenPayLoad.dart';
@@ -14,7 +16,6 @@ class AccountController extends GetxController{
  bool isVisible=true;
  bool signUpPasswordIsVisible=true;
  TextEditingController confirmPasswordTextEditingController, nameTextEditingController,emailTextEditingController,passwordTextEditingController,cityTextEditingController,countryTextEditingController,phoneTextEditingController;
-
  @override
   void onInit() {
    if(emailTextEditingController==null){
@@ -87,7 +88,7 @@ class AccountController extends GetxController{
       ));
     }
   }
-  Future<void> RegisterUser(BuildContext context) {
+  Future<void> RegisterUser(BuildContext context,BusinessViewModel businessViewModel) {
     if (nameTextEditingController.text == null || nameTextEditingController.text.isEmpty) {
       Utils.showError(context, "Name Required");
     } else if (emailTextEditingController.text == null || emailTextEditingController.text.isEmpty) {
@@ -112,7 +113,7 @@ class AccountController extends GetxController{
           phone: phoneTextEditingController.text,
           country: countryTextEditingController.text,
           city: cityTextEditingController.text,
-          roleId: "8ec13695-8959-4468-a739-a7e864041936"
+          businessViewModel: businessViewModel
       ));
     }
   }

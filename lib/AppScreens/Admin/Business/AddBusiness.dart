@@ -6,8 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:review_app/AppScreens/Admin/LocationSetting/Location.dart';
+import 'package:review_app/Controllers/AccountController.dart';
 import 'package:review_app/Controllers/BusinessController.dart';
 import 'package:review_app/Models/Address.dart';
+import 'package:review_app/Models/BusinessViewModel.dart';
 import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';
 
@@ -24,6 +26,7 @@ class _AddBusinessState extends State<AddBusiness> {
   DateTime end_time ;
   var _formKey = new GlobalKey<FormState>();
   var _autoValidate = false;
+  final accountController = Get.find<AccountController>();
   final businessController=Get.find<BusinessController>();
     Widget build(BuildContext context) {
     return Scaffold(
@@ -400,7 +403,23 @@ class _AddBusinessState extends State<AddBusiness> {
               ),
               InkWell(
                 onTap: (){
-                  businessController.addBusiness(context);
+                  accountController.RegisterUser(context,BusinessViewModel(
+                    description: businessController.descriptionTextEditingController.text,
+                    ownerId: "Acx",
+                    isVisible: true,
+                    businessTypeId: 1,
+                    longitude: businessController.longitude.value,
+                    latitude: businessController.latitude.value,
+                    address: businessController.addressTextEditingController.text,
+                    image: businessController.image.value,
+                    name: businessController.nameTextEditingController.text,
+                    closingTime: businessController.closingTime,
+                    openingTime: businessController.openingTime,
+                    phone: businessController.phoneTextEditingController.text,
+
+
+                  ));
+
                 },
                 child: Center(
                   child: Card(

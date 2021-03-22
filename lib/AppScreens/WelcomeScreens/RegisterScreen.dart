@@ -329,7 +329,7 @@ class RegisterScreen extends StatelessWidget{
                 padding: const EdgeInsets.all(5.0),
                 child: InkWell(
                   onTap: (){
-                      accountController.RegisterUser(context);
+                      accountController.RegisterUser(context,null);
                   },
                   child: Center(
                     child: Card(

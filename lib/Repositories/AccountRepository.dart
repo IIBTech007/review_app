@@ -34,7 +34,10 @@ class AccountRepository extends IAccountRepository{
         Utils.showSuccess(context,"Login Sucess");
         locator<Logger>().i(jsonDecode(res.body)["token"]);
         locator<GetStorage>().write("token", jsonDecode(res.body)["token"]);
-         //Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>ClientBottomNavBar()));
+        var claims =Utils.parseJwt(jsonDecode(res.body)["token"]);
+        if(claims['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']=="Customer")
+         Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>ClientBottomNavBar()));
+        else
         Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>BottomNavBar()));
 
         return res.body;
