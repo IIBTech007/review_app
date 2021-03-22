@@ -39,6 +39,7 @@ class CustomerFeedBack{
     "businessId":businessId,
     "categoryId":categoryId,
     "subCategoryId":subCategoryId,
+    "questions":questions.toJson(),
     "rating":rating,
     "questionId":questionId,
     "selectedQuestionOption":List<dynamic>.from(selectedOptions.map((x) => x.toJson()))

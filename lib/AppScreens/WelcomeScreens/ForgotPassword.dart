@@ -71,7 +71,6 @@ import 'package:review_app/components/colorConstants.dart';
                  padding: const EdgeInsets.all(12.0),
                  child: Container(
                    width: 400,
-                   height: 310,
                    decoration: BoxDecoration(
                      color: color4,
                      borderRadius: BorderRadius.circular(10),

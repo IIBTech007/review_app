@@ -93,7 +93,7 @@ class _BusinessListState extends ResumableState<BusinessList> {
                       Navigator.push(context,MaterialPageRoute(builder:(context)=>BusinessReport(businessController.businesses[index].id)));
                     },
                           onLongPress: (){
-                            push(context,MaterialPageRoute(builder:(context)=>BusinessQRCode(businessController.businesses[index].id)));
+                            push(context,MaterialPageRoute(builder:(context)=>BusinessQRCode(businessController.businesses[index])));
                           },
                           onTap: (){
                             push(context,MaterialPageRoute(builder:(context)=>BusinessCategoryList(businessController.businesses[index].id)));

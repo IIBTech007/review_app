@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:review_app/Models/feedback.dart';
@@ -35,7 +37,8 @@ class dbhelper {
   }
   Future<int> addFeedBacks(feedback f) async {
     var dbClient = await db;
-    var result = await dbClient.insert("feedbacks",{"customerName":f.customerName,"phone":f.phone,"email":f.email,"city":f.city,"country":f.country,"comment":f.comment,"image":f.image,"categoryId":f.categoryId,"subCategoryId":f.subCategoryId,"businessId":f.businessId,"overallRating":f.overallRating,"customerFeedBacks":f.customerFeedBacks.toString()});
+
+    var result = await dbClient.insert("feedbacks",{"customerName":f.customerName,"phone":f.phone,"email":f.email,"city":f.city,"country":f.country,"comment":f.comment,"image":f.image,"categoryId":f.categoryId,"subCategoryId":f.subCategoryId,"businessId":f.businessId,"overallRating":f.overallRating,"customerFeedBacks":jsonEncode(f.customerFeedBacks)});
     return result;
   }
   Future<List> getFeedBacks() async {

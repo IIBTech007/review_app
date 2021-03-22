@@ -1,6 +1,6 @@
 import 'dart:async';
-
 // import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
+import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
@@ -9,12 +9,11 @@ import 'package:review_app/AppScreens/Admin/Feedbacks/CommentWithPicture.dart';
 import 'package:review_app/Controllers/FeedbackController.dart';
 import 'package:review_app/Controllers/QuestionsController.dart';
 import 'package:review_app/Models/CustomerFeedBack.dart';
+import 'package:review_app/Models/QuestionOptions.dart';
 import 'package:review_app/Models/SelectedOptions.dart';
 import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';
-import 'package:review_app/components/radio_grouped.dart';
 
-import '../../customRadioBtn.dart';
 class AddRatings extends StatefulWidget {
   int businessId,categoryId,subcategoryId;
 
@@ -150,13 +149,6 @@ class _AddRatingsState extends State<AddRatings> {
                               }
                             },
                             onRatingUpdate: (rating) {
-
-                              // if(_feedbackController.customerFeedback.length>0) {
-                              //   _feedbackController.customerFeedback.removeWhere((
-                              //       element) => element.questionId ==
-                              //       _feedbackController.customerFeedback[index]
-                              //           .questionId);
-                              // }
                                 _feedbackController.customerFeedback.insert(index,
                                     CustomerFeedBack(
                                         businessId: widget.businessId,
@@ -167,8 +159,8 @@ class _AddRatingsState extends State<AddRatings> {
                                         questionId: _questionController
                                             .questionList[index].id,
                                         rating: rating,
-                                        questions: _questionController
-                                            .questionList[index],
+                                      questions: _questionController.questionList[index],
+
                                       selectedOptions: [],
                                     ));
                             },
@@ -176,140 +168,86 @@ class _AddRatingsState extends State<AddRatings> {
                         ):_questionController.questionList[index].questionType==2?Column(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-                            RadioListTile(
-                          value: "Yes",
-                          groupValue: groupValue2,
-                          onChanged:(value){
-                            var alreadyAdded=false;
-                            setState(() {
-                              groupValue2=value;
+                            CustomRadioButton(
+                              enableShape: true,
+                              elevation: 0,
+                              //defaultSelected: "Sunday",
+
+                              enableButtonWrap: true,
+                              width: 120,
+                              autoWidth: true,
+                              unSelectedColor: Theme.of(context).canvasColor,
+                              buttonLables: [
+                                "Yes",
+                                "No"
+                              ],
+                              selectedBorderColor: Colors.white,
+                              unSelectedBorderColor: color3,
+                              buttonValues: [
+                                5.0,
+                                2.0
+                              ],
+                              radioButtonValue: (value) {
+                                List<SelectedOptions> options=[];
                                 _feedbackController.customerFeedback.insert(index,
                                     CustomerFeedBack(
-                                        businessId: widget.businessId,
-                                        categoryId: _questionController
-                                            .questionList[index].categoryId,
-                                        subCategoryId: _questionController
-                                            .questionList[index].subCategoryId,
-                                        questionId: _questionController
-                                            .questionList[index].id,
-                                         questions: _questionController
-                                             .questionList[index],
-                                        rating: 5.0,
-                                      selectedOptions: [],
+                                      businessId: widget.businessId,
+                                      categoryId: _questionController
+                                          .questionList[index].categoryId,
+                                      subCategoryId: _questionController
+                                          .questionList[index].subCategoryId,
+                                      questionId: _questionController
+                                          .questionList[index].id,
+                                        questions: _questionController.questionList[index],
+                                      rating:  value,
+                                      selectedOptions: []
                                     ));
-                            });
-                          },
-                          title: Text("Yes",
-                            style: GoogleFonts.prompt(
-                              textStyle: TextStyle(
-                                  color: color1,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold
-                              ),
-                            ),
-                          ),
-                        ),
-                            RadioListTile(
-                              value: "No",
-                              groupValue: groupValue2,
-                              onChanged:(value){
-                                setState(() {
-                                  groupValue2=value;
-                                    _feedbackController.customerFeedback.insert(index,
-                                        CustomerFeedBack(
-                                            businessId: widget.businessId,
-                                            categoryId: _questionController
-                                                .questionList[index].categoryId,
-                                            subCategoryId: _questionController
-                                                .questionList[index].subCategoryId,
-                                            questionId: _questionController
-                                                .questionList[index].id,
-                                            rating: 2.0,
-                                          selectedOptions: [],
-                                        ));
-
-                                });
                               },
-                              title: Text("No",
-                                style: GoogleFonts.prompt(
-                                  textStyle: TextStyle(
-                                      color: color1,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold
-                                  ),
-                                ),
-                              ),
-                            ),
+                              selectedColor: color3,
+                            )
                           ],
                         ):_questionController.questionList[index].questionType==3?
+
                         Container(
-                          height: 150,
-                          child: ListView.builder(
-                            itemCount: _questionController.questionList[index].questionOptions.length,
-                            itemBuilder: (BuildContext context,int i){
-                              return Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  // MyCustomRadioButton(
-                                  //   elevation: 0,
-                                  //   absoluteZeroSpacing: false,
-                                  //   enableShape: true,
-                                  //   padding:5,
-                                  //   enableButtonWrap: true,
-                                  //   width: 100,
-                                  //   horizontal: true,
-                                  //   unSelectedColor: Theme.of(context).canvasColor,
-                                  //   //defaultSelected:_questionController.questionList[index].questionOptions[i].questionOptionText,
-                                  //   buttonLables: [
-                                  //     _questionController.questionList[index].questionOptions[i].questionOptionText
-                                  //   ],
-                                  //   buttonValues: [
-                                  //     _questionController.questionList[index].questionOptions[i].rating
-                                  //    // _questionController.questionList[index].questionOptions[i].questionOptionText
-                                  //   ],
-                                  //
-                                  //   // buttonTextStyle: ButtonTextStyle(
-                                  //   //     selectedColor: Colors.white,
-                                  //   //     unSelectedColor: Colors.yellow,
-                                  //   //     textStyle: TextStyle(fontSize: 16)),
-                                  //   radioButtonValue: (value) {
-                                  //     print(value);
-                                  //   },
-                                  //   autoWidth: false,
-                                  //   selectedColor: Theme.of(context).accentColor,
-                                  // ),
-                                  customRadioBtn(
-                                    buttonValue: [ _questionController.questionList[index].questionOptions[i].rating],
-                                    buttonLabels: [ _questionController.questionList[index].questionOptions[i].questionOptionText],
-                                  )
-                                  // RadioListTile(
-                                  //   value: _questionController.questionList[index].questionOptions[i].questionOptionText,
-                                  //   groupValue: groupValue,
-                                  //   title: Text(_questionController.questionList[index].questionOptions[i].questionOptionText),
-                                  //   onChanged: (value){
-                                  //     List<SelectedOptions> options=[];
-                                  //     setState(() {
-                                  //       groupValue=value;
-                                  //       options.add(SelectedOptions(questionOptionsId:  _questionController.questionList[index].questionOptions[i].questionOptionId));
-                                  //         _feedbackController.customerFeedback.insert(index,
-                                  //             CustomerFeedBack(
-                                  //               businessId: widget.businessId,
-                                  //               categoryId: _questionController
-                                  //                   .questionList[index].categoryId,
-                                  //               subCategoryId: _questionController
-                                  //                   .questionList[index].subCategoryId,
-                                  //               questionId: _questionController
-                                  //                   .questionList[index].id,
-                                  //               rating:  _questionController.questionList[index].questionOptions[i].rating,
-                                  //               selectedOptions: options,
-                                  //             ));
-                                  //     });
-                                  //   },
-                                  // )
-                                ],
-                              );
-                            },
-                          ),
+                          child:CustomRadioButton(
+                                    enableShape: true,
+                                    elevation: 0,
+                                    //defaultSelected: "Sunday",
+
+                                    enableButtonWrap: true,
+                                    width: 120,
+                                    autoWidth: true,
+                                    unSelectedColor: Theme.of(context).canvasColor,
+                                    buttonLables: [
+                                      for(var options in _questionController.questionList[index].questionOptions)
+                                                   options.questionOptionText
+                                      ],
+                                     selectedBorderColor: Colors.white,
+                                     unSelectedBorderColor: color3,
+                                    buttonValues: [
+                                      for(var options in _questionController.questionList[index].questionOptions)
+                                        options.questionOptionText
+                                    ],
+                                    radioButtonValue: (value) {
+                                      List<SelectedOptions> options=[];
+                                      Iterable<QuestionOptions> option= _questionController.questionList[index].questionOptions.where((element) => element.questionOptionText==value);
+                                      options.add(SelectedOptions(questionOptionsId: option.elementAt(0).questionOptionId));
+                                                      _feedbackController.customerFeedback.insert(index,
+                                                          CustomerFeedBack(
+                                                            businessId: widget.businessId,
+                                                            categoryId: _questionController
+                                                                .questionList[index].categoryId,
+                                                            subCategoryId: _questionController
+                                                                .questionList[index].subCategoryId,
+                                                            questionId: _questionController
+                                                                .questionList[index].id,
+                                                            questions: _questionController.questionList[index],
+                                                            rating:  option.elementAt(0).rating,
+                                                            selectedOptions: options,
+                                                          ));
+                                    },
+                                    selectedColor: color3,
+                                  ),
                         ):Container()
                       ],
                     ),

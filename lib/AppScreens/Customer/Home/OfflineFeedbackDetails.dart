@@ -9,16 +9,16 @@ import 'package:review_app/components/colorConstants.dart';
 
 
 
-class FeedbackDetails extends StatefulWidget {
+class OfflineFeedbackDetail extends StatefulWidget {
   List customerFeedbacks;
 
-  FeedbackDetails(this.customerFeedbacks);
+  OfflineFeedbackDetail(this.customerFeedbacks);
 
   @override
-  _FeedbackDetailsState createState() => _FeedbackDetailsState();
+  _OfflineFeedbackDetailState createState() => _OfflineFeedbackDetailState();
 }
 
-class _FeedbackDetailsState extends State<FeedbackDetails> {
+class _OfflineFeedbackDetailState extends State<OfflineFeedbackDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,21 +67,26 @@ class _FeedbackDetailsState extends State<FeedbackDetails> {
                     ),
                   ),
                   subtitle: Text((){
-                    if(widget.customerFeedbacks[index].questions.questionType==1){
-                      return widget.customerFeedbacks[index].rating.toString()+" Stars Rating";
-                    }else if(widget.customerFeedbacks[index].questions.questionType==2){
-                      if(widget.customerFeedbacks[index].rating==5.0){
+                    if(widget.customerFeedbacks[index]["questions"]['questionType']==1){
+                      return widget.customerFeedbacks[index]['rating'].toString()+" Stars Rating";
+                    }else if(widget.customerFeedbacks[index]['questions']['questionType']==2){
+                      if(widget.customerFeedbacks[index]['rating']==5.0){
                         return "Yes";
                       }else
                         return "No";
-                    }else if(widget.customerFeedbacks[index].questions.questionType==3&&widget.customerFeedbacks[index]['questions']['questionOptions'].length>0){
+                    }else if(widget.customerFeedbacks[index]['questions']['questionType']==3&&widget.customerFeedbacks[index]['questions']['questionOptions'].length>0){
                       List<String> selectedOptions=[];
-                      for(int i=0;i<widget.customerFeedbacks[index].selectedOptions.length;i++){
-                        selectedOptions.add(widget.customerFeedbacks[index]['questions'][i]['questionOptions']['questionOptionText']);
+                      if(widget.customerFeedbacks[index]['selectedOptions']!=null) {
+                        for (int i = 0; i <
+                            widget.customerFeedbacks[index]['selectedOptions']
+                                .length; i++) {
+                          selectedOptions.add(widget
+                              .customerFeedbacks[index]['questions'][i]['questionOptions']['questionOptionText']);
+                        }
                       }
                       return selectedOptions.toString().replaceAll("[","").replaceAll("]", "");
                     }else
-                      return widget.customerFeedbacks[index].rating.toString();
+                      return widget.customerFeedbacks[index]['rating'].toString();
                   }(),
                     style: GoogleFonts.prompt(
                       textStyle: TextStyle(

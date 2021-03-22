@@ -66,7 +66,7 @@ class _ClientSeeAllBusinessesState extends State<ClientSeeAllBusinesses> {
                 padding: EdgeInsets.all(16),
                 icon:Icon(FontAwesomeIcons.qrcode),
                 onPressed: (){
-
+                   Utils.scan(context);
                 },
               )
             ],

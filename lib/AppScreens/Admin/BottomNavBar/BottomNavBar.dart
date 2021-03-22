@@ -1,6 +1,7 @@
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:review_app/AppScreens/Admin/Business/BusinessList.dart';
+import 'package:review_app/AppScreens/Admin/Profile/ProfileScreen.dart';
 
 class BottomNavBar extends StatefulWidget {
   @override
@@ -56,7 +57,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       // case 3:
       //   return BusinessList();//AboutScreen();
       default:
-        return BusinessList();
+        return ProfileScreen();
     }
   }
 }

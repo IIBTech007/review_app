@@ -1,13 +1,11 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:review_app/AppScreens/Admin/Feedbacks/FeedbackDetails.dart';
-import 'package:review_app/Controllers/FeedbackController.dart';
-import 'package:review_app/Models/feedback.dart';
+import 'package:review_app/AppScreens/Customer/Home/OfflineFeedbackDetails.dart';
+import 'package:review_app/Models/CustomerFeedBack.dart';
 import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';
 import 'package:review_app/dbhelper.dart';
@@ -76,7 +74,11 @@ class _IndividualFeedbacksState extends State<OfflineFeedbacks> {
                 child: InkWell(
                   onTap: (){
                     if(feedbackList[index]['customerFeedBacks'].length>0){
-                      Navigator.push(context,MaterialPageRoute(builder: (context)=>FeedbackDetails(jsonDecode(feedbackList[index]['customerFeedBacks']))));
+                     // print(CustomerFeedBack.CustomerFeedBackListFromJson(feedbackList[index]['customerFeedBacks'].toString()));
+                      //print(jsonDecode(feedbackList[index]['customerFeedBacks'].toString()));
+                      //print(feedbackList[index]['customerFeedBacks'].toString());
+
+                      Navigator.push(context,MaterialPageRoute(builder: (context)=>OfflineFeedbackDetail(jsonDecode(feedbackList[index]['customerFeedBacks']))));
                     }else{
                       Utils.showError(context,"No Details Available");
                     }

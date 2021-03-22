@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,12 +8,13 @@ import 'package:printing/printing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:review_app/Models/BusinessViewModel.dart';
 import 'package:review_app/components/colorConstants.dart';
 
 class BusinessQRCode extends StatelessWidget {
-  int businessId;
+  BusinessViewModel businessViewModel;
   GlobalKey globalKey = new GlobalKey();
-  BusinessQRCode(this.businessId);
+  BusinessQRCode(this.businessViewModel);
 
   @override
   Widget build(BuildContext context) {
@@ -40,22 +42,32 @@ class BusinessQRCode extends StatelessWidget {
                 icon: Icon(Icons.print, color: color4,),
                 onPressed: ()async{
                   final doc = pw.Document();
+
                   RenderRepaintBoundary boundary = globalKey.currentContext.findRenderObject();
                   var image = await boundary.toImage();
                   ByteData byteData = await image.toByteData(format: ImageByteFormat.png);
                   Uint8List pngBytes = byteData.buffer.asUint8List();
                   final PdfImage img = PdfImage.file(doc.document, bytes: pngBytes);
+                  final PdfImage logo = PdfImage.file(doc.document, bytes: base64Decode(businessViewModel.image));
                   doc.addPage(pw.Page(
                       build: (pw.Context context) {
                         return pw.Column(
                             children: [
                               pw.Padding(padding: pw.EdgeInsets.all(8.0)),
                               pw.Center(
+                                child: pw.Image(pw.ImageProxy(logo),width: 100,height: 100),
+                              ),
+                              pw.Padding(padding: pw.EdgeInsets.only(bottom:20.0)),
+                              pw.Center(
+                                  child: pw.Text(businessViewModel.name,style: pw.TextStyle(fontSize: 30,fontWeight: pw.FontWeight.bold))
+                              ),
+                              pw.Padding(padding: pw.EdgeInsets.only(bottom:20.0)),
+                              pw.Center(
                                   child: pw.Image(pw.ImageProxy(img),width: 200,height: 200),
                               ),
                               pw.Padding(padding: pw.EdgeInsets.all(8.0)),
                               pw.Center(
-                                  child: pw.Text("Please Scan this QR Code to give Review to this Restaurant",style: pw.TextStyle(fontSize: 15))
+                                  child: pw.Text("Scan this QR code to give review to this Restaurant",style: pw.TextStyle(fontSize: 20))
                               ),
                             ]
                         );
@@ -75,7 +87,7 @@ class BusinessQRCode extends StatelessWidget {
             child: RepaintBoundary(
               key: globalKey,
               child: QrImage(
-                data: businessId.toString(),
+                data: businessViewModel.id.toString(),
                 version: QrVersions.auto,
                 size: 200.0,
               ),

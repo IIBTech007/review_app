@@ -71,7 +71,6 @@ class RegisterScreen extends StatelessWidget{
                   padding: const EdgeInsets.all(12.0),
                   child: Container(
                     width: 400,
-                    height: 560,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       //color: color3,
@@ -81,6 +80,7 @@ class RegisterScreen extends StatelessWidget{
                       // )
                     ),
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Center(
                           child: Padding(
