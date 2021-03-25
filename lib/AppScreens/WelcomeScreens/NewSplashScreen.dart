@@ -71,13 +71,14 @@ class _NewSplashScreenState extends State<NewSplashScreen> {
                     width: 310,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
-                        border: Border.all(color: color3, width: 2)
+                        color: color3
+                        //border: Border.all(color: color3, width: 2)
                     ),
                     child: Center(
                       child: Text("Register Business",
                         style: GoogleFonts.prompt(
                           textStyle: TextStyle(
-                              color: color3,
+                              color: color4,
                               fontSize: 20,
                               fontWeight: FontWeight.bold
                           ),
@@ -87,7 +88,7 @@ class _NewSplashScreenState extends State<NewSplashScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 90,),
+              SizedBox(height: 10,),
               Center(
                 child: InkWell(
                   onTap: (){

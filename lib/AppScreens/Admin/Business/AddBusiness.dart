@@ -5,10 +5,10 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:review_app/AppScreens/Admin/LocationSetting/Address.dart';
 import 'package:review_app/AppScreens/Admin/LocationSetting/Location.dart';
 import 'package:review_app/Controllers/AccountController.dart';
 import 'package:review_app/Controllers/BusinessController.dart';
-import 'package:review_app/Models/Address.dart';
 import 'package:review_app/Models/BusinessViewModel.dart';
 import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';
@@ -24,7 +24,7 @@ class AddBusiness extends StatefulWidget {
 
 class _AddBusinessState extends State<AddBusiness> {
   @override
-  Address address;
+  Address Businessaddress;
   File _image;
   DateTime start_time ;
   DateTime end_time ;
@@ -138,52 +138,86 @@ class _AddBusinessState extends State<AddBusiness> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 2, bottom: 2, left: 8, right: 8),
-                      child: Card(
+                      padding: const EdgeInsets.all(0.0),
+                      child:  Card(
                         elevation: 8,
                         color: color6,
                         child: Container(
                           child: ListTile(
                             title: TextFormField(
-                              controller: businessController.addressTextEditingController,
-                              style:  GoogleFonts.prompt(
-                                textStyle: TextStyle(
-                                    color: color1,
-                                    fontWeight: FontWeight.w500
-                                ),
-                              ),
-                              obscureText: false,maxLines: 2,
-                              validator: (String value) =>
-                              value.isEmpty ? "This field is Required" : null,
+                              controller: accountController.countryTextEditingController,
+                              style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                              obscureText: false,
                               decoration: InputDecoration(
-                                // suffixIcon: Icon(Icons.add_location,color: Colors.amberAccent,),
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(color: color3, width: 1.0)
                                 ),
                                 enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: color6, width: 1.0)
+                                    borderSide: BorderSide(color: color3, width: 1.0)
                                 ),
-                                labelText: 'Address',
-                                labelStyle: GoogleFonts.prompt(
-                                  textStyle: TextStyle(
-                                      color: color3,
-                                      fontWeight: FontWeight.w500
-                                  ),
-                                ),
-                                //suffixIcon: Icon(Icons.email,color: Colors.amberAccent,size: 27,),
+                                labelText:  "Address",
+                                labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
                               ),
                               textInputAction: TextInputAction.next,
+
                             ),
                             trailing: InkWell(
                                 onTap: () async{
-                                 address = await Navigator.push(context, MaterialPageRoute(builder: (context) => Location(),),);
-                                  businessController.addressTextEditingController.text = address.address;
+                                  Businessaddress = await Navigator.push(context, MaterialPageRoute(builder: (context) => Location(),),);
+                                  accountController.countryTextEditingController.text = Businessaddress.address;
                                 },
-                                child: Icon(Icons.add_location_alt,color: color3, size: 30,)),
+                                child: Icon(Icons.add_location,color: color3,size: 35,)),
                           ),
                         ),
                       ),
                     ),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(top: 2, bottom: 2, left: 8, right: 8),
+                    //   child: Card(
+                    //     elevation: 8,
+                    //     color: color6,
+                    //     child: Container(
+                    //       child: ListTile(
+                    //         title: TextFormField(
+                    //           controller: businessController.addressTextEditingController,
+                    //           style:  GoogleFonts.prompt(
+                    //             textStyle: TextStyle(
+                    //                 color: color1,
+                    //                 fontWeight: FontWeight.w500
+                    //             ),
+                    //           ),
+                    //           obscureText: false,maxLines: 2,
+                    //           validator: (String value) =>
+                    //           value.isEmpty ? "This field is Required" : null,
+                    //           decoration: InputDecoration(
+                    //             // suffixIcon: Icon(Icons.add_location,color: Colors.amberAccent,),
+                    //             focusedBorder: OutlineInputBorder(
+                    //                 borderSide: BorderSide(color: color3, width: 1.0)
+                    //             ),
+                    //             enabledBorder: OutlineInputBorder(
+                    //                 borderSide: BorderSide(color: color6, width: 1.0)
+                    //             ),
+                    //             labelText: 'Address',
+                    //             labelStyle: GoogleFonts.prompt(
+                    //               textStyle: TextStyle(
+                    //                   color: color3,
+                    //                   fontWeight: FontWeight.w500
+                    //               ),
+                    //             ),
+                    //             //suffixIcon: Icon(Icons.email,color: Colors.amberAccent,size: 27,),
+                    //           ),
+                    //           textInputAction: TextInputAction.next,
+                    //         ),
+                    //         trailing: InkWell(
+                    //             onTap: () async{
+                    //              address = await Navigator.push(context, MaterialPageRoute(builder: (context) => Location(),),);
+                    //               businessController.addressTextEditingController.text = address.address;
+                    //             },
+                    //             child: Icon(Icons.add_location_alt,color: color3, size: 30,)),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Card(
