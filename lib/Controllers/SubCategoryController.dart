@@ -29,24 +29,25 @@ class SubCategoryController extends GetxController{
       });
     }
    }
- void getSubCategory(int categoryId,BuildContext context){
+  void getSubCategory(int categoryId,BuildContext context){
     _subCategoryRepository.getSubCategories(categoryId, context).then((value){
       subcategoryList.clear();
       subcategoryList.assignAll(value);
     });
   }
-
   void changeVisibility(int id,int categoryId,BuildContext context){
     _subCategoryRepository.changeVisibility(id, context).then((value){
       getSubCategory(categoryId,context);
     });
   }
-
   void getSubCategoryforCustomer(int categoryId,BuildContext context){
     _subCategoryRepository.getSubCategoriesforCustomer(categoryId, context).then((value){
       subcategoryList.clear();
       subcategoryList.assignAll(value);
     });
+  }
+  void UpdateSubCategories(CategoriesViewModel model,BuildContext context){
+    _subCategoryRepository.updateSubCategories(model.id,model, context);
   }
   @override
   void onClose() {

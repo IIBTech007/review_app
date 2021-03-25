@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:need_resume/need_resume.dart';
 import 'package:review_app/AppScreens/Admin/BusinessCategory/AddBusinessCategory.dart';
+import 'package:review_app/AppScreens/Admin/BusinessCategory/UpdateBusinessCategory.dart';
 import 'package:review_app/AppScreens/Admin/BusinessSubcategory/BusinessSubCategoryList.dart';
 import 'package:review_app/Controllers/AccountController.dart';
 import 'package:review_app/Controllers/CategoryController.dart';
@@ -86,7 +87,7 @@ class _BusinessCategoryListState extends ResumableState<BusinessCategoryList> {
                         color: color2,
                         caption: 'Update',
                         onTap: () async {
-                          //Navigator.push(context,MaterialPageRoute(builder: (context)=>UpdateStore(storeList[index])));
+                          push(context,MaterialPageRoute(builder:(context)=>UpdateBusinessCategory(categoriesController.categoryList[index])));
                         },
                       ),
                       IconSlideAction(

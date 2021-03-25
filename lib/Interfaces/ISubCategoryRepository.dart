@@ -5,5 +5,5 @@ abstract class ISubCategoryRepository{
   Future<List<CategoriesViewModel>> getSubCategoriesforCustomer(int categoryId,BuildContext context);
   Future<void> addSubCategories(CategoriesViewModel categoriesViewModel,BuildContext context);
   Future<void> changeVisibility(int id,BuildContext context);
-  Future<void> updateSubCategories(CategoriesViewModel categoriesViewModel,BuildContext context);
+  Future<void> updateSubCategories(int id,CategoriesViewModel categoriesViewModel,BuildContext context);
 }

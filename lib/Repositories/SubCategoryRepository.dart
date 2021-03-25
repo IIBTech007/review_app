@@ -78,11 +78,35 @@ class SubCategoryRepository extends ISubCategoryRepository{
     return null;
   }
   @override
-  Future<void> updateSubCategories(CategoriesViewModel categoriesViewModel, BuildContext context) {
-    // TODO: implement updateSubCategories
-    throw UnimplementedError();
+  Future<void> updateSubCategories(int id,CategoriesViewModel categoriesViewModel, BuildContext context) async{
+    locator<Logger>().i(categoriesViewModel.toJson());
+    ArsProgressDialog progressDialog = ArsProgressDialog(
+        context,
+        blur: 2,
+        backgroundColor: Color(0x33000000),
+        animationDuration: Duration(milliseconds: 500));
+    try{
+      progressDialog.show();
+      var res=await http.put(Utils.baseUrl()+"Subcategories/$id",body:CategoriesViewModel.CategoriesViewModelToJson(categoriesViewModel),headers: {"Content-Type":"application/json","Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
+      progressDialog.dismiss();
+      if(res.statusCode==200||res.statusCode==201)
+      {
+        progressDialog.dismiss();
+        Navigator.pop(context,"Refresh");
+      }else if(res.body!=null&&res.body.isNotEmpty){
+        progressDialog.dismiss();
+        Utils.showError(context,res.body.trim());
+      }else {
+        progressDialog.dismiss();
+        Utils.showError(context, res.statusCode.toString());
+      }
+    }catch(e){
+      progressDialog.dismiss();
+      Utils.showError(context, e.toString());
+    }finally{
+      progressDialog.dismiss();
+    }
   }
-
   @override
   Future<List<CategoriesViewModel>> getSubCategoriesforCustomer(int categoryId, BuildContext context) async {
     ArsProgressDialog progressDialog = ArsProgressDialog(

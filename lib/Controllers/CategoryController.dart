@@ -34,6 +34,15 @@ class CategoryController extends GetxController{
       });
     }
   }
+ void UpdateCategories(CategoriesViewModel model,BuildContext context){
+   if(categoryName.text.isEmpty){
+     Utils.showError(context,"Category Name is Required");
+   }else {
+     _categoryRepository.updateCategories(model.id,model, context).then((value){
+       categoryName.text="";
+     });
+   }
+ }
   void changeVisibility(int id,int businessId,BuildContext context){
     _categoryRepository.changeVisibility(id, context).then((value){
       getCategories(context, businessId);

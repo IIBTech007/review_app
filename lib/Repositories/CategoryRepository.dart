@@ -36,7 +36,6 @@ class CategoryRepository extends ICategoryRepository{
       progressDialog.dismiss();
     }
   }
-
   @override
   Future<List<CategoriesViewModel>> getCategories(int businessId,BuildContext context) async{
     ArsProgressDialog progressDialog = ArsProgressDialog(
@@ -66,7 +65,6 @@ class CategoryRepository extends ICategoryRepository{
     }
     return null;
   }
-
   @override
   Future<void> changeVisibility(int id, BuildContext context)async {
    var response=await http.get(Utils.baseUrl()+"Categories/ChangeVisibility/$id",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
@@ -78,13 +76,34 @@ class CategoryRepository extends ICategoryRepository{
      Utils.showError(context,response.statusCode.toString());
     return null;
   }
-
   @override
-  Future<void> updateCategories(CategoriesViewModel categoriesViewModel, BuildContext context) {
-    // TODO: implement updateCategories
-    throw UnimplementedError();
+  Future<void> updateCategories(int id,CategoriesViewModel categoriesViewModel, BuildContext context)async {
+    ArsProgressDialog progressDialog = ArsProgressDialog(
+        context,
+        blur: 2,
+        backgroundColor: Color(0x33000000),
+        animationDuration: Duration(milliseconds: 500));
+    try{
+      progressDialog.show();
+      var res=await http.put(Utils.baseUrl()+"Categories/$id",body:CategoriesViewModel.CategoriesViewModelToJson(categoriesViewModel),headers: {"Content-Type":"application/json","Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
+      progressDialog.dismiss();
+      if(res.statusCode==200||res.statusCode==201)
+      {
+        progressDialog.dismiss();
+        Navigator.pop(context,"Refresh");
+      }else if(res.body!=null&&res.body.isNotEmpty){
+        progressDialog.dismiss();
+        Utils.showError(context,res.body.trim());
+      }else
+        progressDialog.dismiss();
+      Utils.showError(context,res.statusCode.toString());
+    }catch(e){
+      progressDialog.dismiss();
+      Utils.showError(context, e.toString());
+    }finally{
+      progressDialog.dismiss();
+    }
   }
-
   @override
   Future<List<CategoriesViewModel>> getCategoriesforCustomer(int businessId, BuildContext context) async {
     ArsProgressDialog progressDialog = ArsProgressDialog(

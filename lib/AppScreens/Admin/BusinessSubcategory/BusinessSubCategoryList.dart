@@ -4,6 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:need_resume/need_resume.dart';
+import 'package:review_app/AppScreens/Admin/BusinessSubcategory/UpdateBusinessSubCategory.dart';
 import 'package:review_app/AppScreens/Admin/Feedbacks/CustomerInfoforFeedback.dart';
 import 'package:review_app/AppScreens/Admin/Questionnaire/QuestionnaireList.dart';
 import 'AddBusinessSubCategory.dart';
@@ -88,7 +89,7 @@ class _BusinessSubCategoryListState extends ResumableState<BusinessSubCategoryLi
                         color: color2,
                         caption: 'Update',
                         onTap: () async {
-
+                          push(context,MaterialPageRoute(builder:(context)=>UpdateBusinessSubCategory(subCategoryController.subcategoryList[index])));
                         },
                       ),
                       IconSlideAction(
