@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:review_app/AppScreens/Admin/Business/AddBusiness.dart';
-import 'package:review_app/AppScreens/WelcomeScreens/LoginScreen.dart';
 import 'package:review_app/Controllers/AccountController.dart';
 import 'package:review_app/components/colorConstants.dart';
 
@@ -331,7 +330,7 @@ class RegisterBusiness extends StatelessWidget{
                 child: InkWell(
                   onTap: (){
                     // accountController.RegisterUser(context);
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> AddBusiness()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> AddBusiness("SignUp")));
                   },
                   child: Center(
                     child: Card(

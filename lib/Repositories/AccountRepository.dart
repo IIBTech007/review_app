@@ -36,9 +36,9 @@ class AccountRepository extends IAccountRepository{
         locator<GetStorage>().write("token", jsonDecode(res.body)["token"]);
         var claims =Utils.parseJwt(jsonDecode(res.body)["token"]);
         if(claims['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']=="Customer")
-         Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>ClientBottomNavBar()));
+         Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context)=>ClientBottomNavBar()),(Route<dynamic> route) => false);
         else
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>BottomNavBar()));
+        Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context)=>BottomNavBar()),(Route<dynamic> route) => false);
 
         return res.body;
       }else if(res.body!=null&&res.body.isNotEmpty){
@@ -69,6 +69,8 @@ class AccountRepository extends IAccountRepository{
       progressDialog.show();
       var res=await http.post(Utils.baseUrl()+"Account/Register",body:RegisterViewModel.registerViewModelToJson(registerViewModel),headers: {"Content-type":"application/json"});
       progressDialog.dismiss();
+      locator<Logger>().i(RegisterViewModel.registerViewModelToJson(registerViewModel));
+       print(res.body);
       if(res.statusCode==200)
       {
         progressDialog.dismiss();
@@ -78,9 +80,10 @@ class AccountRepository extends IAccountRepository{
       }else if(res.body!=null&&res.body.isNotEmpty){
         progressDialog.dismiss();
         Utils.showError(context,res.body.trim());
-      }else
+      }else {
         progressDialog.dismiss();
-        Utils.showError(context,res.statusCode.toString());
+        Utils.showError(context, res.statusCode.toString());
+      }
     }catch(e){
       progressDialog.dismiss();
       Utils.showError(context, e.toString());

@@ -49,7 +49,7 @@ class _BusinessListState extends ResumableState<BusinessList> {
           IconButton(
             icon: Icon(Icons.add, color: color4, size:35,),
             onPressed: (){
-              push(context, MaterialPageRoute(builder: (context)=> AddBusiness()));
+              push(context, MaterialPageRoute(builder: (context)=> AddBusiness("loggedIn")));
             },
           ):Container()
         ],

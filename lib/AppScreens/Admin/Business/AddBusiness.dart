@@ -14,6 +14,10 @@ import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';
 
 class AddBusiness extends StatefulWidget {
+  var type;
+
+  AddBusiness(this.type);
+
   @override
   _AddBusinessState createState() => _AddBusinessState();
 }
@@ -27,7 +31,7 @@ class _AddBusinessState extends State<AddBusiness> {
   var _formKey = new GlobalKey<FormState>();
   var _autoValidate = false;
   final accountController = Get.find<AccountController>();
-  final businessController=Get.find<BusinessController>();
+  final businessController=Get.put(BusinessController());
     Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -403,22 +407,40 @@ class _AddBusinessState extends State<AddBusiness> {
               ),
               InkWell(
                 onTap: (){
-                  accountController.RegisterUser(context,BusinessViewModel(
-                    description: businessController.descriptionTextEditingController.text,
-                    ownerId: "Acx",
-                    isVisible: true,
-                    businessTypeId: 1,
-                    longitude: businessController.longitude.value,
-                    latitude: businessController.latitude.value,
-                    address: businessController.addressTextEditingController.text,
-                    image: businessController.image.value,
-                    name: businessController.nameTextEditingController.text,
-                    closingTime: businessController.closingTime,
-                    openingTime: businessController.openingTime,
-                    phone: businessController.phoneTextEditingController.text,
-
-
-                  ));
+                  if(widget.type=="SignUp") {
+                    accountController.RegisterUser(context, BusinessViewModel(
+                      description: businessController
+                          .descriptionTextEditingController.text,
+                      email: businessController.emailTextEditingController.text,
+                      ownerId: "Acx",
+                      isVisible: true,
+                      businessTypeId: 1,
+                      longitude: businessController.longitude.value,
+                      latitude: businessController.latitude.value,
+                      address: businessController.addressTextEditingController
+                          .text,
+                      image: businessController.image.value,
+                      name: businessController.nameTextEditingController.text,
+                      closingTime: DateFormat("HH:mm:ss").format(
+                          businessController.closingTime.value),
+                      openingTime: DateFormat("HH:mm:ss").format(
+                          businessController.openingTime.value),
+                      phone: businessController.phoneTextEditingController.text,
+                    )).then((value){
+                      businessController.descriptionTextEditingController.text="";
+                      businessController.emailTextEditingController.text="";
+                      businessController.addressTextEditingController.text="";
+                      businessController.image.value="";
+                      businessController.nameTextEditingController.text="";
+                      businessController.phoneTextEditingController.text="";
+                      businessController.closingTime.value=null;
+                      businessController.openingTime.value=null;
+                      businessController.longitude.value=0.0;
+                      businessController.latitude.value=0.0;
+                    });
+                  }else if(widget.type=="loggedIn"){
+                    businessController.addBusiness(context);
+                  }
 
                 },
                 child: Center(

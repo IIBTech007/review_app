@@ -114,7 +114,14 @@ class AccountController extends GetxController{
           country: countryTextEditingController.text,
           city: cityTextEditingController.text,
           businessViewModel: businessViewModel
-      ));
+      )).then((value){
+         nameTextEditingController.text="";
+         emailTextEditingController.text="";
+         passwordTextEditingController.text="";
+         phoneTextEditingController.text="";
+         cityTextEditingController.text="";
+         countryTextEditingController.text="";
+      });
     }
   }
   TokenPayLoad getLoggedInUserData(){

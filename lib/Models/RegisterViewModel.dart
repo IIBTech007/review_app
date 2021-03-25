@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:review_app/Models/BusinessViewModel.dart';
+import 'package:review_app/Utils/Utils.dart';
 
 class RegisterViewModel{
  String name,email,phone,password,roleId,city,country;
@@ -37,6 +38,6 @@ class RegisterViewModel{
   "password": password,
   "phone": phone,
   "roleId":roleId,
-  "business": businessViewModel == null ? null : businessViewModel,
+  "business": businessViewModel == null ? null : businessViewModel.toJson(),
  };
 }

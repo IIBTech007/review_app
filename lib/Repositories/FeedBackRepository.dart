@@ -2,6 +2,7 @@ import 'package:ars_progress_dialog/ars_progress_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
+import 'package:review_app/AppScreens/Customer/BottomNavBar/BottomNavBar.dart';
 import 'package:review_app/AppScreens/Customer/Home/SeeAllBusinesses.dart';
 import 'package:review_app/Interfaces/IFeedbackRepository.dart';
 import 'package:review_app/Models/OverallReport.dart';
@@ -29,7 +30,11 @@ class FeedBackRepository extends IFeedBackRepository{
       {
         progressDialog.dismiss();
         Utils.showSuccess(context,"Feedback Added");
-        Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder:(context)=>ClientSeeAllBusinesses()),(Route<dynamic> route) => false);
+        if(locator<GetStorage>().read("token")!=null) {
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ClientBottomNavBar()), (Route<dynamic> route) => false);
+        }else{
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ClientSeeAllBusinesses()), (Route<dynamic> route) => false);
+        }
       }else if(res.body!=null&&res.body.isNotEmpty){
         progressDialog.dismiss();
         locator<Logger>().i(res.body.trim());

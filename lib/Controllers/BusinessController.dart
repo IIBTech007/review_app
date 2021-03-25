@@ -23,7 +23,6 @@ class BusinessController extends GetxController{
   TextEditingController nameTextEditingController,phoneTextEditingController,emailTextEditingController,descriptionTextEditingController,addressTextEditingController;
   @override
   void onInit() {
-    if(accountController.getLoggedInUserData()!=null&&accountController.getLoggedInUserData().role=="Admin") {
       if (nameTextEditingController == null) {
         nameTextEditingController = TextEditingController();
       }
@@ -39,8 +38,6 @@ class BusinessController extends GetxController{
       if (addressTextEditingController == null) {
         addressTextEditingController = TextEditingController();
       }
-
-    }
   }
 
  void  getBusinessByOwner(BuildContext context){
