@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';// Stores the Google Maps API Key
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:review_app/AppScreens/Admin/LocationSetting/Address.dart';
 
 import 'dart:math' show cos, sqrt, asin;
 
-import 'package:review_app/Models/Address.dart';
 import 'package:review_app/components/colorConstants.dart';
 
 
@@ -303,7 +303,7 @@ class _DirectionMapScreenState extends State<Location> {
                             child: Icon(Icons.done, color: color1,),
                           ),
                           onTap: () {
-                            address =Address(address: _currentAddress!=null?_currentAddress:"Enter Address",latitude: latitue!=null?latitue:_currentPosition.latitude,longitude: longitude!=null?longitude:_currentPosition.longitude);
+                            address = Address(address: _currentAddress!=null?_currentAddress:"Enter Address",latitude: latitue!=null?latitue:_currentPosition.latitude,longitude: longitude!=null?longitude:_currentPosition.longitude);
                             Navigator.pop(context,address);
                           },
                         ),

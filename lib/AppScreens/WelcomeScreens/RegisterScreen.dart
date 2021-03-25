@@ -3,11 +3,22 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:review_app/AppScreens/Admin/LocationSetting/Address.dart';
+import 'package:review_app/AppScreens/Admin/LocationSetting/Location.dart';
 import 'package:review_app/AppScreens/WelcomeScreens/LoginScreen.dart';
 import 'package:review_app/Controllers/AccountController.dart';
 import 'package:review_app/components/colorConstants.dart';
 
 class RegisterScreen extends StatelessWidget{
+
+  Address primaryAddress;
+  TextEditingController  address;
+
+  @override
+  void initState(){
+    this.address=TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     final  accountController = Get.put(AccountController());
@@ -248,78 +259,112 @@ class RegisterScreen extends StatelessWidget{
                             ),
                           ),
                         ),
+                        // Padding(
+                        //   padding: const EdgeInsets.all(8.0),
+                        //   child: Card(
+                        //     elevation: 8,
+                        //     color: color6,
+                        //     child: Container(
+                        //       child: TextFormField(
+                        //         controller: accountController.cityTextEditingController,
+                        //         style:  GoogleFonts.prompt(
+                        //           textStyle: TextStyle(
+                        //               color: color1,
+                        //               fontWeight: FontWeight.w500
+                        //           ),
+                        //         ),
+                        //         obscureText: false,
+                        //         decoration: InputDecoration(
+                        //           focusedBorder: OutlineInputBorder(
+                        //               borderSide: BorderSide(color: color3, width: 1.0)
+                        //           ),
+                        //           enabledBorder: OutlineInputBorder(
+                        //               borderSide: BorderSide(color: color6, width: 1.0)
+                        //           ),
+                        //           labelText: "City",
+                        //           labelStyle: GoogleFonts.prompt(
+                        //             textStyle: TextStyle(
+                        //                 color: color3,
+                        //                 fontWeight: FontWeight.w500
+                        //             ),
+                        //           ),
+                        //           suffixIcon: Icon(Icons.add_location_alt_outlined,color: color3,size: 27,),
+                        //         ),
+                        //         textInputAction: TextInputAction.next,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Card(
+                          padding: const EdgeInsets.all(0.0),
+                          child:  Card(
                             elevation: 8,
                             color: color6,
                             child: Container(
-                              child: TextFormField(
-                                controller: accountController.cityTextEditingController,
-                                style:  GoogleFonts.prompt(
-                                  textStyle: TextStyle(
-                                      color: color1,
-                                      fontWeight: FontWeight.w500
-                                  ),
-                                ),
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: color3, width: 1.0)
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: color6, width: 1.0)
-                                  ),
-                                  labelText: "City",
-                                  labelStyle: GoogleFonts.prompt(
-                                    textStyle: TextStyle(
-                                        color: color3,
-                                        fontWeight: FontWeight.w500
+                              child: ListTile(
+                                title: TextFormField(
+                                  controller: accountController.countryTextEditingController,
+                                  style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                                  obscureText: false,
+                                  decoration: InputDecoration(
+                                    focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(color: color3, width: 1.0)
                                     ),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(color: color3, width: 1.0)
+                                    ),
+                                    labelText:  "Address",
+                                    labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
                                   ),
-                                  suffixIcon: Icon(Icons.add_location_alt_outlined,color: color3,size: 27,),
+                                  textInputAction: TextInputAction.next,
+
                                 ),
-                                textInputAction: TextInputAction.next,
+                                trailing: InkWell(
+                                    onTap: () async{
+                                      primaryAddress = await Navigator.push(context, MaterialPageRoute(builder: (context) => Location(),),);
+                                      accountController.countryTextEditingController.text = primaryAddress.address;
+                                    },
+                                    child: Icon(Icons.add_location,color: color3,size: 35,)),
                               ),
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Card(
-                            elevation: 8,
-                            color: color6,
-                            child: Container(
-                              child: TextFormField(
-                                controller: accountController.countryTextEditingController,
-                                style:  GoogleFonts.prompt(
-                                  textStyle: TextStyle(
-                                      color: color1,
-                                      fontWeight: FontWeight.w500
-                                  ),
-                                ),
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: color3, width: 1.0)
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(color: color6, width: 1.0)
-                                  ),
-                                  labelText: "Country",
-                                  labelStyle: GoogleFonts.prompt(
-                                    textStyle: TextStyle(
-                                        color: color3,
-                                        fontWeight: FontWeight.w500
-                                    ),
-                                  ),
-                                  suffixIcon: Icon(Icons.account_balance,color: color3,size: 27,),
-                                ),
-                                textInputAction: TextInputAction.next,
-                              ),
-                            ),
-                          ),
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.all(8.0),
+                        //   child: Card(
+                        //     elevation: 8,
+                        //     color: color6,
+                        //     child: Container(
+                        //       child: TextFormField(
+                        //         controller: accountController.countryTextEditingController,
+                        //         style:  GoogleFonts.prompt(
+                        //           textStyle: TextStyle(
+                        //               color: color1,
+                        //               fontWeight: FontWeight.w500
+                        //           ),
+                        //         ),
+                        //         obscureText: false,
+                        //         decoration: InputDecoration(
+                        //           focusedBorder: OutlineInputBorder(
+                        //               borderSide: BorderSide(color: color3, width: 1.0)
+                        //           ),
+                        //           enabledBorder: OutlineInputBorder(
+                        //               borderSide: BorderSide(color: color6, width: 1.0)
+                        //           ),
+                        //           labelText: "Country",
+                        //           labelStyle: GoogleFonts.prompt(
+                        //             textStyle: TextStyle(
+                        //                 color: color3,
+                        //                 fontWeight: FontWeight.w500
+                        //             ),
+                        //           ),
+                        //           suffixIcon: Icon(Icons.account_balance,color: color3,size: 27,),
+                        //         ),
+                        //         textInputAction: TextInputAction.next,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),

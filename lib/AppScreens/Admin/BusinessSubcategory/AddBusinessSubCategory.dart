@@ -20,14 +20,14 @@ class _AddBusinessSubCategoryState extends State<AddBusinessSubCategory> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Add Business Sub Category", style: TextStyle(
-            color: color3, fontSize: 22, fontWeight: FontWeight.bold
+            color: color4, fontSize: 22, fontWeight: FontWeight.bold
         ),
         ),
         iconTheme: IconThemeData(
-            color: color3
+            color: color4
         ),
         centerTitle: true,
-        backgroundColor: color1,
+        backgroundColor: color3,
       ),
       body: Container(
         color: color4,
@@ -37,24 +37,29 @@ class _AddBusinessSubCategoryState extends State<AddBusinessSubCategory> {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: subcategoriesController.subCategoryName,
-                style: TextStyle(color: color1,fontWeight: FontWeight.bold),
-                obscureText: false,
-                validator: (String value) =>
-                value.isEmpty ? "This field is Required" : null,
-                decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: color1, width: 1.0)
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: color1, width: 1.0)
-                  ),
-                  labelText: "Sub Category Name",
-                  labelStyle: TextStyle(color: color1, fontWeight: FontWeight.bold),
+              child: Card(
+                elevation: 6,
+                child: Container(
+                  child: TextFormField(
+                    controller: subcategoriesController.subCategoryName,
+                    style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                    obscureText: false,
+                    validator: (String value) =>
+                    value.isEmpty ? "This field is Required" : null,
+                    decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: color3, width: 1.0)
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: color6, width: 1.0)
+                      ),
+                      labelText: "Sub Category Name",
+                      labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
 
+                    ),
+                    textInputAction: TextInputAction.next,
+                  ),
                 ),
-                textInputAction: TextInputAction.next,
               ),
             ),
             SizedBox(height: 20,),
@@ -72,7 +77,7 @@ class _AddBusinessSubCategoryState extends State<AddBusinessSubCategory> {
                   ),
                   child: Center(
                     child: Text("SAVE", style: TextStyle(
-                      color: color1,
+                      color: color4,
                       fontWeight: FontWeight.bold,
                       fontSize: 22,
                     ),),

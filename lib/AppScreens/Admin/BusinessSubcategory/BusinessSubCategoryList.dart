@@ -45,21 +45,21 @@ class _BusinessSubCategoryListState extends ResumableState<BusinessSubCategoryLi
       appBar: AppBar(
         actions: [
           IconButton(
-            icon: Icon(Icons.add, color: color3,size:25,),
+            icon: Icon(Icons.add, color: color4,size:25,),
             onPressed: (){
               push(context, MaterialPageRoute(builder: (context)=> AddBusinessSubCategory(widget.businessId,widget.categoryId)));
             },
           ),
         ],
         title: Text("Business Subcategory", style: TextStyle(
-            color: color3, fontSize: 22, fontWeight: FontWeight.bold
+            color: color4, fontSize: 22, fontWeight: FontWeight.bold
         ),
         ),
         iconTheme: IconThemeData(
-            color: color3
+            color: color4
         ),
         centerTitle: true,
-        backgroundColor: color1,
+        backgroundColor: color3,
       ),
       body: RefreshIndicator(
         key: _refreshIndicatorKey,
@@ -101,31 +101,34 @@ class _BusinessSubCategoryListState extends ResumableState<BusinessSubCategoryLi
                         },
                       ),
                     ],
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 70,
-                      decoration: BoxDecoration(
-                        //color: color1,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: color3, width: 2)
-                      ),
-                      child: ListTile(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder:(context)=>QuestionnaireList(subCategoryId: subCategoryController.subcategoryList[index].id,categoryId: subCategoryController.subcategoryList[index].categoryId,businessId: widget.businessId)));
-                        },
-                        title: Text(subCategoryController.subcategoryList[index].name,
-                        style: TextStyle(
-                        color: color3,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20
+                    child: Card(
+                      elevation: 6,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 70,
+                        decoration: BoxDecoration(
+                          //color: color1,
+                            borderRadius: BorderRadius.circular(10),
+                            //border: Border.all(color: color3, width: 2)
+                        ),
+                        child: ListTile(
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder:(context)=>QuestionnaireList(subCategoryId: subCategoryController.subcategoryList[index].id,categoryId: subCategoryController.subcategoryList[index].categoryId,businessId: widget.businessId)));
+                          },
+                          title: Text(subCategoryController.subcategoryList[index].name,
+                          style: TextStyle(
+                          color: color3,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20
+                          ),
+                        ),
+                        leading: FaIcon(
+                          FontAwesomeIcons.building,
+                          color: color3,
                         ),
                       ),
-                      leading: FaIcon(
-                        FontAwesomeIcons.building,
-                        color: color3,
-                      ),
-                    ),
-                  )
+                  ),
+                    )
               ),
               );
             });

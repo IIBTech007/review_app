@@ -16,14 +16,14 @@ class UpdateBusinessSubCategory extends StatelessWidget{
     return Scaffold(
       appBar: AppBar(
         title: Text("Update Business Category", style: TextStyle(
-            color: color3, fontSize: 22, fontWeight: FontWeight.bold
+            color: color4, fontSize: 22, fontWeight: FontWeight.bold
         ),
         ),
         iconTheme: IconThemeData(
-            color: color3
+            color: color4
         ),
         centerTitle: true,
-        backgroundColor: color1,
+        backgroundColor: color3,
       ),
       body: Container(
         color: color4,

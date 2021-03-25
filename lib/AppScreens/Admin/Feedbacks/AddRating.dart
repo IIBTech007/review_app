@@ -42,11 +42,11 @@ class _AddRatingsState extends State<AddRatings> {
           style: GoogleFonts.prompt(
             textStyle: TextStyle(
                 color: color4,
-                fontSize: 22,
+                fontSize: 22, ),
+
                 fontWeight: FontWeight.bold
             ),
           ),
-        ),
         iconTheme: IconThemeData(
             color: color4
         ),
