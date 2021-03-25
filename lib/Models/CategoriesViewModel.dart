@@ -20,5 +20,6 @@ class CategoriesViewModel{
     "businessId": businessId,
     "categoryId":categoryId,
     "name":name,
+    "id":id
   };
 }

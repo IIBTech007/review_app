@@ -21,6 +21,7 @@ class SubCategoryController extends GetxController{
       Utils.showError(context,"Sub Category Name is Required");
     }else{
       _subCategoryRepository.addSubCategories(CategoriesViewModel(
+        id: 0,
         categoryId: categoryId,
         businessId: businessId,
         name: subCategoryName.text

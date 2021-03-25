@@ -3,15 +3,24 @@ import 'package:get/get.dart';
 import 'package:review_app/Controllers/CategoryController.dart';
 import 'package:review_app/Models/CategoriesViewModel.dart';
 import 'package:review_app/components/colorConstants.dart';
-class UpdateBusinessCategory extends StatelessWidget{
+class UpdateBusinessCategory extends StatefulWidget{
   CategoriesViewModel category;
 
   UpdateBusinessCategory(this.category);
 
   @override
+  _UpdateBusinessCategoryState createState() => _UpdateBusinessCategoryState();
+}
+
+class _UpdateBusinessCategoryState extends State<UpdateBusinessCategory> {
+  final categoriesController=Get.find<CategoryController>();
+  @override
+  void initState() {
+    categoriesController.categoryName.text=widget.category.name;
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
-    final categoriesController=Get.find<CategoryController>();
-    categoriesController.categoryName.text=category.name;
     return Scaffold(
       appBar: AppBar(
         title: Text("Update Business Category", style: TextStyle(
@@ -58,8 +67,8 @@ class UpdateBusinessCategory extends StatelessWidget{
                 categoriesController.UpdateCategories(CategoriesViewModel(
                   name: categoriesController.categoryName.text,
                   categoryId: 0,
-                  id: category.id,
-                  businessId: category.businessId,
+                  id: widget.category.id,
+                  businessId: widget.category.businessId,
                 ),context);
               },
               child: Center(

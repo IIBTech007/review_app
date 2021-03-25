@@ -88,7 +88,7 @@ class AccountController extends GetxController{
       ));
     }
   }
-  Future<void> RegisterUser(BuildContext context,BusinessViewModel businessViewModel) {
+  Future<void> RegisterUser(BuildContext context,String role) {
     if (nameTextEditingController.text == null || nameTextEditingController.text.isEmpty) {
       Utils.showError(context, "Name Required");
     } else if (emailTextEditingController.text == null || emailTextEditingController.text.isEmpty) {
@@ -113,7 +113,7 @@ class AccountController extends GetxController{
           phone: phoneTextEditingController.text,
           country: countryTextEditingController.text,
           city: cityTextEditingController.text,
-          businessViewModel: businessViewModel
+          role: role
       )).then((value){
          nameTextEditingController.text="";
          emailTextEditingController.text="";
@@ -121,6 +121,7 @@ class AccountController extends GetxController{
          phoneTextEditingController.text="";
          cityTextEditingController.text="";
          countryTextEditingController.text="";
+
       });
     }
   }

@@ -89,7 +89,7 @@ class SubCategoryRepository extends ISubCategoryRepository{
       progressDialog.show();
       var res=await http.put(Utils.baseUrl()+"Subcategories/$id",body:CategoriesViewModel.CategoriesViewModelToJson(categoriesViewModel),headers: {"Content-Type":"application/json","Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
       progressDialog.dismiss();
-      if(res.statusCode==200||res.statusCode==201)
+      if(res.statusCode==200||res.statusCode==201||res.statusCode==204)
       {
         progressDialog.dismiss();
         Navigator.pop(context,"Refresh");
@@ -124,9 +124,10 @@ class SubCategoryRepository extends ISubCategoryRepository{
       }else if(response.body!=null&&response.body.isNotEmpty){
         progressDialog.dismiss();
         Utils.showError(context,response.body.toString());
-      }else
+      }else {
         progressDialog.dismiss();
-      Utils.showError(context,response.statusCode.toString());
+        Utils.showError(context, response.statusCode.toString());
+      }
     }catch(e){
       progressDialog.dismiss();
       Utils.showError(context,e.toString());

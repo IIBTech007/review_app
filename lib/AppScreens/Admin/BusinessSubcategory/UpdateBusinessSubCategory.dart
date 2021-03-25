@@ -1,21 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:review_app/Controllers/CategoryController.dart';
 import 'package:review_app/Controllers/SubCategoryController.dart';
 import 'package:review_app/Models/CategoriesViewModel.dart';
 import 'package:review_app/components/colorConstants.dart';
-class UpdateBusinessSubCategory extends StatelessWidget{
+class UpdateBusinessSubCategory extends StatefulWidget{
   CategoriesViewModel subcategory;
 
   UpdateBusinessSubCategory(this.subcategory);
 
   @override
+  _UpdateBusinessSubCategoryState createState() => _UpdateBusinessSubCategoryState();
+}
+
+class _UpdateBusinessSubCategoryState extends State<UpdateBusinessSubCategory> {
+  final subcategoriesController=Get.find<SubCategoryController>();
+  @override
+  void initState() {
+    subcategoriesController.subCategoryName.text=widget.subcategory.name;
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
-    final subcategoriesController=Get.find<SubCategoryController>();
-    subcategoriesController.subCategoryName.text=subcategory.name;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Update Business Category", style: TextStyle(
+        title: Text("Update Business Sub Category", style: TextStyle(
             color: color4, fontSize: 22, fontWeight: FontWeight.bold
         ),
         ),
@@ -58,9 +66,9 @@ class UpdateBusinessSubCategory extends StatelessWidget{
               onTap: (){
                 subcategoriesController.UpdateSubCategories(CategoriesViewModel(
                   name: subcategoriesController.subCategoryName.text,
-                  businessId: subcategory.businessId,
-                  categoryId: subcategory.businessId,
-                  id: subcategory.id,
+                  businessId: widget.subcategory.businessId,
+                  categoryId: widget.subcategory.categoryId,
+                  id: widget.subcategory.id,
                 ),context);
               },
               child: Center(

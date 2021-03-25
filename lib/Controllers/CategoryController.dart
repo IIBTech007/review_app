@@ -26,6 +26,7 @@ class CategoryController extends GetxController{
       Utils.showError(context,"Category Name is Required");
     }else {
       _categoryRepository.addCategories(CategoriesViewModel(
+        id: 0,
         name: categoryName.text,
         businessId: businessId,
         categoryId: 0,

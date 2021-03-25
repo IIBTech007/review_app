@@ -4,18 +4,16 @@ import 'package:review_app/Models/BusinessViewModel.dart';
 import 'package:review_app/Utils/Utils.dart';
 
 class RegisterViewModel{
- String name,email,phone,password,roleId,city,country;
- BusinessViewModel businessViewModel;
+ String name,email,phone,password,role,city,country;
 
  RegisterViewModel({
   this.name,
   this.email,
   this.phone,
   this.password,
-  this.roleId,
+  this.role,
   this.city,
   this.country,
-  this.businessViewModel
  });
  static RegisterViewModel registerViewModelFromJson(String str) => RegisterViewModel.fromJson(json.decode(str));
 
@@ -27,7 +25,7 @@ class RegisterViewModel{
   email: json["email"],
   password: json["password"],
   phone: json["phone"],
-  roleId:json["roleId"]
+  role:json["role"]
  );
 
  Map<String, dynamic> toJson() => {
@@ -37,7 +35,6 @@ class RegisterViewModel{
   "email": email,
   "password": password,
   "phone": phone,
-  "roleId":roleId,
-  "business": businessViewModel == null ? null : businessViewModel.toJson(),
+  "role":role,
  };
 }

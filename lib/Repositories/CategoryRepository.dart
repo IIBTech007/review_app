@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:ars_progress_dialog/ars_progress_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:logger/logger.dart';
 import 'package:review_app/Interfaces/ICategoryRepository.dart';
 import 'package:review_app/Models/CategoriesViewModel.dart';
 import 'package:http/http.dart'as http;
@@ -86,17 +87,21 @@ class CategoryRepository extends ICategoryRepository{
     try{
       progressDialog.show();
       var res=await http.put(Utils.baseUrl()+"Categories/$id",body:CategoriesViewModel.CategoriesViewModelToJson(categoriesViewModel),headers: {"Content-Type":"application/json","Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
+      locator<Logger>().i(Utils.baseUrl()+"Categories/$id");
+      locator<Logger>().i(CategoriesViewModel.CategoriesViewModelToJson(categoriesViewModel));
+      locator<Logger>().i(res.body);
       progressDialog.dismiss();
-      if(res.statusCode==200||res.statusCode==201)
+      if(res.statusCode==200||res.statusCode==201||res.statusCode==204)
       {
         progressDialog.dismiss();
         Navigator.pop(context,"Refresh");
       }else if(res.body!=null&&res.body.isNotEmpty){
         progressDialog.dismiss();
         Utils.showError(context,res.body.trim());
-      }else
+      }else {
         progressDialog.dismiss();
-      Utils.showError(context,res.statusCode.toString());
+        Utils.showError(context, res.statusCode.toString());
+      }
     }catch(e){
       progressDialog.dismiss();
       Utils.showError(context, e.toString());

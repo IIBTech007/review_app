@@ -14,24 +14,21 @@ import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';
 
 class AddBusiness extends StatefulWidget {
-  var type;
 
-  AddBusiness(this.type);
 
   @override
   _AddBusinessState createState() => _AddBusinessState();
 }
 
 class _AddBusinessState extends State<AddBusiness> {
-  @override
   Address Businessaddress;
   File _image;
   DateTime start_time ;
   DateTime end_time ;
   var _formKey = new GlobalKey<FormState>();
   var _autoValidate = false;
-  final accountController = Get.find<AccountController>();
   final businessController=Get.put(BusinessController());
+  @override
     Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -145,7 +142,7 @@ class _AddBusinessState extends State<AddBusiness> {
                         child: Container(
                           child: ListTile(
                             title: TextFormField(
-                              controller: accountController.countryTextEditingController,
+                              controller: businessController.addressTextEditingController,
                               style: TextStyle(color: color1,fontWeight: FontWeight.bold),
                               obscureText: false,
                               decoration: InputDecoration(
@@ -164,60 +161,15 @@ class _AddBusinessState extends State<AddBusiness> {
                             trailing: InkWell(
                                 onTap: () async{
                                   Businessaddress = await Navigator.push(context, MaterialPageRoute(builder: (context) => Location(),),);
-                                  accountController.countryTextEditingController.text = Businessaddress.address;
+                                  businessController.addressTextEditingController.text = Businessaddress.address;
+                                  businessController.longitude.value=Businessaddress.longitude;
+                                  businessController.latitude.value=Businessaddress.latitude;
                                 },
                                 child: Icon(Icons.add_location,color: color3,size: 35,)),
                           ),
                         ),
                       ),
                     ),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(top: 2, bottom: 2, left: 8, right: 8),
-                    //   child: Card(
-                    //     elevation: 8,
-                    //     color: color6,
-                    //     child: Container(
-                    //       child: ListTile(
-                    //         title: TextFormField(
-                    //           controller: businessController.addressTextEditingController,
-                    //           style:  GoogleFonts.prompt(
-                    //             textStyle: TextStyle(
-                    //                 color: color1,
-                    //                 fontWeight: FontWeight.w500
-                    //             ),
-                    //           ),
-                    //           obscureText: false,maxLines: 2,
-                    //           validator: (String value) =>
-                    //           value.isEmpty ? "This field is Required" : null,
-                    //           decoration: InputDecoration(
-                    //             // suffixIcon: Icon(Icons.add_location,color: Colors.amberAccent,),
-                    //             focusedBorder: OutlineInputBorder(
-                    //                 borderSide: BorderSide(color: color3, width: 1.0)
-                    //             ),
-                    //             enabledBorder: OutlineInputBorder(
-                    //                 borderSide: BorderSide(color: color6, width: 1.0)
-                    //             ),
-                    //             labelText: 'Address',
-                    //             labelStyle: GoogleFonts.prompt(
-                    //               textStyle: TextStyle(
-                    //                   color: color3,
-                    //                   fontWeight: FontWeight.w500
-                    //               ),
-                    //             ),
-                    //             //suffixIcon: Icon(Icons.email,color: Colors.amberAccent,size: 27,),
-                    //           ),
-                    //           textInputAction: TextInputAction.next,
-                    //         ),
-                    //         trailing: InkWell(
-                    //             onTap: () async{
-                    //              address = await Navigator.push(context, MaterialPageRoute(builder: (context) => Location(),),);
-                    //               businessController.addressTextEditingController.text = address.address;
-                    //             },
-                    //             child: Icon(Icons.add_location_alt,color: color3, size: 30,)),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Card(
@@ -441,41 +393,7 @@ class _AddBusinessState extends State<AddBusiness> {
               ),
               InkWell(
                 onTap: (){
-                  if(widget.type=="SignUp") {
-                    accountController.RegisterUser(context, BusinessViewModel(
-                      description: businessController
-                          .descriptionTextEditingController.text,
-                      email: businessController.emailTextEditingController.text,
-                      ownerId: "Acx",
-                      isVisible: true,
-                      businessTypeId: 1,
-                      longitude: businessController.longitude.value,
-                      latitude: businessController.latitude.value,
-                      address: businessController.addressTextEditingController
-                          .text,
-                      image: businessController.image.value,
-                      name: businessController.nameTextEditingController.text,
-                      closingTime: DateFormat("HH:mm:ss").format(
-                          businessController.closingTime.value),
-                      openingTime: DateFormat("HH:mm:ss").format(
-                          businessController.openingTime.value),
-                      phone: businessController.phoneTextEditingController.text,
-                    )).then((value){
-                      businessController.descriptionTextEditingController.text="";
-                      businessController.emailTextEditingController.text="";
-                      businessController.addressTextEditingController.text="";
-                      businessController.image.value="";
-                      businessController.nameTextEditingController.text="";
-                      businessController.phoneTextEditingController.text="";
-                      businessController.closingTime.value=null;
-                      businessController.openingTime.value=null;
-                      businessController.longitude.value=0.0;
-                      businessController.latitude.value=0.0;
-                    });
-                  }else if(widget.type=="loggedIn"){
                     businessController.addBusiness(context);
-                  }
-
                 },
                 child: Center(
                   child: Card(

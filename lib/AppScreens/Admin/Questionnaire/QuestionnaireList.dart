@@ -4,6 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:need_resume/need_resume.dart';
 import 'package:review_app/AppScreens/Admin/Questionnaire/AddAQuestion.dart';
+import 'package:review_app/AppScreens/Admin/Questionnaire/Options/OptionsList.dart';
 import 'package:review_app/Controllers/QuestionsController.dart';
 import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';
@@ -105,6 +106,11 @@ class _QuestionnaireListState extends ResumableState<QuestionnaireList> {
                           border: Border.all(color: color3, width: 2)
                       ),
                       child: ListTile(
+                        onTap: () {
+                          print(_questionController.questionList[index].id);
+                           //Navigator.push(context,MaterialPageRoute(builder:(context)=>QuestionOptionsList(_questionController.questionList[index].id)));
+
+                        },
                         title: Text(_questionController.questionList[index].questionText,
                           style: TextStyle(
                               color: color3,

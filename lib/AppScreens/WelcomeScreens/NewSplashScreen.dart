@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:review_app/AppScreens/Customer/Home/SeeAllBusinesses.dart';
-import 'package:review_app/AppScreens/WelcomeScreens/RegisterBusiness.dart';
 import 'package:review_app/Utils/Locator.dart';
 import 'package:review_app/AppScreens/WelcomeScreens/LoginScreen.dart';
 import 'package:review_app/AppScreens/WelcomeScreens/RegisterScreen.dart';
@@ -64,7 +63,7 @@ class _NewSplashScreenState extends State<NewSplashScreen> {
               Center(
                 child: InkWell(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisterBusiness()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisterScreen("Admin")));
                   },
                   child: Container(
                     height: 60,
@@ -92,7 +91,7 @@ class _NewSplashScreenState extends State<NewSplashScreen> {
               Center(
                 child: InkWell(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisterScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisterScreen("Customer")));
                   },
                   child: Container(
                     height: 60,
