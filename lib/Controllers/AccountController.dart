@@ -9,6 +9,7 @@ import 'package:review_app/Models/RegisterViewModel.dart';
 import 'package:review_app/Models/TokenPayLoad.dart';
 import 'package:review_app/Utils/Locator.dart';
 import '../Models/LoginViewModel.dart';
+import '../Models/RegisterViewModel.dart';
 import '../Utils/Utils.dart';
 
 class AccountController extends GetxController{
@@ -88,7 +89,7 @@ class AccountController extends GetxController{
       ));
     }
   }
-  Future<void> RegisterUser(BuildContext context,String role) {
+  Future<void> RegisterUser(BuildContext context,BusinessViewModel businessViewModel) {
     if (nameTextEditingController.text == null || nameTextEditingController.text.isEmpty) {
       Utils.showError(context, "Name Required");
     } else if (emailTextEditingController.text == null || emailTextEditingController.text.isEmpty) {
@@ -113,7 +114,8 @@ class AccountController extends GetxController{
           phone: phoneTextEditingController.text,
           country: countryTextEditingController.text,
           city: cityTextEditingController.text,
-          role: role
+        businessViewModel: businessViewModel
+
       )).then((value){
          nameTextEditingController.text="";
          emailTextEditingController.text="";

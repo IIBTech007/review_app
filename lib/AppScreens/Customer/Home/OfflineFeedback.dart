@@ -78,7 +78,7 @@ class _IndividualFeedbacksState extends State<OfflineFeedbacks> {
                       //print(jsonDecode(feedbackList[index]['customerFeedBacks'].toString()));
                       //print(feedbackList[index]['customerFeedBacks'].toString());
 
-                      Navigator.push(context,MaterialPageRoute(builder: (context)=>OfflineFeedbackDetail(jsonDecode(feedbackList[index]['customerFeedBacks']))));
+                     /// Navigator.push(context,MaterialPageRoute(builder: (context)=>OfflineFeedbackDetail(jsonDecode(feedbackList[index]['customerFeedBacks']))));
                     }else{
                       Utils.showError(context,"No Details Available");
                     }

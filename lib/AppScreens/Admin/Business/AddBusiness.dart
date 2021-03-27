@@ -12,15 +12,21 @@ import 'package:review_app/Controllers/BusinessController.dart';
 import 'package:review_app/Models/BusinessViewModel.dart';
 import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';
+import 'package:review_app/Controllers/AccountController.dart';
+import 'package:review_app/Models/BusinessViewModel.dart';
+
 
 class AddBusiness extends StatefulWidget {
+  var type;
 
+  AddBusiness(this.type);
 
   @override
   _AddBusinessState createState() => _AddBusinessState();
 }
 
 class _AddBusinessState extends State<AddBusiness> {
+
   Address Businessaddress;
   File _image;
   DateTime start_time ;
@@ -28,6 +34,8 @@ class _AddBusinessState extends State<AddBusiness> {
   var _formKey = new GlobalKey<FormState>();
   var _autoValidate = false;
   final businessController=Get.put(BusinessController());
+  final accountController = Get.find<AccountController>();
+
   @override
     Widget build(BuildContext context) {
     return Scaffold(
@@ -393,7 +401,42 @@ class _AddBusinessState extends State<AddBusiness> {
               ),
               InkWell(
                 onTap: (){
+
+                   // businessController.addBusiness(context);
+                  if(widget.type=="SignUp") {
+                    accountController.RegisterUser(context, BusinessViewModel(
+                      description: businessController
+                          .descriptionTextEditingController.text,
+                      email: businessController.emailTextEditingController.text,
+                      ownerId: "Acx",
+                      isVisible: true,
+                      businessTypeId: 1,
+                      longitude: businessController.longitude.value,
+                      latitude: businessController.latitude.value,
+                      address: businessController.addressTextEditingController
+                          .text,
+                      image: businessController.image.value,
+                      name: businessController.nameTextEditingController.text,
+                      closingTime: DateFormat("HH:mm:ss").format(
+                          businessController.closingTime.value),
+                      openingTime: DateFormat("HH:mm:ss").format(
+                          businessController.openingTime.value),
+                      phone: businessController.phoneTextEditingController.text,
+                    )).then((value){
+                      businessController.descriptionTextEditingController.text="";
+                      businessController.emailTextEditingController.text="";
+                      businessController.addressTextEditingController.text="";
+                      businessController.image.value="";
+                      businessController.nameTextEditingController.text="";
+                      businessController.phoneTextEditingController.text="";
+                      businessController.closingTime.value=null;
+                      businessController.openingTime.value=null;
+                      businessController.longitude.value=0.0;
+                      businessController.latitude.value=0.0;
+                    });
+                  }else if(widget.type=="loggedIn"){
                     businessController.addBusiness(context);
+                  }
                 },
                 child: Center(
                   child: Card(

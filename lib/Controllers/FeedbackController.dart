@@ -5,8 +5,11 @@ import 'package:review_app/Controllers/AccountController.dart';
 import 'package:review_app/Interfaces/IFeedbackRepository.dart';
 import 'package:review_app/Models/CustomerFeedBack.dart';
 import 'package:review_app/Models/feedback.dart';
+import 'package:review_app/Models/offlineFeedBack.dart';
 import 'package:review_app/Utils/Locator.dart';
 import 'package:review_app/dbhelper.dart';
+
+import '../AppScreens/Customer/Home/OfflineFeedback.dart';
 
 class FeedbackController extends GetxController{
 TextEditingController comment,phone,email,name,city,country;
@@ -63,7 +66,7 @@ final _accountController=Get.find<AccountController>();
        for(CustomerFeedBack cus in customerFeedback){
          overallRating+=cus.rating/customerFeedback.length;
        }
-       new dbhelper().addFeedBacks(feedback(
+       new dbhelper().addFeedBacks(Offlinefeedback(
            subCategoryId: subCategoryId,
            categoryId: categoryId,
            phone:phone.text,

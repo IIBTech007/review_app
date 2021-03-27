@@ -5,6 +5,7 @@ import 'package:review_app/Utils/Utils.dart';
 
 class RegisterViewModel{
  String name,email,phone,password,role,city,country;
+ BusinessViewModel businessViewModel;
 
  RegisterViewModel({
   this.name,
@@ -14,6 +15,8 @@ class RegisterViewModel{
   this.role,
   this.city,
   this.country,
+  this.businessViewModel
+
  });
  static RegisterViewModel registerViewModelFromJson(String str) => RegisterViewModel.fromJson(json.decode(str));
 
@@ -36,5 +39,7 @@ class RegisterViewModel{
   "password": password,
   "phone": phone,
   "role":role,
+  "business": businessViewModel == null ? null : businessViewModel,
+
  };
 }

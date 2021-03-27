@@ -3,26 +3,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:review_app/AppScreens/Admin/LocationSetting/Address.dart';
-import 'package:review_app/AppScreens/Admin/LocationSetting/Location.dart';
-import 'package:review_app/AppScreens/WelcomeScreens/LoginScreen.dart';
+import 'package:review_app/AppScreens/Admin/Business/AddBusiness.dart';
 import 'package:review_app/Controllers/AccountController.dart';
 import 'package:review_app/components/colorConstants.dart';
 
-class RegisterScreen extends StatelessWidget{
-  String role;
-
-  RegisterScreen(this.role);
-
-
-  Address primaryAddress;
-  TextEditingController  address;
-
-  @override
-  void initState(){
-    this.address=TextEditingController();
-  }
-
+class RegisterBusiness extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     final  accountController = Get.put(AccountController());
@@ -70,15 +55,15 @@ class RegisterScreen extends StatelessWidget{
                 ),
               ),
               Center(
-                child: Container(
-                  width: 400,
-                  height: 100,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('assets/tasteclicks.png')
-                      )
-                  ),
-                )
+                  child: Container(
+                    width: 400,
+                    height: 100,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('assets/tasteclicks.png')
+                        )
+                    ),
+                  )
               ),
               SizedBox(height: 10,),
               Center(
@@ -217,11 +202,11 @@ class RegisterScreen extends StatelessWidget{
                                   ),
                                   suffixIcon: IconButton(icon: Icon(accountController.signUpPasswordIsVisible?Icons.visibility:Icons.visibility_off,color: color3,size: 27),
                                     onPressed: () {
-                                     if(accountController.signUpPasswordIsVisible){
-                                       accountController.signUpPasswordIsVisible=false;
-                                     }else
-                                       accountController.signUpPasswordIsVisible=true;
-                                  },),//Icon(Icons.https,color: yellowColor,size: 27,)
+                                      if(accountController.signUpPasswordIsVisible){
+                                        accountController.signUpPasswordIsVisible=false;
+                                      }else
+                                        accountController.signUpPasswordIsVisible=true;
+                                    },),//Icon(Icons.https,color: yellowColor,size: 27,)
                                 ),
                               ),
                             ),
@@ -344,7 +329,10 @@ class RegisterScreen extends StatelessWidget{
                 padding: const EdgeInsets.all(5.0),
                 child: InkWell(
                   onTap: (){
-                      accountController.RegisterUser(context,null);
+                    // accountController.RegisterUser(context);
+                   // Navigator.push(context, MaterialPageRoute(builder: (context)=> AddBusiness()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> AddBusiness("SignUp")));
+
                   },
                   child: Center(
                     child: Card(
@@ -357,7 +345,7 @@ class RegisterScreen extends StatelessWidget{
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Center(
-                          child: Text("Sign Up",
+                          child: Text("Next",
                             style: GoogleFonts.prompt(
                               textStyle: TextStyle(
                                   color: color4,
@@ -373,45 +361,7 @@ class RegisterScreen extends StatelessWidget{
                 ),
               ),
               SizedBox(height: 15,),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Already Have Account?',
-                            style: GoogleFonts.prompt(
-                              textStyle: TextStyle(
-                                  color: color1,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 4,),
-                          InkWell(
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginScreen()));
-                            },
-                            child: Text(
-                              'Login',
-                              style: GoogleFonts.prompt(
-                                textStyle: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                    color: color3,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      )
-                  ),
-                ),
-              ),
+
             ],
           ),
         ),

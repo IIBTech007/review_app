@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:review_app/Models/feedback.dart';
+
+import 'Models/offlineFeedBack.dart';
 class dbhelper {
   static Database _db;
   Future<Database> get db async {
@@ -35,7 +37,7 @@ class dbhelper {
         "customerFeedBacks TEXT"
         ")");
   }
-  Future<int> addFeedBacks(feedback f) async {
+  Future<int> addFeedBacks(Offlinefeedback f) async {
     var dbClient = await db;
 
     var result = await dbClient.insert("feedbacks",{"customerName":f.customerName,"phone":f.phone,"email":f.email,"city":f.city,"country":f.country,"comment":f.comment,"image":f.image,"categoryId":f.categoryId,"subCategoryId":f.subCategoryId,"businessId":f.businessId,"overallRating":f.overallRating,"customerFeedBacks":jsonEncode(f.customerFeedBacks)});

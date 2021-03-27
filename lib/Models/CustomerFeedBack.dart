@@ -42,4 +42,13 @@ class CustomerFeedBack{
     "questionId":questionId,
     "selectedQuestionOption":List<dynamic>.from(selectedOptions.map((x) => x.toJson()))
   };
+  Map<String, dynamic> toMap() => {
+    "businessId":businessId,
+    "categoryId":categoryId,
+    "subCategoryId":subCategoryId,
+    "questions":questions.toJson(),
+    "rating":rating,
+    "questionId":questionId,
+    "selectedQuestionOption":List<dynamic>.from(selectedOptions.map((x) => x.toJson()))
+  };
 }

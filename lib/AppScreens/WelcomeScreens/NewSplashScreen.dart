@@ -10,6 +10,8 @@ import 'package:review_app/AppScreens/WelcomeScreens/RegisterScreen.dart';
 
 import 'package:review_app/components/colorConstants.dart';
 
+import 'RegisterBusiness.dart';
+
 class NewSplashScreen extends StatefulWidget {
   @override
   _NewSplashScreenState createState() => _NewSplashScreenState();
@@ -63,7 +65,7 @@ class _NewSplashScreenState extends State<NewSplashScreen> {
               Center(
                 child: InkWell(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisterScreen("Admin")));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisterBusiness()));
                   },
                   child: Container(
                     height: 60,
