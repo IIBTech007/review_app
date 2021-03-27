@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:need_resume/need_resume.dart';
 import 'package:review_app/AppScreens/Admin/Questionnaire/AddAQuestion.dart';
 import 'package:review_app/AppScreens/Admin/Questionnaire/Options/OptionsList.dart';
@@ -49,15 +50,20 @@ class _QuestionnaireListState extends ResumableState<QuestionnaireList> {
             },
           ),
         ],
-        title: Text("Questionnaire", style: TextStyle(
-            color: color3, fontSize: 22, fontWeight: FontWeight.bold
-        ),
+        title: Text("Questionnaire",
+          style: GoogleFonts.prompt(
+            textStyle: TextStyle(
+                color: color4,
+                fontSize: 22,
+                fontWeight: FontWeight.bold
+            ),
+          ),
         ),
         iconTheme: IconThemeData(
-            color: color3
+            color: color4
         ),
         centerTitle: true,
-        backgroundColor: color1,
+        backgroundColor: color3,
       ),
       body: RefreshIndicator(
         key: _refreshIndicatorKey,
@@ -100,31 +106,38 @@ class _QuestionnaireListState extends ResumableState<QuestionnaireList> {
                         },
                       ),
                     ],
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      //height: 70,
-                      decoration: BoxDecoration(
-                        //color: color1,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: color3, width: 2)
-                      ),
-                      child: ListTile(
-                        onTap: () {
-                          print(_questionController.questionList[index].id);
-                           Navigator.push(context,MaterialPageRoute(builder:(context)=>QuestionOptionsList(_questionController.questionList[index].id)));
-                        },
-                        title: Text(_questionController.questionList[index].questionText,
-                          style: TextStyle(
-                              color: color3,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20
-                          ),
+                    child: Card(
+                      elevation: 6,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        //height: 70,
+                        decoration: BoxDecoration(
+                          //color: color1,
+                            borderRadius: BorderRadius.circular(10),
+                            //border: Border.all(color: color3, width: 2)
                         ),
-                        subtitle: Text(Utils.getQuestionType(_questionController.questionList[index].questionType),
-                          style: TextStyle(
-                              color: color1,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16
+                        child: ListTile(
+                          onTap: () {
+                            print(_questionController.questionList[index].id);
+                             Navigator.push(context,MaterialPageRoute(builder:(context)=>QuestionOptionsList(_questionController.questionList[index].id)));
+                          },
+                          title: Text(_questionController.questionList[index].questionText,
+                            style: GoogleFonts.prompt(
+                              textStyle: TextStyle(
+                                  color: color3,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ),
+                          subtitle: Text(Utils.getQuestionType(_questionController.questionList[index].questionType),
+                            style: GoogleFonts.prompt(
+                              textStyle: TextStyle(
+                                  color: color1,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
                           ),
                         ),
                       ),

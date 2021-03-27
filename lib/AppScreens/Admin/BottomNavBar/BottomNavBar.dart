@@ -32,12 +32,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
           //   iconData: Icons.view_list,
           //   title: "Review",
           // ),
-          TabData(iconData: Icons.home, title: "Home",),
-          TabData(iconData: Icons.question_answer, title: "Feedbacks"),
-          TabData(iconData: Icons.settings, title: "Settings"),
+          TabData(iconData: Icons.home, title: "Home", ),
+          TabData(iconData: Icons.account_box, title: "Profile"),
+          //TabData(iconData: Icons.settings, title: "Settings"),
 
         ],
-        initialSelection: 2,
+        initialSelection: 0,
         key: bottomNavigationKey,
         onTabChangedListener: (position) {
           setState(() {
@@ -52,10 +52,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
     switch (page) {
       case 0:
         return BusinessList();
-      case 1:
+      //case 1:
        // return AdminHomeScreen();
-      case 2:
-        return BusinessList();
+      // case 2:
+      //   return BusinessList();
       // case 2:
       //   return BusinessList();
       // case 3:

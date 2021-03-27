@@ -2,10 +2,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:review_app/Controllers/FeedbackController.dart';
 import 'package:review_app/Controllers/OverallReportController.dart';
 import 'package:review_app/Utils/Utils.dart';
+import 'package:review_app/components/colorConstants.dart';
 
 class BusinessReport extends StatefulWidget {
   int businessId;
@@ -37,7 +39,22 @@ class _BusinessReportState extends State<BusinessReport> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title:Text("Overall Report")),
+      appBar: AppBar(
+        title: Text("Dashboard",
+          style: GoogleFonts.prompt(
+            textStyle: TextStyle(
+                color: color4,
+                fontSize: 22,
+                fontWeight: FontWeight.bold
+            ),
+          ),
+        ),
+        iconTheme: IconThemeData(
+            color: color4
+        ),
+        centerTitle: true,
+        backgroundColor: color3,
+      ),
       body: RefreshIndicator(
         key: _refreshIndicatorKey,
         onRefresh: ()async{
@@ -61,7 +78,15 @@ class _BusinessReportState extends State<BusinessReport> {
                           return Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text("Monthly Report",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                              Text("Monthly Report",
+                                style: GoogleFonts.prompt(
+                                  textStyle: TextStyle(
+                                      color: color1,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                              ),
                           Visibility(
                           visible: _reportController.dataMap!=null,
                             child: PieChart(

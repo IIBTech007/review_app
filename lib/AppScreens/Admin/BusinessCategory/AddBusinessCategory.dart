@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:review_app/Controllers/CategoryController.dart';
 import 'package:review_app/components/colorConstants.dart';
 
@@ -18,8 +19,13 @@ class _AddBusinessCategoryState extends State<AddBusinessCategory> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add Business Category", style: TextStyle(
-            color: color4, fontSize: 22, fontWeight: FontWeight.bold
+        title: Text("Add Business Category", style:
+        GoogleFonts.prompt(
+          textStyle: TextStyle(
+              color: color4,
+              fontSize: 22,
+              fontWeight: FontWeight.bold
+          ),
         ),
         ),
         iconTheme: IconThemeData(
@@ -41,7 +47,13 @@ class _AddBusinessCategoryState extends State<AddBusinessCategory> {
                 child: Container(
                   child: TextFormField(
                     controller: categoriesController.categoryName,
-                    style: TextStyle(color: color1,fontWeight: FontWeight.bold),
+                    style: GoogleFonts.prompt(
+                      textStyle: TextStyle(
+                          color: color1,
+                          //fontSize: 22,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
                     obscureText: false,
                     validator: (String value) =>
                     value.isEmpty ? "This field is Required" : null,
@@ -53,7 +65,13 @@ class _AddBusinessCategoryState extends State<AddBusinessCategory> {
                           borderSide: BorderSide(color: color6, width: 1.0)
                       ),
                       labelText: "Category Name",
-                      labelStyle: TextStyle(color: color3, fontWeight: FontWeight.bold),
+                      labelStyle: GoogleFonts.prompt(
+                        textStyle: TextStyle(
+                            color: color3,
+                            //fontSize: 22,
+                            fontWeight: FontWeight.bold
+                        ),
+                      ),
 
                     ),
                     textInputAction: TextInputAction.next,
@@ -75,11 +93,14 @@ class _AddBusinessCategoryState extends State<AddBusinessCategory> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Center(
-                    child: Text("SAVE", style: TextStyle(
-                      color: color4,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 22,
-                    ),),
+                    child: Text("SAVE", style: GoogleFonts.prompt(
+                      textStyle: TextStyle(
+                          color: color4,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    ),
                   ),
                 ),
               ),

@@ -185,12 +185,17 @@ class _ClientSeeAllBusinessesState extends State<ClientSeeAllBusinesses> {
                               children: [
                                 FaIcon(FontAwesomeIcons.mapMarkerAlt, color: color3, size: 30,),
                                 SizedBox(width: 5,),
-                                Text(businessController.businesses[index].address!=null?businessController.businesses[index].address:"-",
-                                  style: GoogleFonts.prompt(
-                                    textStyle: TextStyle(
-                                        color: color1,
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.bold
+                                Container(
+                                  width: 80,
+                                  height: 10,
+                                  child: Text(businessController.businesses[index].address!=null?businessController.businesses[index].address:"-",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.prompt(
+                                      textStyle: TextStyle(
+                                          color: color1,
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold
+                                      ),
                                     ),
                                   ),
                                 )

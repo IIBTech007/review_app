@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:review_app/Controllers/QuestionsController.dart';
 import 'package:review_app/Models/QuestionOptions.dart';
+import 'package:review_app/components/colorConstants.dart';
 
 class AddOptions extends StatefulWidget {
   int businessId, categoryId,subCategoryId,questionTypeId;
@@ -76,7 +78,21 @@ class _AddOptionsState extends State<AddOptions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Add Question Options"),),
+      appBar: AppBar(title: Text("Add Question Options", style:
+      GoogleFonts.prompt(
+        textStyle: TextStyle(
+            color: color4,
+            fontSize: 22,
+            fontWeight: FontWeight.bold
+        ),
+      ),
+        ),
+        iconTheme: IconThemeData(
+            color: color4
+        ),
+        centerTitle: true,
+        backgroundColor: color3,
+      ),
       body: Column(
         children: <Widget>[
           Expanded(
@@ -100,7 +116,7 @@ class _AddOptionsState extends State<AddOptions> {
         ],
       ),
       floatingActionButton:
-      FloatingActionButton(child: Icon(Icons.done), onPressed: _onDone),
+      FloatingActionButton(child: Icon(Icons.done, color: color4,), onPressed: _onDone, backgroundColor: color3,),
     );
   }
 }

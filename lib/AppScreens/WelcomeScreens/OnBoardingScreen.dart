@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:review_app/AppScreens/WelcomeScreens/NewSplashScreen.dart';
+import 'package:review_app/components/OnBoardingAnimation.dart';
 import 'package:review_app/components/colorConstants.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -28,14 +29,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               Column(
                 children: [
                   Container(
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage('assets/review.jpg')
-                        )
-                    ),
-                    height: MediaQuery.of(context).size.height/2,
+                    // decoration: BoxDecoration(
+                    //     image: DecorationImage(
+                    //         fit: BoxFit.cover,
+                    //         image: AssetImage('assets/review.jpg')
+                    //     )
+                    // ),
+                    height: MediaQuery.of(context).size.height / 1.5,
                     width: MediaQuery.of(context).size.width,
+                    child: OnBoardingAnimation(),
                   )
                 ],
               ),
@@ -82,7 +84,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 ),
               ),
               Positioned(
-                top: 500,
+                top: 480,
                 child: Container(
                   color: color3,
                   height: 400,
@@ -92,7 +94,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          child: Text("TasteClicks empowers participating Better Business Bureau accredited businesses to request customer reviews at the point of service. \n From TasteClicks, customers receive a text and submit their review directly to the participating Better Business Bureaus. \n The customer review is pre-verified and ready for publication once it has been processed by the local business.",
+                          child: Text("TasteClicks empowers participating Better Business Bureau accredited businesses to request customer reviews at the point of service. \n From TasteClicks, customers receive a text and submit their review directly to the participating Better Business Bureaus.",
                             textAlign: TextAlign.center,
                             style: GoogleFonts.prompt(
                               textStyle: TextStyle(
@@ -104,7 +106,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 35,),
+                      SizedBox(height: 25,),
                       Center(
                         child: InkWell(
                           onTap: (){

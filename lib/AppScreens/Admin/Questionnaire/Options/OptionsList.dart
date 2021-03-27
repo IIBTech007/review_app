@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:need_resume/need_resume.dart';
 import 'package:review_app/AppScreens/Admin/BusinessCategory/AddBusinessCategory.dart';
 import 'package:review_app/AppScreens/Admin/BusinessCategory/UpdateBusinessCategory.dart';
@@ -53,9 +54,14 @@ class _QuestionOptionsListState extends ResumableState<QuestionOptionsList> {
             },
           ):Container()
         ],
-        title: Text("Question Options", style: TextStyle(
-            color: color4, fontSize: 22, fontWeight: FontWeight.bold
-        ),
+        title: Text("Question Options",
+          style: GoogleFonts.prompt(
+            textStyle: TextStyle(
+                color: color4,
+                fontSize: 22,
+                fontWeight: FontWeight.bold
+            ),
+          ),
         ),
         iconTheme: IconThemeData(
             color: color4
@@ -118,17 +124,21 @@ class _QuestionOptionsListState extends ResumableState<QuestionOptionsList> {
                            // Navigator.push(context,MaterialPageRoute(builder:(context)=>BusinessSubCategoryList(widget.q,categoriesController.categoryList[index].id)));
                           },
                           title: Text(_optionsController.questionList!=null&&_optionsController.questionList[index].questionOptionText!=null?_optionsController.questionList[index].questionOptionText:"-",
-                            style: TextStyle(
-                                color: color3,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20
+                            style: GoogleFonts.prompt(
+                              textStyle: TextStyle(
+                                  color: color3,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold
+                              ),
                             ),
                           ),
                           subtitle: Text(_optionsController.questionList!=null&&_optionsController.questionList[index].rating!=null?_optionsController.questionList[index].rating.toString():"-",
-                            style: TextStyle(
-                                color: color3,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20
+                            style: GoogleFonts.prompt(
+                              textStyle: TextStyle(
+                                  color: color1,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold
+                              ),
                             ),
                           ),
                           leading: FaIcon(

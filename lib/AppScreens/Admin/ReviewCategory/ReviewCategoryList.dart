@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:review_app/AppScreens/Admin/ReviewCategory/AddReviewCategory.dart';
 import 'package:review_app/components/colorConstants.dart';
 
@@ -23,15 +24,19 @@ class _ReviewCategoryListState extends State<ReviewCategoryList> {
             },
           ),
         ],
-        title: Text("Review Category", style: TextStyle(
-            color: color3, fontSize: 22, fontWeight: FontWeight.bold
+        title: Text("Review Category", style: GoogleFonts.prompt(
+          textStyle: TextStyle(
+              color: color4,
+              //fontSize: 22,
+              fontWeight: FontWeight.bold
+          ),
         ),
         ),
         iconTheme: IconThemeData(
-            color: color3
+            color: color4
         ),
         centerTitle: true,
-        backgroundColor: color1,
+        backgroundColor: color3,
       ),
       body: Container(
         color: color4,

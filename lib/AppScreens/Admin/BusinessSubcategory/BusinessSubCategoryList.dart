@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:need_resume/need_resume.dart';
 import 'package:review_app/AppScreens/Admin/BusinessSubcategory/UpdateBusinessSubCategory.dart';
 import 'package:review_app/AppScreens/Admin/Feedbacks/CustomerInfoforFeedback.dart';
@@ -51,9 +52,14 @@ class _BusinessSubCategoryListState extends ResumableState<BusinessSubCategoryLi
             },
           ),
         ],
-        title: Text("Business Subcategory", style: TextStyle(
-            color: color4, fontSize: 22, fontWeight: FontWeight.bold
-        ),
+        title: Text("Business Subcategory",
+          style: GoogleFonts.prompt(
+            textStyle: TextStyle(
+                color: color4,
+                fontSize: 22,
+                fontWeight: FontWeight.bold
+            ),
+          ),
         ),
         iconTheme: IconThemeData(
             color: color4
@@ -116,11 +122,13 @@ class _BusinessSubCategoryListState extends ResumableState<BusinessSubCategoryLi
                             Navigator.push(context, MaterialPageRoute(builder:(context)=>QuestionnaireList(subCategoryId: subCategoryController.subcategoryList[index].id,categoryId: subCategoryController.subcategoryList[index].categoryId,businessId: widget.businessId)));
                           },
                           title: Text(subCategoryController.subcategoryList[index].name,
-                          style: TextStyle(
-                          color: color3,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20
-                          ),
+                            style: GoogleFonts.prompt(
+                              textStyle: TextStyle(
+                                  color: color3,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
                         ),
                         leading: FaIcon(
                           FontAwesomeIcons.building,
