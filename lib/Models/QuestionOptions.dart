@@ -6,7 +6,7 @@ class QuestionOptions{
  static String questionOptionsListToJson(List<QuestionOptions> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
   static QuestionOptions questionOptionFromJson(String str) => QuestionOptions.fromJson(json.decode(str));
  static String questionOptionToJson(QuestionOptions data) => json.encode(data.toJson());
-
+ int questionId;
  int questionOptionId;
  String questionOptionText;
  double rating;
@@ -14,14 +14,18 @@ class QuestionOptions{
  QuestionOptions({
   this.questionOptionId,
   this.questionOptionText,
-  this.rating
+  this.rating,
+  this.questionId
  });
  factory QuestionOptions.fromJson(Map<String, dynamic> json) => QuestionOptions(
+    questionId: json["questionId"],
     questionOptionId:json["questionOptionId"],
     questionOptionText: json["questionOptionText"],
     rating: json['rating'],
  );
  Map<String, dynamic> toJson() => {
+   "questionId":questionId,
+   "questionOptionId":questionOptionId,
     "questionOptionText":questionOptionText,
     "rating":rating
  };

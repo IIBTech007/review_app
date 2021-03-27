@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:review_app/Controllers/CategoryController.dart';
-import 'package:review_app/Controllers/QuestionOptions.dart';
+import 'package:review_app/Controllers/QuestionOptionsController.dart';
 import 'package:review_app/components/colorConstants.dart';
 
 class AddQuestionOptions extends StatefulWidget {

@@ -10,19 +10,20 @@ import 'package:review_app/AppScreens/Admin/BusinessSubcategory/BusinessSubCateg
 import 'package:review_app/AppScreens/Admin/Questionnaire/Options/AddQuestionOptions.dart';
 import 'package:review_app/Controllers/AccountController.dart';
 import 'package:review_app/Controllers/CategoryController.dart';
-import 'package:review_app/Controllers/QuestionOptions.dart';
+import 'package:review_app/Controllers/QuestionOptionsController.dart';
 import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';
+
+import 'UpdateQuestionOption.dart';
 
 class QuestionOptionsList extends StatefulWidget {
   int questionId;
   QuestionOptionsList(this.questionId);
   @override
-  _BusinessCategoryListState createState() => _BusinessCategoryListState();
+  _QuestionOptionsListState createState() => _QuestionOptionsListState();
 }
 
-class _BusinessCategoryListState extends ResumableState<QuestionOptionsList> {
-  final categoriesController=Get.put(QuestionOptionsController());
+class _QuestionOptionsListState extends ResumableState<QuestionOptionsList> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
   @override
   void initState() {
@@ -40,6 +41,7 @@ class _BusinessCategoryListState extends ResumableState<QuestionOptionsList> {
   @override
   Widget build(BuildContext context) {
     final _accountController =Get.find<AccountController>();
+    final _optionsController =Get.put(QuestionOptionsController());
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -66,7 +68,7 @@ class _BusinessCategoryListState extends ResumableState<QuestionOptionsList> {
         onRefresh: ()async{
           return Utils.check_connectivity().then((isConnected){
             if(isConnected){
-              categoriesController.getQuestions(widget.questionId,context);
+              _optionsController.getQuestionOptions(widget.questionId,context);
             }else{
               Utils.showError(context,"Network not Available");
             }
@@ -77,7 +79,7 @@ class _BusinessCategoryListState extends ResumableState<QuestionOptionsList> {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child:Obx((){
-            return ListView.builder(itemCount:categoriesController.questionList!=null?categoriesController.questionList.length:0, itemBuilder: (context, index){
+            return ListView.builder(itemCount:_optionsController.questionList!=null?_optionsController.questionList.length:0, itemBuilder: (context, index){
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Slidable(
@@ -89,7 +91,7 @@ class _BusinessCategoryListState extends ResumableState<QuestionOptionsList> {
                         color: color2,
                         caption: 'Update',
                         onTap: () async {
-                         // push(context,MaterialPageRoute(builder:(context)=>UpdateBusinessCategory(categoriesController.questionList[index])));
+                          push(context,MaterialPageRoute(builder:(context)=>UpdateOptions(_optionsController.questionList[index])));
                         },
                       ),
                       // IconSlideAction(
@@ -115,14 +117,14 @@ class _BusinessCategoryListState extends ResumableState<QuestionOptionsList> {
                           onTap: (){
                            // Navigator.push(context,MaterialPageRoute(builder:(context)=>BusinessSubCategoryList(widget.q,categoriesController.categoryList[index].id)));
                           },
-                          title: Text(categoriesController.questionList!=null&&categoriesController.questionList[index].questionOptionText!=null?categoriesController.questionList[index].questionOptionText:"-",
+                          title: Text(_optionsController.questionList!=null&&_optionsController.questionList[index].questionOptionText!=null?_optionsController.questionList[index].questionOptionText:"-",
                             style: TextStyle(
                                 color: color3,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20
                             ),
                           ),
-                          subtitle: Text(categoriesController.questionList!=null&&categoriesController.questionList[index].rating!=null?categoriesController.questionList[index].rating.toString():"-",
+                          subtitle: Text(_optionsController.questionList!=null&&_optionsController.questionList[index].rating!=null?_optionsController.questionList[index].rating.toString():"-",
                             style: TextStyle(
                                 color: color3,
                                 fontWeight: FontWeight.bold,

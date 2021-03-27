@@ -47,18 +47,22 @@ class QuestionOptionsRepository extends IQuestionOptionsRepository{
         animationDuration: Duration(milliseconds: 500));
     try{
       progressDialog.show();
-      var res=await http.post(Utils.baseUrl()+"QuestionOptions",body:QuestionOptions.questionOptionToJson(questions),headers: {"Content-Type":"application/json","Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
+      var res=await http.put(Utils.baseUrl()+"QuestionOptions/${questions.questionOptionId}",body:QuestionOptions.questionOptionToJson(questions),headers: {"Content-Type":"application/json","Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
       progressDialog.dismiss();
-      if(res.statusCode==200||res.statusCode==201)
+      locator<Logger>().w(res.body);
+      locator<Logger>().w(QuestionOptions.questionOptionToJson(questions));
+      locator<Logger>().i(Utils.baseUrl()+"QuestionOptions/${questions.questionOptionId}");
+      if(res.statusCode==200||res.statusCode==204)
       {
         progressDialog.dismiss();
         Navigator.pop(context,"Refresh");
       }else if(res.body!=null&&res.body.isNotEmpty){
         progressDialog.dismiss();
         Utils.showError(context,res.body.trim());
-      }else
+      }else {
         progressDialog.dismiss();
-      Utils.showError(context,res.statusCode.toString());
+        Utils.showError(context, res.statusCode.toString());
+      }
     }catch(e){
       progressDialog.dismiss();
       Utils.showError(context, e.toString());
@@ -87,9 +91,7 @@ class QuestionOptionsRepository extends IQuestionOptionsRepository{
         animationDuration: Duration(milliseconds: 500));
     try{
       progressDialog.show();
-      var response= await http.get(Utils.baseUrl()+"QuestionOptions?QuestionId=$questionId",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
-      print(Utils.baseUrl()+"getQuestionsforCustomer?SubCategoryId=$questionId");
-      print(response.body);
+      var response= await http.get(Utils.baseUrl()+"QuestionOptions/getOptionsByQuestion/$questionId",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
       locator<Logger>().i(response.body);
       if(response.statusCode==200){
         progressDialog.dismiss();

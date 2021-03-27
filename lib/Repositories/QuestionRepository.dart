@@ -52,9 +52,36 @@ class QuestionRepository extends IQuestionRepository{
   }
 
   @override
-  Future<void> updateQuestions(Questions questions, BuildContext context) {
-    // TODO: implement updateQuestions
-    throw UnimplementedError();
+  Future<void> updateQuestions(Questions questions, BuildContext context) async{
+    ArsProgressDialog progressDialog = ArsProgressDialog(
+        context,
+        blur: 2,
+        backgroundColor: Color(0x33000000),
+        animationDuration: Duration(milliseconds: 500));
+    try{
+      progressDialog.show();
+      var res=await http.put(Utils.baseUrl()+"Questions/${questions.id}",body:Questions.QuestionsToJson(questions),headers: {"Content-Type":"application/json","Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
+      progressDialog.dismiss();
+      print(Utils.baseUrl()+"Questions/${questions.id}");
+      locator<Logger>().w(Questions.QuestionsToJson(questions));
+      print(res.body);
+      if(res.statusCode==200||res.statusCode==204)
+      {
+        progressDialog.dismiss();
+        Navigator.pop(context,"Refresh");
+      }else if(res.body!=null&&res.body.isNotEmpty){
+        progressDialog.dismiss();
+        Utils.showError(context,res.body.trim());
+      }else {
+        progressDialog.dismiss();
+        Utils.showError(context, res.statusCode.toString());
+      }
+    }catch(e){
+      progressDialog.dismiss();
+      Utils.showError(context, e.toString());
+    }finally{
+      progressDialog.dismiss();
+    }
   }
   @override
   Future<List<Questions>> getQuestions(int businessId, int categoryId, int subcategoryId, BuildContext context) async{

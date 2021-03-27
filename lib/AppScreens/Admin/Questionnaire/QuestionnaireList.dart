@@ -9,6 +9,8 @@ import 'package:review_app/Controllers/QuestionsController.dart';
 import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';
 
+import 'UpdateQuestion.dart';
+
 
 class QuestionnaireList extends StatefulWidget {
   int businessId,categoryId,subCategoryId;
@@ -85,6 +87,7 @@ class _QuestionnaireListState extends ResumableState<QuestionnaireList> {
                         color: color2,
                         caption: 'Update',
                         onTap: () {
+                          push(context,MaterialPageRoute(builder:(context)=>UpdateQuestion(widget.businessId,widget.categoryId,widget.subCategoryId,_questionController.questionList[index])));
 
                         },
                       ),
@@ -108,8 +111,7 @@ class _QuestionnaireListState extends ResumableState<QuestionnaireList> {
                       child: ListTile(
                         onTap: () {
                           print(_questionController.questionList[index].id);
-                           //Navigator.push(context,MaterialPageRoute(builder:(context)=>QuestionOptionsList(_questionController.questionList[index].id)));
-
+                           Navigator.push(context,MaterialPageRoute(builder:(context)=>QuestionOptionsList(_questionController.questionList[index].id)));
                         },
                         title: Text(_questionController.questionList[index].questionText,
                           style: TextStyle(

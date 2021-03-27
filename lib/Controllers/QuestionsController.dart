@@ -20,6 +20,7 @@ class QuestionController extends GetxController{
   }
   void AddQuestions(int businessId,int categoryId,int subcategoryId,BuildContext context){
       _questionRepository.addQuestions(Questions(
+        id: 0,
         businessId: businessId,
         categoryId: categoryId,
         questionText: questionText.text,
@@ -28,6 +29,17 @@ class QuestionController extends GetxController{
         questionOptions: optionsList
       ), context).then((value) =>questionText.text="");
    }
+  void UpdateQuestions(int businessId,int categoryId,int subcategoryId,int questionId,BuildContext context){
+    _questionRepository.updateQuestions(Questions(
+        id: questionId,
+        businessId: businessId,
+        categoryId: categoryId,
+        questionText: questionText.text,
+        questionType: questionTypeId.value,
+        subCategoryId: subcategoryId,
+        questionOptions: optionsList
+    ), context).then((value) =>questionText.text="");
+  }
   void getQuestions(int subCategoryId,BuildContext context){
     _questionRepository.getQuestions(0,0,subCategoryId,context).then((questionlist){
       questionList.clear();

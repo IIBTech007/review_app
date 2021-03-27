@@ -4,11 +4,12 @@ import 'package:review_app/Interfaces/IQuestionOptionsRepository.dart';
 import 'package:review_app/Models/QuestionOptions.dart';
 import 'package:review_app/Utils/Locator.dart';
 
+import '../Models/QuestionOptions.dart';
+
 class QuestionOptionsController extends GetxController{
   TextEditingController questionOptionText,value;
   var _questionOptionsRepository= locator<IQuestionOptionsRepository>();
   var questionList =<QuestionOptions>[].obs;
-  var questionTypeId=1.obs;
   @override
   void onInit() {
     if(questionOptionText==null){
@@ -20,10 +21,19 @@ class QuestionOptionsController extends GetxController{
     _questionOptionsRepository.addQuestionOptions(QuestionOptions(
         questionOptionText:  questionOptionText.text,
         rating: double.parse(value.text),
-        questionOptionId: questionId,
+        questionOptionId: 0,
+        questionId: questionId
     ), context).then((value) =>questionOptionText.text="");
   }
-  void getQuestions(int questionId,BuildContext context){
+  void UpdateQuestionOptions(QuestionOptions questionOptions,BuildContext context){
+    _questionOptionsRepository.updateQuestionOptions(QuestionOptions(
+      questionOptionText:  questionOptionText.text,
+      rating: double.parse(value.text),
+      questionId: questionOptions.questionId,
+      questionOptionId: questionOptions.questionOptionId,
+    ), context).then((value) =>questionOptionText.text="");
+  }
+  void getQuestionOptions(int questionId,BuildContext context){
     _questionOptionsRepository. getQuestionOptions(questionId,context).then((questionlist){
       questionList.clear();
       questionList.assignAll(questionlist);
