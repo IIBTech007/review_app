@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:review_app/Models/SelectedOptions.dart';
-
 import 'Questions.dart';
 
 class CustomerFeedBack{
@@ -39,7 +37,7 @@ class CustomerFeedBack{
     "businessId":businessId,
     "categoryId":categoryId,
     "subCategoryId":subCategoryId,
-    "questions":questions.toJson(),
+   // "questions":questions.toJson(),
     "rating":rating,
     "questionId":questionId,
     "selectedQuestionOption":List<dynamic>.from(selectedOptions.map((x) => x.toJson()))

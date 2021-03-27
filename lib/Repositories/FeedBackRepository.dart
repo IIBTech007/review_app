@@ -21,8 +21,9 @@ class FeedBackRepository extends IFeedBackRepository{
         backgroundColor: Color(0x33000000),
         animationDuration: Duration(milliseconds: 500));
     try{
-      locator<Logger>().i(f.customerFeedBacks);
+      locator<Logger>().i(f);
       progressDialog.show();
+      print(feedback.FeedbackToJson(f).toString()+"grftuiuyuu");
       var res=await http.post(Utils.baseUrl()+"Feedback",body:feedback.FeedbackToJson(f),headers: {"Content-Type":"application/json","Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
       progressDialog.dismiss();
       locator<Logger>().i(res.statusCode);

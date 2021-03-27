@@ -17,7 +17,7 @@ import 'package:share/share.dart';
 class Utils{
    static String baseUrl(){
     // return "https://foodbooks.conveyor.cloud/api/";
-    // return "http://192.168.10.20:45455/api/";
+     //return "http://192.168.1.14:45459/api/";
      return "http://iibtechnology-001-site1.dtempurl.com/api/";
    }
    static bool validateStructure(String value){

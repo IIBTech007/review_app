@@ -56,13 +56,6 @@ class _AddRatingsState extends State<AddRatings> {
           IconButton(
             icon:Icon(Icons.add, color: color4, size: 30,),
             onPressed: (){
-              // final ids = _feedbackController.customerFeedback.map((e) => e.questionId).toSet();
-              // _feedbackController.customerFeedback.retainWhere((x) => ids.remove(x.questionId));
-              // for(int i=0;i<_feedbackController.customerFeedback.length;i++){
-              //   print(_feedbackController.customerFeedback[i].toJson());
-              // }
-              // print(_feedbackController.customerFeedback.length);
-              //print(_feedbackController.customerFeedback.toString());
              Navigator.push(context,MaterialPageRoute(builder: (context)=>CommentWithPicture(businessId: widget.businessId,subcategoryId: widget.subcategoryId,categoryId: widget.categoryId,)));
             },
           )
