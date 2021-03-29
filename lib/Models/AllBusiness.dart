@@ -5,11 +5,11 @@
 import 'dart:convert';
 
 
-
 class AllBusiness {
- static List<AllBusiness> allBusinessFromJson(String str) => List<AllBusiness>.from(json.decode(str).map((x) => AllBusiness.fromJson(x)));
 
-  //String allBusinessToJson(List<AllBusiness> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+  static List<AllBusiness> allBusinessFromJson(String str) => List<AllBusiness>.from(json.decode(str).map((x) => AllBusiness.fromJson(x)));
+
+ // String allBusinessToJson(List<AllBusiness> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
   AllBusiness({
     this.id,
     this.name,
@@ -36,8 +36,8 @@ class AllBusiness {
   String phone;
   String email;
   String description;
-  int longitude;
-  int latitude;
+  double longitude;
+  double latitude;
   String address;
   String openingTime;
   String closingTime;
@@ -56,8 +56,8 @@ class AllBusiness {
     phone: json["phone"] == null ? null : json["phone"],
     email: json["email"] == null ? null : json["email"],
     description: json["description"] == null ? null : json["description"],
-    longitude: json["longitude"] == null ? null : json["longitude"],
-    latitude: json["latitude"] == null ? null : json["latitude"],
+    longitude: json["longitude"] == null ? null : json["longitude"].toDouble(),
+    latitude: json["latitude"] == null ? null : json["latitude"].toDouble(),
     address: json["address"] == null ? null : json["address"],
     openingTime: json["openingTime"] == null ? null : json["openingTime"],
     closingTime: json["closingTime"] == null ? null : json["closingTime"],

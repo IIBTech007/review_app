@@ -38,8 +38,8 @@ class _IndividualFeedbacksState extends State<OfflineFeedbacks> {
     String businessName ="";
     if(id!=null && businessController.allBusinesses.length>0){
       for(int i=0;i<businessController.allBusinesses.length;i++){
-        if(businessController.allBusinesses[i].id == id){
-          businessName = businessController.allBusinesses[i].name;
+        if(businessController.allBusinesses[i]['id'] == id){
+          businessName = businessController.allBusinesses[i]['name'];
         }
       }
     }
