@@ -48,7 +48,7 @@ class Offlinefeedback{
     "businessId":businessId,
     "categoryId":categoryId,
     "subCategoryId":subCategoryId,
-    "customerFeedBacks":List<dynamic>.from(customerFeedBacks.map((x) => x.toMap()))
+    "customerFeedBacks":List<dynamic>.from(customerFeedBacks.map((x) => x.toJson()))
   };
 
 }

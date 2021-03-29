@@ -23,7 +23,7 @@ class feedback{
   });
   static feedback FeedbackFromJson(String str) => feedback.fromJson(json.decode(str));
   static List<feedback> FeedbackListFromJson(String str) => List<feedback>.from(json.decode(str).map((x) => feedback.fromJson(x)));
-  static String FeedbackToJson(feedback data) => json.encode(data.toJson());
+  static String FeedbackToJson(feedback data) => json.encode(data.toMap());
   factory feedback.fromJson(Map<String, dynamic> json) => feedback(
     customerName: json["customerName"],
     phone: json["phone"],
@@ -49,5 +49,16 @@ class feedback{
     "categoryId":categoryId,
     "subCategoryId":subCategoryId,
     "customerFeedBacks":List<dynamic>.from(customerFeedBacks.map((x) => x.toJson()))
+  };
+  Map<String, dynamic> toMap() => {
+    "customerName": customerName,
+    "phone":phone,
+    "email":email,
+    "image":image,
+    "comment":comment,
+    "businessId":businessId,
+    "categoryId":categoryId,
+    "subCategoryId":subCategoryId,
+    "customerFeedBacks":List<dynamic>.from(customerFeedBacks.map((x) => x.toMap()))
   };
 }

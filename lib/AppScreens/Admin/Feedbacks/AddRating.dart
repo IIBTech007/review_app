@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -26,16 +27,18 @@ class _AddRatingsState extends State<AddRatings> {
   StreamController _event =StreamController<dynamic>.broadcast();
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
   var groupValue,groupValue2;
+  final _questionController =Get.put(QuestionController());
+  final _feedbackController=Get.put(FeedbackController());
   @override
   void initState() {
     WidgetsBinding.instance
         .addPostFrameCallback((_) => _refreshIndicatorKey.currentState.show());
+    _feedbackController.customerFeedback.clear();
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
-    final _questionController =Get.put(QuestionController());
-    final _feedbackController=Get.put(FeedbackController());
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Add Review",
@@ -221,6 +224,7 @@ class _AddRatingsState extends State<AddRatings> {
                                         options.questionOptionText
                                     ],
                                     radioButtonValue: (value) {
+
                                       List<SelectedOptions> options=[];
                                       Iterable<QuestionOptions> option= _questionController.questionList[index].questionOptions.where((element) => element.questionOptionText==value);
                                       options.add(SelectedOptions(questionOptionsId: option.elementAt(0).questionOptionId));
@@ -237,6 +241,7 @@ class _AddRatingsState extends State<AddRatings> {
                                                             rating:  option.elementAt(0).rating,
                                                             selectedOptions: options,
                                                           ));
+                                      print(jsonEncode(_feedbackController.customerFeedback));
                                     },
                                     selectedColor: color3,
                                   ),

@@ -66,7 +66,8 @@ final _accountController=Get.find<AccountController>();
        for(CustomerFeedBack cus in customerFeedback){
          overallRating+=cus.rating/customerFeedback.length;
        }
-       new dbhelper().addFeedBacks(Offlinefeedback(
+       print(customerFeedback);
+       new dbhelper().addFeedBacks(feedback(
            subCategoryId: subCategoryId,
            categoryId: categoryId,
            phone:phone.text,

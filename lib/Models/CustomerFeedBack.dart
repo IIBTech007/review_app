@@ -22,7 +22,7 @@ class CustomerFeedBack{
   }
   static CustomerFeedBack CustomerFeedBackFromJson(String str) => CustomerFeedBack.fromJson(json.decode(str));
   static List<CustomerFeedBack> CustomerFeedBackListFromJson(String str) => List<CustomerFeedBack>.from(json.decode(str).map((x) => CustomerFeedBack.fromJson(x)));
-  static String CustomerFeedBackToJson(CustomerFeedBack data) => json.encode(data.toJson());
+  static String CustomerFeedBackToJson(CustomerFeedBack data) => json.encode(data.toMap());
   factory CustomerFeedBack.fromJson(Map<String, dynamic> json) => CustomerFeedBack(
       businessId:json["businessId"],
       categoryId:json["categoryId"],
@@ -37,7 +37,7 @@ class CustomerFeedBack{
     "businessId":businessId,
     "categoryId":categoryId,
     "subCategoryId":subCategoryId,
-   // "questions":questions.toJson(),
+    "questions":questions.toJson(),
     "rating":rating,
     "questionId":questionId,
     "selectedQuestionOption":List<dynamic>.from(selectedOptions.map((x) => x.toJson()))
@@ -46,7 +46,7 @@ class CustomerFeedBack{
     "businessId":businessId,
     "categoryId":categoryId,
     "subCategoryId":subCategoryId,
-    "questions":questions.toJson(),
+    // "questions":questions.toJson(),
     "rating":rating,
     "questionId":questionId,
     "selectedQuestionOption":List<dynamic>.from(selectedOptions.map((x) => x.toJson()))
