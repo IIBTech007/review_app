@@ -137,7 +137,7 @@ class _BusinessListState extends ResumableState<BusinessList> {
                                               color: Colors.black87,
                                               borderRadius: BorderRadius.circular(30)
                                           ),
-                                          width: 60,
+                                          width: 65,
                                           height: 30,
 
                                           child: Padding(
@@ -151,12 +151,10 @@ class _BusinessListState extends ResumableState<BusinessList> {
                                                 ),
                                                 SizedBox(width: 2,),
                                                 Text(businessController.businesses[index].overallRating.toStringAsFixed(1),
-                                                  style: GoogleFonts.prompt(
-                                                    textStyle: TextStyle(
-                                                        color: color4,
-                                                        fontSize: 15,
-                                                        fontWeight: FontWeight.w500
-                                                    ),
+                                                  style: TextStyle(
+                                                      color: color4,
+                                                      fontSize: 15,
+                                                      fontWeight: FontWeight.bold
                                                   ),
                                                 ),
                                               ],

@@ -23,12 +23,12 @@ class _BusinessReportState extends State<BusinessReport> {
   final _reportController = Get.put(OverallReportController());
   Map<String, double> dataMap = {
     "Positive Rating": 0,
-    "Negetive Rating": 0,
+    "Negative Rating": 0,
   };
   List<Color> colorList = [
-    Colors.red,
-    Colors.yellow,
     Colors.green,
+    Colors.red,
+    Colors.red,
   ];
   @override
   void initState() {
@@ -102,8 +102,12 @@ class _BusinessReportState extends State<BusinessReport> {
                                 showLegendsInRow: false,
                                 legendPosition: LegendPosition.right,
                                 showLegends: true,
-                                legendTextStyle: TextStyle(
-                                  fontWeight: FontWeight.bold,
+                                legendTextStyle: GoogleFonts.prompt(
+                                  textStyle: TextStyle(
+                                      color: color1,
+                                      //fontSize: 15,
+                                      fontWeight: FontWeight.bold
+                                  ),
                                 ),
                               ),
                               chartValuesOptions: ChartValuesOptions(

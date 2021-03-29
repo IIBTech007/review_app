@@ -102,7 +102,7 @@ class _ClientSeeAllBusinessesState extends State<ClientSeeAllBusinesses> {
                     color: color4,
                     child: Container(
                       width: 300,
-                      height: 230,
+                      height: 240,
                       decoration: BoxDecoration(
                         //color: color4,
                         borderRadius: BorderRadius.circular(10),
@@ -112,7 +112,7 @@ class _ClientSeeAllBusinessesState extends State<ClientSeeAllBusinesses> {
                         children: [
                           Container(
                             width: MediaQuery.of(context).size.width,
-                            height: 120,
+                            height: 130,
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                   fit: BoxFit.cover,
@@ -129,7 +129,7 @@ class _ClientSeeAllBusinessesState extends State<ClientSeeAllBusinesses> {
                                         color: Colors.black87,
                                         borderRadius: BorderRadius.circular(30)
                                     ),
-                                    width: 60,
+                                    width: 65,
                                     height: 30,
 
                                     child: Padding(
@@ -163,7 +163,7 @@ class _ClientSeeAllBusinessesState extends State<ClientSeeAllBusinesses> {
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               children: [
-                                FaIcon(FontAwesomeIcons.building, color: color3, size: 30,),
+                                FaIcon(FontAwesomeIcons.building, color: color1, size: 30,),
                                 SizedBox(width: 5,),
                                 Text(businessController.businesses[index].name,
                                   style: GoogleFonts.prompt(
@@ -186,8 +186,8 @@ class _ClientSeeAllBusinessesState extends State<ClientSeeAllBusinesses> {
                                 FaIcon(FontAwesomeIcons.mapMarkerAlt, color: color3, size: 30,),
                                 SizedBox(width: 5,),
                                 Container(
-                                  width: 80,
-                                  height: 10,
+                                  width: 300,
+                                  height: 30,
                                   child: Text(businessController.businesses[index].address!=null?businessController.businesses[index].address:"-",
                                     overflow: TextOverflow.ellipsis,
                                     style: GoogleFonts.prompt(
