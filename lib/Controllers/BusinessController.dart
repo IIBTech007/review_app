@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:review_app/Controllers/AccountController.dart';
 import 'package:review_app/Interfaces/IBusinessRepository.dart';
+import 'package:review_app/Models/AllBusiness.dart';
 import 'package:review_app/Models/BusinessByCustomerViewModel.dart';
 import 'package:review_app/Models/BusinessViewModel.dart';
 import 'package:review_app/Utils/Locator.dart';
@@ -13,6 +14,7 @@ import 'package:review_app/Utils/Utils.dart';
 
 class BusinessController extends GetxController{
   var businesses =<BusinessViewModel>[].obs;
+  var allBusinesses =<AllBusiness>[].obs;
   var _businessRepository= locator<IBusinessRepository>();
   var openingTime=DateTime.now().obs;
   var closingTime=DateTime.now().obs;
@@ -59,7 +61,12 @@ class BusinessController extends GetxController{
       locator<Logger>().i("Latitude  ${position.latitude}  Longitude  ${position.longitude}");
     });
   }
-
+  void getAllBusiness(BuildContext context){
+      _businessRepository.getAllBusiness(context).then((value){
+        allBusinesses.clear();
+        allBusinesses.assignAll(value);
+      });
+  }
   addBusiness(BuildContext context){
     if(nameTextEditingController.text==null||nameTextEditingController.text.isEmpty){
       Utils.showError(context,"Business Name is Required");

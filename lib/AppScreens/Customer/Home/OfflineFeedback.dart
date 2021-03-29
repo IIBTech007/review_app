@@ -2,9 +2,11 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:review_app/AppScreens/Admin/Feedbacks/FeedbackDetails.dart';
 import 'package:review_app/AppScreens/Customer/Home/OfflineFeedbackDetails.dart';
+import 'package:review_app/Controllers/BusinessController.dart';
 import 'package:review_app/Models/CustomerFeedBack.dart';
 import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';
@@ -21,13 +23,27 @@ class OfflineFeedbacks extends StatefulWidget {
 }
 
 class _IndividualFeedbacksState extends State<OfflineFeedbacks> {
+  final businessController=Get.find<BusinessController>();
   List<dynamic> feedbackList=[];
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
   @override
   void initState() {
+
     WidgetsBinding.instance
         .addPostFrameCallback((_) => _refreshIndicatorKey.currentState.show());
     super.initState();
+  }
+
+  String getBusinessName(int id){
+    String businessName ="";
+    if(id!=null && businessController.allBusinesses.length>0){
+      for(int i=0;i<businessController.allBusinesses.length;i++){
+        if(businessController.allBusinesses[i].id == id){
+          businessName = businessController.allBusinesses[i].name;
+        }
+      }
+    }
+    return businessName;
   }
   @override
   Widget build(BuildContext context) {
@@ -53,11 +69,12 @@ class _IndividualFeedbacksState extends State<OfflineFeedbacks> {
         key: _refreshIndicatorKey,
         onRefresh: ()async{
           return Utils.check_connectivity().then((isConnected){
+            businessController.getAllBusiness(context);
+            print("iuytreyuitrtyu"+businessController.allBusinesses.toString());
             dbhelper().getFeedBacks().then((value) {
               feedbackList.clear();
               setState(() {
                 feedbackList = value;
-                print(value);
               });
             });
           });
@@ -77,8 +94,7 @@ class _IndividualFeedbacksState extends State<OfflineFeedbacks> {
                      // print(CustomerFeedBack.CustomerFeedBackListFromJson(feedbackList[index]['customerFeedBacks'].toString()));
                       //print(jsonDecode(feedbackList[index]['customerFeedBacks'].toString()));
                       //print(feedbackList[index]['customerFeedBacks'].toString());
-
-                     /// Navigator.push(context,MaterialPageRoute(builder: (context)=>OfflineFeedbackDetail(jsonDecode(feedbackList[index]['customerFeedBacks']))));
+                      Navigator.push(context,MaterialPageRoute(builder: (context)=>OfflineFeedbackDetail(jsonDecode(feedbackList[index]['customerFeedBacks']))));
                     }else{
                       Utils.showError(context,"No Details Available");
                     }
@@ -117,7 +133,7 @@ class _IndividualFeedbacksState extends State<OfflineFeedbacks> {
                                     ),
                                   ),
                                 ),
-                                Text(feedbackList[index]['businessId'].toString(),
+                                Text(getBusinessName(feedbackList[index]['businessId']),
                                   style: GoogleFonts.prompt(
                                     textStyle: TextStyle(
                                         color: color1,

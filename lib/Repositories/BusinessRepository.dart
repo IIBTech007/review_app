@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
 import 'package:review_app/Interfaces/IBusinessRepository.dart';
+import 'package:review_app/Models/AllBusiness.dart';
 import 'package:review_app/Models/BusinessByCustomerViewModel.dart';
 import 'package:review_app/Models/BusinessViewModel.dart';
 import 'package:http/http.dart'as http;
@@ -71,6 +72,36 @@ class BusinessRepository extends IBusinessRepository{
     return null;
   }
 
+  @override
+  Future<List<AllBusiness>> getAllBusiness(BuildContext context) async{
+    ArsProgressDialog progressDialog = ArsProgressDialog(
+        context,
+        blur: 2,
+        backgroundColor: Color(0x33000000),
+        animationDuration: Duration(milliseconds: 500));
+    try{
+      progressDialog.show();
+      var response= await http.get(Utils.baseUrl()+"Business/GetAllBusiness",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
+      print("fdsduitreruud"+response.body.toString());
+      print(response.statusCode);
+      if(response.statusCode==200){
+        return AllBusiness.allBusinessFromJson(response.body);
+      }else if(response.body!=null&&response.body.isNotEmpty){
+        progressDialog.dismiss();
+        locator<Logger>().i(response.body);
+        // Utils.showError(context,response.body);
+      }else
+        progressDialog.dismiss();
+      Utils.showError(context,response.statusCode.toString());
+    }catch(e){
+     // locator<Logger>().i(e.toString());
+       Utils.showError(context,e.toString());
+      progressDialog.dismiss();
+    }finally{
+      progressDialog.dismiss();
+    }
+    return null;
+  }
   @override
   Future<void> updateBusiness(BusinessViewModel businessViewModel, BuildContext context) async{
 
