@@ -14,7 +14,7 @@ import 'package:review_app/Utils/Utils.dart';
 
 class BusinessController extends GetxController{
   var businesses =<BusinessViewModel>[].obs;
-  var allBusinesses =<AllBusiness>[].obs;
+  var allBusinesses =[].obs;
   var _businessRepository= locator<IBusinessRepository>();
   var openingTime=DateTime.now().obs;
   var closingTime=DateTime.now().obs;
@@ -63,8 +63,11 @@ class BusinessController extends GetxController{
   }
   void getAllBusiness(BuildContext context){
       _businessRepository.getAllBusiness(context).then((value){
+
         allBusinesses.clear();
+        allBusinesses.addAll(value);
         allBusinesses.assignAll(value);
+        print("qwertfdsazxcvc"+allBusinesses.toString());
       });
   }
   addBusiness(BuildContext context){

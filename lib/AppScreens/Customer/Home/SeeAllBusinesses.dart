@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -12,7 +11,6 @@ import 'package:review_app/Utils/Locator.dart';
 import 'package:review_app/Utils/Utils.dart';
 import 'package:review_app/components/colorConstants.dart';
 import 'package:review_app/dbhelper.dart';
-
 import 'OfflineFeedback.dart';
 
 class ClientSeeAllBusinesses extends StatefulWidget {
@@ -102,7 +100,7 @@ class _ClientSeeAllBusinessesState extends State<ClientSeeAllBusinesses> {
                     color: color4,
                     child: Container(
                       width: 300,
-                      height: 240,
+                      height: 260,
                       decoration: BoxDecoration(
                         //color: color4,
                         borderRadius: BorderRadius.circular(10),
@@ -130,7 +128,7 @@ class _ClientSeeAllBusinessesState extends State<ClientSeeAllBusinesses> {
                                         borderRadius: BorderRadius.circular(30)
                                     ),
                                     width: 65,
-                                    height: 30,
+                                    height: 50,
 
                                     child: Padding(
                                       padding: const EdgeInsets.all(4.0),
@@ -187,8 +185,8 @@ class _ClientSeeAllBusinessesState extends State<ClientSeeAllBusinesses> {
                                 SizedBox(width: 5,),
                                 Container(
                                   width: 300,
-                                  height: 30,
-                                  child: Text(businessController.businesses[index].address!=null?businessController.businesses[index].address:"-",
+                                  height: 50,
+                                  child: Text(businessController.businesses[index].address!=null?businessController.businesses[index].address:"-",maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: GoogleFonts.prompt(
                                       textStyle: TextStyle(

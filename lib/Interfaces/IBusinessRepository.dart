@@ -6,7 +6,7 @@ import 'package:review_app/Models/BusinessViewModel.dart';
 abstract class IBusinessRepository{
  Future<void> addBusiness(BusinessViewModel businessViewModel,BuildContext context);
  Future<List<BusinessViewModel>> getBusinessByOwner(BuildContext context);
- Future<List<AllBusiness>> getAllBusiness(BuildContext context);
+ Future<List<dynamic>> getAllBusiness(BuildContext context);
  Future<BusinessViewModel> getBusinessById(int businessId,BuildContext context);
  Future<List<BusinessViewModel>> getBusinessForCustomer(BusinessByCustomerViewModel businessByCustomerViewModel,BuildContext context);
  Future<void> updateBusiness(BusinessViewModel businessViewModel,BuildContext context);

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:ars_progress_dialog/ars_progress_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
@@ -73,19 +75,20 @@ class BusinessRepository extends IBusinessRepository{
   }
 
   @override
-  Future<List<AllBusiness>> getAllBusiness(BuildContext context) async{
+  Future<List<dynamic>> getAllBusiness(BuildContext context) async{
     ArsProgressDialog progressDialog = ArsProgressDialog(
         context,
         blur: 2,
         backgroundColor: Color(0x33000000),
         animationDuration: Duration(milliseconds: 500));
     try{
-      progressDialog.show();
+     // progressDialog.show();
       var response= await http.get(Utils.baseUrl()+"Business/GetAllBusiness",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
-      print("fdsduitreruud"+response.body.toString());
-      print(response.statusCode);
       if(response.statusCode==200){
-        return AllBusiness.allBusinessFromJson(response.body);
+        progressDialog.dismiss();
+        print(jsonDecode(response.body).runtimeType);
+        return jsonDecode(response.body);
+       // return AllBusiness.allBusinessFromJson(response.body);
       }else if(response.body!=null&&response.body.isNotEmpty){
         progressDialog.dismiss();
         locator<Logger>().i(response.body);
