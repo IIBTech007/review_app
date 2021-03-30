@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:review_app/AppScreens/Admin/Profile/EditProfile.dart';
 import 'package:review_app/AppScreens/WelcomeScreens/NewSplashScreen.dart';
 import 'package:review_app/Controllers/AccountController.dart';
 import 'package:review_app/Utils/Locator.dart';
@@ -40,13 +41,13 @@ class ProfileScreen extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(top: 50),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                //crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: <Widget>[
                                   IconButton(
-                                    icon: Icon(Icons.arrow_back, color: color3,size:30),
+                                    icon: Icon(Icons.edit, color: color3,size:30),
                                     onPressed: (){
-                                      Navigator.pop(context);
+                                      //Navigator.push(context, MaterialPageRoute(builder: (context)=> EditProfile()));
                                     },
                                   ),
                                   IconButton(
