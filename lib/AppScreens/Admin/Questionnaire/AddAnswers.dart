@@ -132,6 +132,7 @@ class _AddOptionsState extends State<AddOptions> {
                         textStyle: TextStyle(
                             color: color4,
                             fontSize: 20,
+
                             fontWeight: FontWeight.bold
                         ),
                       ),
