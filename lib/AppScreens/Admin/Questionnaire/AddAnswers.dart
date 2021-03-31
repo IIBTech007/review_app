@@ -30,30 +30,36 @@ class _AddOptionsState extends State<AddOptions> {
     ratingTECS.add(rating);
     return Card(
       elevation: 10,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top:16.0),
-            child: Text('Option ${cards.length + 1}'),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: TextField(
-                controller: optionText,
-                decoration: InputDecoration(labelText: 'Option Text'),
-                keyboardType: TextInputType.text,
+      color: color4,
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: color3, width: 1)
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top:16.0),
+              child: Text('Option ${cards.length + 1}'),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16,left: 16,right: 16),
-            child: TextField(
-                controller: rating,
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
-                decoration: InputDecoration(labelText: 'Rating')
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: TextField(
+                  controller: optionText,
+                  decoration: InputDecoration(labelText: 'Option Text'),
+                  keyboardType: TextInputType.text,
+              ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16,left: 16,right: 16),
+              child: TextField(
+                  controller: rating,
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  decoration: InputDecoration(labelText: 'Rating')
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -108,9 +114,32 @@ class _AddOptionsState extends State<AddOptions> {
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: RaisedButton(
-              child: Text('add new'),
-              onPressed: () => setState(() => cards.add(createCard())),
+            child:  InkWell(
+              onTap: () => setState(() => cards.add(createCard())),
+              child: Center(
+                child: Card(
+                  elevation: 6,
+                  color: color3,
+                  child: Container(
+                    height: 55,
+                    width: 220,
+                    decoration: BoxDecoration(
+                      color: color3,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Text("ADD", style: GoogleFonts.prompt(
+                        textStyle: TextStyle(
+                            color: color3,
+                            //fontSize: 22,
+                            fontWeight: FontWeight.bold
+                        ),
+                      ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
           )
         ],

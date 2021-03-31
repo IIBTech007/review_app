@@ -107,7 +107,7 @@ class _UpdateBusinessSubCategoryState extends State<UpdateBusinessSubCategory> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
-                      child: Text("Update",
+                      child: Text("UPDATE",
                         style: GoogleFonts.prompt(
                           textStyle: TextStyle(
                               color: color4,

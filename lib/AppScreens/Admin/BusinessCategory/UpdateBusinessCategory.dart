@@ -107,7 +107,7 @@ class _UpdateBusinessCategoryState extends State<UpdateBusinessCategory> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
-                      child: Text("Update", style: TextStyle(
+                      child: Text("UPDATE", style: TextStyle(
                         color: color4,
                         fontWeight: FontWeight.bold,
                         fontSize: 22,

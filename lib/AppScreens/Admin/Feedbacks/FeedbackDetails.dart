@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:review_app/AppScreens/Admin/Feedbacks/CommentandPicture.dart';
 import 'package:review_app/Controllers/FeedbackController.dart';
 import 'package:review_app/Models/CustomerFeedBack.dart';
 import 'package:review_app/components/colorConstants.dart';
@@ -23,6 +24,14 @@ class _FeedbackDetailsState extends State<FeedbackDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Icon(Icons.announcement_rounded, color: color4,size:25,),
+            onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> CommentAndPicture()));
+            },
+          ),
+        ],
         title: Text("Feedback Details",
           style: GoogleFonts.prompt(
             textStyle: TextStyle(
@@ -96,7 +105,7 @@ class _FeedbackDetailsState extends State<FeedbackDetails> {
                     color: color3,
                     size: 35,
                   ),
-                ),
+                )
               ),
             ),
           );
