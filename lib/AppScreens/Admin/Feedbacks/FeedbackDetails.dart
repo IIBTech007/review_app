@@ -24,12 +24,13 @@ class _FeedbackDetailsState extends State<FeedbackDetails> {
     return Scaffold(
       appBar: AppBar(
         actions: [
+          widget.f.comment!=null||widget.f.image!=null?
           IconButton(
             icon: Icon(Icons.announcement_rounded, color: color4,size:25,),
             onPressed: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=> CommentAndPicture(widget.f.comment,widget.f.image)));
             },
-          ),
+          ):Container(),
         ],
         title: Text("Feedback Details",
           style: GoogleFonts.prompt(

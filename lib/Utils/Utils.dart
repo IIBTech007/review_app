@@ -90,8 +90,6 @@ class Utils{
        return "Yes/No";
      }else if(id==3){
        return "Radio Button";
-     }else if(id==4){
-       return "Numbering";
      }
    }
    static Future<File> getImage() async {

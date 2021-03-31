@@ -10,7 +10,7 @@ class QuestionController extends GetxController{
  var _questionRepository= locator<IQuestionRepository>();
  var optionsList =<QuestionOptions>[].obs;
   var questionList =<Questions>[].obs;
-  List reviewTypeList=["Star Rating", "Yes/No", "Radio Button", "Number Rating"];
+  List reviewTypeList=["Star Rating", "Yes/No", "Radio Button"];
   var questionTypeId=1.obs;
   @override
   void onInit() {
