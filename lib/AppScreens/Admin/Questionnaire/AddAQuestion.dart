@@ -88,36 +88,46 @@ class _AddAQuestionState extends State<AddAQuestion> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8),
-                child: DropdownButtonFormField(
-                  items: _questionController.reviewTypeList!=null?_questionController.reviewTypeList.map((trainer)=>DropdownMenuItem(
-                    child: Text(trainer,style: TextStyle(color: color1),),
-                    value: trainer,
-                  )).toList():[""].map((name) => DropdownMenuItem(
-                      value: name, child: Text("$name",style: GoogleFonts.prompt(
-                      textStyle: TextStyle(
-                        color: color1,
-                        //fontSize: 22,
-                      ),
+                child: Card(
+                  elevation: 6,
+                  color: color4,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: color4,
+                      border: Border.all(color: color3, width: 1)
+                    ),
+                    child: DropdownButtonFormField(
+                      items: _questionController.reviewTypeList!=null?_questionController.reviewTypeList.map((trainer)=>DropdownMenuItem(
+                        child: Text(trainer,style: TextStyle(color: color1),),
+                        value: trainer,
+                      )).toList():[""].map((name) => DropdownMenuItem(
+                          value: name, child: Text("$name",style: GoogleFonts.prompt(
+                          textStyle: TextStyle(
+                            color: color1,
+                            //fontSize: 22,
+                          ),
 
-                      fontWeight: FontWeight.bold
-                  ),
-                  )))
-                      .toList(),
-                  decoration: InputDecoration(labelText: "Review Options",labelStyle: GoogleFonts.prompt(
-                    textStyle: TextStyle(
-                        color: color3,
-                        //fontSize: 22,
-                        fontWeight: FontWeight.bold
+                          fontWeight: FontWeight.bold
+                      ),
+                      )))
+                          .toList(),
+                      decoration: InputDecoration(labelText: "Review Options",labelStyle: GoogleFonts.prompt(
+                        textStyle: TextStyle(
+                            color: color3,
+                            //fontSize: 22,
+                            fontWeight: FontWeight.bold
+                        ),
+                      ),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(0.0),
+                            borderSide: BorderSide(color: color3, width: 1.0)
+                        ),
+                      ),
+                      onChanged: (value){
+                       _questionController.questionTypeId.value=_questionController.reviewTypeList.indexOf(value)+1;
+                      },
                     ),
                   ),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(9.0),
-                        borderSide: BorderSide(color: color3, width: 1.0)
-                    ),
-                  ),
-                  onChanged: (value){
-                   _questionController.questionTypeId.value=_questionController.reviewTypeList.indexOf(value)+1;
-                  },
                 ),
               ),
               SizedBox(height: 10,),
@@ -143,8 +153,8 @@ class _AddAQuestionState extends State<AddAQuestion> {
                       child: Center(
                         child: Text("SAVE", style: GoogleFonts.prompt(
                           textStyle: TextStyle(
-                              color: color3,
-                              //fontSize: 22,
+                              color: color4,
+                              fontSize: 22,
                               fontWeight: FontWeight.bold
                           ),
                         ),

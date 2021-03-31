@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:logger/logger.dart';
 import 'package:review_app/Controllers/BusinessController.dart';
 import 'package:review_app/Interfaces/IAccountRepository.dart';
 import 'package:review_app/Models/BusinessViewModel.dart';
@@ -59,7 +60,14 @@ class AccountController extends GetxController{
           return accountRepository.login(context, LoginViewModel(
               email: emailTextEditingController.text,
               password: passwordTextEditingController.text,
-              confirmPassword: passwordTextEditingController.text));
+              confirmPassword: passwordTextEditingController.text)).then((value){
+            nameTextEditingController.text="";
+            emailTextEditingController.text="";
+            passwordTextEditingController.text="";
+            phoneTextEditingController.text="";
+            cityTextEditingController.text="";
+            countryTextEditingController.text="";
+          });
         }
       }else
         Utils.showError(context,"Network not Available");
@@ -127,6 +135,39 @@ class AccountController extends GetxController{
       });
     }
   }
+  Future<void> updateProfile(BuildContext context){
+    if (nameTextEditingController.text == null || nameTextEditingController.text.isEmpty) {
+      Utils.showError(context, "Name Required");
+    } else if (emailTextEditingController.text == null || emailTextEditingController.text.isEmpty) {
+      Utils.showError(context, "Email Required");
+    } else if (!Utils.validateEmail(emailTextEditingController.text)) {
+      Utils.showError(context, "Email Not Valid");
+    } else if (passwordTextEditingController.text == null || passwordTextEditingController.text.isEmpty) {
+      Utils.showError(context, "Password Required");
+    } else if (!Utils.validateStructure(passwordTextEditingController.text)) {
+      Utils.showError(context, "password contain 1 upper case 1 num and 1 special chracter");
+    } else if (phoneTextEditingController.text == null || phoneTextEditingController.text.isEmpty) {
+      Utils.showError(context, "Phone is Required");
+    } else if (cityTextEditingController.text == null || cityTextEditingController.text.isEmpty) {
+      Utils.showError(context, "City is Required");
+    } else if (countryTextEditingController.text == null || countryTextEditingController.text.isEmpty) {
+      Utils.showError(context, "Country is Required");
+    } else {
+      locator<Logger>().w(getLoggedInUserData().userInfo.id);
+      return accountRepository.updateProfile(context, RegisterViewModel(
+          name: nameTextEditingController.text,
+          email: emailTextEditingController.text,
+          password: passwordTextEditingController.text,
+          phone: phoneTextEditingController.text,
+          country: countryTextEditingController.text,
+          city: cityTextEditingController.text,
+          userId: getLoggedInUserData().userInfo.id
+      )).then((value){
+        AuthenticateUser(context);
+      });
+    }
+  }
+
   TokenPayLoad getLoggedInUserData(){
    if(locator<GetStorage>().read("token")!=null) {
      return TokenPayLoad.fromJson(

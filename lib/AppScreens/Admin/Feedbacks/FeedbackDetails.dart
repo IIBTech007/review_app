@@ -1,19 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:review_app/AppScreens/Admin/Feedbacks/CommentandPicture.dart';
-import 'package:review_app/Controllers/FeedbackController.dart';
 import 'package:review_app/Models/CustomerFeedBack.dart';
+import 'package:review_app/Models/feedback.dart';
 import 'package:review_app/components/colorConstants.dart';
 
 
 
 class FeedbackDetails extends StatefulWidget {
   List<CustomerFeedBack> customerFeedbacks;
-
-  FeedbackDetails(this.customerFeedbacks);
+  feedback f;
+  FeedbackDetails(this.customerFeedbacks,this.f);
 
   @override
   _FeedbackDetailsState createState() => _FeedbackDetailsState();
@@ -28,7 +27,7 @@ class _FeedbackDetailsState extends State<FeedbackDetails> {
           IconButton(
             icon: Icon(Icons.announcement_rounded, color: color4,size:25,),
             onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> CommentAndPicture()));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> CommentAndPicture(widget.f.comment,widget.f.image)));
             },
           ),
         ],

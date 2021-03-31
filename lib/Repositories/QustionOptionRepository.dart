@@ -19,18 +19,20 @@ class QuestionOptionsRepository extends IQuestionOptionsRepository{
         animationDuration: Duration(milliseconds: 500));
     try{
       progressDialog.show();
-      var res=await http.post(Utils.baseUrl()+"QuestionOptions",body:QuestionOptions.questionOptionToJson(questions),headers: {"Content-Type":"application/json","Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
+      var res=await http.post(Utils.baseUrl()+"QuestionOptions",body:QuestionOptions.questionOptionToMap(questions),headers: {"Content-Type":"application/json","Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
       progressDialog.dismiss();
       if(res.statusCode==200||res.statusCode==201)
       {
         progressDialog.dismiss();
         Navigator.pop(context,"Refresh");
+        Utils.showSuccess(context,res.body.trim());
       }else if(res.body!=null&&res.body.isNotEmpty){
         progressDialog.dismiss();
         Utils.showError(context,res.body.trim());
-      }else
+      }else {
         progressDialog.dismiss();
-      Utils.showError(context,res.statusCode.toString());
+        Utils.showError(context, res.statusCode.toString());
+      }
     }catch(e){
       progressDialog.dismiss();
       Utils.showError(context, e.toString());
@@ -47,15 +49,16 @@ class QuestionOptionsRepository extends IQuestionOptionsRepository{
         animationDuration: Duration(milliseconds: 500));
     try{
       progressDialog.show();
-      var res=await http.put(Utils.baseUrl()+"QuestionOptions/${questions.questionOptionId}",body:QuestionOptions.questionOptionToJson(questions),headers: {"Content-Type":"application/json","Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
+      var res=await http.put(Utils.baseUrl()+"QuestionOptions/${questions.questionOptionId}",body:QuestionOptions.questionOptionToMap(questions),headers: {"Content-Type":"application/json","Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
       progressDialog.dismiss();
       locator<Logger>().w(res.body);
-      locator<Logger>().w(QuestionOptions.questionOptionToJson(questions));
+      locator<Logger>().w(QuestionOptions.questionOptionToMap(questions));
       locator<Logger>().i(Utils.baseUrl()+"QuestionOptions/${questions.questionOptionId}");
       if(res.statusCode==200||res.statusCode==204)
       {
         progressDialog.dismiss();
         Navigator.pop(context,"Refresh");
+        Utils.showSuccess(context,"Question Option Updated Sucessfully");
       }else if(res.body!=null&&res.body.isNotEmpty){
         progressDialog.dismiss();
         Utils.showError(context,res.body.trim());
@@ -77,8 +80,9 @@ class QuestionOptionsRepository extends IQuestionOptionsRepository{
       Utils.showSuccess(context,"Visibility Changed");
     }else if(response.body!=null&&response.body.isNotEmpty){
       Utils.showError(context,response.body);
-    }else
-      Utils.showError(context,response.statusCode.toString());
+    }else {
+      Utils.showError(context, response.statusCode.toString());
+    }
     return null;
   }
 
@@ -100,9 +104,10 @@ class QuestionOptionsRepository extends IQuestionOptionsRepository{
       }else if(response.body!=null&&response.body.isNotEmpty){
         progressDialog.dismiss();
         Utils.showError(context,response.body.toString());
-      }else
+      }else {
         progressDialog.dismiss();
-      Utils.showError(context,response.statusCode.toString());
+        Utils.showError(context, response.statusCode.toString());
+      }
     }catch(e){
       progressDialog.dismiss();
       Utils.showError(context,e.toString());

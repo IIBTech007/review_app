@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
@@ -5,23 +7,20 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:review_app/components/colorConstants.dart';
 
 class CommentAndPicture extends StatefulWidget {
+  String comment,image;
+
+  CommentAndPicture(this.comment, this.image);
+
   @override
   _CommentAndPictureState createState() => _CommentAndPictureState();
 }
 
 class _CommentAndPictureState extends State<CommentAndPicture> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // actions: [
-        //   IconButton(
-        //     icon: Icon(Icons.add, color: color4,size:25,),
-        //     onPressed: (){
-        //       //Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisterBusiness()));
-        //     },
-        //   ),
-        // ],
         title: Text("Comment & Picture",
           style: GoogleFonts.prompt(
             textStyle: TextStyle(
@@ -50,7 +49,7 @@ class _CommentAndPictureState extends State<CommentAndPicture> {
               color: color1,
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage("assets/business.jpg")
+                image: widget.image!=null ?MemoryImage(base64Decode(widget.image)):AssetImage("assets/business.jpg")
               )
             ),
             ),
@@ -76,7 +75,7 @@ class _CommentAndPictureState extends State<CommentAndPicture> {
                           ),
                         ),
                       ),
-                      Text("Please add the Comments API IN CASE OF ANY MISLEADING THINGS then respected person will be accused",
+                      Text(widget.comment!=null?widget.comment:"",
                         textAlign: TextAlign.center,
                         style: GoogleFonts.prompt(
                           textStyle: TextStyle(

@@ -72,7 +72,7 @@ class _IndividualFeedbacksState extends State<IndividualFeedbacks> {
                 child: InkWell(
                   onTap: (){
                     if(_feedbackcontroller.feedbacks[index].customerFeedBacks.length>0){
-                      Navigator.push(context,MaterialPageRoute(builder: (context)=>FeedbackDetails(_feedbackcontroller.feedbacks[index].customerFeedBacks)));
+                      Navigator.push(context,MaterialPageRoute(builder: (context)=>FeedbackDetails(_feedbackcontroller.feedbacks[index].customerFeedBacks,_feedbackcontroller.feedbacks[index])));
                     }else{
                       Utils.showError(context,"No Details Available");
                     }

@@ -24,12 +24,14 @@ class CategoryRepository extends ICategoryRepository{
       {
         progressDialog.dismiss();
         Navigator.pop(context,"Refresh");
+        Utils.showSuccess(context,res.body.trim());
       }else if(res.body!=null&&res.body.isNotEmpty){
         progressDialog.dismiss();
         Utils.showError(context,res.body.trim());
-      }else
+      }else {
         progressDialog.dismiss();
-        Utils.showError(context,res.statusCode.toString());
+        Utils.showSuccess(context, res.statusCode.toString());
+      }
     }catch(e){
       progressDialog.dismiss();
       Utils.showError(context, e.toString());
@@ -49,6 +51,7 @@ class CategoryRepository extends ICategoryRepository{
       var response= await http.get(Utils.baseUrl()+"Categories/GetCategoriesByBusiness/$businessId",headers: {"Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
       if(response.statusCode==200){
         progressDialog.dismiss();
+
        // locator<Logger>().i(CategoriesViewModel.CategoriesListFromJson(response.body));
         return CategoriesViewModel.CategoriesListFromJson(response.body);
       }else if(response.body!=null&&response.body.isNotEmpty){

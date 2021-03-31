@@ -152,10 +152,10 @@ class _UpdateBusinessCategoryState extends State<UpdateOptions> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
-                      child: Text("Update",
+                      child: Text("UPDATE",
                         style: GoogleFonts.prompt(
                           textStyle: TextStyle(
-                              color: color3,
+                              color: color4,
                               fontSize: 22,
                               fontWeight: FontWeight.bold
                           ),

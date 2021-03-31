@@ -47,7 +47,7 @@ class ProfileScreen extends StatelessWidget {
                                   IconButton(
                                     icon: Icon(Icons.edit, color: color3,size:30),
                                     onPressed: (){
-                                      //Navigator.push(context, MaterialPageRoute(builder: (context)=> EditProfile()));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=> EditProfile()));
                                     },
                                   ),
                                   IconButton(
@@ -60,45 +60,47 @@ class ProfileScreen extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            SizedBox(height: 10,),
+                            SizedBox(height: 30,),
                             Row(
                               children: [
-                                Container(
-                                  width: 155.0,
-                                  height: 155.0,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: color3
-                                  ),
-                                  child: Stack(
-                                    children: [
-                                      Positioned(
-                                        top: 15,
-                                        child: Container(
-                                          width: 130.0,
-                                          height: 130.0,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Colors.amberAccent.shade100,
+                                // Container(
+                                //   width: 155.0,
+                                //   height: 155.0,
+                                //   decoration: BoxDecoration(
+                                //       shape: BoxShape.circle,
+                                //       color: color3
+                                //   ),
+                                //   child: Stack(
+                                //     children: [
+                                //       Positioned(
+                                //         top: 15,
+                                //         child: Container(
+                                //           width: 130.0,
+                                //           height: 130.0,
+                                //           decoration: BoxDecoration(
+                                //             shape: BoxShape.circle,
+                                //             color: Colors.amberAccent.shade100,
+                                //
+                                //           ),
+                                //           child:  CircleAvatar(
+                                //             radius: 75,
+                                //             backgroundColor: color2,
+                                //             child: CircleAvatar(
+                                //               backgroundImage: AssetImage('assets/image.jpg'),
+                                //               //backgroundImage: NetworkImage(userDetail!=null?userDetail['image']:'http://www.4motiondarlington.org/wp-content/uploads/2013/06/No-image-found.jpg'),
+                                //               radius: 70,
+                                //             ),
+                                //           ),
+                                //         ),
+                                //       ),
+                                //     ],
+                                //   ),
+                                // ),
 
-                                          ),
-                                          child:  CircleAvatar(
-                                            radius: 75,
-                                            backgroundColor: color2,
-                                            child: CircleAvatar(
-                                              backgroundImage: AssetImage('assets/image.jpg'),
-                                              //backgroundImage: NetworkImage(userDetail!=null?userDetail['image']:'http://www.4motiondarlington.org/wp-content/uploads/2013/06/No-image-found.jpg'),
-                                              radius: 70,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(width: 8,),
+                                SizedBox(width: 80,),
+
                                 Container(
-                                  width: 200,
+                                  width: 250,
                                   height: 100,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
@@ -109,6 +111,7 @@ class ProfileScreen extends StatelessWidget {
                                     // )
                                   ),
                                   child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Text(_accountController.getLoggedInUserData()!=null&&_accountController.getLoggedInUserData().userInfo!=null?_accountController.getLoggedInUserData().userInfo.name:'',
                                         maxLines: 2,
@@ -264,12 +267,16 @@ class ProfileScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(40)
                               ),
                               child: Center(
-                                child: Text(_accountController.getLoggedInUserData()!=null&&_accountController.getLoggedInUserData().userInfo!=null?_accountController.getLoggedInUserData().userInfo.email:'',
-                                  style: GoogleFonts.prompt(
-                                    textStyle: TextStyle(
-                                        color: color1,
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w500
+                                child: Container(
+                                  width: 200,
+                                  child: Text(_accountController.getLoggedInUserData()!=null&&_accountController.getLoggedInUserData().userInfo!=null?_accountController.getLoggedInUserData().userInfo.email:'',
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.prompt(
+                                      textStyle: TextStyle(
+                                          color: color1,
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w500
+                                      ),
                                     ),
                                   ),
                                 ),

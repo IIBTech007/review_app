@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
 import 'package:review_app/Interfaces/IBusinessRepository.dart';
-import 'package:review_app/Models/AllBusiness.dart';
 import 'package:review_app/Models/BusinessByCustomerViewModel.dart';
 import 'package:review_app/Models/BusinessViewModel.dart';
 import 'package:http/http.dart'as http;
@@ -35,7 +34,7 @@ class BusinessRepository extends IBusinessRepository{
         Utils.showError(context,res.body.trim());
       }else
         progressDialog.dismiss();
-        Utils.showError(context,res.statusCode.toString());
+        Utils.showSuccess(context,res.statusCode.toString());
     }catch(e){
       progressDialog.dismiss();
       Utils.showError(context, e.toString());

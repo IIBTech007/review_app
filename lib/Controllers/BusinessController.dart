@@ -6,7 +6,6 @@ import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:review_app/Controllers/AccountController.dart';
 import 'package:review_app/Interfaces/IBusinessRepository.dart';
-import 'package:review_app/Models/AllBusiness.dart';
 import 'package:review_app/Models/BusinessByCustomerViewModel.dart';
 import 'package:review_app/Models/BusinessViewModel.dart';
 import 'package:review_app/Utils/Locator.dart';

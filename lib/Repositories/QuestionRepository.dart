@@ -19,21 +19,25 @@ class QuestionRepository extends IQuestionRepository{
         animationDuration: Duration(milliseconds: 500));
     try{
       progressDialog.show();
+      locator<Logger>().w(Questions.QuestionsToJson(questions));
       var res=await http.post(Utils.baseUrl()+"Questions",body:Questions.QuestionsToJson(questions),headers: {"Content-Type":"application/json","Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
       progressDialog.dismiss();
+
       if(res.statusCode==200||res.statusCode==201)
       {
         progressDialog.dismiss();
         Navigator.pop(context,"Refresh");
+        Utils.showSuccess(context,res.body.trim());
       }else if(res.body!=null&&res.body.isNotEmpty){
         progressDialog.dismiss();
-        Utils.showError(context,res.body.trim());
-      }else
+        locator<Logger>().w(res.body.trim());
+      }else {
         progressDialog.dismiss();
-      Utils.showError(context,res.statusCode.toString());
+        Utils.showError(context, res.statusCode.toString());
+      }
     }catch(e){
       progressDialog.dismiss();
-      Utils.showError(context, e.toString());
+      locator<Logger>().w(e.toString());
     }finally{
       progressDialog.dismiss();
     }

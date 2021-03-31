@@ -10,9 +10,11 @@ class UserInfo
       email :json["email"],
       city: json["city"],
       country: json["country"],
+      id: json["id"]
   );
 
   Map<String, dynamic> toJson() => {
+    "id":id,
     "name": name,
     "phone":phone,
     "email":email,

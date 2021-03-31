@@ -121,8 +121,8 @@ class _AddOptionsState extends State<AddOptions> {
                   elevation: 6,
                   color: color3,
                   child: Container(
-                    height: 55,
-                    width: 220,
+                    height: 40,
+                    width: 150,
                     decoration: BoxDecoration(
                       color: color3,
                       borderRadius: BorderRadius.circular(10),
@@ -130,8 +130,8 @@ class _AddOptionsState extends State<AddOptions> {
                     child: Center(
                       child: Text("ADD", style: GoogleFonts.prompt(
                         textStyle: TextStyle(
-                            color: color3,
-                            //fontSize: 22,
+                            color: color4,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold
                         ),
                       ),

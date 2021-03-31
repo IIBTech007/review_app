@@ -24,6 +24,7 @@ class SubCategoryRepository extends ISubCategoryRepository{
       {
         progressDialog.dismiss();
         Navigator.pop(context,"Refresh");
+        Utils.showSuccess(context,res.body.trim());
       }else if(res.body!=null&&res.body.isNotEmpty){
         progressDialog.dismiss();
         Utils.showError(context,res.body.trim());
