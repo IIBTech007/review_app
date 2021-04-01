@@ -30,8 +30,10 @@ class CategoryController extends GetxController{
         name: categoryName.text,
         businessId: businessId,
         categoryId: 0,
-      ), context).then((value){
-        categoryName.text="";
+      ), context).then((response){
+        if(response.statusCode==200||response.statusCode==201) {
+          categoryName.text = "";
+        }
       });
     }
   }
@@ -39,8 +41,10 @@ class CategoryController extends GetxController{
    if(categoryName.text.isEmpty){
      Utils.showError(context,"Category Name is Required");
    }else {
-     _categoryRepository.updateCategories(model.id,model, context).then((value){
-       categoryName.text="";
+     _categoryRepository.updateCategories(model.id,model, context).then((response){
+       if(response.statusCode==200||response.statusCode==204) {
+         categoryName.text = "";
+       }
      });
    }
  }

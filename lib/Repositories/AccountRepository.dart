@@ -16,7 +16,7 @@ import 'package:review_app/Utils/Utils.dart';
 
 class AccountRepository extends IAccountRepository{
   @override
-  Future<void> login(BuildContext context,LoginViewModel loginViewModel)async {
+  Future<http.Response> login(BuildContext context,LoginViewModel loginViewModel)async {
     ArsProgressDialog progressDialog = ArsProgressDialog(
         context,
         blur: 2,
@@ -38,7 +38,7 @@ class AccountRepository extends IAccountRepository{
          Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context)=>ClientBottomNavBar()),(Route<dynamic> route) => false);
         else
         Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context)=>BottomNavBar()),(Route<dynamic> route) => false);
-        return res.body;
+        return res;
       }else if(res.body!=null&&res.body.isNotEmpty){
         progressDialog.dismiss();
         Utils.showError(context,res.body.trim());
@@ -46,7 +46,6 @@ class AccountRepository extends IAccountRepository{
         progressDialog.dismiss();
         Utils.showError(context, res.statusCode.toString());
       }
-      return "InValid Username or Password";
     }catch(e){
       Utils.showError(context, e.toString());
       progressDialog.dismiss();
@@ -57,7 +56,7 @@ class AccountRepository extends IAccountRepository{
   }
 
   @override
-  Future<void> register(BuildContext context,RegisterViewModel registerViewModel)async {
+  Future<http.Response> register(BuildContext context,RegisterViewModel registerViewModel)async {
     ArsProgressDialog progressDialog = ArsProgressDialog(
         context,
         blur: 2,
@@ -75,7 +74,7 @@ class AccountRepository extends IAccountRepository{
         progressDialog.dismiss();
         Utils.showSuccess(context,res.body.trim());
         locator<Logger>().w(res.body.trim());
-        return res.body.trim();
+        return res;
       }else if(res.body!=null&&res.body.isNotEmpty){
         progressDialog.dismiss();
         Utils.showError(context,res.body.trim());
@@ -93,7 +92,7 @@ class AccountRepository extends IAccountRepository{
   }
 
   @override
-  Future<void> resetPassword(BuildContext context, LoginViewModel loginViewModel)async {
+  Future<http.Response> resetPassword(BuildContext context, LoginViewModel loginViewModel)async {
     ArsProgressDialog progressDialog = ArsProgressDialog(
         context,
         blur: 2,
@@ -132,7 +131,7 @@ class AccountRepository extends IAccountRepository{
   }
 
   @override
-  Future<void> updateProfile(BuildContext context, RegisterViewModel registerViewModel)async {
+  Future<http.Response> updateProfile(BuildContext context, RegisterViewModel registerViewModel)async {
     ArsProgressDialog progressDialog = ArsProgressDialog(
         context,
         blur: 2,
@@ -149,7 +148,7 @@ class AccountRepository extends IAccountRepository{
         progressDialog.dismiss();
         Utils.showSuccess(context,res.body.trim());
         locator<Logger>().w(res.body.trim());
-        return res.body.trim();
+        return res;
       }else if(res.body!=null&&res.body.isNotEmpty){
         progressDialog.dismiss();
         Utils.showError(context,res.body.trim());

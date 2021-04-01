@@ -4,7 +4,7 @@ import 'package:review_app/Models/CustomerFeedBack.dart';
 
 class feedback{
   String customerName,phone,email,comment,image,city,country;
-  int businessId,categoryId,subCategoryId;
+  int businessId,categoryId,subCategoryId,id;
   List<CustomerFeedBack> customerFeedBacks;
   double overallRating;
   feedback({
@@ -19,11 +19,13 @@ class feedback{
     this.categoryId,
     this.subCategoryId,
     this.customerFeedBacks,
-    this.overallRating
+    this.overallRating,
+    this.id
   });
   static feedback FeedbackFromJson(String str) => feedback.fromJson(json.decode(str));
   static List<feedback> FeedbackListFromJson(String str) => List<feedback>.from(json.decode(str).map((x) => feedback.fromJson(x)));
-  static String FeedbackToJson(feedback data) => json.encode(data.toMap());
+  static String FeedbackToJson(feedback data) => json.encode(data.toJson());
+  static String FeedbackUpdateToJson(feedback data) => json.encode(data.toMap());
   factory feedback.fromJson(Map<String, dynamic> json) => feedback(
     customerName: json["customerName"],
     phone: json["phone"],
@@ -51,6 +53,7 @@ class feedback{
     "customerFeedBacks":List<dynamic>.from(customerFeedBacks.map((x) => x.toJson()))
   };
   Map<String, dynamic> toMap() => {
+    "id":id,
     "customerName": customerName,
     "phone":phone,
     "email":email,

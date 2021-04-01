@@ -23,7 +23,11 @@ class QuestionOptionsController extends GetxController{
         rating: double.parse(value.text),
         questionOptionId: 0,
         questionId: questionId
-    ), context).then((value) =>questionOptionText.text="");
+    ), context).then((response){
+      if(response.statusCode==200||response.statusCode==201) {
+        questionOptionText.text = "";
+      }
+    });
   }
   void UpdateQuestionOptions(QuestionOptions questionOptions,BuildContext context){
     _questionOptionsRepository.updateQuestionOptions(QuestionOptions(
@@ -31,7 +35,11 @@ class QuestionOptionsController extends GetxController{
       rating: double.parse(value.text),
       questionId: questionOptions.questionId,
       questionOptionId: questionOptions.questionOptionId,
-    ), context).then((value) =>questionOptionText.text="");
+    ), context).then((response){
+      if(response.statusCode==200||response.statusCode==204) {
+        questionOptionText.text = "";
+      }
+    });
   }
   void getQuestionOptions(int questionId,BuildContext context){
     _questionOptionsRepository. getQuestionOptions(questionId,context).then((questionlist){

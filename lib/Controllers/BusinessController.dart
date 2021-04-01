@@ -99,15 +99,17 @@ class BusinessController extends GetxController{
         latitude: latitude.value,
         image: image.value,
         businessTypeId: 1,
-      ), context).then((value){
-        nameTextEditingController.text="";
-        emailTextEditingController.text="";
-        phoneTextEditingController.text="";
-        descriptionTextEditingController.text="";
-        addressTextEditingController.text="";
-        longitude.value=0.0;
-        latitude.value=0.0;
-        image.value="";
+      ), context).then((response){
+        if(response.statusCode==200||response.statusCode==201) {
+          nameTextEditingController.text = "";
+          emailTextEditingController.text = "";
+          phoneTextEditingController.text = "";
+          descriptionTextEditingController.text = "";
+          addressTextEditingController.text = "";
+          longitude.value = 0.0;
+          latitude.value = 0.0;
+          image.value = "";
+        }
       });
     }
   }

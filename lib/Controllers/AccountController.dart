@@ -60,13 +60,15 @@ class AccountController extends GetxController{
           return accountRepository.login(context, LoginViewModel(
               email: emailTextEditingController.text,
               password: passwordTextEditingController.text,
-              confirmPassword: passwordTextEditingController.text)).then((value){
-            nameTextEditingController.text="";
-            emailTextEditingController.text="";
-            passwordTextEditingController.text="";
-            phoneTextEditingController.text="";
-            cityTextEditingController.text="";
-            countryTextEditingController.text="";
+              confirmPassword: passwordTextEditingController.text)).then((response){
+                if(response.statusCode==200) {
+                  nameTextEditingController.text = "";
+                  emailTextEditingController.text = "";
+                  passwordTextEditingController.text = "";
+                  phoneTextEditingController.text = "";
+                  cityTextEditingController.text = "";
+                  countryTextEditingController.text = "";
+                }
           });
         }
       }else
@@ -94,7 +96,13 @@ class AccountController extends GetxController{
           email: emailTextEditingController.text,
           password: passwordTextEditingController.text,
           confirmPassword: confirmPasswordTextEditingController.text
-      ));
+      )).then((response){
+        if(response.statusCode==200){
+          emailTextEditingController.text="";
+          passwordTextEditingController.text="";
+          confirmPasswordTextEditingController.text="";
+        }
+      });
     }
   }
   Future<void> RegisterUser(BuildContext context,BusinessViewModel businessViewModel) {
@@ -122,16 +130,16 @@ class AccountController extends GetxController{
           phone: phoneTextEditingController.text,
           country: countryTextEditingController.text,
           city: cityTextEditingController.text,
-        businessViewModel: businessViewModel
-
-      )).then((value){
-         nameTextEditingController.text="";
-         emailTextEditingController.text="";
-         passwordTextEditingController.text="";
-         phoneTextEditingController.text="";
-         cityTextEditingController.text="";
-         countryTextEditingController.text="";
-
+          businessViewModel: businessViewModel
+      )).then((response){
+        if(response.statusCode==200){
+          nameTextEditingController.text="";
+          emailTextEditingController.text="";
+          passwordTextEditingController.text="";
+          phoneTextEditingController.text="";
+          cityTextEditingController.text="";
+          countryTextEditingController.text="";
+        }
       });
     }
   }

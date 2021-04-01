@@ -14,7 +14,7 @@ import 'package:review_app/Utils/Utils.dart';
 
 class FeedBackRepository extends IFeedBackRepository{
   @override
-  Future<void> AddFeedBack(feedback f, BuildContext context) async {
+  Future<http.Response> AddFeedBack(feedback f, BuildContext context) async {
     ArsProgressDialog progressDialog = ArsProgressDialog(
         context,
         blur: 2,
@@ -96,9 +96,43 @@ class FeedBackRepository extends IFeedBackRepository{
   }
 
   @override
-  Future<void> updateFeedBack(feedback feedback, BuildContext context) {
-    // TODO: implement updateFeedBack
-    throw UnimplementedError();
+  Future<http.Response> updateFeedBack(feedback f, BuildContext context)async {
+    ArsProgressDialog progressDialog = ArsProgressDialog(
+        context,
+        blur: 2,
+        backgroundColor: Color(0x33000000),
+        animationDuration: Duration(milliseconds: 500));
+    try{
+      locator<Logger>().i(f);
+      progressDialog.show();
+      var res=await http.put(Utils.baseUrl()+"Feedback/${f.id}",body:feedback.FeedbackUpdateToJson(f),headers: {"Content-Type":"application/json","Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
+      progressDialog.dismiss();
+      locator<Logger>().i(res.statusCode);
+      if(res.statusCode==200||res.statusCode==204)
+      {
+        progressDialog.dismiss();
+        Utils.showSuccess(context,"Feedback Updated");
+        if(locator<GetStorage>().read("token")!=null) {
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ClientBottomNavBar()), (Route<dynamic> route) => false);
+        }else{
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ClientSeeAllBusinesses()), (Route<dynamic> route) => false);
+        }
+      }else if(res.body!=null&&res.body.isNotEmpty){
+        progressDialog.dismiss();
+        locator<Logger>().i(res.body.trim());
+        Utils.showSuccess(context,res.body.trim());
+        // Utils.showError(context,res.body.trim());
+      }else {
+        progressDialog.dismiss();
+        Utils.showError(context, res.statusCode.toString());
+      }
+    }catch(e){
+      progressDialog.dismiss();
+      locator<Logger>().e(e);
+      //Utils.showError(context, e.toString());
+    }finally{
+      progressDialog.dismiss();
+    }
   }
 
   @override

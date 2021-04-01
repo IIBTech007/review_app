@@ -27,7 +27,11 @@ class QuestionController extends GetxController{
         questionType: questionTypeId.value,
         subCategoryId: subcategoryId,
         questionOptions: optionsList
-      ), context).then((value) =>questionText.text="");
+      ), context).then((response){
+        if(response.statusCode==200||response.statusCode==201) {
+          questionText.text = "";
+        }
+      });
    }
   void UpdateQuestions(int businessId,int categoryId,int subcategoryId,int questionId,BuildContext context){
     _questionRepository.updateQuestions(Questions(
@@ -38,7 +42,11 @@ class QuestionController extends GetxController{
         questionType: questionTypeId.value,
         subCategoryId: subcategoryId,
         questionOptions: optionsList
-    ), context).then((value) =>questionText.text="");
+    ), context).then((response){
+      if(response.statusCode==200||response.statusCode==204) {
+        questionText.text = "";
+      }
+    });
   }
   void getQuestions(int subCategoryId,BuildContext context){
     _questionRepository.getQuestions(0,0,subCategoryId,context).then((questionlist){

@@ -11,7 +11,7 @@ import 'package:review_app/Utils/Utils.dart';
 
 class QuestionRepository extends IQuestionRepository{
   @override
-  Future<void> addQuestions(Questions questions, BuildContext context) async{
+  Future<http.Response> addQuestions(Questions questions, BuildContext context) async{
     ArsProgressDialog progressDialog = ArsProgressDialog(
         context,
         blur: 2,
@@ -56,7 +56,7 @@ class QuestionRepository extends IQuestionRepository{
   }
 
   @override
-  Future<void> updateQuestions(Questions questions, BuildContext context) async{
+  Future<http.Response> updateQuestions(Questions questions, BuildContext context) async{
     ArsProgressDialog progressDialog = ArsProgressDialog(
         context,
         blur: 2,

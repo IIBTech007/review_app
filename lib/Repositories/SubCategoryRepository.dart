@@ -9,7 +9,7 @@ import 'package:review_app/Utils/Locator.dart';
 import 'package:review_app/Utils/Utils.dart';
 class SubCategoryRepository extends ISubCategoryRepository{
   @override
-  Future<void> addSubCategories(CategoriesViewModel categoriesViewModel,BuildContext context)async{
+  Future<http.Response> addSubCategories(CategoriesViewModel categoriesViewModel,BuildContext context)async{
     locator<Logger>().i(categoriesViewModel.toJson());
     ArsProgressDialog progressDialog = ArsProgressDialog(
         context,
@@ -79,7 +79,7 @@ class SubCategoryRepository extends ISubCategoryRepository{
     return null;
   }
   @override
-  Future<void> updateSubCategories(int id,CategoriesViewModel categoriesViewModel, BuildContext context) async{
+  Future<http.Response> updateSubCategories(int id,CategoriesViewModel categoriesViewModel, BuildContext context) async{
     locator<Logger>().i(categoriesViewModel.toJson());
     ArsProgressDialog progressDialog = ArsProgressDialog(
         context,

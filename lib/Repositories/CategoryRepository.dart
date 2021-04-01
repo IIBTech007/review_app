@@ -10,7 +10,7 @@ import 'package:review_app/Utils/Locator.dart';
 import 'package:review_app/Utils/Utils.dart';
 class CategoryRepository extends ICategoryRepository{
   @override
-  Future<void> addCategories(CategoriesViewModel categoriesViewModel,BuildContext context) async{
+  Future<http.Response> addCategories(CategoriesViewModel categoriesViewModel,BuildContext context) async{
     ArsProgressDialog progressDialog = ArsProgressDialog(
         context,
         blur: 2,
@@ -81,7 +81,7 @@ class CategoryRepository extends ICategoryRepository{
     return null;
   }
   @override
-  Future<void> updateCategories(int id,CategoriesViewModel categoriesViewModel, BuildContext context)async {
+  Future<http.Response> updateCategories(int id,CategoriesViewModel categoriesViewModel, BuildContext context)async {
     ArsProgressDialog progressDialog = ArsProgressDialog(
         context,
         blur: 2,

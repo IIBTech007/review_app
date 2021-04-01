@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:ars_progress_dialog/ars_progress_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
@@ -12,7 +11,7 @@ import 'package:review_app/Utils/Locator.dart';
 import 'package:review_app/Utils/Utils.dart';
 class BusinessRepository extends IBusinessRepository{
   @override
-  Future<void> addBusiness(BusinessViewModel businessViewModel, BuildContext context) async{
+  Future<http.Response> addBusiness(BusinessViewModel businessViewModel, BuildContext context) async{
     ArsProgressDialog progressDialog = ArsProgressDialog(
         context,
         blur: 2,
@@ -26,15 +25,16 @@ class BusinessRepository extends IBusinessRepository{
       if(res.statusCode==200)
       {
         progressDialog.dismiss();
-       // Utils.showSuccess(context,"Business Added");
         Navigator.pop(context,"Refresh");
+        Utils.showSuccess(context,"Business Added Sucessfully");
       }else if(res.body!=null&&res.body.isNotEmpty){
         progressDialog.dismiss();
         locator<Logger>().i(res.body.trim());
         Utils.showError(context,res.body.trim());
-      }else
+      }else {
         progressDialog.dismiss();
-        Utils.showSuccess(context,res.statusCode.toString());
+        Utils.showError(context, res.statusCode.toString());
+      }
     }catch(e){
       progressDialog.dismiss();
       Utils.showError(context, e.toString());
@@ -105,8 +105,36 @@ class BusinessRepository extends IBusinessRepository{
     return null;
   }
   @override
-  Future<void> updateBusiness(BusinessViewModel businessViewModel, BuildContext context) async{
-
+  Future<http.Response> updateBusiness(BusinessViewModel businessViewModel, BuildContext context) async{
+    ArsProgressDialog progressDialog = ArsProgressDialog(
+        context,
+        blur: 2,
+        backgroundColor: Color(0x33000000),
+        animationDuration: Duration(milliseconds: 500));
+    try{
+      progressDialog.show();
+      var res=await http.put(Utils.baseUrl()+"Business/${businessViewModel.id}",body:BusinessViewModel.BusinessViewModelToJson(businessViewModel),headers: {"Content-Type":"application/json","Authorization":"Bearer ${locator<GetStorage>().read("token")}"});
+      progressDialog.dismiss();
+      locator<Logger>().i(BusinessViewModel.BusinessViewModelToJson(businessViewModel));
+      if(res.statusCode==200)
+      {
+        progressDialog.dismiss();
+        Navigator.pop(context,"Refresh");
+        Utils.showSuccess(context,"Business Updated Sucessfully");
+      }else if(res.body!=null&&res.body.isNotEmpty){
+        progressDialog.dismiss();
+        locator<Logger>().i(res.body.trim());
+        Utils.showError(context,res.body.trim());
+      }else {
+        progressDialog.dismiss();
+        Utils.showError(context, res.statusCode.toString());
+      }
+    }catch(e){
+      progressDialog.dismiss();
+      Utils.showError(context, e.toString());
+    }finally{
+      progressDialog.dismiss();
+    }
   }
 
   @override

@@ -25,8 +25,10 @@ class SubCategoryController extends GetxController{
         categoryId: categoryId,
         businessId: businessId,
         name: subCategoryName.text
-      ), context).then((value){
-        subCategoryName.text="";
+      ), context).then((response){
+        if(response.statusCode==200||response.statusCode==201) {
+          subCategoryName.text = "";
+        }
       });
     }
    }
@@ -48,7 +50,11 @@ class SubCategoryController extends GetxController{
     });
   }
   void UpdateSubCategories(CategoriesViewModel model,BuildContext context){
-    _subCategoryRepository.updateSubCategories(model.id,model, context);
+    _subCategoryRepository.updateSubCategories(model.id,model, context).then((response){
+      if(response.statusCode==200||response.statusCode==204){
+        subCategoryName.text="";
+      }
+    });
   }
   @override
   void onClose() {
